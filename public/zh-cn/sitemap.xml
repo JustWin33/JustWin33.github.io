@@ -49,6 +49,8 @@
     <loc>http://localhost:1313/posts/%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2025-10-18T16:31:22+08:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/blockchain/</loc>
+  </url><url>
     <loc>http://localhost:1313/categories/git/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/git-github/</loc>
@@ -72,8 +74,6 @@
     <loc>http://localhost:1313/posts/windows%E4%B8%93%E4%B8%9A%E7%89%88/</loc>
   </url><url>
     <loc>http://localhost:1313/archives/</loc>
-  </url><url>
-    <loc>http://localhost:1313/blockchain/</loc>
   </url><url>
     <loc>http://localhost:1313/search/</loc>
   </url><url>
