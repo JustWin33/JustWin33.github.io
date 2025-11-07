@@ -1,0 +1,4 @@
+[submodule "main"]
+	path = main
+	url = git@github.com:JustWin33/JustWin33.github.io.git
+	branch = main
