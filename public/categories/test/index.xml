@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Test on JustWin</title>
+        <link>http://localhost:1313/categories/test/</link>
+        <description>Recent content in Test on JustWin</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>© 2025 win. 保留所有权利.</copyright><atom:link href="http://localhost:1313/categories/test/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>IPV6</title>
+        <link>http://localhost:1313/posts/ipv6/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/ipv6/</guid>
+        <description>&lt;h3 id=&#34;流程&#34;&gt;流程
+&lt;/h3&gt;&lt;p&gt;临时教育邮箱(&lt;a class=&#34;link&#34; href=&#34;https://etempmail.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://etempmail.com&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;注册IPV6链接（https://tunnelbroker.net）&lt;/p&gt;
+&lt;p&gt;真实地址生成器(&lt;a class=&#34;link&#34; href=&#34;https://ip-geoaddress-generator.pages.dev&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://ip-geoaddress-generator.pages.dev&lt;/a&gt;),自动识别你当前的真实IP地址或节点，来帮你创建一个对应的真实的地址！&lt;/p&gt;
+&lt;p&gt;IPv6地址转IP6.arpa 域名(&lt;a class=&#34;link&#34; href=&#34;https://ipv6.jiemi360.workers.dev&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://ipv6.jiemi360.workers.dev&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;点&lt;code&gt;临时教育邮箱&lt;/code&gt;中收到的文件，文件中有申请下来的链接，复制链接，在&lt;code&gt;浏览器&lt;/code&gt;中打开，登录账号来验证一下就好了，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANBaQABwfgPXZeVuekr-pnwfvtsxjGuAAKZC2sb8OMIVOonbH5El2HIAQADAgADeQADNgQ.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANCaQABxvTi41QwM1nop4onfQh3yn7QAAKuC2sb8OMIVHIoK2xz7p7GAQADAgADeQADNgQ.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANDaQABx46TR9ZiK8MLzQz3Kp3KpYWMAAKwC2sb8OMIVMoAAZbahr3GOgEAAwIAA3kAAzYE.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点IPV6转地址，填写自己区域码、邮箱、全局API令牌&lt;/p&gt;
+&lt;p&gt;点左边&lt;code&gt;SSL/TLS&lt;/code&gt;，点&lt;code&gt;边缘证书&lt;/code&gt;来查看&lt;/p&gt;
+&lt;p&gt;这种是部署成功的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANEaQF7mf0hflIyj6STo9mWea0zfXMAApwMaxvw4whUJppSQAcVTSYBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>订阅链接</title>
+        <link>http://localhost:1313/posts/%E8%AE%A2%E9%98%85%E9%93%BE%E6%8E%A5/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/%E8%AE%A2%E9%98%85%E9%93%BE%E6%8E%A5/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;切记勿乱传！&lt;/strong&gt;，本人不负责！！！&lt;/p&gt;
+&lt;h3 id=&#34;所有的流程&#34;&gt;所有的流程
+&lt;/h3&gt;&lt;p&gt;你先按照我之前说的方法，随便找个能用的节点，先连接上，不连接节点搞不了&lt;/p&gt;
+&lt;h4 id=&#34;域名&#34;&gt;域名
+&lt;/h4&gt;&lt;p&gt;1、查看你要注册的域名有没有被注册(&lt;a class=&#34;link&#34; href=&#34;https://domain.digitalplat.org/%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://domain.digitalplat.org/)&lt;/a&gt;,域名是二级域名，格式：&lt;code&gt;foo.example.com&lt;/code&gt;,&lt;code&gt;foo&lt;/code&gt;替换成你喜欢的，一定要符合格式，后面的后缀不用管，主要是按照这个格式，点&lt;code&gt;Check Availability&lt;/code&gt;,看看有没有被注册&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMbaP9VENd1IS-2u4BM_PuD8qw3EIIAAtoMaxvkPPlXmONKHDadGCYBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMcaP9VefZz5DwQAAFFW5NgaErY5E9IAALcDGsb5Dz5VwnxpL3IVV-wAQADAgADdwADNgQ.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这种是可以注册的！&lt;/p&gt;
+&lt;p&gt;2、注册域名链接(&lt;a class=&#34;link&#34; href=&#34;https://dash.domain.digitalplat.org/auth/register&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://dash.domain.digitalplat.org/auth/register&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMdaP9c4tJVjgABCMM_-LXn0x23Q5IdAALmDGsb5Dz5V5t-C786Z-yCAQADAgADeQADNgQ.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;出现&lt;code&gt;绿色 √&lt;/code&gt; 显示&lt;code&gt;Success&lt;/code&gt;就成功了！&lt;/p&gt;
+&lt;p&gt;你可以打开你注册的时候用的邮箱，看图片，从&lt;code&gt;https://--------&lt;/code&gt;复制到结尾，在浏览器的搜索栏粘贴打开。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMeaP9d8ZWgqDSzmTYwiRR3bocxcocAAukMaxvkPPlXfAfLwj-xwBUBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;打开后，显示&lt;code&gt;Success!&lt;/code&gt;就成功了！&lt;/p&gt;
+&lt;p&gt;3、登录(&lt;a class=&#34;link&#34; href=&#34;https://dash.domain.digitalplat.org/auth/login&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://dash.domain.digitalplat.org/auth/login&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;进入后，就会看到他要美国.KG KYC,点选择方法，点&lt;code&gt;GitHub OAuth&lt;/code&gt;,这个是通过&lt;code&gt;Github&lt;/code&gt;进行登录验证，然后点下方使用&lt;code&gt;Github&lt;/code&gt;登录下,&lt;code&gt;没有Github账号点链接(https://github.com)去注册&lt;/code&gt;，显示&lt;code&gt;Success&lt;/code&gt;就通过key验证了，这样你就进入后台！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMjaP9j-28h4ibImOT3RuWnEAfWqbAAAgUNaxvkPPlXAjT6xT6Tn8wBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点进去，就可以看到官方仓库了，右上角点一个&lt;code&gt;星&lt;/code&gt;就可以了！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMiaP9jxL9jo0A7V4mbPOxLJwweCVcAAgINaxvkPPlXxCOgBHgaoHIBAAMCAANtAAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;回来,点&lt;code&gt;click here to verify&lt;/code&gt;验证GitHub账户就可以了！&lt;/p&gt;
+&lt;p&gt;左边栏第3个，点&lt;code&gt;Domain Registration&lt;/code&gt;，上面域名填你要起的，下面选择后缀&lt;code&gt;.dpdns.org&lt;/code&gt;,点一下就可以了！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMkaP9kkgvtgoMHMYIiF9AT214rV3MAAgsNaxvkPPlXx4kX7pm18soBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这页面&lt;code&gt;不要取消&lt;/code&gt;，再再开一个页面，完成以下操作！&lt;/p&gt;
+&lt;h4 id=&#34;cloudflare&#34;&gt;Cloudflare
+&lt;/h4&gt;&lt;p&gt;注册一个cloudflare账号(&lt;a class=&#34;link&#34; href=&#34;https://www.cloudflare.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.cloudflare.com&lt;/a&gt;) 最好使用&lt;code&gt;Google账号&lt;/code&gt;注册&lt;/p&gt;
+&lt;p&gt;进入后，点&lt;code&gt;账户主页&lt;/code&gt;,&lt;code&gt;加入域&lt;/code&gt;，填写你注册好的域名，直接点&lt;code&gt;继续&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMmaP9mqb6LVlW5oGp1khUgiRNvYPsAAhQNaxvkPPlX250mJx0r_XABAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMlaP9mUJWQSNBDmJ1JRkCj6PqPXQsAAhINaxvkPPlXVptqWe_Vqw0BAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;进入后，点&lt;code&gt;免费的&lt;/code&gt;套餐，完成后，点左边的&lt;code&gt;概述&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMoaP9rKqhEOzj613-kHrxMxBqIXHIAAiINaxvkPPlXaOPqXo6-wjoBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMpaP9r2E00kQVQ0Muz2IQUUtdKyQEAAiUNaxvkPPlXpzN9-F9u2wsBAAMCAANtAAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;分别把这两条复制到对应&lt;code&gt;名称服务器&lt;/code&gt;上&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMnaP9qzhW6XSXMqTmebND4bOyzG0MAAiENaxvkPPlXcTx5helTolUBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点&lt;code&gt;保存&lt;/code&gt;就可以了,回到&lt;code&gt;cloudflare&lt;/code&gt;等一段时间刷新一下，等他解析过来&lt;/p&gt;
+&lt;p&gt;显示这种就是成功了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMqaP9tBrg5g4G5jXo68Abh8V3QNcMAAikNaxvkPPlXLcMqYXgv4m8BAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;订阅链接&#34;&gt;订阅链接
+&lt;/h4&gt;&lt;p&gt;点左边栏找到&lt;code&gt;Workers和Pages&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMraP9tci7D4eKp45i-Pzl2DBsrMoYAAioNaxvkPPlXm23REoKh4-cBAAMCAANtAAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点&lt;code&gt;创建应用程序&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMsaP9t3ZfdPeN3Nk0VyA4E4vD2Nm0AAi0NaxvkPPlXeZ1lYoT44ewBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;创建&lt;code&gt;workers&lt;/code&gt;,点&lt;code&gt;从Hello World!开始&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMtaP9uUtdXOeXOV9XBNd7Eq-XhnxoAAi4NaxvkPPlXYVd0QRr2rUIBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;进入后直接点右下角&lt;code&gt;部署&lt;/code&gt;,好了之后，再找到图片中的位置，创建一个&lt;code&gt;KV&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMuaP9u27EfP9RzECSoK1hoyGXnksEAAi8NaxvkPPlXGKH5Q72G38gBAAMCAANtAAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;空间起个&lt;code&gt;大写英文&lt;/code&gt;名字,创办好了之后，再回到&lt;code&gt;Workers and Pages&lt;/code&gt;找到你创建好的&lt;code&gt;workers&lt;/code&gt;,点进去，点&lt;code&gt;绑定&lt;/code&gt;,再点&lt;code&gt;添加绑定&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMvaP9wlM1vofyvUS19qAVn77JZwGQAAjYNaxvkPPlX7hu9H1nMS_4BAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;找到&lt;code&gt;KV空间&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMwaP9xCLQ-uwPbZSyDEDDHdLay9ZUAAjcNaxvkPPlXzHF0PGKbA_0BAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一定要填大写的&lt;code&gt;C&lt;/code&gt;,KV命名空间选择&lt;code&gt;你创建的&lt;/code&gt;,再点&lt;code&gt;添加绑定&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMxaP9xd0t7K_6EQ12-LWpDJOKXHukAAj8NaxvkPPlXrMSXKZvQ4kgBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点&lt;code&gt;设置&lt;/code&gt;,把上面的两个非活动，点右边&lt;code&gt;三个点&lt;/code&gt;禁用一下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMzaP9yigMrbwlZQd7YxVkxGJJNWYAAAk8NaxvkPPlX6ZofxLlYh2ABAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;再点&lt;code&gt;＋添加&lt;/code&gt;，点自定义域名，填写&lt;code&gt;你申请创办好的域名&lt;/code&gt;,添加一下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM0aP9y5F-QtBKZLHuOIDULy4ep7rwAAlENaxvkPPlX7CNPKGKSrI4BAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;添加一个&lt;code&gt;变量&lt;/code&gt;，一定要填小写&lt;code&gt;u&lt;/code&gt;,下面是&lt;code&gt;UUID&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM1aP9za0uycQ6QYzMk1XyaTy9OiZkAAlQNaxvkPPlXGo5fy_OjaWEBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;UUID获取，打开V2rayN,看图片点，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM2aP9zvCHEPlmAo2qB2AaQusSw_3AAAlUNaxvkPPlXLtLSgTOAfkwBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM3aP90Xea98VMWwYsKvUdHS7qU0PcAAlcNaxvkPPlXfS7S9Ask4ToBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;把这个生成的UUID复制好，粘贴到一个文本上,回到&lt;code&gt;cloudflare&lt;/code&gt;部署一下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM4aP900cvKym27SLfnhwi-chw7akQAAlgNaxvkPPlXbvdARF4r7O4BAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点&lt;code&gt;编辑代码&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM5aP91NK-r1tEzofdsZ6_p1SvjUx8AAlkNaxvkPPlX8PpHNQpPpXYBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;进入后，把左边的代码&lt;code&gt;全选全部删除&lt;/code&gt;,跳转到Github仓库(&lt;a class=&#34;link&#34; href=&#34;https://github.com/byJoey/cfnew/blob/main/%E5%B0%91%E5%B9%B4%E4%BD%A0%E7%9B%B8%E4%BF%A1%E5%85%89%E5%90%97&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/byJoey/cfnew/blob/main/%E5%B0%91%E5%B9%B4%E4%BD%A0%E7%9B%B8%E4%BF%A1%E5%85%89%E5%90%97&lt;/a&gt;)，复制代码，粘贴到你删除的左边代码框，点部署&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM6aP94isafZcpx3SwHDbujPqCGjXwAAlwNaxvkPPlXDeNhP1aZvIUBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;出现这种就是成功了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM7aP94za7nnSrZt5lCKL5Nzf4otOMAAl4NaxvkPPlXOGoar7XpoWMBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;复制跳转&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM8aP95IJ2cYKqPIiCf9_IE5Mw18JsAAl8NaxvkPPlXLCqlcsgt6DgBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;输入叫你保存到文本的UUID，就可以了&lt;/p&gt;
+&lt;p&gt;成功进入后就和图片中的一样&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM9aP95rqLiPuP3lNkMkDN2TkjGUJ8AAmENaxvkPPlX5TKNftFvnqUBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;再点V2rayN，复制生成的链接,打开V2rayN使用就可以了！ 剩下的懒得说了，看我之前的就可以了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM-aP96HLx4K-_I68M0JVBPo7gt6gkAAmMNaxvkPPlXQMcQeEibJckBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM_aP96psTIZCMpQppiB_1QyCmyaMEAAmUNaxvkPPlXdWwJzd82nr8BAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANAaP961hSn0Xye0yjm1GFAoVL1o4UAAmYNaxvkPPlXQRoomgUxT4kBAAMCAANtAAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>科学上网</title>
+        <link>http://localhost:1313/posts/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</guid>
+        <description>&lt;h3 id=&#34;电脑版&#34;&gt;电脑版
+&lt;/h3&gt;&lt;p&gt;主要分&lt;code&gt;Windows&lt;/code&gt;和&lt;code&gt;Mac&lt;/code&gt;两个版本，但是科学上网的方法基本相同，&lt;code&gt;Mac&lt;/code&gt;更方便一些，有更多的选择。&lt;/p&gt;
+&lt;p&gt;主要讲&lt;code&gt;V2rayN&lt;/code&gt;的使用，这个两个操作系统都可以使用&lt;/p&gt;
+&lt;h4 id=&#34;windows操作步骤&#34;&gt;windows操作步骤
+&lt;/h4&gt;&lt;p&gt;1、先下载&lt;code&gt;Watt Toolkit&lt;/code&gt;,在电脑应用商店搜，或者点这个链接直接点转到他的官网下载(&lt;a class=&#34;link&#34; href=&#34;https://steampp.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://steampp.net/&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;下载好之后，打开找到&lt;code&gt;网络加速&lt;/code&gt;点进去，在平台加速中，找到&lt;code&gt;GitHub&lt;/code&gt;打上对勾，点&lt;code&gt;一键加速&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;GitHub官网(&lt;a class=&#34;link&#34; href=&#34;https://github.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/&lt;/a&gt;)，点进去，或者你直接点项目的地址(&lt;a class=&#34;link&#34; href=&#34;https://github.com/2dust/v2rayN&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/2dust/v2rayN&lt;/a&gt;)，看看可以下载这个V2rayN吗，如果不能下载，你在注册GitHub账号&lt;/p&gt;
+&lt;p&gt;进入项目地址后，看右边的栏，找到&lt;code&gt;Releases&lt;/code&gt;点进去，往下滑找到&lt;code&gt;Assets&lt;/code&gt;,再点&lt;code&gt;Show all 19 assets&lt;/code&gt;就可以看到所有的软件包了，选择&lt;code&gt;v2rayN-windows-64-SelfContained.zip&lt;/code&gt;点一下等下载好就可以了。&lt;/p&gt;
+&lt;p&gt;2、下载好，直接打开下载好的文件，在文件夹中找到并打开这个&lt;code&gt;应用程序&lt;/code&gt;，每次都是从这里打开使用
+&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMOaP3S4O-OPbe8LNbOoCdeymnO77YAAt0LaxvkPOlXX-alcDD6JsYBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;打开后，点&lt;code&gt;设置&lt;/code&gt;，点&lt;code&gt;以管理员身份启动&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;点&lt;code&gt;加号&lt;/code&gt;添加,按图片的配置，就是&lt;code&gt;别名&lt;/code&gt;随便起,&lt;code&gt;可选地址&lt;/code&gt;可以在网上找可以用，下面有找的方法。别的就不要动了
+&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMPaP3WVKAndEQVZckXQM7h2V6W4b8AAvALaxvkPOlXLzt4Mjizq0YBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;添加上，就右键一下，点&lt;code&gt;全选&lt;/code&gt;,再点图中的测试一下就可以了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMQaP3XfuTnpxRmV0ydWOSD5IuklxAAAvcLaxvkPOlXIEKyM_Ps140BAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;测试的结果，出来后，绿色是可以用的，红的不能用，选中绿色的点&lt;code&gt;启用Tun&lt;/code&gt;就可以了。
+&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMRaP3YC1B7YeZMgkNLueI6F1jw7WUAAgQMaxvkPOlXcC0k2lhuxMkBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;·都不能用的话 ，就按照上面的重新开始换一个链接就可以了！&lt;/p&gt;
+&lt;h3 id=&#34;如何获取v2rayn链接&#34;&gt;如何获取V2rayN链接
+&lt;/h3&gt;&lt;p&gt;其实获取链接有很多方法，一时半会说不清楚，好的链接都是需要自己有一个域名自己去搞一个，如果没有域名就按照我说的去免费白嫖人家分享的&lt;/p&gt;
+&lt;p&gt;打开&lt;code&gt;GitHub&lt;/code&gt;(&lt;a class=&#34;link&#34; href=&#34;https://github.com/%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/)&lt;/a&gt;,进入后，看搜索栏，输入&lt;code&gt;V2rayN订阅&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMUaP3by_opF_O_Qi5aE81XLwvi_RwAAhcMaxvkPOlXgZxfRAay-akBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点&lt;code&gt;Recently updated&lt;/code&gt;,就可以看到最新别人最新发布的,然后找一个点进去&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMVaP3cKF4GrhKSdt_HOObQLw0tiOYAAhkMaxvkPOlX5ynMSUXTx8YBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;往下滑，找到就可以看到人家发布的V2rayN链接，复制试试看看能不能用&lt;/p&gt;
+&lt;p&gt;或者你在网上找找别人教的方法试试&lt;/p&gt;
+&lt;h4 id=&#34;mac&#34;&gt;Mac
+&lt;/h4&gt;&lt;p&gt;主要选择&lt;code&gt;Shadowrocket（小火箭）&lt;/code&gt;和&lt;code&gt;V2rayN&lt;/code&gt;，今天主要推荐V2RayN，操作步骤跟Windows是一致的。&lt;/p&gt;
+&lt;p&gt;下载版本选择&lt;code&gt;v2rayN-macos-arm64.zip&lt;/code&gt;就可以了，剩下的跟Windows操作一样。&lt;/p&gt;
+&lt;h3 id=&#34;手机&#34;&gt;手机
+&lt;/h3&gt;&lt;p&gt;就用&lt;code&gt;Heysocks&lt;/code&gt;(黑石)就可以了，在浏览器上搜索，官网下载就可以了，搜不到就换个浏览器。&lt;/p&gt;
+&lt;p&gt;进入后，搞了游客账号就可以了,点区域里那个箭头
+&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMSaP3ZAkXDVShutEDCjUA8NJ-qqHcAAgkMaxvkPOlXFVBIAQO47CkBAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;进入后，最下面有两个永久免费的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMTaP3ZWpt8cnLSq6tdpD1X-t55nYgAAhMMaxvkPOlXhxuSPvG9lf8BAAMCAAN3AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>链上空投</title>
+        <link>http://localhost:1313/posts/%E9%93%BE%E4%B8%8A%E7%A9%BA%E6%8A%95/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/%E9%93%BE%E4%B8%8A%E7%A9%BA%E6%8A%95/</guid>
+        <description>&lt;h3 id=&#34;准备&#34;&gt;准备
+&lt;/h3&gt;&lt;p&gt;1、社交软件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;推特/X、discord、Telegram&lt;/code&gt;这个三个社交软件必不可少！&lt;/p&gt;
+&lt;p&gt;2、浏览器尽量选择使用&lt;code&gt;Google&lt;/code&gt;,注册个谷歌账号、谷歌邮箱&lt;/p&gt;
+&lt;p&gt;3、链上钱包(电脑上都是用浏览器的扩件)&lt;/p&gt;
+&lt;p&gt;一个&lt;code&gt;币安&lt;/code&gt;钱包和一个&lt;code&gt;MetaMask(小狐狸)&lt;/code&gt;钱包就够了&lt;/p&gt;
+&lt;p&gt;币安钱包(&lt;a class=&#34;link&#34; href=&#34;https://web3.binance.com/referral?ref=DQF3CCTM&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://web3.binance.com/referral?ref=DQF3CCTM&lt;/a&gt;)在手机端是可以不用生产私钥词，直接用人脸就可以登陆，安全性强，但是在链上不是很使用，适合存放资金，不适用大量的频繁的使用&lt;/p&gt;
+&lt;p&gt;MetaMask钱包手机端非常垃圾，电脑端还是很好用，在浏览器上，右上角找到&lt;code&gt;扩展&lt;/code&gt;，点进去，再点&lt;code&gt;获取扩展&lt;/code&gt;，进入搜索&lt;code&gt;MetaMask&lt;/code&gt;，一定要下载图片中这种有蓝标认证的，OK钱包、币安钱包都是通过这种方式下载。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMZaP4YSxK3n_zmDbYG-yW7CiSnkFwAAkYLaxvkPPFXaaiyd5gpU_kBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;下载好之后，就可以注册一个MetaMask钱包，一定要放好、存好自己的钱包&lt;code&gt;私钥&lt;/code&gt;就是&lt;strong&gt;助记词&lt;/strong&gt;,再设置打开浏览器使用钱包的密码。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMaaP4ZT3npS-senZp0h78mTGojmMQAAkoLaxvkPPFXNhLqOncreRsBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;番外：OK钱包(&lt;a class=&#34;link&#34; href=&#34;https://web3.okx.com/join/WIN168&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://web3.okx.com/join/WIN168&lt;/a&gt;)是全链钱包，所有的网络都支持，其实这种也没有什么用，就是听起来有点牛逼，但是并没有很牛逼&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

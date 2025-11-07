@@ -1,0 +1,33 @@
+.about-profile {
+    padding: 2rem 0;
+}
+
+.about-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    display: block;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.about-copyright {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.about-copyright h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #111827;
+}
+
+.about-copyright p {
+    margin: 0.5rem 0;
+    color: #4b5563;
+}

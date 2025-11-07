@@ -1,0 +1,247 @@
+# 站点基础配置
+baseurl: "http://localhost:1313/"  # 本地开发地址，部署时替换为实际域名
+languageCode: "zh-CN"              # 站点主要语言
+theme: "stack"              # 主题名称（确保与主题文件夹名一致）
+title: "JustWin"              # 自定义博客标题
+copyright: "© 2025 win. 保留所有权利."  # 版权信息
+
+# 国际化配置
+DefaultContentLanguage: zh-cn      # 默认内容语言
+hasCJKLanguage: true               # 启用CJK语言支持（中文/日文/韩文）
+
+# 多语言详细配置
+languages:
+    zh-cn:
+        languageName: 中文
+        title: JustWin
+        weight: 1
+        params:
+            sidebar:
+                subtitle: 分享技术与生活  # 侧边栏副标题
+    en:
+        languageName: English
+        title: JustWin
+        weight: 2
+        params:
+            sidebar:
+                subtitle: Personal blog about technology and life
+
+# 第三方服务配置
+services:
+    disqus:
+        shortname: ""  # 填写你的Disqus shortname（可选）
+    googleAnalytics:
+        id: ""         # 填写你的Google Analytics ID（可选）
+
+# 分页设置
+pagination:
+    pagerSize: 5  # 分页显示的页码数量
+
+# 永久链接格式
+permalinks:
+    post: /posts/:slug/  # 文章URL格式（与mainSections对应）
+    page: /:slug/        # 页面URL格式
+
+# 主题参数配置
+params:
+    mainSections:
+        - post  # 文章目录名称，需与content下的posts文件夹对应
+    featuredImageField: image  # 特色图片字段名
+    rssFullContent: true       # RSS包含全文
+    favicon: /favicon.ico      # 网站图标路径（需放置对应文件）
+
+    # 页脚设置
+    footer:
+        since: 2025  # 起始年份
+        customText: ""  # 自定义页脚文本（可选）
+
+    # 日期格式
+    dateFormat:
+        published: 2006-01-02  # 发布日期格式
+        lastUpdated: 2006-01-02 15:04  # 最后更新日期格式
+
+    # 侧边栏设置
+    sidebar:
+        emoji: "✍️"  # 侧边栏图标表情
+        subtitle: 分享技术与生活  # 侧边栏副标题
+        avatar:
+            enabled: true              # 显示头像
+            local: true                # 使用本地图片
+            src: images/avatar.jpg     # 头像路径（建议放在assets/images目录）
+        # 社交链接配置
+        social:
+          - name: "GitHub"
+            url: "https://github.com/你的用户名"  # 替换为你的GitHub地址
+            icon: "github"
+          - name: "知乎"
+            url: "https://zhihu.com/你的用户名"    # 替换为你的知乎地址
+            icon: "zhihu"
+          - name: "Twitter"
+            url: "https://twitter.com/你的用户名"  # 可选：添加Twitter
+            icon: "twitter"
+          - name: "邮箱"
+            url: "mailto:你的邮箱地址"             # 可选：添加邮箱
+            icon: "mail"
+
+    # 文章设置
+    article:
+        math: false  # 不启用数学公式支持（需要时设为true）
+        toc: true    # 显示文章目录
+        readingTime: true  # 显示阅读时间
+        license:
+            enabled: true  # 显示版权信息
+            default: "本文采用 CC BY-NC-SA 4.0 许可协议"  # 默认许可证文本
+        # 封面图配置
+        cover:
+            enabled: true
+            default:
+                enabled: true
+                local: false
+                src: "https://picsum.photos/1200/600"  # 默认封面图
+
+    # 评论系统配置（Giscus）
+    comments:
+        enabled: true
+        provider: giscus  # 使用giscus评论系统
+
+    # 小工具配置
+    widgets:
+        homepage:
+            - type: search        # 搜索框
+            - type: archives      # 文章归档
+              params:
+                  limit: 6        # 显示最近6条归档
+            - type: categories    # 分类
+              params:
+                  limit: 12
+            - type: tag-cloud     # 标签云
+              params:
+                  limit: 20
+        page:
+            - type: toc  # 页面目录
+
+    # OpenGraph设置（社交媒体分享）
+    opengraph:
+        twitter:
+            site: ""  # Twitter用户名（可选）
+            card: summary_large_image  # 分享卡片类型
+
+    # 默认图片设置
+    defaultImage:
+        opengraph:
+            enabled: true
+            local: false
+            src: ""  # 默认分享图片（可选）
+
+    # 颜色方案
+    colorScheme:
+        toggle: true        # 显示明暗模式切换按钮
+        default: light      # 默认主题（light/dark/auto）
+
+    # 图片处理
+    imageProcessing:
+        cover:
+            enabled: true   # 处理封面图片
+        content:
+            enabled: true   # 处理内容图片
+
+    # SEO配置
+    seo:
+        title: "win - 技术与生活分享"  # 自定义SEO标题
+        description: "专注于 Hugo 博客搭建、前端开发和技术分享"  # 网站描述
+        keywords: "Hugo,前端开发,技术分享"  # 关键词，用逗号分隔
+
+# 自定义菜单配置
+menu:
+    main:  # 主导航菜单
+    - identifier: home
+      name:  首页 
+      url: /
+      weight: 1
+    - identifier: archives
+      name: 归档
+      url: /archives/
+      weight: 2
+    - identifier: about
+      name: 关于
+      url: /about/       
+      weight: 3
+    - identifier: links
+      name: 网站分享
+      url: /links/
+      weight: 4
+    - identifier: Blockchain
+      name: 区块链
+      url: /Blockchain/
+      weight: 5    
+    
+    - identifier:
+      name: 
+      url:  
+      weight:
+    social:  # 社交链接菜单
+        - identifier: github
+          name: GitHub
+          url: "https://github.com/passion-win"
+          params:
+              icon: brand-github
+        - identifier: twitter
+          name: twitter
+          url: "https://twitter.com/@win1688888888"
+          params:
+              icon: brand-twitter
+
+        - identifier: telegram
+          name: telegram
+          url: "https://t.me/+TFjBeZzowwU1YTY1"
+          params:
+              icon: brand-telegram
+
+# 相关文章设置
+related:
+    includeNewer: true
+    threshold: 60
+    toLower: false
+    indices:
+        - name: tags
+          weight: 100
+        - name: categories
+          weight: 200
+
+# Markdown渲染设置
+markup:
+    goldmark:
+        extensions:
+            passthrough:
+                enable: true
+                delimiters:
+                    block:
+                        - - \[
+                          - \]
+                        - - $$
+                          - $$
+                    inline:
+                        - - \(
+                          - \)
+        renderer:
+            unsafe: true  # 允许渲染HTML内容
+    tableOfContents:
+        endLevel: 4
+        ordered: true
+        startLevel: 2
+    highlight:
+        noClasses: false
+        codeFences: true
+        guessSyntax: true
+        lineNoStart: 1
+        lineNos: true
+        lineNumbersInTable: true
+        tabWidth: 4
+
+# 性能优化配置（资源压缩）
+minify:
+    disableXML: true
+    minifyOutput: true  # 压缩输出内容
+resources:
+    cache:
+        enabled: true  # 启用资源缓存

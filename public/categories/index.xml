@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Categories on JustWin</title>
+        <link>http://localhost:1313/categories/</link>
+        <description>Recent content in Categories on JustWin</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>© 2025 win. 保留所有权利.</copyright><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Defi</title>
+        <link>http://localhost:1313/categories/defi/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/defi/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Test</title>
+        <link>http://localhost:1313/categories/test/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/test/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>V2rayN教程</title>
+        <link>http://localhost:1313/categories/v2rayn%E6%95%99%E7%A8%8B/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/v2rayn%E6%95%99%E7%A8%8B/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>教程</title>
+        <link>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>节点</title>
+        <link>http://localhost:1313/categories/%E8%8A%82%E7%82%B9/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/%E8%8A%82%E7%82%B9/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>

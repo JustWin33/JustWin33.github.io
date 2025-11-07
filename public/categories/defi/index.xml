@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Defi on JustWin</title>
+        <link>http://localhost:1313/categories/defi/</link>
+        <description>Recent content in Defi on JustWin</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>© 2025 win. 保留所有权利.</copyright><atom:link href="http://localhost:1313/categories/defi/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>链上空投</title>
+        <link>http://localhost:1313/posts/%E9%93%BE%E4%B8%8A%E7%A9%BA%E6%8A%95/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/%E9%93%BE%E4%B8%8A%E7%A9%BA%E6%8A%95/</guid>
+        <description>&lt;h3 id=&#34;准备&#34;&gt;准备
+&lt;/h3&gt;&lt;p&gt;1、社交软件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;推特/X、discord、Telegram&lt;/code&gt;这个三个社交软件必不可少！&lt;/p&gt;
+&lt;p&gt;2、浏览器尽量选择使用&lt;code&gt;Google&lt;/code&gt;,注册个谷歌账号、谷歌邮箱&lt;/p&gt;
+&lt;p&gt;3、链上钱包(电脑上都是用浏览器的扩件)&lt;/p&gt;
+&lt;p&gt;一个&lt;code&gt;币安&lt;/code&gt;钱包和一个&lt;code&gt;MetaMask(小狐狸)&lt;/code&gt;钱包就够了&lt;/p&gt;
+&lt;p&gt;币安钱包(&lt;a class=&#34;link&#34; href=&#34;https://web3.binance.com/referral?ref=DQF3CCTM&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://web3.binance.com/referral?ref=DQF3CCTM&lt;/a&gt;)在手机端是可以不用生产私钥词，直接用人脸就可以登陆，安全性强，但是在链上不是很使用，适合存放资金，不适用大量的频繁的使用&lt;/p&gt;
+&lt;p&gt;MetaMask钱包手机端非常垃圾，电脑端还是很好用，在浏览器上，右上角找到&lt;code&gt;扩展&lt;/code&gt;，点进去，再点&lt;code&gt;获取扩展&lt;/code&gt;，进入搜索&lt;code&gt;MetaMask&lt;/code&gt;，一定要下载图片中这种有蓝标认证的，OK钱包、币安钱包都是通过这种方式下载。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMZaP4YSxK3n_zmDbYG-yW7CiSnkFwAAkYLaxvkPPFXaaiyd5gpU_kBAAMCAAN5AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;下载好之后，就可以注册一个MetaMask钱包，一定要放好、存好自己的钱包&lt;code&gt;私钥&lt;/code&gt;就是&lt;strong&gt;助记词&lt;/strong&gt;,再设置打开浏览器使用钱包的密码。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMaaP4ZT3npS-senZp0h78mTGojmMQAAkoLaxvkPPFXNhLqOncreRsBAAMCAAN4AAM2BA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;番外：OK钱包(&lt;a class=&#34;link&#34; href=&#34;https://web3.okx.com/join/WIN168&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://web3.okx.com/join/WIN168&lt;/a&gt;)是全链钱包，所有的网络都支持，其实这种也没有什么用，就是听起来有点牛逼，但是并没有很牛逼&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
