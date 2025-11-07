@@ -1,0 +1,528 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Hugo + GitHub搭建个人博客\n首先安装下载 Hugo和Git,并且注册一个GitHub账号，Hugo一定要选择Extended版本。\n打开终端，按下win+R,输入cmd，回车进入终端，输入以下命令，验证一下安装是否成功了吗？\n"><title>搭建hugo博客</title><link rel=canonical href=http://localhost:1313/posts/%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="搭建hugo博客"><meta property='og:description' content="Hugo + GitHub搭建个人博客\n首先安装下载 Hugo和Git,并且注册一个GitHub账号，Hugo一定要选择Extended版本。\n打开终端，按下win+R,输入cmd，回车进入终端，输入以下命令，验证一下安装是否成功了吗？\n"><meta property='og:url' content='http://localhost:1313/posts/%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2025-10-18T16:31:22+08:00'><meta property='article:modified_time' content='2025-10-18T16:31:22+08:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="搭建hugo博客"><meta name=twitter:description content="Hugo + GitHub搭建个人博客\n首先安装下载 Hugo和Git,并且注册一个GitHub账号，Hugo一定要选择Extended版本。\n打开终端，按下win+R,输入cmd，回车进入终端，输入以下命令，验证一下安装是否成功了吗？\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/archives/><span>归档</span></a></li><li><a href=/about/><span>关于</span></a></li><li><a href=/links/><span>网站分享</span></a></li><li><a href=/blockchain/><span>区块链</span></a></li><li><a href><span></span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><ol><li><a href=#本地仓库推送新账号>本地仓库推送新账号</a></li></ol></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/posts/%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/>搭建hugo博客</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-10-18</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 8 分钟</time></div></footer></div></header><section class=article-content><p>Hugo + GitHub搭建个人博客</p><p>首先安装下载 Hugo和Git,并且注册一个GitHub账号，Hugo一定要选择<code>Extended</code>版本。</p><p>打开终端，按下<code>win+R</code>,输入<code>cmd</code>，回车进入终端，输入以下命令，验证一下安装是否成功了吗？</p><p><code>git --version</code></p><p><code>hugo version</code></p><p>如果能看到版本号，说明安装成功了</p><p>创建本地博客项目</p><p>1、打开终端,<code>cd</code>到你希望存放博客项目的文件夹。</p><p>2、运行以下命令创建一个新的Hugo站点。我们将博客项目命名为 <code>my-blog</code></p><p><code>hugo new site my-blog</code></p><p>3、进入刚刚创建的目录并初始化Git仓库</p><p><code>cd my-blog</code></p><p><code>git init</code></p><p>添加主题</p><p>找到Hugo官网，选择主题，跳转到Github,点<code>tag</code>,下载最新版zip源码包</p><p>解压缩到<code>themes</code>文件夹，并将名字中的版本号去掉</p><p><img src=https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMIaPOdoDP41HIYSdPL6PtG1KOY9UUAAi8LaxspIaFXF3C7MOihYicBAAMCAAN4AAM2BA.png loading=lazy></p><p>配置主题</p><p>在 <code>my-blog</code> 目录下，执行以下命令（仅针对本项目，功能是提取作者的演示案例作为初始项目，并清除作者的演示案例）</p><p>强制删除当前目录的 content 文件夹（若存在）
+<code>Remove-Item -Path "content" -Recurse -Force -ErrorAction SilentlyContinue</code></p><p>将主题示例的 content 复制到当前目录（xcopy在PowerShell中可直接使用）
+<code>xcopy "themes\hugo-theme-stack\exampleSite\content" "content" /E /I /H /Y</code></p><p>删除 exampleSite 文件夹
+<code>Remove-Item -Path "themes\hugo-theme-stack\exampleSite" -Recurse -Force -ErrorAction SilentlyContinue</code></p><p>删除 rich-content 文件夹
+<code>Remove-Item -Path "content/post/rich-content" -Recurse -Force -ErrorAction SilentlyContinue</code></p><p>删除hugo.toml，并创建hugo.yaml (进入相应文件夹中删除创建即可)</p><p>将下面模板代码完整复制到<code>config.yaml</code>文件中，根据注释修改你的信息<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl>#站点基础配置
+</span></span><span class=line><span class=cl>baseurl: https://example.com/           # 网站根URL
+</span></span><span class=line><span class=cl>languageCode: en-us                     # 默认语言代码
+</span></span><span class=line><span class=cl>theme: hugo-theme-stack                 # 使用的主题名称
+</span></span><span class=line><span class=cl>title: Example Site                     # 网站标题
+</span></span><span class=line><span class=cl>copyright: Example Person               # 版权信息
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#国际化配置
+</span></span><span class=line><span class=cl>#支持的语言: ar, bn, ca, de, el, en, es, fr, hu, id, it, ja, ko, nl, pt-br, th, uk, zh-cn, zh-hk, zh-tw
+</span></span><span class=line><span class=cl>DefaultContentLanguage: en              # 默认内容语言
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#如果默认语言是中文/日文/韩文，需设置为true
+</span></span><span class=line><span class=cl>#这将使.Summary和.WordCount对CJK语言正常工作
+</span></span><span class=line><span class=cl>hasCJKLanguage: false
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#多语言详细配置
+</span></span><span class=line><span class=cl>languages:
+</span></span><span class=line><span class=cl>    en:
+</span></span><span class=line><span class=cl>        languageName: English           # 语言显示名称
+</span></span><span class=line><span class=cl>        title: Example Site             # 该语言下的网站标题
+</span></span><span class=line><span class=cl>        weight: 1                       # 权重（排序用）
+</span></span><span class=line><span class=cl>        params:
+</span></span><span class=line><span class=cl>            sidebar:
+</span></span><span class=line><span class=cl>                subtitle: Example description  # 侧边栏副标题
+</span></span><span class=line><span class=cl>    zh-cn:
+</span></span><span class=line><span class=cl>        languageName: 中文
+</span></span><span class=line><span class=cl>        title: 演示站点
+</span></span><span class=line><span class=cl>        weight: 2
+</span></span><span class=line><span class=cl>        params:
+</span></span><span class=line><span class=cl>            sidebar:
+</span></span><span class=line><span class=cl>                subtitle: 演示说明
+</span></span><span class=line><span class=cl>    ar:
+</span></span><span class=line><span class=cl>        languageName: عربي
+</span></span><span class=line><span class=cl>        languagedirection: rtl          # 文本方向（阿拉伯语从右到左）
+</span></span><span class=line><span class=cl>        title: موقع تجريبي
+</span></span><span class=line><span class=cl>        weight: 3
+</span></span><span class=line><span class=cl>        params:
+</span></span><span class=line><span class=cl>            sidebar:
+</span></span><span class=line><span class=cl>                subtitle: وصف تجريبي
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#第三方服务配置
+</span></span><span class=line><span class=cl>services:
+</span></span><span class=line><span class=cl>    # Disqus评论系统（使用前需修改为你的shortname）
+</span></span><span class=line><span class=cl>    disqus:
+</span></span><span class=line><span class=cl>        shortname: &#34;hugo-theme-stack&#34;
+</span></span><span class=line><span class=cl>    # Google Analytics跟踪ID
+</span></span><span class=line><span class=cl>    googleAnalytics:
+</span></span><span class=line><span class=cl>        id:                             # 填入你的GA跟踪ID
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#分页设置
+</span></span><span class=line><span class=cl>pagination:
+</span></span><span class=line><span class=cl>    pagerSize: 3                        # 分页器显示页码数量
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#永久链接格式
+</span></span><span class=line><span class=cl>permalinks:
+</span></span><span class=line><span class=cl>    post: /p/:slug/                     # 文章URL格式
+</span></span><span class=line><span class=cl>    page: /:slug/                       # 页面URL格式
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#主题参数配置
+</span></span><span class=line><span class=cl>params:
+</span></span><span class=line><span class=cl>    mainSections:
+</span></span><span class=line><span class=cl>        - post                         # 主要内容区域
+</span></span><span class=line><span class=cl>    featuredImageField: image          # 特色图片字段名
+</span></span><span class=line><span class=cl>    rssFullContent: true               # RSS是否包含全文
+</span></span><span class=line><span class=cl>    favicon:                           # 网站图标路径，如：/favicon.ico
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 页脚设置
+</span></span><span class=line><span class=cl>    footer:
+</span></span><span class=line><span class=cl>        since: 2020                    # 起始年份
+</span></span><span class=line><span class=cl>        customText:                    # 自定义文本
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 日期格式
+</span></span><span class=line><span class=cl>    dateFormat:
+</span></span><span class=line><span class=cl>        published: Jan 02, 2006        # 发布日期格式
+</span></span><span class=line><span class=cl>        lastUpdated: Jan 02, 2006 15:04 MST  # 最后更新日期格式
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 侧边栏设置
+</span></span><span class=line><span class=cl>    sidebar:
+</span></span><span class=line><span class=cl>        emoji: 🍥                      # 表情图标
+</span></span><span class=line><span class=cl>        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.  # 副标题
+</span></span><span class=line><span class=cl>        avatar:
+</span></span><span class=line><span class=cl>            enabled: true              # 是否显示头像
+</span></span><span class=line><span class=cl>            local: true                # 是否使用本地图片
+</span></span><span class=line><span class=cl>            src: img/avatar.png        # 头像路径
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 文章设置
+</span></span><span class=line><span class=cl>    article:
+</span></span><span class=line><span class=cl>        math: false                    # 是否支持数学公式
+</span></span><span class=line><span class=cl>        toc: true                      # 是否显示目录
+</span></span><span class=line><span class=cl>        readingTime: true              # 是否显示阅读时间
+</span></span><span class=line><span class=cl>        license:
+</span></span><span class=line><span class=cl>            enabled: true              # 是否显示版权信息
+</span></span><span class=line><span class=cl>            default: Licensed under CC BY-NC-SA 4.0  # 默认许可证
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 评论系统配置
+</span></span><span class=line><span class=cl>    comments:
+</span></span><span class=line><span class=cl>        enabled: true                  # 启用评论
+</span></span><span class=line><span class=cl>        provider: disqus               # 评论提供商
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        # 各评论系统的具体配置
+</span></span><span class=line><span class=cl>        disqusjs: {...}                # DisqusJS配置
+</span></span><span class=line><span class=cl>        utterances: {...}              # Utterances配置（GitHub-based）
+</span></span><span class=line><span class=cl>        beaudar: {...}                 # Beaudar配置
+</span></span><span class=line><span class=cl>        remark42: {...}                # Remark42配置
+</span></span><span class=line><span class=cl>        vssue: {...}                   # Vssue配置
+</span></span><span class=line><span class=cl>        waline: {...}                  # Waline配置
+</span></span><span class=line><span class=cl>        twikoo: {...}                  # Twikoo配置
+</span></span><span class=line><span class=cl>        cactus: {...}                  # Cactus Chat配置
+</span></span><span class=line><span class=cl>        giscus: {...}                  # Giscus配置（GitHub Discussions）
+</span></span><span class=line><span class=cl>        gitalk: {...}                  # Gitalk配置
+</span></span><span class=line><span class=cl>        cusdis: {...}                  # Cusdis配置
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 小工具配置
+</span></span><span class=line><span class=cl>    widgets:
+</span></span><span class=line><span class=cl>        homepage:                      # 首页小工具
+</span></span><span class=line><span class=cl>            - type: search             # 搜索框
+</span></span><span class=line><span class=cl>            - type: archives           # 文章归档
+</span></span><span class=line><span class=cl>              params:
+</span></span><span class=line><span class=cl>                  limit: 5             # 显示数量
+</span></span><span class=line><span class=cl>            - type: categories         # 分类
+</span></span><span class=line><span class=cl>              params:
+</span></span><span class=line><span class=cl>                  limit: 10
+</span></span><span class=line><span class=cl>            - type: tag-cloud          # 标签云
+</span></span><span class=line><span class=cl>              params:
+</span></span><span class=line><span class=cl>                  limit: 10
+</span></span><span class=line><span class=cl>        page:
+</span></span><span class=line><span class=cl>            - type: toc                # 页面目录
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # OpenGraph设置（社交媒体分享）
+</span></span><span class=line><span class=cl>    opengraph:
+</span></span><span class=line><span class=cl>        twitter:
+</span></span><span class=line><span class=cl>            site:                      # Twitter用户名
+</span></span><span class=line><span class=cl>            card: summary_large_image  # 卡片类型：summary或summary_large_image
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 默认图片设置
+</span></span><span class=line><span class=cl>    defaultImage:
+</span></span><span class=line><span class=cl>        opengraph:
+</span></span><span class=line><span class=cl>            enabled: false             # 是否启用
+</span></span><span class=line><span class=cl>            local: false               # 是否使用本地图片
+</span></span><span class=line><span class=cl>            src:                       # 图片路径
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 颜色方案
+</span></span><span class=line><span class=cl>    colorScheme:
+</span></span><span class=line><span class=cl>        toggle: true                   # 是否显示切换按钮
+</span></span><span class=line><span class=cl>        default: auto                  # 默认模式：auto, light, dark
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    # 图片处理
+</span></span><span class=line><span class=cl>    imageProcessing:
+</span></span><span class=line><span class=cl>        cover:
+</span></span><span class=line><span class=cl>            enabled: true              # 处理封面图片
+</span></span><span class=line><span class=cl>        content:
+</span></span><span class=line><span class=cl>            enabled: true              # 处理内容图片
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#自定义菜单配置
+</span></span><span class=line><span class=cl>menu:
+</span></span><span class=line><span class=cl>    main: []                           # 主导航菜单
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    social:                            # 社交链接菜单
+</span></span><span class=line><span class=cl>        - identifier: github
+</span></span><span class=line><span class=cl>          name: GitHub
+</span></span><span class=line><span class=cl>          url: https://github.com/CaiJimmy/hugo-theme-stack
+</span></span><span class=line><span class=cl>          params:
+</span></span><span class=line><span class=cl>              icon: brand-github       # 图标名称
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#相关文章设置
+</span></span><span class=line><span class=cl>related:
+</span></span><span class=line><span class=cl>    includeNewer: true                 # 是否包含较新文章
+</span></span><span class=line><span class=cl>    threshold: 60                      # 相关度阈值
+</span></span><span class=line><span class=cl>    toLower: false                     # 是否忽略大小写
+</span></span><span class=line><span class=cl>    indices:
+</span></span><span class=line><span class=cl>        - name: tags                   # 使用标签作为关联依据
+</span></span><span class=line><span class=cl>          weight: 100                  # 权重
+</span></span><span class=line><span class=cl>        - name: categories             # 使用分类作为关联依据
+</span></span><span class=line><span class=cl>          weight: 200
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>#Markdown渲染设置
+</span></span><span class=line><span class=cl>markup:
+</span></span><span class=line><span class=cl>    goldmark:
+</span></span><span class=line><span class=cl>        extensions:
+</span></span><span class=line><span class=cl>            passthrough:
+</span></span><span class=line><span class=cl>                enable: true           # 启用原始HTML通过
+</span></span><span class=line><span class=cl>                delimiters:
+</span></span><span class=line><span class=cl>                    block:             # 块级分隔符
+</span></span><span class=line><span class=cl>                        - - \[
+</span></span><span class=line><span class=cl>                          - \]
+</span></span><span class=line><span class=cl>                        - - $$
+</span></span><span class=line><span class=cl>                          - $$
+</span></span><span class=line><span class=cl>                    inline:            # 行内分隔符
+</span></span><span class=line><span class=cl>                        - - \(
+</span></span><span class=line><span class=cl>                          - \)
+</span></span><span class=line><span class=cl>        renderer:
+</span></span><span class=line><span class=cl>            unsafe: true               # 允许不安全HTML（直接渲染HTML内容）
+</span></span><span class=line><span class=cl>    tableOfContents:
+</span></span><span class=line><span class=cl>        endLevel: 4                    # 目录结束级别
+</span></span><span class=line><span class=cl>        ordered: true                  # 是否有序
+</span></span><span class=line><span class=cl>        startLevel: 2                  # 目录开始级别
+</span></span><span class=line><span class=cl>    highlight:
+</span></span><span class=line><span class=cl>        noClasses: false               # 是否使用内联样式
+</span></span><span class=line><span class=cl>        codeFences: true               # 启用代码围栏
+</span></span><span class=line><span class=cl>        guessSyntax: true              # 自动猜测语法
+</span></span><span class=line><span class=cl>        lineNoStart: 1                 # 行号起始值
+</span></span><span class=line><span class=cl>        lineNos: true                  # 显示行号
+</span></span><span class=line><span class=cl>        lineNumbersInTable: true       # 在表格中显示行号
+</span></span><span class=line><span class=cl>        tabWidth: 4                    # 制表符宽度</span></span></code></pre></td></tr></table></div></div></p><p>重点： 务必修改 baseURL、title、avatar.src 和 social 部分的内容为你自己的信息</p><p>本地预览</p><p>在发布到互联网前，先在本地预览效果。</p><p>在 my-blog 目录的 PowerShell 中执行：</p><p>hugo server -D</p><p>终端会提示一个地址，通常是 http://localhost:1313/。在浏览器中打开它，你应该能看到你的博客了。</p><p>托管代码到 GitHub 并设置自动化部署</p><p>创建并设置源代码仓库</p><p>·登录 GitHub，创建一个新仓库用于存放博客的源代码。</p><p>·Repository name: &lt;你的用户名>.github.io (这是获取顶级访问域名的关键，例如用户名 john 则仓库名为 john.github.io)。</p><p>·将仓库 visibility 设为 Public (私有仓库需要付费账户才能使用 Pages 功能)。</p><p>·不要勾选 “Initialize this repository with a README”。</p><p>·创建完成后，复制仓库的 HTTPS 地址（格式为 <a class=link href=https://github.com/ target=_blank rel=noopener>https://github.com/</a>&lt;你的用户名>/&lt;你的用户名>.github.io.git）。
+推送本地代码到仓库</p><p>推送本地代码到仓库</p><p>在本地终端 (如 PowerShell) 中，进入你的 Hugo 站点根目录 (例如 my-blog)，执行以下命令：</p><p>#关联远程仓库（地址替换为刚复制的地址）</p><p>git remote add origin <a class=link href=https://github.com/ target=_blank rel=noopener>https://github.com/</a>&lt;你的用户名>/&lt;你的用户名>.github.io.git</p><p>#添加所有文件到暂存区并提交</p><p>git add .</p><p>git commit -m &ldquo;Initial commit with Hugo site and Stack theme&rdquo;</p><p>#将本地 main 分支推送到 GitHub 并设为上游分支</p><p>git branch -M main</p><p>git push -u origin main</p><p>配置自动化部署 (GitHub Actions)</p><p>·设置Github Pages</p><p>·点击Settings</p><p>·点击左侧Pages</p><p>·将Buile and depolyment由Deploy from branch 改为 GitHub Actions</p><p>·在本地站点根目录下，创建目录结构：.github/workflows/，并在 workflows 目录中新建文件 deploy.yml。</p><p>·用文本编辑器打开 deploy.yml，粘贴以下工作流配置（该配置使用官方推荐 Actions，支持自动构建、发布）：<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl>name: Deploy Hugo Site to Pages
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>on:
+</span></span><span class=line><span class=cl>  push:
+</span></span><span class=line><span class=cl>    branches: [&#34;main&#34;]   # 代码推送至 main 分支时触发
+</span></span><span class=line><span class=cl>  workflow_dispatch:     # 支持手动触发
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>permissions:
+</span></span><span class=line><span class=cl>  contents: read
+</span></span><span class=line><span class=cl>  pages: write
+</span></span><span class=line><span class=cl>  id-token: write
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>concurrency:
+</span></span><span class=line><span class=cl>  group: &#34;pages&#34;
+</span></span><span class=line><span class=cl>  cancel-in-progress: false
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>jobs:
+</span></span><span class=line><span class=cl>  build:
+</span></span><span class=line><span class=cl>    runs-on: ubuntu-latest
+</span></span><span class=line><span class=cl>    steps:
+</span></span><span class=line><span class=cl>      - name: Checkout code
+</span></span><span class=line><span class=cl>        uses: actions/checkout@v4
+</span></span><span class=line><span class=cl>        with:
+</span></span><span class=line><span class=cl>          submodules: recursive  # 自动拉取主题子模块
+</span></span><span class=line><span class=cl>          fetch-depth: 0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      - name: Setup Hugo
+</span></span><span class=line><span class=cl>        uses: peaceiris/actions-hugo@v2
+</span></span><span class=line><span class=cl>        with:
+</span></span><span class=line><span class=cl>          hugo-version: &#39;latest&#39;
+</span></span><span class=line><span class=cl>          # extended: true       # 若主题需扩展版，取消注释
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      - name: Build with Hugo
+</span></span><span class=line><span class=cl>        run: hugo --minify --gc   # 生成优化后的静态文件
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      - name: Upload artifact
+</span></span><span class=line><span class=cl>        uses: actions/upload-pages-artifact@v3
+</span></span><span class=line><span class=cl>        with:
+</span></span><span class=line><span class=cl>          path: ./public          # 上传生成的站点文件
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  deploy:
+</span></span><span class=line><span class=cl>    environment:
+</span></span><span class=line><span class=cl>      name: github-pages
+</span></span><span class=line><span class=cl>      url: ${{ steps.deployment.outputs.page_url }}
+</span></span><span class=line><span class=cl>    runs-on: ubuntu-latest
+</span></span><span class=line><span class=cl>    needs: build
+</span></span><span class=line><span class=cl>    steps:
+</span></span><span class=line><span class=cl>      - name: Deploy to GitHub Pages
+</span></span><span class=line><span class=cl>        id: deployment
+</span></span><span class=line><span class=cl>        uses: actions/deploy-pages@v4</span></span></code></pre></td></tr></table></div></div></p><p>查看部署状态和访问博客</p><p>推送完成后，在浏览器中访问你的 GitHub 仓库：https://github.com/&lt;你的用户名>/&lt;你的用户名>.github.io。</p><p>点击顶部 Actions 标签页，查看名为 “Deploy Hugo Site to Pages” 的工作流运行状态。等待运行完成（出现绿色对勾 ✅）。</p><p>部署成功后，进入 Settings → Pages，页面顶部会显示你的博客访问地址：https://&lt;你的用户名>.github.io。</p><p>点击该链接即可访问已自动发布的博客。</p><p>发布上线过程：</p><p>进入my-blog根目录执行</p><p><code>hugo --cleanDestinationDir</code> #清理旧文件并重新 生成</p><p><code>hugo server</code> 预览一下</p><p><code>git add .</code></p><p><code>git commit -m "Publish: XXX"</code></p><p><code>git push</code></p><h4 id=本地仓库推送新账号>本地仓库推送新账号</h4><p>删除本地仓库文件<code>.git</code></p><p>初始化全新的Git仓库</p><p>git init</p><p>添加所有文件</p><p>git add .</p><p>提交初始版本</p><p>git commit -m &ldquo;初始化博客仓库&rdquo;</p><p>步骤 1：生成并添加 SSH 密钥到新账号</p><p>打开终端，生成 SSH 密钥（按提示操作，无需设置密码）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ssh-keygen -t ed25519 -C <span class=s2>&#34;oppwin168@gmail.com&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>找到生成的公钥文件（默认路径）：</p><p>Windows：C:\Users\你的用户名.ssh\id_ed25519.pub</p><p>用记事本打开，复制全部内容</p><p>登录 JustWin33 的 GitHub 账号：</p><p>进入 Settings → SSH and GPG keys → New SSH key</p><p>粘贴公钥内容，随意填写一个标题（如 my-blog-pc），点击添加</p><p>步骤 2：修改本地仓库的远程链接为 SSH 形式</p><p>先删除现有 origin 关联</p><p>git remote remove origin</p><p>添加 SSH 形式的远程仓库链接</p><p>git remote add origin <a class=link href=mailto:git@github.com>git@github.com</a>:JustWin33/JustWin33.github.io.git</p><p>步骤 3：测试 SSH 连接并推送</p><p>测试是否能连接到 GitHub</p><p>ssh -T <a class=link href=mailto:git@github.com>git@github.com</a></p><p>如果成功，会显示 Hi JustWin33! You&rsquo;ve successfully authenticated&mldr;</p><p>然后推送代码：</p><p>git push &ndash;set-upstream origin main</p><p>git submodule add -b main <a class=link href=mailto:git@github.com>git@github.com</a>:JustWin33/JustWin33.github.io.git main</p><p>注意是：main分支</p><p>进入my-blog根目录执行</p><p>hugo &ndash;cleanDestinationDir #清理旧文件并重新 生成</p><p>hugo server 预览一下</p><p>git add .</p><p>git commit -m &ldquo;Publish: XXX&rdquo;</p><p>git push</p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.41ca4eaf52b652e57287476ccaad0cf00156a16b60b73a41dc06dc640bc54102.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

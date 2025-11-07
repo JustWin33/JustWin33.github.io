@@ -6,405 +6,242 @@
         <description>Recent content in Posts on JustWin</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>© 2025 win. 保留所有权利.</copyright><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>IPV6</title>
-        <link>http://localhost:1313/posts/ipv6/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <copyright>© 2025 win. 保留所有权利.</copyright>
+        <lastBuildDate>Mon, 20 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux四剑客</title>
+        <link>http://localhost:1313/posts/linux%E5%9B%9B%E5%89%91%E5%AE%A2/</link>
+        <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/ipv6/</guid>
-        <description>&lt;h3 id=&#34;流程&#34;&gt;流程
-&lt;/h3&gt;&lt;p&gt;临时教育邮箱(&lt;a class=&#34;link&#34; href=&#34;https://etempmail.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://etempmail.com&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;注册IPV6链接（https://tunnelbroker.net）&lt;/p&gt;
-&lt;p&gt;真实地址生成器(&lt;a class=&#34;link&#34; href=&#34;https://ip-geoaddress-generator.pages.dev&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://ip-geoaddress-generator.pages.dev&lt;/a&gt;),自动识别你当前的真实IP地址或节点，来帮你创建一个对应的真实的地址！&lt;/p&gt;
-&lt;p&gt;IPv6地址转IP6.arpa 域名(&lt;a class=&#34;link&#34; href=&#34;https://ipv6.jiemi360.workers.dev&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://ipv6.jiemi360.workers.dev&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;点&lt;code&gt;临时教育邮箱&lt;/code&gt;中收到的文件，文件中有申请下来的链接，复制链接，在&lt;code&gt;浏览器&lt;/code&gt;中打开，登录账号来验证一下就好了，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANBaQABwfgPXZeVuekr-pnwfvtsxjGuAAKZC2sb8OMIVOonbH5El2HIAQADAgADeQADNgQ.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANCaQABxvTi41QwM1nop4onfQh3yn7QAAKuC2sb8OMIVHIoK2xz7p7GAQADAgADeQADNgQ.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANDaQABx46TR9ZiK8MLzQz3Kp3KpYWMAAKwC2sb8OMIVMoAAZbahr3GOgEAAwIAA3kAAzYE.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;点IPV6转地址，填写自己区域码、邮箱、全局API令牌&lt;/p&gt;
-&lt;p&gt;点左边&lt;code&gt;SSL/TLS&lt;/code&gt;，点&lt;code&gt;边缘证书&lt;/code&gt;来查看&lt;/p&gt;
-&lt;p&gt;这种是部署成功的&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANEaQF7mf0hflIyj6STo9mWea0zfXMAApwMaxvw4whUJppSQAcVTSYBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
+        <guid>http://localhost:1313/posts/linux%E5%9B%9B%E5%89%91%E5%AE%A2/</guid>
+        <description>&lt;p&gt;Linux四剑客&lt;/p&gt;
+&lt;p&gt;1、find    ：           查找文件、目录，find与其他命令配合&lt;/p&gt;
+&lt;p&gt;2、gerp/egrep  ： 过滤&lt;/p&gt;
+&lt;p&gt;3、sed           ：过滤，替换，取行&lt;/p&gt;
+&lt;p&gt;4、awk           ：过滤，取行，取列，统计与计算&lt;/p&gt;
+&lt;h3 id=&#34;find&#34;&gt;find
+&lt;/h3&gt;&lt;p&gt;find 路径 -name &amp;ldquo;文件名&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;选项&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.&lt;/code&gt;                        表示在当前目录下&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;quot;ab*&amp;quot;&lt;/code&gt;                    *匹配一串字符    ？匹配一个字符&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-type&lt;/code&gt;                    d目录  f文件  l软链接&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-iname&lt;/code&gt;                   忽略大小写查找含有关键字的文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-name&lt;/code&gt;                    指定文件名，默认精确匹配。加上*模糊&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-size&lt;/code&gt;                    指定大小 +1M表示大于1M的，-1k表示小于1k的文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-mtime&lt;/code&gt;                   根据时间查找&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-maxdepth&lt;/code&gt;                查找最大深度&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-perm 755&lt;/code&gt;                表示权限为755的文件&lt;/p&gt;
+&lt;h4 id=&#34;案例01找出etc目录下面以conf结尾的文件&#34;&gt;案例01：找出/etc/目录下面以.conf结尾的文件
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;find /etc/ -type f -name &#39;*.conf&#39;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;find  目录  类型 名字&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;find /etc/ -type f -name &#39;host*&#39;&lt;/code&gt;       #以hosts开头&lt;/p&gt;
+&lt;p&gt;找出/bin/  /sbin/  文件中包含ip的文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;find /bin/ /sbin/ -type f -name &amp;quot;*ip&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;案例02找出etc目录下以conf结尾的文件文件大小大于10k&#34;&gt;案例02：找出/etc/目录下以.conf结尾的文件文件大小大于10k
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;find /etc/ -type f -name &amp;quot;*.conf&amp;quot; -size +10k&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;案例03找出varlog下面以log结尾的文件并且修改时间大于3天&#34;&gt;案例03：找出/var/log下面以.log结尾的文件并且修改时间大于3天
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;find /var/log/ -type f -name &amp;quot;*.log&amp;quot; -mtime +3&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;案例04查找文件或目录的时候不区分大小写&#34;&gt;案例04：查找文件或目录的时候不区分大小写
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;find /etc/ -type f -iname &amp;quot;*.conf&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;案例根据深度查找文件&#34;&gt;案例根据深度查找文件
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;find /etc/ -maxdepth 1 -type f -name &amp;quot;*.conf&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;案例05find找出文件后进行删除&#34;&gt;案例05：find找出文件后进行删除
+&lt;/h4&gt;&lt;p&gt;创建测试环境&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mkdir  -p /app/logs/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;touch /app/logs/access{01..10}.log&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;方法01：find与反引导&lt;/p&gt;
+&lt;p&gt;rm -f &lt;code&gt;find /app/logs/ -type f -name &#39;*.log&#39;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;方法02：find 管道&lt;/p&gt;
+&lt;p&gt;find /app/logs/ -type f -name &amp;ldquo;*.log&amp;rdquo; | xargs rm -f&lt;/p&gt;
+&lt;p&gt;| 与|xargs区别&lt;/p&gt;
+&lt;p&gt;|传递的是字符串，文字符号&lt;/p&gt;
+&lt;p&gt;|xargs传递是参数 命令后面文件，目录&lt;/p&gt;
+&lt;p&gt;方法03：find选项-exec&lt;/p&gt;
+&lt;p&gt;find -type f -name &amp;ldquo;*.log&amp;rdquo; -exec rm -f {} ;&lt;/p&gt;
+&lt;p&gt;-exec 命令 {} ;&lt;/p&gt;
+&lt;p&gt;{}前面find找出的文件内容&lt;/p&gt;
+&lt;p&gt;;结尾标记&lt;/p&gt;
+&lt;h4 id=&#34;案例06找出etc下以conf结尾的文件与打包压缩backup&#34;&gt;案例06：找出/etc/下以.conf结尾的文件与打包压缩/backup/
+&lt;/h4&gt;&lt;p&gt;方法01：find+反引号&lt;/p&gt;
+&lt;p&gt;tar zcf /backup/etc-conf.tar.gz  &lt;code&gt;find /etc/ -type f -name &amp;quot;*.conf&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;方法02：find |xargs&lt;/p&gt;
+&lt;p&gt;find /etc/ -type f -name &amp;ldquo;*.conf&amp;rdquo; |xargs tar zcf /backup/etc_conf.tar.gz&lt;/p&gt;
+&lt;p&gt;方法03：find -execf&lt;/p&gt;
+&lt;p&gt;find /etc/ -type f -name &amp;ldquo;*.conf&amp;rdquo; -exec tar -zcf /backup/etc_conf.tar.gz {} ;&lt;/p&gt;
+&lt;p&gt;有坑，发现打包压缩后只有1个文件&lt;/p&gt;
+&lt;p&gt;find 与 -exe执行流程&lt;/p&gt;
+&lt;p&gt;find找出1个文件exec执行1次命令&lt;/p&gt;
+&lt;p&gt;find /etc/ -type f -name &amp;ldquo;*.conf&amp;rdquo; -exec tar zcf /backup/etc-exec.tar.gz {} +&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先执行前面命令执行完成，结果一次性通exec传递给后面命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;特殊符号-重定向&#34;&gt;特殊符号-重定向
+&lt;/h4&gt;&lt;h5 id=&#34;单引号双引号反引号不加引号的区别&#34;&gt;单引号、双引号、反引号、不加引号的区别
+&lt;/h5&gt;&lt;p&gt;单引号：所见即所得，单引号里面的内容会原封不动输出，shell(bash)不会解析与运行&lt;/p&gt;
+&lt;p&gt;双引号：与单引号类似，特殊符号会被解析运行$,``,不会解析{}(通配符匹配文件名)&lt;/p&gt;
+&lt;p&gt;不加引号：与双引号类似，解析{}&lt;/p&gt;
+&lt;p&gt;反引号：优先执行，先运行引号里面的命令&lt;/p&gt;
+&lt;p&gt;#echo &amp;lsquo;oldboy $LANG hostname{01..10}&amp;rsquo;| oldboy $LANG hostname {01..10}&lt;/p&gt;
+&lt;p&gt;#echo &amp;ldquo;oldboy $LANG hostname {01..10}&amp;rdquo;&lt;/p&gt;
+&lt;h5 id=&#34;重定向符号&#34;&gt;重定向符号
+&lt;/h5&gt;&lt;p&gt;&lt;code&gt;&amp;gt; 或1&amp;gt;&lt;/code&gt;           标准输出重定向（正确信息），先清空，然后写入&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;gt; &amp;gt; 或1&amp;gt;&amp;gt;&lt;/code&gt;     标准输出追加重定向（正确信息），追加到文件末尾&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;2&amp;gt;&lt;/code&gt;                标准错误输出重定向（错误信息），先清空，然后写入&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;2&amp;gt;&amp;gt;&lt;/code&gt;              标准错误追加输出重定向（错误信息），追加到文件末尾&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;gt; &amp;gt; oldboy.txt 2&amp;gt;&amp;amp;1 &amp;amp;&amp;gt;&amp;gt;oldboy.txt               标准错误信息都写入到指定文件&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;或0&amp;lt;&lt;/code&gt;            输入重定向&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;&amp;lt;或0&amp;lt;&amp;lt;&lt;/code&gt;           追加输入重定向&lt;/p&gt;
+&lt;p&gt;2&amp;gt;&amp;amp;1:将正确和错误的信息都输出，适用于日志文件&lt;/p&gt;
+&lt;p&gt;2&amp;gt;:只输出错误的信息&lt;/p&gt;
+&lt;h3 id=&#34;grep&#34;&gt;grep
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep -n --color &amp;#39;^hello&amp;#39; ~/Desktop/2.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;-n              ==&amp;gt; 显示行数&lt;/p&gt;
+&lt;p&gt;-color          ==&amp;gt; 显示颜色&lt;/p&gt;
+&lt;p&gt;&amp;lsquo;^hello&amp;rsquo;  ^     ==&amp;gt;字符串开头,查找的字符串
+$               ==&amp;gt; 字符串结尾&lt;/p&gt;
+&lt;p&gt;~/Desktop/2.txt ==&amp;gt; 查找的文件路径&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep -v --color &amp;#39;^hello&amp;#39; ~/Desktop/2.txt | grep -v &amp;#34;^$&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+-v        ==&amp;gt; 取反，不要以 hello 开头的内容&lt;/p&gt;
+&lt;p&gt;-v ”^$”   ==&amp;gt; 去掉空行&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;egrep &amp;#39;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$&amp;#39; 2.txt 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;egrep &amp;#39;([0-9]{1,3}\.){3}[0-9]{1,3}$&amp;#39; 2.txt&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&amp;lsquo;[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}$&amp;rsquo;  ==&amp;gt; 正则表达式匹配ip地址 xxx.xxx.xxx.xxx&lt;/p&gt;
+&lt;p&gt;cat /etc/passwd&lt;/p&gt;
+&lt;p&gt;grep 命令用于查找文件中的内容,匹配文件中的内容&lt;/p&gt;
+&lt;p&gt;grep  -n &amp;ndash;color &amp;ldquo;root&amp;rdquo; /etc/passwd&lt;/p&gt;
+&lt;p&gt;-n    ==&amp;gt;查找的结果在passwd文件的 行号&lt;/p&gt;
+&lt;p&gt;&amp;ndash;color  ==&amp;gt;为关键字加上颜色&lt;/p&gt;
+&lt;p&gt;/etc/passwd  这个文件&lt;/p&gt;
+&lt;p&gt;grep  -n &amp;ndash;color &amp;ldquo;^root&amp;rdquo; /etc/passwd&lt;/p&gt;
+&lt;p&gt;^root 表示以root开头的行，文本后面出现root关键字没有用&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep  -n --color &amp;#34;root$&amp;#34; /etc/passwd
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep  -n --color &amp;#34;bash$&amp;#34; /etc/passwd&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+root$ 表示文本所在行以root结尾&lt;/p&gt;
+&lt;p&gt;bash$ 表示文本所在行以bash结尾&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep &amp;#34;#&amp;#34; /etc/passwd  #查找passwd文件中包含#的行
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep -v &amp;#34;#&amp;#34; /etc/passwd  #查找passwd文件中不包含#的行&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;grep -v &amp;ldquo;#&amp;rdquo; /etc/passwd | grep -v &amp;ldquo;^$&amp;rdquo;   #查找passwd文件中不包含#的行,并去除空行&lt;/p&gt;
+&lt;p&gt;grep -v &amp;ldquo;^$&amp;rdquo;   表示不包含空行，即去除空行&lt;/p&gt;
+&lt;p&gt;-v  表示不包含&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;^$&amp;rdquo; 表示空行&lt;/p&gt;
+&lt;p&gt;^ 以空格开头&lt;/p&gt;
+&lt;p&gt;$ 以空格结尾&lt;/p&gt;
+&lt;p&gt;grep -[a c i n v] &amp;lsquo;搜索的内容&amp;rsquo;  filename&lt;/p&gt;
+&lt;p&gt;-a 以文本文件方式搜索&lt;/p&gt;
+&lt;p&gt;-c 计算找到的符合行的次数&lt;/p&gt;
+&lt;p&gt;-i 忽略大小写&lt;/p&gt;
+&lt;p&gt;-n 顺便输出行号&lt;/p&gt;
+&lt;p&gt;-v 反向选择，即显示不包含匹配文本的所有行&lt;/p&gt;
+&lt;p&gt;-h 查询多文件时不显示文件名&lt;/p&gt;
+&lt;p&gt;-l查询多文件时只输出包含匹配字符的文件名&lt;/p&gt;
+&lt;p&gt;-s 不显示不存在或无匹配的错误信息&lt;/p&gt;
+&lt;p&gt;grep 命令加 -E 参数，这一扩展允许使用扩展模式匹配&lt;/p&gt;
+&lt;p&gt;grep -E  =  egrep&lt;/p&gt;
+&lt;p&gt;使用grep查找文件中的ip地址&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep --color &amp;#34;[0-9][0-9]&amp;#34;  test.txt   
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;[0-9]&amp;#34;  表示0~9任意一个字符
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;[0-9][0-9]&amp;#34; 两个连续数字
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep --color &amp;#34;[0-9]\{1,3}&amp;#34;  test.txt  #匹配1~3次&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;egrep &amp;ndash;color &amp;ldquo;[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}$&amp;rdquo;  test.txt&lt;/p&gt;
+&lt;p&gt;[0-9]{1,3}. 表示以1~3位数字，并且后面有一个 . 号&lt;/p&gt;
+&lt;p&gt;.   表示转义的.  一定要加上&lt;/p&gt;
+&lt;p&gt;[0-9]{1,3}$   表示以1~3位数字结尾，如果是4位数字或以上就不行&lt;/p&gt;
+&lt;p&gt;[a-z] 表示一个字母&lt;/p&gt;
+&lt;p&gt;egrep &amp;ndash;color &amp;ldquo;([0-9]{1,3}.){3}[0-9]{1,3}$&amp;rdquo;  test.txt
+{} 表示匹配的的次数
+([0-9]{1,3}.){3} 将前面的形式匹配3次&lt;/p&gt;
+&lt;p&gt;[^] 匹配一个不在指定范围内的字符 ex: &amp;lsquo;[^A-FH-Z]rep&amp;rsquo; 匹配不包含A-R和T-Z的一个字母开头，紧跟rep的行。&lt;/p&gt;
+&lt;p&gt;ls -l |grep &amp;lsquo;^a&amp;rsquo;通过管道过滤ls -l 输出的内容，只显示以a开头的行
+grep &amp;rsquo;test&amp;rsquo; aa bb cc 显示在aa，bb，cc文件中匹配test行
+grep &amp;lsquo;[a-z]/{5/}&amp;rsquo;  aa显示所有包含每个字符串至少有5个连续小写字符的字符串的行&lt;/p&gt;
+&lt;p&gt;grep -c &amp;ldquo;48&amp;rdquo; test.txt 统计所有以&amp;quot;48&amp;quot;字符开头的行有多少
+grep -i &amp;ldquo;May&amp;rdquo; test.txt 不区分大小写查找 &amp;ldquo;May&amp;quot;所有的行&lt;/p&gt;
+&lt;p&gt;grep -n &amp;ldquo;May&amp;rdquo; test.txt 显示行号
+grep -v &amp;ldquo;48&amp;rdquo; test.txt 显示输出没有字符&amp;quot;48&amp;rdquo; 所有的行
+([a-z]+[a-z0-9])      表示匹配任意一个字母 + 任意一个数字或字母
+([a-z]+[a-z0-9]+)    这边的+号表示可以匹配多个&lt;/p&gt;
 </description>
         </item>
         <item>
-        <title>订阅链接</title>
-        <link>http://localhost:1313/posts/%E8%AE%A2%E9%98%85%E9%93%BE%E6%8E%A5/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <title>Wireshark</title>
+        <link>http://localhost:1313/posts/wireshark/</link>
+        <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/%E8%AE%A2%E9%98%85%E9%93%BE%E6%8E%A5/</guid>
-        <description>&lt;p&gt;&lt;strong&gt;切记勿乱传！&lt;/strong&gt;，本人不负责！！！&lt;/p&gt;
-&lt;h3 id=&#34;所有的流程&#34;&gt;所有的流程
-&lt;/h3&gt;&lt;p&gt;你先按照我之前说的方法，随便找个能用的节点，先连接上，不连接节点搞不了&lt;/p&gt;
-&lt;h4 id=&#34;域名&#34;&gt;域名
-&lt;/h4&gt;&lt;p&gt;1、查看你要注册的域名有没有被注册(&lt;a class=&#34;link&#34; href=&#34;https://domain.digitalplat.org/%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://domain.digitalplat.org/)&lt;/a&gt;,域名是二级域名，格式：&lt;code&gt;foo.example.com&lt;/code&gt;,&lt;code&gt;foo&lt;/code&gt;替换成你喜欢的，一定要符合格式，后面的后缀不用管，主要是按照这个格式，点&lt;code&gt;Check Availability&lt;/code&gt;,看看有没有被注册&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMbaP9VENd1IS-2u4BM_PuD8qw3EIIAAtoMaxvkPPlXmONKHDadGCYBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMcaP9VefZz5DwQAAFFW5NgaErY5E9IAALcDGsb5Dz5VwnxpL3IVV-wAQADAgADdwADNgQ.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;这种是可以注册的！&lt;/p&gt;
-&lt;p&gt;2、注册域名链接(&lt;a class=&#34;link&#34; href=&#34;https://dash.domain.digitalplat.org/auth/register&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://dash.domain.digitalplat.org/auth/register&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMdaP9c4tJVjgABCMM_-LXn0x23Q5IdAALmDGsb5Dz5V5t-C786Z-yCAQADAgADeQADNgQ.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;出现&lt;code&gt;绿色 √&lt;/code&gt; 显示&lt;code&gt;Success&lt;/code&gt;就成功了！&lt;/p&gt;
-&lt;p&gt;你可以打开你注册的时候用的邮箱，看图片，从&lt;code&gt;https://--------&lt;/code&gt;复制到结尾，在浏览器的搜索栏粘贴打开。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMeaP9d8ZWgqDSzmTYwiRR3bocxcocAAukMaxvkPPlXfAfLwj-xwBUBAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;打开后，显示&lt;code&gt;Success!&lt;/code&gt;就成功了！&lt;/p&gt;
-&lt;p&gt;3、登录(&lt;a class=&#34;link&#34; href=&#34;https://dash.domain.digitalplat.org/auth/login&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://dash.domain.digitalplat.org/auth/login&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;进入后，就会看到他要美国.KG KYC,点选择方法，点&lt;code&gt;GitHub OAuth&lt;/code&gt;,这个是通过&lt;code&gt;Github&lt;/code&gt;进行登录验证，然后点下方使用&lt;code&gt;Github&lt;/code&gt;登录下,&lt;code&gt;没有Github账号点链接(https://github.com)去注册&lt;/code&gt;，显示&lt;code&gt;Success&lt;/code&gt;就通过key验证了，这样你就进入后台！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMjaP9j-28h4ibImOT3RuWnEAfWqbAAAgUNaxvkPPlXAjT6xT6Tn8wBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;点进去，就可以看到官方仓库了，右上角点一个&lt;code&gt;星&lt;/code&gt;就可以了！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMiaP9jxL9jo0A7V4mbPOxLJwweCVcAAgINaxvkPPlXxCOgBHgaoHIBAAMCAANtAAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;回来,点&lt;code&gt;click here to verify&lt;/code&gt;验证GitHub账户就可以了！&lt;/p&gt;
-&lt;p&gt;左边栏第3个，点&lt;code&gt;Domain Registration&lt;/code&gt;，上面域名填你要起的，下面选择后缀&lt;code&gt;.dpdns.org&lt;/code&gt;,点一下就可以了！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMkaP9kkgvtgoMHMYIiF9AT214rV3MAAgsNaxvkPPlXx4kX7pm18soBAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;这页面&lt;code&gt;不要取消&lt;/code&gt;，再再开一个页面，完成以下操作！&lt;/p&gt;
-&lt;h4 id=&#34;cloudflare&#34;&gt;Cloudflare
-&lt;/h4&gt;&lt;p&gt;注册一个cloudflare账号(&lt;a class=&#34;link&#34; href=&#34;https://www.cloudflare.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://www.cloudflare.com&lt;/a&gt;) 最好使用&lt;code&gt;Google账号&lt;/code&gt;注册&lt;/p&gt;
-&lt;p&gt;进入后，点&lt;code&gt;账户主页&lt;/code&gt;,&lt;code&gt;加入域&lt;/code&gt;，填写你注册好的域名，直接点&lt;code&gt;继续&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMmaP9mqb6LVlW5oGp1khUgiRNvYPsAAhQNaxvkPPlX250mJx0r_XABAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMlaP9mUJWQSNBDmJ1JRkCj6PqPXQsAAhINaxvkPPlXVptqWe_Vqw0BAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;进入后，点&lt;code&gt;免费的&lt;/code&gt;套餐，完成后，点左边的&lt;code&gt;概述&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMoaP9rKqhEOzj613-kHrxMxBqIXHIAAiINaxvkPPlXaOPqXo6-wjoBAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMpaP9r2E00kQVQ0Muz2IQUUtdKyQEAAiUNaxvkPPlXpzN9-F9u2wsBAAMCAANtAAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;分别把这两条复制到对应&lt;code&gt;名称服务器&lt;/code&gt;上&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMnaP9qzhW6XSXMqTmebND4bOyzG0MAAiENaxvkPPlXcTx5helTolUBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;点&lt;code&gt;保存&lt;/code&gt;就可以了,回到&lt;code&gt;cloudflare&lt;/code&gt;等一段时间刷新一下，等他解析过来&lt;/p&gt;
-&lt;p&gt;显示这种就是成功了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMqaP9tBrg5g4G5jXo68Abh8V3QNcMAAikNaxvkPPlXLcMqYXgv4m8BAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h4 id=&#34;订阅链接&#34;&gt;订阅链接
-&lt;/h4&gt;&lt;p&gt;点左边栏找到&lt;code&gt;Workers和Pages&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMraP9tci7D4eKp45i-Pzl2DBsrMoYAAioNaxvkPPlXm23REoKh4-cBAAMCAANtAAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;点&lt;code&gt;创建应用程序&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMsaP9t3ZfdPeN3Nk0VyA4E4vD2Nm0AAi0NaxvkPPlXeZ1lYoT44ewBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;创建&lt;code&gt;workers&lt;/code&gt;,点&lt;code&gt;从Hello World!开始&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMtaP9uUtdXOeXOV9XBNd7Eq-XhnxoAAi4NaxvkPPlXYVd0QRr2rUIBAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;进入后直接点右下角&lt;code&gt;部署&lt;/code&gt;,好了之后，再找到图片中的位置，创建一个&lt;code&gt;KV&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMuaP9u27EfP9RzECSoK1hoyGXnksEAAi8NaxvkPPlXGKH5Q72G38gBAAMCAANtAAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;空间起个&lt;code&gt;大写英文&lt;/code&gt;名字,创办好了之后，再回到&lt;code&gt;Workers and Pages&lt;/code&gt;找到你创建好的&lt;code&gt;workers&lt;/code&gt;,点进去，点&lt;code&gt;绑定&lt;/code&gt;,再点&lt;code&gt;添加绑定&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMvaP9wlM1vofyvUS19qAVn77JZwGQAAjYNaxvkPPlX7hu9H1nMS_4BAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;找到&lt;code&gt;KV空间&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMwaP9xCLQ-uwPbZSyDEDDHdLay9ZUAAjcNaxvkPPlXzHF0PGKbA_0BAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;一定要填大写的&lt;code&gt;C&lt;/code&gt;,KV命名空间选择&lt;code&gt;你创建的&lt;/code&gt;,再点&lt;code&gt;添加绑定&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMxaP9xd0t7K_6EQ12-LWpDJOKXHukAAj8NaxvkPPlXrMSXKZvQ4kgBAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;点&lt;code&gt;设置&lt;/code&gt;,把上面的两个非活动，点右边&lt;code&gt;三个点&lt;/code&gt;禁用一下&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMzaP9yigMrbwlZQd7YxVkxGJJNWYAAAk8NaxvkPPlX6ZofxLlYh2ABAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;再点&lt;code&gt;＋添加&lt;/code&gt;，点自定义域名，填写&lt;code&gt;你申请创办好的域名&lt;/code&gt;,添加一下&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM0aP9y5F-QtBKZLHuOIDULy4ep7rwAAlENaxvkPPlX7CNPKGKSrI4BAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;添加一个&lt;code&gt;变量&lt;/code&gt;，一定要填小写&lt;code&gt;u&lt;/code&gt;,下面是&lt;code&gt;UUID&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM1aP9za0uycQ6QYzMk1XyaTy9OiZkAAlQNaxvkPPlXGo5fy_OjaWEBAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;UUID获取，打开V2rayN,看图片点，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM2aP9zvCHEPlmAo2qB2AaQusSw_3AAAlUNaxvkPPlXLtLSgTOAfkwBAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM3aP90Xea98VMWwYsKvUdHS7qU0PcAAlcNaxvkPPlXfS7S9Ask4ToBAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;把这个生成的UUID复制好，粘贴到一个文本上,回到&lt;code&gt;cloudflare&lt;/code&gt;部署一下&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM4aP900cvKym27SLfnhwi-chw7akQAAlgNaxvkPPlXbvdARF4r7O4BAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;点&lt;code&gt;编辑代码&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM5aP91NK-r1tEzofdsZ6_p1SvjUx8AAlkNaxvkPPlX8PpHNQpPpXYBAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;进入后，把左边的代码&lt;code&gt;全选全部删除&lt;/code&gt;,跳转到Github仓库(&lt;a class=&#34;link&#34; href=&#34;https://github.com/byJoey/cfnew/blob/main/%E5%B0%91%E5%B9%B4%E4%BD%A0%E7%9B%B8%E4%BF%A1%E5%85%89%E5%90%97&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/byJoey/cfnew/blob/main/%E5%B0%91%E5%B9%B4%E4%BD%A0%E7%9B%B8%E4%BF%A1%E5%85%89%E5%90%97&lt;/a&gt;)，复制代码，粘贴到你删除的左边代码框，点部署&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM6aP94isafZcpx3SwHDbujPqCGjXwAAlwNaxvkPPlXDeNhP1aZvIUBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;出现这种就是成功了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM7aP94za7nnSrZt5lCKL5Nzf4otOMAAl4NaxvkPPlXOGoar7XpoWMBAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;复制跳转&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM8aP95IJ2cYKqPIiCf9_IE5Mw18JsAAl8NaxvkPPlXLCqlcsgt6DgBAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;输入叫你保存到文本的UUID，就可以了&lt;/p&gt;
-&lt;p&gt;成功进入后就和图片中的一样&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM9aP95rqLiPuP3lNkMkDN2TkjGUJ8AAmENaxvkPPlX5TKNftFvnqUBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;再点V2rayN，复制生成的链接,打开V2rayN使用就可以了！ 剩下的懒得说了，看我之前的就可以了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM-aP96HLx4K-_I68M0JVBPo7gt6gkAAmMNaxvkPPlXQMcQeEibJckBAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAM_aP96psTIZCMpQppiB_1QyCmyaMEAAmUNaxvkPPlXdWwJzd82nr8BAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAANAaP961hSn0Xye0yjm1GFAoVL1o4UAAmYNaxvkPPlXQRoomgUxT4kBAAMCAANtAAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
+        <guid>http://localhost:1313/posts/wireshark/</guid>
+        <description>&lt;p&gt;Wireshark&lt;/p&gt;
+&lt;p&gt;官网：https://www.wireshark.org&lt;/p&gt;
 </description>
         </item>
         <item>
-        <title>科学上网</title>
-        <link>http://localhost:1313/posts/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <title>搭建hugo博客</title>
+        <link>http://localhost:1313/posts/%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</link>
+        <pubDate>Sat, 18 Oct 2025 16:31:22 +0800</pubDate>
         
-        <guid>http://localhost:1313/posts/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</guid>
-        <description>&lt;h3 id=&#34;电脑版&#34;&gt;电脑版
-&lt;/h3&gt;&lt;p&gt;主要分&lt;code&gt;Windows&lt;/code&gt;和&lt;code&gt;Mac&lt;/code&gt;两个版本，但是科学上网的方法基本相同，&lt;code&gt;Mac&lt;/code&gt;更方便一些，有更多的选择。&lt;/p&gt;
-&lt;p&gt;主要讲&lt;code&gt;V2rayN&lt;/code&gt;的使用，这个两个操作系统都可以使用&lt;/p&gt;
-&lt;h4 id=&#34;windows操作步骤&#34;&gt;windows操作步骤
-&lt;/h4&gt;&lt;p&gt;1、先下载&lt;code&gt;Watt Toolkit&lt;/code&gt;,在电脑应用商店搜，或者点这个链接直接点转到他的官网下载(&lt;a class=&#34;link&#34; href=&#34;https://steampp.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://steampp.net/&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;下载好之后，打开找到&lt;code&gt;网络加速&lt;/code&gt;点进去，在平台加速中，找到&lt;code&gt;GitHub&lt;/code&gt;打上对勾，点&lt;code&gt;一键加速&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;GitHub官网(&lt;a class=&#34;link&#34; href=&#34;https://github.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/&lt;/a&gt;)，点进去，或者你直接点项目的地址(&lt;a class=&#34;link&#34; href=&#34;https://github.com/2dust/v2rayN&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/2dust/v2rayN&lt;/a&gt;)，看看可以下载这个V2rayN吗，如果不能下载，你在注册GitHub账号&lt;/p&gt;
-&lt;p&gt;进入项目地址后，看右边的栏，找到&lt;code&gt;Releases&lt;/code&gt;点进去，往下滑找到&lt;code&gt;Assets&lt;/code&gt;,再点&lt;code&gt;Show all 19 assets&lt;/code&gt;就可以看到所有的软件包了，选择&lt;code&gt;v2rayN-windows-64-SelfContained.zip&lt;/code&gt;点一下等下载好就可以了。&lt;/p&gt;
-&lt;p&gt;2、下载好，直接打开下载好的文件，在文件夹中找到并打开这个&lt;code&gt;应用程序&lt;/code&gt;，每次都是从这里打开使用
-&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMOaP3S4O-OPbe8LNbOoCdeymnO77YAAt0LaxvkPOlXX-alcDD6JsYBAAMCAAN4AAM2BA.png&#34;
+        <guid>http://localhost:1313/posts/%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;p&gt;Hugo + GitHub搭建个人博客&lt;/p&gt;
+&lt;p&gt;首先安装下载  Hugo和Git,并且注册一个GitHub账号，Hugo一定要选择&lt;code&gt;Extended&lt;/code&gt;版本。&lt;/p&gt;
+&lt;p&gt;打开终端，按下&lt;code&gt;win+R&lt;/code&gt;,输入&lt;code&gt;cmd&lt;/code&gt;，回车进入终端，输入以下命令，验证一下安装是否成功了吗？&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git --version&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo version&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果能看到版本号，说明安装成功了&lt;/p&gt;
+&lt;p&gt;创建本地博客项目&lt;/p&gt;
+&lt;p&gt;1、打开终端,&lt;code&gt;cd&lt;/code&gt;到你希望存放博客项目的文件夹。&lt;/p&gt;
+&lt;p&gt;2、运行以下命令创建一个新的Hugo站点。我们将博客项目命名为 &lt;code&gt;my-blog&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo new site my-blog&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;3、进入刚刚创建的目录并初始化Git仓库&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cd my-blog&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git init&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;添加主题&lt;/p&gt;
+&lt;p&gt;找到Hugo官网，选择主题，跳转到Github,点&lt;code&gt;tag&lt;/code&gt;,下载最新版zip源码包&lt;/p&gt;
+&lt;p&gt;解压缩到&lt;code&gt;themes&lt;/code&gt;文件夹，并将名字中的版本号去掉&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMIaPOdoDP41HIYSdPL6PtG1KOY9UUAAi8LaxspIaFXF3C7MOihYicBAAMCAAN4AAM2BA.png&#34;
 	
 	
 	
@@ -412,99 +249,636 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;打开后，点&lt;code&gt;设置&lt;/code&gt;，点&lt;code&gt;以管理员身份启动&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;点&lt;code&gt;加号&lt;/code&gt;添加,按图片的配置，就是&lt;code&gt;别名&lt;/code&gt;随便起,&lt;code&gt;可选地址&lt;/code&gt;可以在网上找可以用，下面有找的方法。别的就不要动了
-&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMPaP3WVKAndEQVZckXQM7h2V6W4b8AAvALaxvkPOlXLzt4Mjizq0YBAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;添加上，就右键一下，点&lt;code&gt;全选&lt;/code&gt;,再点图中的测试一下就可以了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMQaP3XfuTnpxRmV0ydWOSD5IuklxAAAvcLaxvkPOlXIEKyM_Ps140BAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;测试的结果，出来后，绿色是可以用的，红的不能用，选中绿色的点&lt;code&gt;启用Tun&lt;/code&gt;就可以了。
-&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMRaP3YC1B7YeZMgkNLueI6F1jw7WUAAgQMaxvkPOlXcC0k2lhuxMkBAAMCAAN5AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;·都不能用的话 ，就按照上面的重新开始换一个链接就可以了！&lt;/p&gt;
-&lt;h3 id=&#34;如何获取v2rayn链接&#34;&gt;如何获取V2rayN链接
-&lt;/h3&gt;&lt;p&gt;其实获取链接有很多方法，一时半会说不清楚，好的链接都是需要自己有一个域名自己去搞一个，如果没有域名就按照我说的去免费白嫖人家分享的&lt;/p&gt;
-&lt;p&gt;打开&lt;code&gt;GitHub&lt;/code&gt;(&lt;a class=&#34;link&#34; href=&#34;https://github.com/%29&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/)&lt;/a&gt;,进入后，看搜索栏，输入&lt;code&gt;V2rayN订阅&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMUaP3by_opF_O_Qi5aE81XLwvi_RwAAhcMaxvkPOlXgZxfRAay-akBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;点&lt;code&gt;Recently updated&lt;/code&gt;,就可以看到最新别人最新发布的,然后找一个点进去&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMVaP3cKF4GrhKSdt_HOObQLw0tiOYAAhkMaxvkPOlX5ynMSUXTx8YBAAMCAAN4AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;往下滑，找到就可以看到人家发布的V2rayN链接，复制试试看看能不能用&lt;/p&gt;
-&lt;p&gt;或者你在网上找找别人教的方法试试&lt;/p&gt;
-&lt;h4 id=&#34;mac&#34;&gt;Mac
-&lt;/h4&gt;&lt;p&gt;主要选择&lt;code&gt;Shadowrocket（小火箭）&lt;/code&gt;和&lt;code&gt;V2rayN&lt;/code&gt;，今天主要推荐V2RayN，操作步骤跟Windows是一致的。&lt;/p&gt;
-&lt;p&gt;下载版本选择&lt;code&gt;v2rayN-macos-arm64.zip&lt;/code&gt;就可以了，剩下的跟Windows操作一样。&lt;/p&gt;
-&lt;h3 id=&#34;手机&#34;&gt;手机
-&lt;/h3&gt;&lt;p&gt;就用&lt;code&gt;Heysocks&lt;/code&gt;(黑石)就可以了，在浏览器上搜索，官网下载就可以了，搜不到就换个浏览器。&lt;/p&gt;
-&lt;p&gt;进入后，搞了游客账号就可以了,点区域里那个箭头
-&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMSaP3ZAkXDVShutEDCjUA8NJ-qqHcAAgkMaxvkPOlXFVBIAQO47CkBAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;进入后，最下面有两个永久免费的&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMTaP3ZWpt8cnLSq6tdpD1X-t55nYgAAhMMaxvkPOlXhxuSPvG9lf8BAAMCAAN3AAM2BA.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;配置主题&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;my-blog&lt;/code&gt; 目录下，执行以下命令（仅针对本项目，功能是提取作者的演示案例作为初始项目，并清除作者的演示案例）&lt;/p&gt;
+&lt;p&gt;强制删除当前目录的 content 文件夹（若存在）
+&lt;code&gt;Remove-Item -Path &amp;quot;content&amp;quot; -Recurse -Force -ErrorAction SilentlyContinue&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;将主题示例的 content 复制到当前目录（xcopy在PowerShell中可直接使用）
+&lt;code&gt;xcopy &amp;quot;themes\hugo-theme-stack\exampleSite\content&amp;quot; &amp;quot;content&amp;quot; /E /I /H /Y&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;删除 exampleSite 文件夹
+&lt;code&gt;Remove-Item -Path &amp;quot;themes\hugo-theme-stack\exampleSite&amp;quot; -Recurse -Force -ErrorAction SilentlyContinue&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;删除 rich-content 文件夹
+&lt;code&gt;Remove-Item -Path &amp;quot;content/post/rich-content&amp;quot; -Recurse -Force -ErrorAction SilentlyContinue&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;删除hugo.toml，并创建hugo.yaml (进入相应文件夹中删除创建即可)&lt;/p&gt;
+&lt;p&gt;将下面模板代码完整复制到&lt;code&gt;config.yaml&lt;/code&gt;文件中，根据注释修改你的信息
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;102
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;103
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;104
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;105
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;106
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;107
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;108
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;109
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;110
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;111
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;112
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;113
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;114
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;115
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;116
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;117
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;118
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;119
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;120
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;121
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;122
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;123
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;124
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;125
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;126
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;127
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;128
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;129
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;130
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;131
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;132
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;133
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;134
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;135
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;136
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;137
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;138
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;139
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;140
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;141
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;142
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;143
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;144
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;145
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;146
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;147
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;148
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;149
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;150
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;151
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;152
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;153
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;154
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;155
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;156
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;157
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;158
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;159
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;160
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;161
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;162
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;163
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;164
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;165
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;166
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;167
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;168
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;169
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;170
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;171
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;172
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;173
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;174
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;175
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;176
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;177
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;178
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;179
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;180
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;181
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;182
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;183
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;184
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;185
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;186
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;187
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;188
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;189
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;190
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;191
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;192
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;193
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;194
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;195
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;196
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;197
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;198
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;199
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;200
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;201
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;202
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;203
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;204
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#站点基础配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;baseurl: https://example.com/           # 网站根URL
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;languageCode: en-us                     # 默认语言代码
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;theme: hugo-theme-stack                 # 使用的主题名称
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;title: Example Site                     # 网站标题
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;copyright: Example Person               # 版权信息
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#国际化配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#支持的语言: ar, bn, ca, de, el, en, es, fr, hu, id, it, ja, ko, nl, pt-br, th, uk, zh-cn, zh-hk, zh-tw
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;DefaultContentLanguage: en              # 默认内容语言
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#如果默认语言是中文/日文/韩文，需设置为true
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#这将使.Summary和.WordCount对CJK语言正常工作
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hasCJKLanguage: false
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#多语言详细配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;languages:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    en:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        languageName: English           # 语言显示名称
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        title: Example Site             # 该语言下的网站标题
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        weight: 1                       # 权重（排序用）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        params:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            sidebar:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                subtitle: Example description  # 侧边栏副标题
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    zh-cn:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        languageName: 中文
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        title: 演示站点
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        weight: 2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        params:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            sidebar:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                subtitle: 演示说明
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ar:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        languageName: عربي
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        languagedirection: rtl          # 文本方向（阿拉伯语从右到左）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        title: موقع تجريبي
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        weight: 3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        params:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            sidebar:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                subtitle: وصف تجريبي
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#第三方服务配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;services:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # Disqus评论系统（使用前需修改为你的shortname）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    disqus:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        shortname: &amp;#34;hugo-theme-stack&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # Google Analytics跟踪ID
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    googleAnalytics:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        id:                             # 填入你的GA跟踪ID
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#分页设置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pagination:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    pagerSize: 3                        # 分页器显示页码数量
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#永久链接格式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;permalinks:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    post: /p/:slug/                     # 文章URL格式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    page: /:slug/                       # 页面URL格式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#主题参数配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;params:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    mainSections:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        - post                         # 主要内容区域
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    featuredImageField: image          # 特色图片字段名
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    rssFullContent: true               # RSS是否包含全文
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    favicon:                           # 网站图标路径，如：/favicon.ico
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 页脚设置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    footer:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        since: 2020                    # 起始年份
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        customText:                    # 自定义文本
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 日期格式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    dateFormat:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        published: Jan 02, 2006        # 发布日期格式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        lastUpdated: Jan 02, 2006 15:04 MST  # 最后更新日期格式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 侧边栏设置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    sidebar:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        emoji: 🍥                      # 表情图标
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.  # 副标题
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        avatar:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            enabled: true              # 是否显示头像
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            local: true                # 是否使用本地图片
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            src: img/avatar.png        # 头像路径
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 文章设置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    article:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        math: false                    # 是否支持数学公式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        toc: true                      # 是否显示目录
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        readingTime: true              # 是否显示阅读时间
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        license:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            enabled: true              # 是否显示版权信息
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            default: Licensed under CC BY-NC-SA 4.0  # 默认许可证
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 评论系统配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    comments:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        enabled: true                  # 启用评论
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        provider: disqus               # 评论提供商
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        # 各评论系统的具体配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        disqusjs: {...}                # DisqusJS配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        utterances: {...}              # Utterances配置（GitHub-based）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        beaudar: {...}                 # Beaudar配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        remark42: {...}                # Remark42配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        vssue: {...}                   # Vssue配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        waline: {...}                  # Waline配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        twikoo: {...}                  # Twikoo配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        cactus: {...}                  # Cactus Chat配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        giscus: {...}                  # Giscus配置（GitHub Discussions）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        gitalk: {...}                  # Gitalk配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        cusdis: {...}                  # Cusdis配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 小工具配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    widgets:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        homepage:                      # 首页小工具
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            - type: search             # 搜索框
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            - type: archives           # 文章归档
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              params:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                  limit: 5             # 显示数量
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            - type: categories         # 分类
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              params:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                  limit: 10
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            - type: tag-cloud          # 标签云
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              params:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                  limit: 10
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        page:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            - type: toc                # 页面目录
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # OpenGraph设置（社交媒体分享）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    opengraph:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        twitter:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            site:                      # Twitter用户名
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            card: summary_large_image  # 卡片类型：summary或summary_large_image
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 默认图片设置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    defaultImage:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        opengraph:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            enabled: false             # 是否启用
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            local: false               # 是否使用本地图片
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            src:                       # 图片路径
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 颜色方案
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    colorScheme:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        toggle: true                   # 是否显示切换按钮
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        default: auto                  # 默认模式：auto, light, dark
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    # 图片处理
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    imageProcessing:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        cover:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            enabled: true              # 处理封面图片
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        content:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            enabled: true              # 处理内容图片
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#自定义菜单配置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;menu:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    main: []                           # 主导航菜单
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    social:                            # 社交链接菜单
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        - identifier: github
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          name: GitHub
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          url: https://github.com/CaiJimmy/hugo-theme-stack
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          params:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              icon: brand-github       # 图标名称
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#相关文章设置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;related:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    includeNewer: true                 # 是否包含较新文章
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    threshold: 60                      # 相关度阈值
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    toLower: false                     # 是否忽略大小写
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    indices:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        - name: tags                   # 使用标签作为关联依据
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          weight: 100                  # 权重
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        - name: categories             # 使用分类作为关联依据
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          weight: 200
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#Markdown渲染设置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;markup:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    goldmark:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        extensions:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            passthrough:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                enable: true           # 启用原始HTML通过
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                delimiters:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    block:             # 块级分隔符
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                        - - \[
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                          - \]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                        - - $$
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                          - $$
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    inline:            # 行内分隔符
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                        - - \(
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                          - \)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        renderer:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            unsafe: true               # 允许不安全HTML（直接渲染HTML内容）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    tableOfContents:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        endLevel: 4                    # 目录结束级别
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ordered: true                  # 是否有序
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        startLevel: 2                  # 目录开始级别
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    highlight:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        noClasses: false               # 是否使用内联样式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        codeFences: true               # 启用代码围栏
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        guessSyntax: true              # 自动猜测语法
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        lineNoStart: 1                 # 行号起始值
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        lineNos: true                  # 显示行号
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        lineNumbersInTable: true       # 在表格中显示行号
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        tabWidth: 4                    # 制表符宽度&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;重点： 务必修改 baseURL、title、avatar.src 和 social 部分的内容为你自己的信息&lt;/p&gt;
+&lt;p&gt;本地预览&lt;/p&gt;
+&lt;p&gt;在发布到互联网前，先在本地预览效果。&lt;/p&gt;
+&lt;p&gt;在 my-blog 目录的 PowerShell 中执行：&lt;/p&gt;
+&lt;p&gt;hugo server -D&lt;/p&gt;
+&lt;p&gt;终端会提示一个地址，通常是 http://localhost:1313/。在浏览器中打开它，你应该能看到你的博客了。&lt;/p&gt;
+&lt;p&gt;托管代码到 GitHub 并设置自动化部署&lt;/p&gt;
+&lt;p&gt;创建并设置源代码仓库&lt;/p&gt;
+&lt;p&gt;·登录 GitHub，创建一个新仓库用于存放博客的源代码。&lt;/p&gt;
+&lt;p&gt;·Repository name: &amp;lt;你的用户名&amp;gt;.github.io (这是获取顶级访问域名的关键，例如用户名 john 则仓库名为 john.github.io)。&lt;/p&gt;
+&lt;p&gt;·将仓库 visibility 设为 Public (私有仓库需要付费账户才能使用 Pages 功能)。&lt;/p&gt;
+&lt;p&gt;·不要勾选 “Initialize this repository with a README”。&lt;/p&gt;
+&lt;p&gt;·创建完成后，复制仓库的 HTTPS 地址（格式为 &lt;a class=&#34;link&#34; href=&#34;https://github.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/&lt;/a&gt;&amp;lt;你的用户名&amp;gt;/&amp;lt;你的用户名&amp;gt;.github.io.git）。
+推送本地代码到仓库&lt;/p&gt;
+&lt;p&gt;推送本地代码到仓库&lt;/p&gt;
+&lt;p&gt;在本地终端 (如 PowerShell) 中，进入你的 Hugo 站点根目录 (例如 my-blog)，执行以下命令：&lt;/p&gt;
+&lt;p&gt;#关联远程仓库（地址替换为刚复制的地址）&lt;/p&gt;
+&lt;p&gt;git remote add origin &lt;a class=&#34;link&#34; href=&#34;https://github.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/&lt;/a&gt;&amp;lt;你的用户名&amp;gt;/&amp;lt;你的用户名&amp;gt;.github.io.git&lt;/p&gt;
+&lt;p&gt;#添加所有文件到暂存区并提交&lt;/p&gt;
+&lt;p&gt;git add .&lt;/p&gt;
+&lt;p&gt;git commit -m &amp;ldquo;Initial commit with Hugo site and Stack theme&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;#将本地 main 分支推送到 GitHub 并设为上游分支&lt;/p&gt;
+&lt;p&gt;git branch -M main&lt;/p&gt;
+&lt;p&gt;git push -u origin main&lt;/p&gt;
+&lt;p&gt;配置自动化部署 (GitHub Actions)&lt;/p&gt;
+&lt;p&gt;·设置Github Pages&lt;/p&gt;
+&lt;p&gt;·点击Settings&lt;/p&gt;
+&lt;p&gt;·点击左侧Pages&lt;/p&gt;
+&lt;p&gt;·将Buile and depolyment由Deploy from branch 改为 GitHub Actions&lt;/p&gt;
+&lt;p&gt;·在本地站点根目录下，创建目录结构：.github/workflows/，并在 workflows 目录中新建文件 deploy.yml。&lt;/p&gt;
+&lt;p&gt;·用文本编辑器打开 deploy.yml，粘贴以下工作流配置（该配置使用官方推荐 Actions，支持自动构建、发布）：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;name: Deploy Hugo Site to Pages
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;on:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  push:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    branches: [&amp;#34;main&amp;#34;]   # 代码推送至 main 分支时触发
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  workflow_dispatch:     # 支持手动触发
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;permissions:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  contents: read
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  pages: write
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  id-token: write
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;concurrency:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  group: &amp;#34;pages&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  cancel-in-progress: false
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;jobs:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  build:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    runs-on: ubuntu-latest
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    steps:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      - name: Checkout code
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        uses: actions/checkout@v4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        with:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          submodules: recursive  # 自动拉取主题子模块
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          fetch-depth: 0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      - name: Setup Hugo
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        uses: peaceiris/actions-hugo@v2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        with:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          hugo-version: &amp;#39;latest&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          # extended: true       # 若主题需扩展版，取消注释
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      - name: Build with Hugo
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        run: hugo --minify --gc   # 生成优化后的静态文件
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      - name: Upload artifact
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        uses: actions/upload-pages-artifact@v3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        with:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          path: ./public          # 上传生成的站点文件
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  deploy:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    environment:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      name: github-pages
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      url: ${{ steps.deployment.outputs.page_url }}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    runs-on: ubuntu-latest
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    needs: build
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    steps:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      - name: Deploy to GitHub Pages
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        id: deployment
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        uses: actions/deploy-pages@v4&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;查看部署状态和访问博客&lt;/p&gt;
+&lt;p&gt;推送完成后，在浏览器中访问你的 GitHub 仓库：https://github.com/&amp;lt;你的用户名&amp;gt;/&amp;lt;你的用户名&amp;gt;.github.io。&lt;/p&gt;
+&lt;p&gt;点击顶部 Actions 标签页，查看名为 “Deploy Hugo Site to Pages” 的工作流运行状态。等待运行完成（出现绿色对勾 ✅）。&lt;/p&gt;
+&lt;p&gt;部署成功后，进入 Settings → Pages，页面顶部会显示你的博客访问地址：https://&amp;lt;你的用户名&amp;gt;.github.io。&lt;/p&gt;
+&lt;p&gt;点击该链接即可访问已自动发布的博客。&lt;/p&gt;
+&lt;p&gt;发布上线过程：&lt;/p&gt;
+&lt;p&gt;进入my-blog根目录执行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo --cleanDestinationDir&lt;/code&gt;     #清理旧文件并重新 生成&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hugo server&lt;/code&gt;  预览一下&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git add .&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commit -m &amp;quot;Publish: XXX&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git push&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;本地仓库推送新账号&#34;&gt;本地仓库推送新账号
+&lt;/h4&gt;&lt;p&gt;删除本地仓库文件&lt;code&gt;.git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;初始化全新的Git仓库&lt;/p&gt;
+&lt;p&gt;git init&lt;/p&gt;
+&lt;p&gt;添加所有文件&lt;/p&gt;
+&lt;p&gt;git add .&lt;/p&gt;
+&lt;p&gt;提交初始版本&lt;/p&gt;
+&lt;p&gt;git commit -m &amp;ldquo;初始化博客仓库&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;步骤 1：生成并添加 SSH 密钥到新账号&lt;/p&gt;
+&lt;p&gt;打开终端，生成 SSH 密钥（按提示操作，无需设置密码）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ssh-keygen -t ed25519 -C &lt;span class=&#34;s2&#34;&gt;&amp;#34;oppwin168@gmail.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;找到生成的公钥文件（默认路径）：&lt;/p&gt;
+&lt;p&gt;Windows：C:\Users\你的用户名.ssh\id_ed25519.pub&lt;/p&gt;
+&lt;p&gt;用记事本打开，复制全部内容&lt;/p&gt;
+&lt;p&gt;登录 JustWin33 的 GitHub 账号：&lt;/p&gt;
+&lt;p&gt;进入 Settings → SSH and GPG keys → New SSH key&lt;/p&gt;
+&lt;p&gt;粘贴公钥内容，随意填写一个标题（如 my-blog-pc），点击添加&lt;/p&gt;
+&lt;p&gt;步骤 2：修改本地仓库的远程链接为 SSH 形式&lt;/p&gt;
+&lt;p&gt;先删除现有 origin 关联&lt;/p&gt;
+&lt;p&gt;git remote remove origin&lt;/p&gt;
+&lt;p&gt;添加 SSH 形式的远程仓库链接&lt;/p&gt;
+&lt;p&gt;git remote add origin &lt;a class=&#34;link&#34; href=&#34;mailto:git@github.com&#34; &gt;git@github.com&lt;/a&gt;:JustWin33/JustWin33.github.io.git&lt;/p&gt;
+&lt;p&gt;步骤 3：测试 SSH 连接并推送&lt;/p&gt;
+&lt;p&gt;测试是否能连接到 GitHub&lt;/p&gt;
+&lt;p&gt;ssh -T &lt;a class=&#34;link&#34; href=&#34;mailto:git@github.com&#34; &gt;git@github.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果成功，会显示 Hi JustWin33! You&amp;rsquo;ve successfully authenticated&amp;hellip;&lt;/p&gt;
+&lt;p&gt;然后推送代码：&lt;/p&gt;
+&lt;p&gt;git push &amp;ndash;set-upstream origin main&lt;/p&gt;
+&lt;p&gt;git submodule add -b main &lt;a class=&#34;link&#34; href=&#34;mailto:git@github.com&#34; &gt;git@github.com&lt;/a&gt;:JustWin33/JustWin33.github.io.git main&lt;/p&gt;
+&lt;p&gt;注意是：main分支&lt;/p&gt;
+&lt;p&gt;进入my-blog根目录执行&lt;/p&gt;
+&lt;p&gt;hugo &amp;ndash;cleanDestinationDir     #清理旧文件并重新 生成&lt;/p&gt;
+&lt;p&gt;hugo server  预览一下&lt;/p&gt;
+&lt;p&gt;git add .&lt;/p&gt;
+&lt;p&gt;git commit -m &amp;ldquo;Publish: XXX&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;git push&lt;/p&gt;
 </description>
         </item>
         <item>
-        <title>链上空投</title>
-        <link>http://localhost:1313/posts/%E9%93%BE%E4%B8%8A%E7%A9%BA%E6%8A%95/</link>
+        <title>Git &amp; GitHub</title>
+        <link>http://localhost:1313/posts/git-github/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/%E9%93%BE%E4%B8%8A%E7%A9%BA%E6%8A%95/</guid>
-        <description>&lt;h3 id=&#34;准备&#34;&gt;准备
-&lt;/h3&gt;&lt;p&gt;1、社交软件&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;推特/X、discord、Telegram&lt;/code&gt;这个三个社交软件必不可少！&lt;/p&gt;
-&lt;p&gt;2、浏览器尽量选择使用&lt;code&gt;Google&lt;/code&gt;,注册个谷歌账号、谷歌邮箱&lt;/p&gt;
-&lt;p&gt;3、链上钱包(电脑上都是用浏览器的扩件)&lt;/p&gt;
-&lt;p&gt;一个&lt;code&gt;币安&lt;/code&gt;钱包和一个&lt;code&gt;MetaMask(小狐狸)&lt;/code&gt;钱包就够了&lt;/p&gt;
-&lt;p&gt;币安钱包(&lt;a class=&#34;link&#34; href=&#34;https://web3.binance.com/referral?ref=DQF3CCTM&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://web3.binance.com/referral?ref=DQF3CCTM&lt;/a&gt;)在手机端是可以不用生产私钥词，直接用人脸就可以登陆，安全性强，但是在链上不是很使用，适合存放资金，不适用大量的频繁的使用&lt;/p&gt;
-&lt;p&gt;MetaMask钱包手机端非常垃圾，电脑端还是很好用，在浏览器上，右上角找到&lt;code&gt;扩展&lt;/code&gt;，点进去，再点&lt;code&gt;获取扩展&lt;/code&gt;，进入搜索&lt;code&gt;MetaMask&lt;/code&gt;，一定要下载图片中这种有蓝标认证的，OK钱包、币安钱包都是通过这种方式下载。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMZaP4YSxK3n_zmDbYG-yW7CiSnkFwAAkYLaxvkPPFXaaiyd5gpU_kBAAMCAAN5AAM2BA.png&#34;
+        <guid>http://localhost:1313/posts/git-github/</guid>
+        <description>&lt;h2 id=&#34;git的-四个空间模型&#34;&gt;Git的 &amp;ldquo;四个空间&amp;quot;模型
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMJaPRHS_HqpI_X4jvit3oZ3IVUxncAAkoMaxspIaFXCCGXH9obv0QBAAMCAAN5AAM2BA.png&#34;
 	
 	
 	
@@ -512,8 +886,331 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;下载好之后，就可以注册一个MetaMask钱包，一定要放好、存好自己的钱包&lt;code&gt;私钥&lt;/code&gt;就是&lt;strong&gt;助记词&lt;/strong&gt;,再设置打开浏览器使用钱包的密码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMaaP4ZT3npS-senZp0h78mTGojmMQAAkoLaxvkPPFXNhLqOncreRsBAAMCAAN4AAM2BA.png&#34;
+&lt;h3 id=&#34;工作区-working-directory&#34;&gt;工作区 (Working Directory)
+&lt;/h3&gt;&lt;p&gt;它就是你在电脑上能直接看到的项目文件夹，包含着所有项目文件。你用你的代码编辑器（比如 VS Code）打开项目，进行添加、删除、修改代码等所有操作，都是在工作区里完成的。它是最直观、最原始的空间。&lt;/p&gt;
+&lt;h3 id=&#34;暂存区-staging-area&#34;&gt;暂存区 (Staging Area)
+&lt;/h3&gt;&lt;p&gt;工作区的文件修改后，你不能直接把它“存档”。你需要一个中间步骤，让你选择哪些修改要被打包存档。暂存区就是这个地方。&lt;/p&gt;
+&lt;p&gt;为什么需要它？ 假设你同时修改了3个文件，但只有2个是关于“修复登录bug”的，另1个是改着玩的。你就可以只把那2个文件“加入购物车”（git add），然后“结账”（git commit）。暂存区给了你一个精挑细选和反悔的机会，确保每一次提交都是一个逻辑完整的单元。&lt;/p&gt;
+&lt;h3 id=&#34;本地仓库local-repository&#34;&gt;本地仓库(Local Repository)
+&lt;/h3&gt;&lt;p&gt;当你执行“结账”命令（git commit）后，暂存区（购物车）里所有的内容会被打包成一个版本（我们称之为一次“提交”），然后被永久地保存在你本地电脑的仓库里。&lt;/p&gt;
+&lt;p&gt;这个本地仓库位于你项目的 .git 隐藏文件夹中。它就像一个精密的数据库，记录了你项目从创建之初到现在的每一次提交，包括谁、在什么时间、修改了什么内容。这是你个人的、完整的项目历史备份。&lt;/p&gt;
+&lt;h3 id=&#34;远程仓库remote-repository&#34;&gt;远程仓库(Remote Repository)
+&lt;/h3&gt;&lt;p&gt;个人开发时，有前三个空间就足够了。但要团队协作，就需要一个所有成员都能访问的中央服务器来同步代码。这个服务器就是远程仓库。&lt;/p&gt;
+&lt;p&gt;它通常托管在像 GitHub、GitLab 或 Gitee 这样的代码托管平台上。团队成员可以：&lt;/p&gt;
+&lt;p&gt;·从远程仓库克隆 (clone) 一份完整的项目到自己的本地仓库。&lt;/p&gt;
+&lt;p&gt;·将自己本地仓库中新的提交推送 (push) 到远程仓库，分享给他人。
+·从远程仓库拉取 (pull) 别人的提交，更新自己的本地代码。&lt;/p&gt;
+&lt;p&gt;在工作区写代码 -&amp;gt; add到暂存区 -&amp;gt; commit到本地仓库 -&amp;gt; push到远程仓库。&lt;/p&gt;
+&lt;h2 id=&#34;准备git环境&#34;&gt;准备Git环境
+&lt;/h2&gt;&lt;p&gt;安装 Git、配置 Git、注册 GitHub 账号&lt;/p&gt;
+&lt;h3 id=&#34;安装git&#34;&gt;安装Git
+&lt;/h3&gt;&lt;p&gt;Git是一个命令行工具，首先需要将它安装到你的电脑上。&lt;/p&gt;
+&lt;p&gt;· Windows:前往官方官网下载安装包，选择好你要存放的地方，注意：选择 &lt;code&gt;“Override...”&lt;/code&gt; 并将分支名设为 &lt;code&gt;main&lt;/code&gt;，别的一路点击&lt;code&gt;&amp;quot;Next&amp;quot;&lt;/code&gt;即可。在开始菜单里找到&lt;code&gt;&amp;quot;Git Bash&amp;quot;&lt;/code&gt;并打开&lt;/p&gt;
+&lt;p&gt;· masOS:打开“终端 (Terminal)” 应用，输入 &lt;code&gt;git --version&lt;/code&gt;。如果系统提示你安装命令行开发者工具，请同意安装，macOS 会自动为你装好 Git。如果你的系统已经安装了 Xcode，那么 Git 也已经自带了。&lt;/p&gt;
+&lt;p&gt;· Linux: 打开终端，根据你的发行版，运行相应的命令：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Debian/Ubuntu: sudo apt-get install git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Fedora/CentOS: sudo yum install git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后，打开你的终端（Windows 用户请使用 Git Bash），输入以下命令来验证是否安装成功：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git --version&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;1、如果终端打印出类似 git version 2.30.0 这样的版本号信息，恭喜你，Git 已经成功安装！&lt;/p&gt;
+&lt;p&gt;2、首次配置：为你的代码署名
+安装好 Git 后，还有一件至关重要的事情要做：告诉 Git 你是谁。&lt;/p&gt;
+&lt;p&gt;请在终端中运行以下两条命令，将引号中的内容替换成&lt;code&gt;你自己的用户名和邮箱&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;设置你的全局用户名（提交时会显示这个名字）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git config --global user.name &amp;quot;Your Name&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;设置你的全局邮箱(GitHub会用它来关联你的提交和账号)
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git config --global user.email &amp;#34;your.email@example.com&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+提示：&lt;code&gt;--global&lt;/code&gt; 参数表示这台电脑上所有的Git仓库都会使用这个配置。你只需要设置一次就够了。&lt;/p&gt;
+&lt;p&gt;3、注册GitHub
+· Git是工具：一个在你电脑上运行的命令行软件
+· GitHub是平台： 一个网站，提供了远程仓库的托管服务，并围绕代码构建了一个庞大的开发社区&lt;/p&gt;
+&lt;h2 id=&#34;本地管理你的代码&#34;&gt;本地管理你的代码
+&lt;/h2&gt;&lt;p&gt;Git最核心的三个命令：&lt;/p&gt;
+&lt;p&gt;·&lt;code&gt;git init&lt;/code&gt;:初始化一个新仓库。&lt;/p&gt;
+&lt;p&gt;·&lt;code&gt;git add&lt;/code&gt;:将文件变更添加到暂存区。&lt;/p&gt;
+&lt;p&gt;·&lt;code&gt;git commit&lt;/code&gt;:将暂存区的变更永久保存到版本库。&lt;/p&gt;
+&lt;h3 id=&#34;创建你的项目&#34;&gt;创建你的项目
+&lt;/h3&gt;&lt;p&gt;创建一个新文件夹，这个可以放在你喜欢放的位置。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mkdir my-first-git-project&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;进入这个文件夹&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cd my-first-git-project&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;现在，这个文件夹就是我们的工作区 (Working Directory)。它是我们编写代码、创建文件、进行所有实际工作的地方。但目前，它还只是一个普通的文件夹，Git 还不知道它的存在。&lt;/p&gt;
+&lt;p&gt;初始化仓库 (git init)：开启版本控制&lt;/p&gt;
+&lt;p&gt;为了让 Git 开始管理这个文件夹，我们需要在这个文件夹内部运行一个命令，来“激活”它。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git init&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;当你运行这个命令后，你会看到类似这样的输出： &lt;code&gt;Initialized empty Git repository in /path/to/your/my-first-git-project/.git/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个命令做了什么？它在你的项目文件夹里创建了一个名为 .git 的隐藏子文件夹。这个 .git 文件夹就是你的本地仓库 (Local Repository)。它像一个神秘的保险箱，存放着你项目的所有版本历史、配置信息等&lt;/p&gt;
+&lt;p&gt;警告：除非你非常清楚自己在做什么，否则永远不要手动修改 .git 文件夹里的任何内容！把它当成 Git 的专属地盘。&lt;/p&gt;
+&lt;p&gt;从现在起，my-first-git-project 文件夹就不再普通了，它已经是一个 Git 仓库了。&lt;/p&gt;
+&lt;h3 id=&#34;创建文件并检查状态git-status&#34;&gt;创建文件并检查状态(&lt;code&gt;git status&lt;/code&gt;)
+&lt;/h3&gt;&lt;p&gt;让我们在工作区里创建第一个文件。一个项目通常会有一个 README.md 文件，用来描述项目信息。&lt;/p&gt;
+&lt;p&gt;创建并写入一句话到 README.md 文件中&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo &amp;quot;Hello, Git! This is my first project.&amp;quot; &amp;gt; README.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;现在，我们的工作区有新内容了。Git 是否察觉到了呢？让我们来问问 Git 当前的状态。git status 是你在使用 Git 过程中最常用、也最有用的命令，它会告诉你仓库当前的状态。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git status&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;终端会返回一些信息，其中最关键的是：&lt;/p&gt;
+&lt;p&gt;On branch master&lt;/p&gt;
+&lt;p&gt;No commits yet&lt;/p&gt;
+&lt;p&gt;Untracked files:&lt;/p&gt;
+&lt;p&gt;(use &amp;ldquo;git add &lt;file&gt;&amp;hellip;&amp;rdquo; to include in what will be committed) README.md&lt;/p&gt;
+&lt;p&gt;nothing added to commit but untracked files present (use &amp;ldquo;git add&amp;rdquo; to track)&lt;/p&gt;
+&lt;p&gt;解读一下：&lt;/p&gt;
+&lt;p&gt;·Untracked files (未跟踪的文件)：Git 发现了一个新面孔 README.md，但它并不在版本管理的范围内。&lt;/p&gt;
+&lt;p&gt;·use “git add …”: Git 很贴心地提示我们，可以使用 git add 命令来开始跟踪这个文件。&lt;/p&gt;
+&lt;p&gt;###添加暂存区(&lt;code&gt;git add&lt;/code&gt;):准备提交&lt;/p&gt;
+&lt;p&gt;现在，我们要把 README.md 文件从工作区的“待定”状态，转移到暂存区 (Staging Area)，表示“我确定要把这个文件的当前版本加入到下一次存档中”。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git add README.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个命令没有任何输出，是正常的。想知道发生了什么？再次使用我们的好朋友 git status：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git status&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;输出变了：
+On branch master&lt;/p&gt;
+&lt;p&gt;No commits yet&lt;/p&gt;
+&lt;p&gt;Changes to be committed:&lt;/p&gt;
+&lt;p&gt;(use &amp;ldquo;git rm &amp;ndash;cached &lt;file&gt;&amp;hellip;&amp;rdquo; to unstage) new file: README.md&lt;/p&gt;
+&lt;p&gt;解读一下：&lt;/p&gt;
+&lt;p&gt;·Changes to be committed (待提交的变更)：README.md 已经进入了暂存区，整装待发，准备被正式存档。&lt;/p&gt;
+&lt;p&gt;·暂存区就像一个购物车，你可以不断地往里添加（git add）或移除商品，直到你确认所有要买的东西都在里面了，才去结账（git commit）。&lt;/p&gt;
+&lt;h3 id=&#34;提交到仓库git-commit完成存档&#34;&gt;提交到仓库(git commit):完成存档
+&lt;/h3&gt;&lt;p&gt;git commit 命令会将暂存区里所有的内容打包，创建一个新的版本记录（一个快照），并永久地保存在你的本地仓库里。&lt;/p&gt;
+&lt;p&gt;每一次提交，都必须附带一条提交信息 (commit message)，用 -m 参数来指定。这条信息是对本次修改的简短描述，例如 “修复了xx bug” 或 “增加了用户登录功能”。良好的提交信息是团队协作的基石！&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git commit -m &amp;quot;Initial commit: Add README file&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;终端会显示类似如下的输出，告诉你这次提交的概要：&lt;/p&gt;
+&lt;p&gt;[master (root-commit) a1b2c3d] Initial commit: Add README file 1 file changed, 1 insertion(+) create mode 100644 README.md&lt;/p&gt;
+&lt;p&gt;恭喜你！你已经成功完成了第一次提交！&lt;/p&gt;
+&lt;p&gt;现在，如果我们再运行 git status，会得到：&lt;/p&gt;
+&lt;p&gt;On branch master&lt;/p&gt;
+&lt;p&gt;nothing to commit, working tree clean&lt;/p&gt;
+&lt;h3 id=&#34;总结完成了一个完整的本地-git-操作循环&#34;&gt;总结完成了一个完整的本地 Git 操作循环：
+&lt;/h3&gt;&lt;p&gt;在工作区修改代码（我们创建了 README.md）。&lt;/p&gt;
+&lt;p&gt;使用 git add 将修改添加到暂存区（挑选要存档的内容）。&lt;/p&gt;
+&lt;p&gt;使用 git commit 将暂存区内容提交到本地仓库（正式存档）。&lt;/p&gt;
+&lt;p&gt;这个 “修改 -&amp;gt; add -&amp;gt; commit” 的循环，是你未来90%的本地 Git 操作，请务必牢记。&lt;/p&gt;
+&lt;h2 id=&#34;版本历史的查看与回溯&#34;&gt;版本历史的查看与回溯
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;查看提交历史(&lt;code&gt;git log&lt;/code&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;你的 .git 仓库就像一本详细的日记，记录了每一次 commit 的所有细节。要阅读这本日记，我们使用 git log 命令。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git log&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;运行后，你会看到类似这样的输出，从最新到最旧排列：&lt;/p&gt;
+&lt;p&gt;commit a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0 (HEAD -&amp;gt; master)&lt;/p&gt;
+&lt;p&gt;Author: Your Name &lt;a class=&#34;link&#34; href=&#34;mailto:your.email@example.com&#34; &gt;your.email@example.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Date: Mon Oct 26 20:21:42 2023 +0800 Initial commit: Add README file&lt;/p&gt;
+&lt;p&gt;每一条记录都包含了：&lt;/p&gt;
+&lt;p&gt;·Commit ID (哈希值)：那一长串唯一的 a1b2c3d&amp;hellip; 字符串，是每个版本的身份证号。&lt;/p&gt;
+&lt;p&gt;·Author (作者)：你之前配置的用户名和邮箱。&lt;/p&gt;
+&lt;p&gt;·Date (日期)：提交发生的时间。&lt;/p&gt;
+&lt;p&gt;·Commit Message (提交信息)：你在 -m 后面写的那段描述。&lt;/p&gt;
+&lt;p&gt;小技巧：如果觉得信息太多，可以试试 &lt;code&gt;git log --oneline&lt;/code&gt;，它会用更简洁的单行格式显示历史，非常清晰！&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;版本回溯：回到过去&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;想象一下，你刚写了一堆代码，结果发现把事情搞砸了，想回到某个正常工作的版本。Git 的时光机能帮你实现！&lt;/p&gt;
+&lt;p&gt;场景：我只想恢复某一个文件&lt;/p&gt;
+&lt;p&gt;这是最安全、最常用的操作。假设你不小心把 README.md 文件改乱了，想把它恢复到上一个提交时的样子。&lt;/p&gt;
+&lt;p&gt;首先，用 &lt;code&gt;git log --oneline&lt;/code&gt; 找到你想回到的那个版本的 Commit ID（比如 a1b2c3d）。&lt;/p&gt;
+&lt;p&gt;然后运行：&lt;/p&gt;
+&lt;p&gt;格式: &lt;code&gt;git checkout &amp;lt;commit_id&amp;gt; – &amp;lt;file_path&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git checkout a1b2c3d -- README.md&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;瞬间，你的 README.md 文件就从“灾难现场”恢复到了 a1b2c3d 这个版本时的状态。这种方式只会影响指定的文件，项目中的其他文件安然无恙。&lt;/p&gt;
+&lt;p&gt;场景：我要让整个项目回到过去（危险操作！）&lt;/p&gt;
+&lt;p&gt;如果你想让整个项目（所有文件）都回滚到某个旧版本，可以使用 &lt;code&gt;git reset&lt;/code&gt;。
+⚠️ 警告：这是一个有破坏性的操作！ 它会 永久丢弃 你在那个旧版本之后的所有修改和提交。请三思而后行。&lt;/p&gt;
+&lt;p&gt;格式: git reset &amp;ndash;hard &amp;lt;commit_id&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset --hard a1b2c3d&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;执行后，你的整个工作区都会被重置到 a1b2c3d 这个版本的状态。之后的所有更改都仿佛从未发生过。&lt;/p&gt;
+&lt;h2 id=&#34;多人模式与-github-协作&#34;&gt;多人模式”：与 GitHub 协作
+&lt;/h2&gt;&lt;p&gt;到目前为止，我们所有的操作都在本地电脑上。代码的备份和分享都无法实现。现在，是时候把我们的本地仓库连接到 GitHub 这个“云端档案馆”，开启真正的协作之旅了。&lt;/p&gt;
+&lt;p&gt;与远程仓库交互，通常有两种起点：&lt;/p&gt;
+&lt;p&gt;从无到有：你先在本地创建了一个项目，然后想把它推送到 GitHub 上分享和备份。&lt;/p&gt;
+&lt;p&gt;从有到有：项目已经存在于 GitHub 上（例如公司的项目或开源项目），你需要把它复制到本地开始工作。&lt;/p&gt;
+&lt;p&gt;我们分别来看这两种情况。&lt;/p&gt;
+&lt;h3 id=&#34;推送本地新项目到-github&#34;&gt;推送本地新项目到 GitHub
+&lt;/h3&gt;&lt;p&gt;这正是我们当前的状况。我们已经在本地创建了 my-first-git-project 并有了一次提交。现在把它推上去。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在GitHub 上创建空的远程仓库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;首先，你需要为本地项目在 GitHub 上准备一个“家”。&lt;/p&gt;
+&lt;p&gt;登录你的 GitHub 账号。&lt;/p&gt;
+&lt;p&gt;点击右上角的 + 号，选择 New repository。&lt;/p&gt;
+&lt;p&gt;Repository name (仓库名)：建议和你的本地文件夹名保持一致，例如 my-first-git-project。&lt;/p&gt;
+&lt;p&gt;Description (描述): 简单描述一下你的项目。&lt;/p&gt;
+&lt;p&gt;保持 Public (公开) 状态，任何人都可以看到你的代码。&lt;/p&gt;
+&lt;p&gt;重要：不要 勾选 “Add a README file”, “Add .gitignore”, “Choose a license”。因为我们本地已经有项目了，需要创建一个完全空的仓库来接收我们的代码。&lt;/p&gt;
+&lt;p&gt;点击 Create repository。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;连接本地与远程 (&lt;code&gt;git remote add&lt;/code&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;创建成功后，GitHub 会给你一个仓库地址，通常是 &lt;a class=&#34;link&#34; href=&#34;https://github.com/YourUsername/my-first-git-project.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/YourUsername/my-first-git-project.git&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;回到你的终端，在本地项目文件夹里，运行以下命令，告诉本地 Git 这个远程仓库的存在：&lt;/p&gt;
+&lt;p&gt;格式: git remote add &amp;lt;远程仓库别名&amp;gt; &amp;lt;远程仓库URL&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git remote add origin https://github.com/YourUsername/my-first-git-project.git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;· origin 是我们给这个远程仓库起的一个别名，这是 Git 的一个通用惯例，代表“主要的、默认的远程仓库”。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;推送你的代码(&lt;code&gt;git push&lt;/code&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;连接已经建立，现在我们可以把本地的代码历史“推送”到 origin（也就是 GitHub）上了。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git push -u origin main&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;· &lt;code&gt;push&lt;/code&gt;：是“推送”的动作。&lt;/p&gt;
+&lt;p&gt;· &lt;code&gt;origin&lt;/code&gt;: 指定要推送到哪个远程仓库。&lt;/p&gt;
+&lt;p&gt;· &lt;code&gt;main&lt;/code&gt;:指定要推送本地的哪个分支。（现在你可以就理解为我们要推送的就是 main 这条主线上的所有代码）。&lt;/p&gt;
+&lt;p&gt;· &lt;code&gt;-u&lt;/code&gt;：这个参数很重要，它会把本地的 main 分支和远程的 main 分支关联起来。这样，未来你再推送时，只需简单地输入 &lt;code&gt;git push&lt;/code&gt; 即可。&lt;/p&gt;
+&lt;p&gt;第一次推送时，系统可能会提示你输入 GitHub 的用户名和密码（或者 Personal Access Token）来完成认证。&lt;/p&gt;
+&lt;p&gt;推送成功后，刷新你的 GitHub 仓库页面，你会惊喜地发现，你本地的 README.md 文件和提交历史已经完完整整地出现在了网页上！&lt;/p&gt;
+&lt;h3 id=&#34;场景二克隆一个已存在的项目-git-clone&#34;&gt;场景二：克隆一个已存在的项目 (&lt;code&gt;git clone&lt;/code&gt;)
+&lt;/h3&gt;&lt;p&gt;这是更常见的协作方式。比如你要加入一个新团队，第一件事通常就是从 GitHub 把项目代码克隆到你的电脑上。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git clone&lt;/code&gt; 命令帮你一步到位。&lt;/p&gt;
+&lt;p&gt;打开你想克隆的项目的 GitHub 页面。&lt;/p&gt;
+&lt;p&gt;点击绿色的 &amp;lt;&amp;gt; Code 按钮，复制 HTTPS 地址。&lt;/p&gt;
+&lt;p&gt;打开你的终端，cd 到你想存放这个项目的目录下（比如 Desktop 或 Documents）。&lt;/p&gt;
+&lt;p&gt;运行 git clone 命令：&lt;/p&gt;
+&lt;p&gt;格式: git clone &amp;lt;远程仓库URL&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git clone https://github.com/some-user/some-awesome-project.git&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个命令会做几件美妙的事情：&lt;/p&gt;
+&lt;p&gt;在当前目录下创建一个名为 &lt;code&gt;some-awesome-project&lt;/code&gt; 的新文件夹。&lt;/p&gt;
+&lt;p&gt;将远程仓库的所有文件和完整的版本历史都下载到这个文件夹里。&lt;/p&gt;
+&lt;p&gt;自动帮你设置好远程仓库的连接，并命名为 &lt;code&gt;origin&lt;/code&gt;。你无需再手动 &lt;code&gt;git remote add&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;克隆完成后，&lt;code&gt;cd some-awesome-project&lt;/code&gt; 进入文件夹，你就可以开始工作了。&lt;/p&gt;
+&lt;p&gt;后续操作：保持同步 (&lt;code&gt;git pull&lt;/code&gt;)&lt;/p&gt;
+&lt;p&gt;无论你是通过 push 还是 clone 开始的远程协作，当你的同事（或者未来的你在另一台电脑上）更新了 GitHub 上的代码后，你就需要将这些最新的变更同步到你的本地仓库。这时使用&lt;code&gt;git pull&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git pull origin main&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个命令会从远程仓库 &lt;code&gt;origin&lt;/code&gt; 的 &lt;code&gt;main&lt;/code&gt; 分支上，拉取最新的代码变更，并自动与你本地的代码合并。养成在开始一天的工作前先 &lt;code&gt;git pull&lt;/code&gt; 的好习惯，可以有效避免很多冲突。&lt;/p&gt;
+&lt;h2 id=&#34;git命令常规操作&#34;&gt;Git命令常规操作
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;add :添加文件内容至暂存区（索引）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;bisect:通过二分查找定位引入bug的变更
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;branch:列出、创建或删除分支
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;checkout:检出一个分支或路径到工作区
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;clone：克隆一个版本库到一个新目录
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;commit:记录变更到版本库（本地）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;diff:显示提交之间、提交和工作区之间等的差异
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;fetch:从另外一个版本库下载对象和引用
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;grep:输出和模式匹配的行
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;init:创建一个空的
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Git:版本库或重新初始化一个已存在的版本库
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;log:显示提交日志
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;merge：合并两个或更多开发历史
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mv:移动或重命名一个文件、目录或符号链接
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pull:获取并合并另外的版本库或一个本地分支
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;push：更新远程引用和相关的对象
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rebase：本地提交转移至更新后的上游分支中
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;reset:重置当前HEAD到指定状态
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rm：从工作区和索引中删除文件
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;show：显示各种类型的对象
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;status：显示工作区状态
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tag:创建、列出、删除或校验一个GPG签名的tag对象&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>Linux科学上网教程</title>
+        <link>http://localhost:1313/posts/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B/</guid>
+        <description>&lt;h3 id=&#34;1下载ssh工具&#34;&gt;1、下载SSH工具
+&lt;/h3&gt;&lt;p&gt;FinalShell：(&lt;a class=&#34;link&#34; href=&#34;https://www.hostbuf.com/t/988.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.hostbuf.com/t/988.html&lt;/a&gt;)&lt;/p&gt;
+&lt;h3 id=&#34;2安装环境&#34;&gt;2、安装环境：
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install bzip2 tar
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install curl&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;3安装shellcrash&#34;&gt;3、安装ShellCrash:
+&lt;/h3&gt;&lt;p&gt;sudo -i #切换到root用户
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;export url=&amp;#39;https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master&amp;#39; &lt;span class=&#34;err&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wget -q --no-check-certificate -O /tmp/install.sh $url/install.sh  &lt;span class=&#34;err&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; bash /tmp/install.sh &lt;span class=&#34;err&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; source /etc/profile &lt;span class=&#34;err&#34;&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;备用安装源：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;export url=&amp;#39;https://gh.jwsc.eu.org/master&amp;#39; &lt;span class=&#34;err&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; bash -c &amp;#34;$(curl -kfsSl $url/install.sh)&amp;#34; &lt;span class=&#34;err&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; source /etc/profile &lt;span class=&#34;err&#34;&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;放行端口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I INPUT -p tcp --dport 9999 -j ACCEPT&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Clash管理地址（将IP替换成自己服务器IP）：http://192.168.1.1:9999/ui&lt;/p&gt;
+&lt;h4 id=&#34;测试打开goole&#34;&gt;测试打开goole
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;curl google.com&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;测速&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt install speedtest-cli&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;运行：speedtest&lt;/p&gt;
+&lt;h3 id=&#34;常见问题&#34;&gt;常见问题
+&lt;/h3&gt;&lt;p&gt;在连接SSH时提示端口22:连接被拒绝：ssh: connect to host 192.168.1.1 port 22: Connection refused
+请安装SSH服务，使用以下命令安装：
+Debian/Ubuntu：sudo apt-get install openssh-server
+CentOS/RHEL：sudo yum install openssh-server&lt;/p&gt;
+&lt;p&gt;本教程使用的命令，使用的是Ubtuntu/Debian系统，如果你使用的是CentOS或者其它，就切换对应的命令。
+另外 ShellCrash 安装源是通用的。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>windows专业版</title>
+        <link>http://localhost:1313/posts/windows%E4%B8%93%E4%B8%9A%E7%89%88/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/windows%E4%B8%93%E4%B8%9A%E7%89%88/</guid>
+        <description>&lt;h4 id=&#34;查看自己的当下的激活密钥&#34;&gt;查看自己的当下的激活密钥
+&lt;/h4&gt;&lt;p&gt;以管理员身份打开 PowerShell，执行命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Get-WmiObject -query &amp;#39;select * from SoftwareLicensingService&amp;#39; | Select-Object OA3xOriginalProductKey&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;系统会返回 25 位激活密钥。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://telegraph-image-5tj.pages.dev/file/AgACAgUAAyEGAAS6dLpwAAMNaPnIsn6-MYeNFxU4D996uL_RAw4AAmwMaxuG6NBXFgxbFDhtFMMBAAMCAAN4AAM2BA.png&#34;
 	
 	
 	
@@ -521,8 +1218,18 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;番外：OK钱包(&lt;a class=&#34;link&#34; href=&#34;https://web3.okx.com/join/WIN168&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://web3.okx.com/join/WIN168&lt;/a&gt;)是全链钱包，所有的网络都支持，其实这种也没有什么用，就是听起来有点牛逼，但是并没有很牛逼&lt;/p&gt;
+&lt;p&gt;一定要确保你的设置&amp;ndash;&amp;gt;系统&amp;ndash;&amp;gt;激活，一打开就可以看到windows11专业版&lt;/p&gt;
+&lt;p&gt;如果显示别的家庭版等，就不能直接使用开源的项目，从家庭版激活到专业版，是激活不了的，就要找市面上的可以先升级的密钥，不用管是不是永久的，等一下用开源的项目，激活一下就是永久的。&lt;/p&gt;
+&lt;p&gt;如果你家庭版也没有激活，可以用开源项目激活一下&lt;/p&gt;
+&lt;p&gt;项目地址：(&lt;a class=&#34;link&#34; href=&#34;https://www.github.com/zbezj/HEU_KMS_Activator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.github.com/zbezj/HEU_KMS_Activator&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;点&lt;code&gt;Releases&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;下载后缀为&lt;code&gt;.rar&lt;/code&gt;软件包&lt;/p&gt;
+&lt;p&gt;解压一下，一定要记得关闭本地病毒保护，全部搞好了，就可以全部删除了，这个不要一直在本地存放&lt;/p&gt;
+&lt;p&gt;进入后，直接智能激活一下就可以了。&lt;/p&gt;
+&lt;p&gt;你就获得了永久的。记得全部删除！&lt;/p&gt;
+&lt;p&gt;windows11专业版密钥：&lt;code&gt;NWPCG-YRFQT-KCK78-7M3CB-XBT6T&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;我用的不知道还能不用再使用&lt;/p&gt;
 </description>
         </item>
         
