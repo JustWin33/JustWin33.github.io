@@ -1,6 +1,7 @@
 ---
 title: K8s
 description: 
+date: 2025-11-08
 categories:
     - 
     - 

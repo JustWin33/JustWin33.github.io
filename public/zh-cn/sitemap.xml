@@ -15,7 +15,13 @@
                 href="http://localhost:1313/"
                 />
   </url><url>
+    <loc>http://localhost:1313/posts/linux%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2025-11-09T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/post/</loc>
+    <lastmod>2025-11-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/vim/</loc>
     <lastmod>2025-11-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/win-r/</loc>
@@ -23,6 +29,9 @@
   </url><url>
     <loc>http://localhost:1313/posts/windows/</loc>
     <lastmod>2025-11-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/k8s/</loc>
+    <lastmod>2025-11-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/docker/</loc>
     <lastmod>2025-11-07T00:00:00+00:00</lastmod>
@@ -68,8 +77,6 @@
     <loc>http://localhost:1313/posts/git-github/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/github/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/k8s/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B/</loc>
   </url><url>
