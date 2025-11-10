@@ -5,6 +5,9 @@
     <loc>http://localhost:1313/posts/cmd/</loc>
     <lastmod>2025-11-10T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/gitgithub/</loc>
+    <lastmod>2025-11-10T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/</loc>
     <lastmod>2025-11-10T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -18,7 +21,16 @@
                 href="http://localhost:1313/"
                 />
   </url><url>
+    <loc>http://localhost:1313/posts/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <lastmod>2025-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/linux%E5%9B%9B%E5%89%91%E5%AE%A2/</loc>
+    <lastmod>2025-11-10T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/post/</loc>
+    <lastmod>2025-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/wireshar/</loc>
     <lastmod>2025-11-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/linux%E5%B7%A5%E5%85%B7/</loc>
@@ -45,8 +57,12 @@
     <loc>http://localhost:1313/about/</loc>
     <lastmod>2025-10-31T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2025-10-18T16:31:22+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/blockchain/</loc>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2025-10-20T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -57,31 +73,6 @@
                 hreflang="zh-cn"
                 href="http://localhost:1313/categories/"
                 />
-  </url><url>
-    <loc>http://localhost:1313/posts/linux%E5%9B%9B%E5%89%91%E5%AE%A2/</loc>
-    <lastmod>2025-10-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/test/</loc>
-    <lastmod>2025-10-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/wireshark/</loc>
-    <lastmod>2025-10-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2025-10-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/%E6%90%AD%E5%BB%BAhugo%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2025-10-18T16:31:22+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/blockchain/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/git/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/git-github/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/github/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%95%99%E7%A8%8B/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
     <xhtml:link
@@ -95,9 +86,13 @@
                 href="http://localhost:1313/tags/"
                 />
   </url><url>
+    <loc>http://localhost:1313/categories/test/</loc>
+  </url><url>
     <loc>http://localhost:1313/posts/windows%E4%B8%93%E4%B8%9A%E7%89%88/</loc>
   </url><url>
     <loc>http://localhost:1313/archives/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</loc>
   </url><url>
     <loc>http://localhost:1313/search/</loc>
   </url><url>
