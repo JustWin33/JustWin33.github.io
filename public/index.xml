@@ -7,7 +7,548 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>© 2025 win. 保留所有权利.</copyright>
-        <lastBuildDate>Sun, 09 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 10 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>cmd</title>
+        <link>http://localhost:1313/posts/cmd/</link>
+        <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cmd/</guid>
+        <description>&lt;h1 id=&#34;windows-cmd-命令&#34;&gt;Windows CMD 命令
+&lt;/h1&gt;&lt;p&gt;以下是分类整理的常用命令提示符（CMD）命令，包含功能说明和实用示例。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一系统信息类命令&#34;&gt;一、系统信息类命令
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;systeminfo&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示详细的系统配置信息&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;systeminfo&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ver&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示Windows版本号&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ver&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;hostname&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示计算机名称&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;hostname&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;whoami&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示当前用户名及权限&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;whoami&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ipconfig&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示网络配置信息&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ipconfig /all&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;driverquery&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示已安装的驱动程序列表&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;driverquery /v&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二文件和目录操作&#34;&gt;二、文件和目录操作
+&lt;/h2&gt;&lt;h3 id=&#34;基础命令&#34;&gt;基础命令
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+          &lt;th&gt;常用示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;dir&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;列出目录内容&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;dir /a:h&lt;/code&gt;（显示隐藏文件）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;cd&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;切换目录&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;cd /d D:\folder&lt;/code&gt;（跨盘符切换）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;md&lt;/code&gt; 或 &lt;code&gt;mkdir&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;创建新目录&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;md &amp;quot;New Folder&amp;quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;rd&lt;/code&gt; 或 &lt;code&gt;rmdir&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;删除目录&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;rd /s /q folder&lt;/code&gt;（强制删除）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;copy&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;复制文件&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;copy file.txt D:\backup&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;xcopy&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;增强复制（支持目录树）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;xcopy /s /e C:\src D:\dst&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;robocopy&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;高级复制（推荐）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;robocopy /mir C:\src D:\dst&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;move&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;移动/重命名文件&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;move file.txt newname.txt&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;del&lt;/code&gt; 或 &lt;code&gt;erase&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;删除文件&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;del /s *.tmp&lt;/code&gt;（递归删除）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;type&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示文件内容&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;type readme.txt&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;find&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;在文件中搜索字符串&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;find &amp;quot;error&amp;quot; log.txt&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;findstr&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;增强搜索（支持正则）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;findstr /s &amp;quot;hello&amp;quot; *.txt&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;实用示例&#34;&gt;实用示例
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-batch&#34; data-lang=&#34;batch&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 批量重命名.txt为.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;ren&lt;/span&gt; *.txt *.log
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 快速清空文件夹内容&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;del&lt;/span&gt; /q *.* &lt;span class=&#34;p&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; /d &lt;span class=&#34;nv&#34;&gt;%i in (*) do @rd /s /q &amp;#34;%&lt;/span&gt;i&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 查找大文件（按大小排序）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dir /s /b /a-d &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; findstr /r &lt;span class=&#34;s2&#34;&gt;&amp;#34;^.*\\[^\\]*$&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; files.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;三网络命令&#34;&gt;三、网络命令
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+          &lt;th&gt;常用参数&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ping&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;测试网络连通性&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ping -t baidu.com&lt;/code&gt;（持续测试）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;tracert&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;路由追踪&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;tracert 8.8.8.8&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;nslookup&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;DNS查询&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;nslookup google.com&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;netstat&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示网络连接状态&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;netstat -ano&lt;/code&gt;（显示PID）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;arp&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示ARP缓存表&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;arp -a&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ipconfig&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;网络配置管理&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ipconfig /release&lt;/code&gt;（释放IP）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;netsh&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;网络配置工具&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;netsh wlan show profiles&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ftp&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;FTP客户端&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;ftp 192.168.1.1&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;telnet&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Telnet客户端（需开启功能）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;telnet baidu.com 80&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;pathping&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;高级路由追踪&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;pathping baidu.com&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;四进程与服务管理&#34;&gt;四、进程与服务管理
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;tasklist&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示所有运行进程&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;tasklist /fi &amp;quot;memusage gt 100000&amp;quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;taskkill&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;终止进程&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;taskkill /im chrome.exe /f&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;start&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;启动新进程&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;start notepad.exe&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;net&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;服务管理&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;net start&lt;/code&gt;（查看服务）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;sc&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;服务控制管理器&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;sc query&lt;/code&gt;（查询服务状态）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;wmic&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;WMI命令行工具&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;wmic process list brief&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;shutdown&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;关机/重启/注销&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;shutdown /s /t 0&lt;/code&gt;（立即关机）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;进程操作示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-batch&#34; data-lang=&#34;batch&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 强制结束占用端口的进程&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netstat -ano &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; findstr &lt;span class=&#34;s2&#34;&gt;&amp;#34;:8080&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;taskkill /pid 1234 /f
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 批量结束同类型进程&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;taskkill /im chrome.exe /t /f
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;五系统管理与维护&#34;&gt;五、系统管理与维护
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+          &lt;th&gt;常用示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;sfc&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;系统文件检查器&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;sfc /scannow&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;chkdsk&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;磁盘检查工具&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;chkdsk C: /f /r&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;diskpart&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;磁盘分区管理工具&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;diskpart&lt;/code&gt;（进入交互模式）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;format&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;格式化磁盘&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;format E: /q /fs:ntfs&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;cipher&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;文件加密/擦除空闲空间&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;cipher /w:C&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;gpresult&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示组策略结果&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;gpresult /r&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;gpupdate&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;刷新组策略&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;gpupdate /force&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;powercfg&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;电源配置管理&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;powercfg /energy&lt;/code&gt;（生成报告）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;msconfig&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;系统配置（图形界面）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;msconfig&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;reg&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;注册表编辑器（命令行）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;reg query HKLM\Software&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;六用户与权限管理&#34;&gt;六、用户与权限管理
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;net user&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;用户账户管理&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;net user&lt;/code&gt;（列出用户）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;net localgroup&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;本地组管理&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;net localgroup administrators&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;runas&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;以其他用户身份运行&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;runas /user:admin cmd&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;icacls&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;文件权限管理&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;icacls file.txt /grant Users:F&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;takeown&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;获取文件所有权&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;takeown /f C:\locked&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;七性能与调试工具&#34;&gt;七、性能与调试工具
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;perfmon&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;性能监视器（GUI）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;perfmon&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;resmon&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;资源监视器（GUI）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;resmon&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;eventvwr&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;事件查看器（GUI）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;eventvwr&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;dxdiag&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;DirectX诊断工具（GUI）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;dxdiag&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;msinfo32&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;系统信息（GUI）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;msinfo32&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;wmic&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;硬件信息查询&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;wmic cpu get name&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;八其他实用命令&#34;&gt;八、其他实用命令
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;功能说明&lt;/th&gt;
+          &lt;th&gt;技巧&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;cls&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;清屏&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;cls&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;color&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;更改控制台颜色&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;color 0a&lt;/code&gt;（黑底绿字）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;title&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;更改窗口标题&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;title MyCMD&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;prompt&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;更改命令提示符&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;prompt $p$g&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;date&lt;/code&gt;/&lt;code&gt;time&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示/设置日期时间&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;date&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;vol&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;显示卷标和序列号&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;vol C:&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;label&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;更改磁盘卷标&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;label C: System&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;tree&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;以树形显示目录结构&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;tree /f &amp;gt; structure.txt&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;fc&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;文件比较&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;fc file1.txt file2.txt&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;comp&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;二进制文件比较&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;comp file1.bin file2.bin&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;where&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;查找文件位置&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;where notepad.exe&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;九批处理常用技巧&#34;&gt;九、批处理常用技巧
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-batch&#34; data-lang=&#34;batch&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 注释说明&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;echo&lt;/span&gt; off          :: 关闭命令回显
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;setlocal&lt;/span&gt;           :: 本地化环境变量
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;cd&lt;/span&gt; /d &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;%~dp0&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;      :: 切换到脚本所在目录
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 延时&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;timeout /t 5       :: 等待5秒
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 条件判断&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;exist&lt;/span&gt; file.txt &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;echo&lt;/span&gt; 存在&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;echo&lt;/span&gt; 不存在&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 循环&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;%%&lt;/span&gt;i &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;*.txt&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;%%&lt;/span&gt;i
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;: 获取管理员权限&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;net session &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;nul &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;powershell start -verb runas &amp;#39;&lt;span class=&#34;nv&#34;&gt;%0&lt;/span&gt;&amp;#39; &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;使用技巧&#34;&gt;使用技巧
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;快速复制粘贴&lt;/strong&gt;：在CMD窗口右键选择&amp;quot;标记&amp;quot;复制，右键粘贴&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;历史命令&lt;/strong&gt;：按&lt;code&gt;F7&lt;/code&gt;查看历史，使用&lt;code&gt;↑&lt;/code&gt;/&lt;code&gt;↓&lt;/code&gt;键浏览&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动补全&lt;/strong&gt;：按&lt;code&gt;Tab&lt;/code&gt;键自动补全文件名&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;管道符&lt;/strong&gt;：&lt;code&gt;|&lt;/code&gt; 将一个命令的输出作为另一个的输入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重定向&lt;/strong&gt;：&lt;code&gt;&amp;gt;&lt;/code&gt; 输出到文件，&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; 追加到文件&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Linux工具</title>
         <link>http://localhost:1313/posts/linux%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>

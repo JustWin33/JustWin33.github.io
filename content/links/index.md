@@ -46,15 +46,15 @@ links:
     description: 
     website: https://www.openwall.com/john
 
-  - title: 
+  - title: Tiktok字幕提取器
     description: 
-    website: 
+    website: https://tiktoktranscript.org/zh
 
 
 
-  - title: 
+  - title: 破解付费文章
     description: 
-    website: 
+    website: https://paywallbuster.com/
 
 
 
