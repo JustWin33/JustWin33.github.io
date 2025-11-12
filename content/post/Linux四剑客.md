@@ -1,3 +1,4 @@
+```markdown
 ---
 title: Linux四剑客
 description: 
@@ -28,7 +29,7 @@ categories:
 ## 二、find：文件查找专家
 
 ### 2.1 基本语法
-```bash
+​```bash
 find [路径] [选项] [表达式]
 ```
 - **路径**：搜索起始目录（默认为当前目录）
@@ -128,6 +129,77 @@ find /etc/ -type f -name "*.conf" | xargs tar zcf /backup/etc_conf.tar.gz
 # 方法03：find -exec（推荐+号）
 find /etc/ -type f -name "*.conf" -exec tar zcf /backup/etc-exec.tar.gz {} +
 ```
+
+**步骤9：查找特定文件的路径（实用技巧）**
+
+在实际运维中，经常需要查找某个文件（如`daily_check.sh`）的完整路径。除了基本的文件名查找，还有多种高效方法：
+
+**方法01：使用find递归搜索（最全面）**
+```bash
+# 从根目录开始搜索（需sudo权限）
+sudo find / -name "daily_check.sh" 2>/dev/null
+
+# 只在当前用户主目录搜索
+find ~ -name "daily_check.sh"
+
+# 在当前目录及子目录搜索
+find . -name "daily_check.sh"
+```
+- 操作意思：在指定目录下递归查找匹配文件名的所有路径
+- `2>/dev/null`：将错误信息（如权限不足）重定向到黑洞，避免屏幕刷屏
+- `-name`：精确匹配文件名（区分大小写），支持`*`（匹配一串字符）和`?`（匹配单个字符）
+- `-iname`：忽略大小写匹配（如`find / -iname "daily_check.sh"`）
+
+**方法02：使用locate快速定位（最快）**
+```bash
+# 先更新数据库（可能需要sudo）
+sudo updatedb
+
+# 然后搜索（基于数据库，瞬时返回）
+locate daily_check.sh
+```
+- 操作意思：`locate`基于预建的数据库搜索，速度极快但可能不是最新结果
+- 优点：比find快数百倍，适合频繁查询
+- 注意：新创建的文件需执行`updatedb`后才能被定位到
+
+**方法03：查找可执行文件路径**
+```bash
+which daily_check.sh      # 查找在$PATH中的可执行文件
+type daily_check.sh       # 显示命令类型和路径
+whereis daily_check.sh    # 查找二进制、源文件和手册页
+```
+- 操作意思：如果脚本在系统PATH环境变量中，快速定位其路径
+- `which`：只查找可执行文件，返回第一个匹配路径
+- `whereis`：查找范围更广，包括二进制、源码和man手册
+
+**方法04：组合查找（推荐实用）**
+```bash
+# 先用locate快速查找，找不到再用find深度搜索
+locate daily_check.sh || find / -name "daily_check.sh" 2>/dev/null
+
+# 结合grep过滤大量结果
+find /opt/scripts -type f -name "*.sh" | grep daily_check
+```
+- 操作意思：兼顾速度与完整性，locate失败时自动降级到find
+- `||`：逻辑或，前一个命令失败时执行后一个
+
+**实际应用场景：**
+```bash
+# 场景1：找到脚本后查看内容
+find / -name "daily_check.sh" 2>/dev/null | xargs cat
+
+# 场景2：找到脚本后批量修改权限
+find /opt -name "daily_check.sh" -exec chmod +x {} \;
+
+# 场景3：统计找到了几个同名文件
+find / -name "daily_check.sh" 2>/dev/null | wc -l
+```
+
+**最佳实践建议：**
+1. **优先使用locate**：对于频繁查询的固定文件，先用locate，找不到再find
+2. **限制搜索范围**：已知大致目录时，指定路径减少搜索时间（如`find /opt -name "*.sh"`）
+3. **处理权限问题**：搜索系统目录时加`sudo`，错误重定向到`/dev/null`
+4. **模糊搜索**：不确定完整文件名时，使用通配符（如`find / -name "*daily*.sh"`）
 
 ---
 
@@ -259,7 +331,7 @@ sed '3a\appended line' file.txt      # 在第3行后追加
 
 **步骤5：多命令组合**
 ```bash
-sed -e 's/foo/bar/' -e 's/baz/qux/' file.txt
+sed -e 's/old/new/' -e 's/baz/qux/' file.txt
 sed -e '3d' -e 's/old/new/g' file.txt
 ```
 - `-e`：执行多个编辑命令（顺序执行）
@@ -417,3 +489,7 @@ sort -k2 -nr | head -10
 6. **备份习惯**：任何修改操作前，先备份原始文件
 
 掌握这四个工具的组合使用，可解决90%以上的Linux文本处理场景。建议通过`man find`、`man grep`、`man sed`、`man awk`查看完整手册深入学习。
+
+```
+
+```
