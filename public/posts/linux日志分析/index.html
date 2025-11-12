@@ -1,0 +1,857 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Linux日志文件 一、主要日志文件位置及含义 系统核心日志 /var/log/messages (CentOS/RHEL) 或 /var/log/syslog (Ubuntu/Debian)\n作用：记录系统整体运行状态，包括服务启动/停止、内核消息、驱动程序信息等 适合分析：系统级问题、服务异常、硬件兼容性 /var/log/secure (CentOS) 或 /var/log/auth.log (Ubuntu)\n"><title>linux日志分析</title><link rel=canonical href=http://localhost:1313/posts/linux%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="linux日志分析"><meta property='og:description' content="Linux日志文件 一、主要日志文件位置及含义 系统核心日志 /var/log/messages (CentOS/RHEL) 或 /var/log/syslog (Ubuntu/Debian)\n作用：记录系统整体运行状态，包括服务启动/停止、内核消息、驱动程序信息等 适合分析：系统级问题、服务异常、硬件兼容性 /var/log/secure (CentOS) 或 /var/log/auth.log (Ubuntu)\n"><meta property='og:url' content='http://localhost:1313/posts/linux%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2025-11-11T00:00:00+00:00'><meta property='article:modified_time' content='2025-11-11T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="linux日志分析"><meta name=twitter:description content="Linux日志文件 一、主要日志文件位置及含义 系统核心日志 /var/log/messages (CentOS/RHEL) 或 /var/log/syslog (Ubuntu/Debian)\n作用：记录系统整体运行状态，包括服务启动/停止、内核消息、驱动程序信息等 适合分析：系统级问题、服务异常、硬件兼容性 /var/log/secure (CentOS) 或 /var/log/auth.log (Ubuntu)\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/archives/><span>归档</span></a></li><li><a href=/about/><span>关于</span></a></li><li><a href=/links/><span>网站分享</span></a></li><li><a href=/blockchain/><span>待定</span></a></li><li><a href><span></span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#一主要日志文件位置及含义>一、主要日志文件位置及含义</a><ol><li><a href=#系统核心日志>系统核心日志</a></li></ol></li><li><a href=#二基础查看命令详解>二、基础查看命令详解</a><ol><li><a href=#1-实时监控类命令>1. 实时监控类命令</a></li><li><a href=#2-分页浏览工具>2. 分页浏览工具</a></li><li><a href=#3-精确时间范围查看>3. 精确时间范围查看</a></li></ol></li><li><a href=#三进阶分析技巧深度解析>三、进阶分析技巧深度解析</a><ol><li><a href=#1-grep搜索实战详解>1. grep搜索实战详解</a></li><li><a href=#2-排序与统计高级用法>2. 排序与统计高级用法</a></li><li><a href=#3-时间戳分析实战>3. 时间戳分析实战</a></li></ol></li><li><a href=#四journalctl-现代日志系统详解>四、journalctl 现代日志系统详解</a><ol><li><a href=#1-基础用法>1. 基础用法</a></li><li><a href=#2-按服务单元过滤最常用>2. 按服务单元过滤（最常用）</a></li><li><a href=#3-进程与日志关联>3. 进程与日志关联</a></li><li><a href=#4-启动日志分析排查启动问题神器>4. 启动日志分析（排查启动问题神器）</a></li><li><a href=#5-组合查询实战>5. 组合查询实战</a></li></ol></li><li><a href=#五实战案例分析详解>五、实战案例分析详解</a><ol><li><a href=#案例1ssh登录失败完整排查流程>案例1：SSH登录失败完整排查流程</a></li><li><a href=#案例2web服务502503错误深度分析>案例2：Web服务502/503错误深度分析</a></li><li><a href=#案例3磁盘io错误导致服务异常>案例3：磁盘I/O错误导致服务异常</a></li><li><a href=#案例4服务启动失败根本原因定位>案例4：服务启动失败根本原因定位</a></li></ol></li><li><a href=#六日志分析脚本详解>六、日志分析脚本详解</a><ol><li><a href=#自动化分析脚本带详细注释>自动化分析脚本（带详细注释）</a></li></ol></li><li><a href=#七日志轮转机制详解>七、日志轮转机制详解</a><ol><li><a href=#logrotate工作原理>logrotate工作原理</a></li></ol></li><li><a href=#八常见问题快速定位表带解读>八、常见问题快速定位表（带解读）</a></li><li><a href=#九高级技巧与最佳实践>九、高级技巧与最佳实践</a><ol><li><a href=#1-日志格式标准化>1. 日志格式标准化</a></li><li><a href=#2-日志关联分析>2. 日志关联分析</a></li><li><a href=#3-性能分析>3. 性能分析</a></li><li><a href=#4-日志远程传输集中管理>4. 日志远程传输（集中管理）</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/linux%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/>linux日志分析</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-11-11</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 14 分钟</time></div></footer></div></header><section class=article-content><h1 id=linux日志文件>Linux日志文件</h1><h2 id=一主要日志文件位置及含义>一、主要日志文件位置及含义</h2><h3 id=系统核心日志>系统核心日志</h3><ul><li><p><strong><code>/var/log/messages</code></strong> (CentOS/RHEL) 或 <strong><code>/var/log/syslog</code></strong> (Ubuntu/Debian)</p><ul><li><strong>作用</strong>：记录系统整体运行状态，包括服务启动/停止、内核消息、驱动程序信息等</li><li><strong>适合分析</strong>：系统级问题、服务异常、硬件兼容性</li></ul></li><li><p><strong><code>/var/log/secure</code></strong> (CentOS) 或 <strong><code>/var/log/auth.log</code></strong> (Ubuntu)</p><ul><li><strong>作用</strong>：专门记录安全相关事件，包括SSH登录、sudo提权、用户切换等</li><li><strong>适合分析</strong>：登录失败、暴力破解、权限异常</li></ul></li><li><p><strong><code>/var/log/dmesg</code></strong></p><ul><li><strong>作用</strong>：内核环缓冲区日志，记录硬件检测、驱动加载、内核错误</li><li><strong>适合分析</strong>：硬件故障、驱动冲突、启动时硬件问题</li></ul></li><li><p>**<code>/var/log/boot.log</code></p><ul><li><strong>作用</strong>：系统启动过程日志，记录各服务启动顺序和结果</li><li><strong>适合分析</strong>：启动缓慢、服务启动失败</li></ul></li><li><p>**<code>/var/log/cron</code></p><ul><li><strong>作用</strong>：定时任务执行日志，记录crontab任务的执行时间和结果</li><li><strong>适合分析</strong>：定时任务失败、cron配置错误</li></ul></li></ul><hr><h2 id=二基础查看命令详解>二、基础查看命令详解</h2><h3 id=1-实时监控类命令>1. 实时监控类命令</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 命令：tail -f /var/log/messages</span>
+</span></span><span class=line><span class=cl><span class=c1># 含义：</span>
+</span></span><span class=line><span class=cl><span class=c1># - tail：显示文件末尾内容</span>
+</span></span><span class=line><span class=cl><span class=c1># - -f (follow)：实时跟踪文件新增内容，不会自动退出</span>
+</span></span><span class=line><span class=cl><span class=c1># 应用场景：重现问题时实时观察日志输出</span>
+</span></span><span class=line><span class=cl><span class=c1># 退出方式：按 Ctrl+C 终止</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 示例：监控最后100行并持续更新</span>
+</span></span><span class=line><span class=cl>tail -100f /var/log/syslog
+</span></span><span class=line><span class=cl><span class=c1># -100：先显示最后100行，然后进入跟踪模式</span>
+</span></span><span class=line><span class=cl><span class=c1># 比直接tail -f更有用，可以看到问题发生前的上下文</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 同时监控多个日志文件</span>
+</span></span><span class=line><span class=cl>tail -f /var/log/messages /var/log/secure
+</span></span><span class=line><span class=cl><span class=c1># 输出格式：[文件路径] 实际日志内容</span>
+</span></span><span class=line><span class=cl><span class=c1># 这样可以关联分析多个服务的交互问题</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>输出示例解读</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Nov <span class=m>10</span> 14:25:01 server sshd<span class=o>[</span>12345<span class=o>]</span>: Failed password <span class=k>for</span> root from 192.168.1.100 port <span class=m>3321</span> ssh2
+</span></span><span class=line><span class=cl><span class=c1># 时间戳    主机名   进程名[PID]: 具体消息内容</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-分页浏览工具>2. 分页浏览工具</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 命令：less /var/log/messages</span>
+</span></span><span class=line><span class=cl><span class=c1># 核心优势：</span>
+</span></span><span class=line><span class=cl><span class=c1># 1. 加载大文件速度快（不像vim会一次性加载全部）</span>
+</span></span><span class=line><span class=cl><span class=c1># 2. 支持前后翻页，适合深入分析</span>
+</span></span><span class=line><span class=cl><span class=c1># 3. 搜索功能强大，不会阻塞</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># less中的关键操作：</span>
+</span></span><span class=line><span class=cl><span class=c1># /keyword  向后搜索关键词（输入后按回车）</span>
+</span></span><span class=line><span class=cl><span class=c1># ?keyword  向前搜索关键词</span>
+</span></span><span class=line><span class=cl><span class=c1># n         跳转到下一个匹配项 (next)</span>
+</span></span><span class=line><span class=cl><span class=c1># N         跳转到上一个匹配项</span>
+</span></span><span class=line><span class=cl><span class=c1># G         跳到文件末尾 (goto end)</span>
+</span></span><span class=line><span class=cl><span class=c1># g         跳到文件开头</span>
+</span></span><span class=line><span class=cl><span class=c1># 空格键    向下翻页</span>
+</span></span><span class=line><span class=cl><span class=c1># b         向上翻页 (back)</span>
+</span></span><span class=line><span class=cl><span class=c1># q         退出 (quit)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 实用技巧：less +F /var/log/messages</span>
+</span></span><span class=line><span class=cl><span class=c1># +F参数：启动时直接进入跟踪模式（类似tail -f）</span>
+</span></span><span class=line><span class=cl><span class=c1># 按Ctrl+C退出跟踪模式，转为普通浏览模式</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-精确时间范围查看>3. 精确时间范围查看</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 命令：grep &#34;Nov 10&#34; /var/log/messages</span>
+</span></span><span class=line><span class=cl><span class=c1># 含义：筛选包含&#34;Nov 10&#34;字符串的行（11月10日的日志）</span>
+</span></span><span class=line><span class=cl><span class=c1># 局限性：会匹配到所有含该字符串的内容，可能不够精确</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 更精确的时间匹配（使用正则表达式）</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;^Nov 10 14:2[0-9]&#34;</span> /var/log/messages
+</span></span><span class=line><span class=cl><span class=c1># ^：行首锚定，确保从时间戳开始匹配</span>
+</span></span><span class=line><span class=cl><span class=c1># 14:2[0-9]：匹配14:20-14:29的时间段</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 使用awk提取特定时间范围</span>
+</span></span><span class=line><span class=cl>awk <span class=s1>&#39;$2==&#34;10&#34; &amp;&amp; $3&gt;=&#34;14:00:00&#34; &amp;&amp; $3&lt;=&#34;14:30:00&#34;&#39;</span> /var/log/messages
+</span></span><span class=line><span class=cl><span class=c1># $2：第二列（日期）</span>
+</span></span><span class=line><span class=cl><span class=c1># $3：第三列（时间）</span>
+</span></span><span class=line><span class=cl><span class=c1># 逻辑：日期是10号且时间在14:00-14:30之间</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=三进阶分析技巧深度解析>三、进阶分析技巧深度解析</h2><h3 id=1-grep搜索实战详解>1. grep搜索实战详解</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 基础错误查找（不区分大小写）</span>
+</span></span><span class=line><span class=cl>grep -i <span class=s2>&#34;error&#34;</span> /var/log/messages
+</span></span><span class=line><span class=cl><span class=c1># -i (ignore case)：忽略大小写，匹配Error、ERROR、error等</span>
+</span></span><span class=line><span class=cl><span class=c1># 为什么用：避免遗漏不同格式的错误信息</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 同时查找多个关键词（使用正则表达式）</span>
+</span></span><span class=line><span class=cl>grep -i <span class=s2>&#34;error\|fail\|critical\|denied&#34;</span> /var/log/messages
+</span></span><span class=line><span class=cl><span class=c1># \|：正则表达式的&#34;或&#34;操作符</span>
+</span></span><span class=line><span class=cl><span class=c1># 为什么用：不同类型的错误可能使用不同词汇描述</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 显示匹配行的上下文（最关键的技巧）</span>
+</span></span><span class=line><span class=cl>grep -C <span class=m>5</span> -i <span class=s2>&#34;fatal&#34;</span> /var/log/messages
+</span></span><span class=line><span class=cl><span class=c1># -C 5 (Context)：显示匹配行前后各5行</span>
+</span></span><span class=line><span class=cl><span class=c1># 为什么用：单个错误行往往信息不足，需要上下文定位根本原因</span>
+</span></span><span class=line><span class=cl><span class=c1># -A 5 (After)：只显示后5行</span>
+</span></span><span class=line><span class=cl><span class=c1># -B 5 (Before)：只显示前5行</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 排除干扰信息（反向匹配）</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;error&#34;</span> /var/log/messages <span class=p>|</span> grep -v <span class=s2>&#34;debug&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># |：管道符，将前一个命令的输出作为后一个命令的输入</span>
+</span></span><span class=line><span class=cl><span class=c1># grep -v：反向匹配，排除包含指定关键词的行</span>
+</span></span><span class=line><span class=cl><span class=c1># 为什么用：开发环境可能有很多debug日志干扰</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 统计错误出现次数（量化分析）</span>
+</span></span><span class=line><span class=cl>grep -c <span class=s2>&#34;error&#34;</span> /var/log/messages
+</span></span><span class=line><span class=cl><span class=c1># -c (count)：只输出匹配的行数，不显示内容</span>
+</span></span><span class=line><span class=cl><span class=c1># 应用场景：判断问题的频率和严重程度</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 显示匹配的文件名（多文件搜索时）</span>
+</span></span><span class=line><span class=cl>grep -l <span class=s2>&#34;error&#34;</span> /var/log/*
+</span></span><span class=line><span class=cl><span class=c1># -l (list)：只显示包含匹配内容的文件名</span>
+</span></span><span class=line><span class=cl><span class=c1># 应用场景：快速定位哪些日志文件有问题</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>实战案例：SSH暴力破解分析</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 第一步：提取所有失败登录的IP</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;Failed password&#34;</span> /var/log/secure <span class=p>|</span> awk <span class=s1>&#39;{print $11}&#39;</span> <span class=p>|</span> sort <span class=p>|</span> uniq -c <span class=p>|</span> sort -nr
+</span></span><span class=line><span class=cl><span class=c1># 分解说明：</span>
+</span></span><span class=line><span class=cl><span class=c1># grep &#34;Failed password&#34;：筛选认证失败记录</span>
+</span></span><span class=line><span class=cl><span class=c1># awk &#39;{print $11}&#39;：提取第11列（IP地址）</span>
+</span></span><span class=line><span class=cl><span class=c1># sort：排序（为uniq做准备）</span>
+</span></span><span class=line><span class=cl><span class=c1># uniq -c：统计每个IP出现的次数</span>
+</span></span><span class=line><span class=cl><span class=c1># sort -nr：按数字降序排列（-n:数字排序, -r:逆序）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 典型输出解读：</span>
+</span></span><span class=line><span class=cl><span class=c1>#    253 192.168.1.100</span>
+</span></span><span class=line><span class=cl><span class=c1>#     45 192.168.1.101</span>
+</span></span><span class=line><span class=cl><span class=c1># IP 192.168.1.100 在日志中出现了253次，是主要攻击源</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 第二步：查看这些IP的详细攻击时间</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;192.168.1.100&#34;</span> /var/log/secure <span class=p>|</span> head -5
+</span></span><span class=line><span class=cl><span class=c1># 查看该IP的前5条记录，确认攻击模式</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-排序与统计高级用法>2. 排序与统计高级用法</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 命令：sort /var/log/messages | uniq -c | sort -nr | head -20</span>
+</span></span><span class=line><span class=cl><span class=c1># 完整含义：找出日志中最常出现的20种模式</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 分步解析：</span>
+</span></span><span class=line><span class=cl>1. sort /var/log/messages
+</span></span><span class=line><span class=cl>   - 先对整个文件排序（uniq只能处理相邻的重复行）
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>2. uniq -c
+</span></span><span class=line><span class=cl>   - 合并相邻的重复行
+</span></span><span class=line><span class=cl>   - -c：在每行前添加出现次数
+</span></span><span class=line><span class=cl>   - 输出示例：<span class=s2>&#34;   127 Nov 10 14:25:01 server crond[1234]: ...&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>3. sort -nr
+</span></span><span class=line><span class=cl>   - -n：按数字大小排序（默认是字典序）
+</span></span><span class=line><span class=cl>   - -r：逆序排列（从大到小）
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>4. head -20
+</span></span><span class=line><span class=cl>   - 只显示前20行（最常见的前20种日志）
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 应用场景：快速识别系统的主要活动在做什么</span>
+</span></span><span class=line><span class=cl><span class=c1># 例如发现&#34;Out of memory&#34;出现上千次，说明内存泄漏严重</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>Web日志分析案例：找出最多访问IP</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 命令：awk &#39;{print $1}&#39; /var/log/apache2/access.log | sort | uniq -c | sort -nr | head -10</span>
+</span></span><span class=line><span class=cl><span class=c1># 详细解释：</span>
+</span></span><span class=line><span class=cl><span class=c1># awk &#39;{print $1}&#39;：提取访问日志的第一列（客户端IP）</span>
+</span></span><span class=line><span class=cl><span class=c1># 后续命令同上，最终得到TOP 10访问IP</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 进阶：找出访问最频繁的URL</span>
+</span></span><span class=line><span class=cl>awk <span class=s1>&#39;{print $7}&#39;</span> /var/log/apache2/access.log <span class=p>|</span> sort <span class=p>|</span> uniq -c <span class=p>|</span> sort -nr <span class=p>|</span> head -10
+</span></span><span class=line><span class=cl><span class=c1># $7：通常表示HTTP请求中的URL路径</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-时间戳分析实战>3. 时间戳分析实战</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 命令：sed -n &#39;/14:00:00/,/14:30:00/p&#39; /var/log/messages</span>
+</span></span><span class=line><span class=cl><span class=c1># 含义：提取14:00:00到14:30:00之间的日志</span>
+</span></span><span class=line><span class=cl><span class=c1># sed -n：安静模式，只打印匹配的行</span>
+</span></span><span class=line><span class=cl><span class=c1># /start/,/end/：范围匹配，从开始模式到结束模式</span>
+</span></span><span class=line><span class=cl><span class=c1># p：打印命令</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 为什么用sed而不是grep？</span>
+</span></span><span class=line><span class=cl><span class=c1># - sed可以按行号或模式范围提取，适合连续时间段</span>
+</span></span><span class=line><span class=cl><span class=c1># - grep只能匹配单个模式</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 更精确的时间分析（使用awk）</span>
+</span></span><span class=line><span class=cl>awk <span class=s1>&#39;$3&gt;=&#34;14:00:00&#34; &amp;&amp; $3&lt;=&#34;14:30:00&#34; {print}&#39;</span> /var/log/messages
+</span></span><span class=line><span class=cl><span class=c1># $3&gt;=：第三列（时间）大于等于14:00:00</span>
+</span></span><span class=line><span class=cl><span class=c1># &amp;&amp;：逻辑与操作符</span>
+</span></span><span class=line><span class=cl><span class=c1># {print}：满足条件时执行打印操作</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=四journalctl-现代日志系统详解>四、journalctl 现代日志系统详解</h2><p><code>journalctl</code>是systemd时代的日志管理工具，功能远超传统syslog</p><h3 id=1-基础用法>1. 基础用法</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 命令：journalctl</span>
+</span></span><span class=line><span class=cl><span class=c1># 默认行为：显示所有日志，从最早到最新</span>
+</span></span><span class=line><span class=cl><span class=c1># 特点：使用less作为分页器，支持所有less操作</span>
+</span></span><span class=line><span class=cl><span class=c1># 退出：按q键</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 实时跟踪模式</span>
+</span></span><span class=line><span class=cl>journalctl -f
+</span></span><span class=line><span class=cl><span class=c1># -f (follow)：类似tail -f，但功能更强大</span>
+</span></span><span class=line><span class=cl><span class=c1># 优势：可以实时过滤，如 journalctl -f -u nginx</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-按服务单元过滤最常用>2. 按服务单元过滤（最常用）</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看Nginx服务的所有日志</span>
+</span></span><span class=line><span class=cl>journalctl -u nginx
+</span></span><span class=line><span class=cl><span class=c1># -u (unit)：指定systemd服务单元</span>
+</span></span><span class=line><span class=cl><span class=c1># 为什么重要：传统日志需手动找文件，journalctl自动聚合</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看SSH服务的错误日志</span>
+</span></span><span class=line><span class=cl>journalctl -u sshd -p err
+</span></span><span class=line><span class=cl><span class=c1># -p err：只显示错误级别及以上的日志</span>
+</span></span><span class=line><span class=cl><span class=c1># 日志级别：emerg(0), alert(1), crit(2), error(3), warning(4), notice(5), info(6), debug(7)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看服务从启动到停止的所有日志</span>
+</span></span><span class=line><span class=cl>journalctl -u nginx --since <span class=s2>&#34;2024-11-10&#34;</span> --until <span class=s2>&#34;2024-11-11&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># --since/--until：时间范围过滤，支持多种格式</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-进程与日志关联>3. 进程与日志关联</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看特定PID的日志</span>
+</span></span><span class=line><span class=cl>journalctl <span class=nv>_PID</span><span class=o>=</span><span class=m>1234</span>
+</span></span><span class=line><span class=cl><span class=c1># _PID：systemd的日志字段，精确匹配进程ID</span>
+</span></span><span class=line><span class=cl><span class=c1># 应用场景：某个进程崩溃，查看它的所有历史日志</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看特定用户的日志</span>
+</span></span><span class=line><span class=cl>journalctl <span class=nv>_UID</span><span class=o>=</span><span class=m>1000</span>
+</span></span><span class=line><span class=cl><span class=c1># _UID：用户ID，查看某个用户的所有操作日志</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-启动日志分析排查启动问题神器>4. 启动日志分析（排查启动问题神器）</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 列出所有启动记录</span>
+</span></span><span class=line><span class=cl>journalctl --list-boots
+</span></span><span class=line><span class=cl><span class=c1># 输出示例：</span>
+</span></span><span class=line><span class=cl><span class=c1># -2 0f8c4c5f5d3a4e8a9b2c1d0e3f7a6b5c Mon 2024-11-09 ...</span>
+</span></span><span class=line><span class=cl><span class=c1># -1 a1b2c3d4e5f678901234567890123456 Sun 2024-11-10 ...</span>
+</span></span><span class=line><span class=cl><span class=c1>#  0 c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f Mon 2024-11-11 ...</span>
+</span></span><span class=line><span class=cl><span class=c1># 数字：启动ID，0表示当前启动，-1表示上一次</span>
+</span></span><span class=line><span class=cl><span class=c1># 哈希：启动的唯一标识符</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看上一次启动的日志</span>
+</span></span><span class=line><span class=cl>journalctl -b -1
+</span></span><span class=line><span class=cl><span class=c1># -b：限制为启动日志</span>
+</span></span><span class=line><span class=cl><span class=c1># -1：指定启动ID</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看某次启动的内核日志</span>
+</span></span><span class=line><span class=cl>journalctl -b <span class=m>0</span> -k
+</span></span><span class=line><span class=cl><span class=c1># -k：只显示内核消息（类似dmesg）</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=5-组合查询实战>5. 组合查询实战</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查询Nginx在过去1小时的错误日志</span>
+</span></span><span class=line><span class=cl>journalctl -u nginx -p err --since <span class=s2>&#34;1 hour ago&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># 组合选项：</span>
+</span></span><span class=line><span class=cl><span class=c1># -u nginx：服务过滤</span>
+</span></span><span class=line><span class=cl><span class=c1># -p err：级别过滤</span>
+</span></span><span class=line><span class=cl><span class=c1># --since：时间过滤</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 输出示例：</span>
+</span></span><span class=line><span class=cl>-- Logs begin at Mon 2024-11-11 08:00:00 CST, end at Mon 2024-11-11 14:30:12 CST. --
+</span></span><span class=line><span class=cl>Nov <span class=m>11</span> 14:25:15 web01 nginx<span class=o>[</span>1234<span class=o>]</span>: 2024/11/11 14:25:15 <span class=o>[</span>error<span class=o>]</span> 1234#0: *5678 connect<span class=o>()</span> failed <span class=o>(</span>111: Connection refused<span class=o>)</span> <span class=k>while</span> connecting to upstream
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 解读：</span>
+</span></span><span class=line><span class=cl><span class=c1># 时间戳 主机名 进程名[PID]: 具体错误消息</span>
+</span></span><span class=line><span class=cl><span class=c1># [error]：错误级别</span>
+</span></span><span class=line><span class=cl><span class=c1># 1234#0：进程ID和线程ID</span>
+</span></span><span class=line><span class=cl><span class=c1># *5678：连接ID</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=五实战案例分析详解>五、实战案例分析详解</h2><h3 id=案例1ssh登录失败完整排查流程>案例1：SSH登录失败完整排查流程</h3><p><strong>场景</strong>：发现服务器响应慢，怀疑有暴力破解</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Step 1：统计失败登录次数</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;Failed password&#34;</span> /var/log/secure <span class=p>|</span> wc -l
+</span></span><span class=line><span class=cl><span class=c1># wc -l：统计行数（word count -lines）</span>
+</span></span><span class=line><span class=cl><span class=c1># 如果数字很大（如&gt;1000），说明确实存在暴力破解</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 2：找出攻击来源IP</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;Failed password&#34;</span> /var/log/secure <span class=p>|</span> awk <span class=s1>&#39;{print $11}&#39;</span> <span class=p>|</span> sort <span class=p>|</span> uniq -c <span class=p>|</span> sort -nr <span class=p>|</span> head -5
+</span></span><span class=line><span class=cl><span class=c1># $11的含义：在CentOS的secure日志中，IP地址通常是第11列</span>
+</span></span><span class=line><span class=cl><span class=c1># 如果日志格式不同，先用head查看列数：head -1 /var/log/secure</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 3：查看攻击时间分布（判断是否持续攻击）</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;192.168.1.100&#34;</span> /var/log/secure <span class=p>|</span> awk <span class=s1>&#39;{print $1&#34; &#34;$2&#34; &#34;$3}&#39;</span> <span class=p>|</span> uniq -c
+</span></span><span class=line><span class=cl><span class=c1># 输出示例：</span>
+</span></span><span class=line><span class=cl><span class=c1>#     50 Nov 10 14:2[0-9]:</span>
+</span></span><span class=line><span class=cl><span class=c1>#     50 Nov 10 14:3[0-9]:</span>
+</span></span><span class=line><span class=cl><span class=c1># 说明每分钟50次尝试，是自动化攻击</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 4：查看是否有成功登录（判断是否已攻破）</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;Accepted&#34;</span> /var/log/secure
+</span></span><span class=line><span class=cl><span class=c1># 如果找到了攻击IP的成功登录，说明威胁严重</span>
+</span></span><span class=line><span class=cl><span class=c1># 应立即更换密码、检查后门</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 5：统计尝试的用户名</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;Failed password&#34;</span> /var/log/secure <span class=p>|</span> awk <span class=s1>&#39;{print $9}&#39;</span> <span class=p>|</span> sort <span class=p>|</span> uniq -c <span class=p>|</span> sort -nr <span class=p>|</span> head -10
+</span></span><span class=line><span class=cl><span class=c1># $9：通常是尝试登录的用户名</span>
+</span></span><span class=line><span class=cl><span class=c1># 常见模式：root、admin、test等默认账户</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=案例2web服务502503错误深度分析>案例2：Web服务502/503错误深度分析</h3><p><strong>场景</strong>：网站出现502 Bad Gateway错误</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Step 1：确认Nginx错误日志位置</span>
+</span></span><span class=line><span class=cl><span class=c1># 查看Nginx配置：grep &#34;error_log&#34; /etc/nginx/nginx.conf</span>
+</span></span><span class=line><span class=cl><span class=c1># 通常为：/var/log/nginx/error.log</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 2：实时观察错误</span>
+</span></span><span class=line><span class=cl>tail -f /var/log/nginx/error.log
+</span></span><span class=line><span class=cl><span class=c1># 观察到的典型错误：</span>
+</span></span><span class=line><span class=cl><span class=c1># connect() failed (111: Connection refused) while connecting to upstream</span>
+</span></span><span class=line><span class=cl><span class=c1># 含义：Nginx无法连接到后端服务（PHP-FPM/应用服务器）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 3：同时监控PHP-FPM日志（确保看到完整上下文）</span>
+</span></span><span class=line><span class=cl>journalctl -f -u nginx -u php-fpm
+</span></span><span class=line><span class=cl><span class=c1># -f：实时跟踪</span>
+</span></span><span class=line><span class=cl><span class=c1># -u nginx -u php-fpm：同时显示两个服务的日志，按时间混合排序</span>
+</span></span><span class=line><span class=cl><span class=c1># 为什么重要：可以同时看到Nginx的请求和PHP-FPM的处理</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 4：检查系统资源（可能原因）</span>
+</span></span><span class=line><span class=cl>journalctl -p warning <span class=p>|</span> grep -E <span class=s2>&#34;memory|oom|kill&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># -p warning：查看警告及以上级别</span>
+</span></span><span class=line><span class=cl><span class=c1># -E：扩展正则表达式</span>
+</span></span><span class=line><span class=cl><span class=c1># 查找OOM（Out of Memory）错误，可能导致PHP-FPM被杀</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 5：分析错误频率</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;2024/11/11&#34;</span> /var/log/nginx/error.log <span class=p>|</span> awk <span class=s1>&#39;{print $2}&#39;</span> <span class=p>|</span> cut -d: -f1,2 <span class=p>|</span> uniq -c
+</span></span><span class=line><span class=cl><span class=c1># $2：日期字段，如2024/11/11</span>
+</span></span><span class=line><span class=cl><span class=c1># cut -d: -f1,2：按冒号分割，取小时和分钟</span>
+</span></span><span class=line><span class=cl><span class=c1># 输出示例：识别错误高发时段</span>
+</span></span><span class=line><span class=cl><span class=c1>#     50 14:25</span>
+</span></span><span class=line><span class=cl><span class=c1>#     30 14:26</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=案例3磁盘io错误导致服务异常>案例3：磁盘I/O错误导致服务异常</h3><p><strong>场景</strong>：服务突然变慢，怀疑磁盘问题</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Step 1：查看内核日志中的硬件错误</span>
+</span></span><span class=line><span class=cl>dmesg <span class=p>|</span> grep -i <span class=s2>&#34;error\|fail\|bad&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># dmesg：显示内核消息缓冲区</span>
+</span></span><span class=line><span class=cl><span class=c1># -i：忽略大小写</span>
+</span></span><span class=line><span class=cl><span class=c1># 典型输出：</span>
+</span></span><span class=line><span class=cl><span class=c1># [12345.678] sd 0:0:1:0: [sdb] Add. Sense: Unrecovered read error</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 2：查看系统日志中的磁盘错误</span>
+</span></span><span class=line><span class=cl>journalctl -p err <span class=p>|</span> grep -E <span class=s2>&#34;disk|I/O|sda|sdb&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># -p err：只显示错误级别</span>
+</span></span><span class=line><span class=cl><span class=c1># -E：扩展正则，同时匹配多个关键词</span>
+</span></span><span class=line><span class=cl><span class=c1># 典型输出：</span>
+</span></span><span class=line><span class=cl><span class=c1># Nov 11 14:30:12 server kernel: Buffer I/O error on dev sdb1, logical block 123456</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 3：检查SMART状态（需要smartmontools）</span>
+</span></span><span class=line><span class=cl>smartctl -a /dev/sda <span class=p>|</span> grep -E <span class=s2>&#34;Error|Fail|Reallocated&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># 如果看到&#34;Reallocated_Sector_Ct&#34;数值很大，说明磁盘有坏道</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 4：统计错误频率</span>
+</span></span><span class=line><span class=cl>journalctl --since <span class=s2>&#34;24 hours ago&#34;</span> <span class=p>|</span> grep <span class=s2>&#34;I/O error&#34;</span> <span class=p>|</span> wc -l
+</span></span><span class=line><span class=cl><span class=c1># 如果数量持续增长，说明故障在恶化，需要立即备份</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=案例4服务启动失败根本原因定位>案例4：服务启动失败根本原因定位</h3><p><strong>场景</strong>：systemctl start nginx失败</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Step 1：查看服务状态（快速诊断）</span>
+</span></span><span class=line><span class=cl>systemctl status nginx
+</span></span><span class=line><span class=cl><span class=c1># 关键信息：</span>
+</span></span><span class=line><span class=cl><span class=c1># Active: failed (Result: exit-code)  # 服务已失败</span>
+</span></span><span class=line><span class=cl><span class=c1># Process: 1234 ExecStart=/usr/sbin/nginx (code=exited, status=1/FAILURE)</span>
+</span></span><span class=line><span class=cl><span class=c1># status=1：通用错误码</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 2：获取详细日志</span>
+</span></span><span class=line><span class=cl>journalctl -u nginx -n <span class=m>50</span>
+</span></span><span class=line><span class=cl><span class=c1># -n 50：显示最后50行（类似tail -50）</span>
+</span></span><span class=line><span class=cl><span class=c1># 关键信息：通常会显示具体错误，如 &#34;nginx: [emerg] bind() to 0.0.0.0:80 failed&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 3：检查配置语法</span>
+</span></span><span class=line><span class=cl>nginx -t
+</span></span><span class=line><span class=cl><span class=c1># 为什么重要：90%的启动失败是配置错误</span>
+</span></span><span class=line><span class=cl><span class=c1># 典型输出：</span>
+</span></span><span class=line><span class=cl><span class=c1># nginx: [emerg] unknown directive &#34;sever&#34; in /etc/nginx/conf.d/site.conf:5</span>
+</span></span><span class=line><span class=cl><span class=c1># 明确指出第5行有拼写错误（sever应为server）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 4：查看启动过程中的所有日志</span>
+</span></span><span class=line><span class=cl>journalctl -u nginx --since <span class=s2>&#34;5 minutes ago&#34;</span> -o verbose
+</span></span><span class=line><span class=cl><span class=c1># -o verbose：详细输出，显示所有字段</span>
+</span></span><span class=line><span class=cl><span class=c1># 包含：_SYSTEMD_UNIT, _PID, _UID等元数据</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Step 5：检查依赖服务</span>
+</span></span><span class=line><span class=cl>systemctl list-dependencies nginx
+</span></span><span class=line><span class=cl><span class=c1># 显示：nginx.service依赖于network.target</span>
+</span></span><span class=line><span class=cl><span class=c1># 如果网络服务未启动，Nginx也会失败</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=六日志分析脚本详解>六、日志分析脚本详解</h2><h3 id=自动化分析脚本带详细注释>自动化分析脚本（带详细注释）</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cat &gt; /usr/local/bin/log_analyzer.sh <span class=s>&lt;&lt; &#39;EOF&#39;
+</span></span></span><span class=line><span class=cl><span class=s>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=s># 脚本功能：自动分析系统日志并生成报告
+</span></span></span><span class=line><span class=cl><span class=s># 使用方法：./log_analyzer.sh
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>LOGFILE=/var/log/messages
+</span></span></span><span class=line><span class=cl><span class=s>DATE=$(date +%b\ %d)  # 例如：Nov 11
+</span></span></span><span class=line><span class=cl><span class=s>REPORT=/tmp/log_report_$(date +%Y%m%d).txt
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 1. 基础统计
+</span></span></span><span class=line><span class=cl><span class=s>echo &#34;=== 日志基础统计 ===&#34; | tee $REPORT
+</span></span></span><span class=line><span class=cl><span class=s>echo &#34;总错误数: $(grep -ci &#34;error&#34; $LOGFILE)&#34; | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s># tee命令：同时输出到屏幕和文件
+</span></span></span><span class=line><span class=cl><span class=s># -a：追加模式
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 2. 最频繁的10种错误（带上下文）
+</span></span></span><span class=line><span class=cl><span class=s>echo -e &#34;\n=== TOP 10 错误模式 ===&#34; | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s>grep -i &#34;error&#34; $LOGFILE | sort | uniq -c | sort -nr | head -10 | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s># -e：允许使用转义字符（如\n换行）
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 3. 安全事件分析
+</span></span></span><span class=line><span class=cl><span class=s>echo -e &#34;\n=== 安全事件统计 ===&#34; | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s>FAILED_LOGINS=$(grep -c &#34;Failed password&#34; /var/log/secure 2&gt;/dev/null || echo &#34;0&#34;)
+</span></span></span><span class=line><span class=cl><span class=s># 2&gt;/dev/null：错误重定向到黑洞（文件不存在时不报错）
+</span></span></span><span class=line><span class=cl><span class=s># || echo &#34;0&#34;：如果命令失败，显示0
+</span></span></span><span class=line><span class=cl><span class=s>echo &#34;SSH失败登录次数: $FAILED_LOGINS&#34; | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 4. 今天的警告日志
+</span></span></span><span class=line><span class=cl><span class=s>echo -e &#34;\n=== 今日警告日志 ===&#34; | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s>grep -i &#34;warning&#34; $LOGFILE | grep &#34;$DATE&#34; | tail -5 | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s># tail -5：只显示最近5条，避免过多
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 5. 内存不足检查
+</span></span></span><span class=line><span class=cl><span class=s>echo -e &#34;\n=== OOM Killer 活动 ===&#34; | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s>journalctl -p warning | grep -i &#34;oom-killer&#34; | tail -3 | tee -a $REPORT
+</span></span></span><span class=line><span class=cl><span class=s># OOM Killer：内存不足时杀进程的机制
+</span></span></span><span class=line><span class=cl><span class=s># 如果有输出，说明系统曾内存耗尽
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>echo -e &#34;\n报告已生成: $REPORT&#34;
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>chmod +x /usr/local/bin/log_analyzer.sh
+</span></span></code></pre></td></tr></table></div></div><p><strong>脚本运行示例</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>./log_analyzer.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 输出解读：</span>
+</span></span><span class=line><span class=cl><span class=o>===</span> <span class=nv>日志基础统计</span> <span class=o>===</span>
+</span></span><span class=line><span class=cl>总错误数: <span class=m>158</span>
+</span></span><span class=line><span class=cl><span class=c1># 说明：系统共有158条错误记录，需要关注</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>===</span> TOP <span class=m>10</span> <span class=nv>错误模式</span> <span class=o>===</span>
+</span></span><span class=line><span class=cl>     <span class=m>45</span> Nov <span class=m>11</span> 14:25:01 server CRON<span class=o>[</span>1234<span class=o>]</span>: <span class=o>(</span>root<span class=o>)</span> CMD <span class=o>(</span>/usr/local/bin/backup.sh<span class=o>)</span>
+</span></span><span class=line><span class=cl>     <span class=m>32</span> Nov <span class=m>11</span> 14:26:12 server kernel: <span class=o>[</span>UFW BLOCK<span class=o>]</span> <span class=nv>IN</span><span class=o>=</span>eth0 <span class=nv>OUT</span><span class=o>=</span> <span class=nv>MAC</span><span class=o>=</span>...
+</span></span><span class=line><span class=cl><span class=c1># 解读：CRON任务出现45次，是正常的定时任务</span>
+</span></span><span class=line><span class=cl><span class=c1># UFW BLOCK出现32次，是防火墙正常拦截</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>===</span> <span class=nv>安全事件统计</span> <span class=o>===</span>
+</span></span><span class=line><span class=cl>SSH失败登录次数: <span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=c1># 良好：没有暴力破解尝试</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>===</span> OOM Killer <span class=nv>活动</span> <span class=o>===</span>
+</span></span><span class=line><span class=cl><span class=c1># 为空：系统未发生内存耗尽</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=七日志轮转机制详解>七、日志轮转机制详解</h2><h3 id=logrotate工作原理>logrotate工作原理</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看logrotate配置</span>
+</span></span><span class=line><span class=cl>cat /etc/logrotate.d/nginx
+</span></span><span class=line><span class=cl><span class=c1># 典型配置：</span>
+</span></span><span class=line><span class=cl><span class=c1># /var/log/nginx/*.log {</span>
+</span></span><span class=line><span class=cl><span class=c1>#     daily                    # 每天轮转一次</span>
+</span></span><span class=line><span class=cl><span class=c1>#     missingok                # 日志不存在时不报错</span>
+</span></span><span class=line><span class=cl><span class=c1>#     rotate 52                # 保留52个旧日志（52天）</span>
+</span></span><span class=line><span class=cl><span class=c1>#     compress                 # 压缩旧日志（gzip）</span>
+</span></span><span class=line><span class=cl><span class=c1>#     delaycompress            # 延迟压缩（下次轮转时压缩）</span>
+</span></span><span class=line><span class=cl><span class=c1>#     notifempty               # 日志为空时不轮转</span>
+</span></span><span class=line><span class=cl><span class=c1>#     create 0640 nginx adm    # 新日志权限和属主</span>
+</span></span><span class=line><span class=cl><span class=c1>#     sharedscripts            # 多个日志共享脚本</span>
+</span></span><span class=line><span class=cl><span class=c1>#     postrotate               # 轮转后执行的命令</span>
+</span></span><span class=line><span class=cl><span class=c1>#         if [ -f /var/run/nginx.pid ]; then</span>
+</span></span><span class=line><span class=cl><span class=c1>#             kill -USR1 $(cat /var/run/nginx.pid)  # 通知Nginx重新打开日志</span>
+</span></span><span class=line><span class=cl><span class=c1>#         fi</span>
+</span></span><span class=line><span class=cl><span class=c1>#     endscript</span>
+</span></span><span class=line><span class=cl><span class=c1># }</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 手动执行日志轮转（测试配置）</span>
+</span></span><span class=line><span class=cl>logrotate -d /etc/logrotate.d/nginx
+</span></span><span class=line><span class=cl><span class=c1># -d (debug)：测试模式，不实际执行，显示详细过程</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 强制立即轮转</span>
+</span></span><span class=line><span class=cl>logrotate -f /etc/logrotate.d/nginx
+</span></span><span class=line><span class=cl><span class=c1># -f (force)：强制执行，忽略时间条件</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=八常见问题快速定位表带解读>八、常见问题快速定位表（带解读）</h2><div class=table-wrapper><table><thead><tr><th>问题现象</th><th>查看命令</th><th>关键输出解读</th><th>解决方案</th></tr></thead><tbody><tr><td><strong>系统启动失败</strong></td><td><code>journalctl -b -1</code></td><td>红色"FAILED"行</td><td>查看失败服务的依赖关系</td></tr><tr><td><strong>SSH无法登录</strong></td><td><code>tail -f /var/log/secure</code></td><td>&ldquo;Connection closed by &mldr;&rdquo;</td><td>检查防火墙、SELinux</td></tr><tr><td><strong>磁盘空间不足</strong></td><td><code>df -h</code> + <code>du -sh /*</code></td><td>100%使用率</td><td>清理大文件或扩展分区</td></tr><tr><td><strong>内存耗尽</strong></td><td><code>journalctl -p err | grep oom</code></td><td>&ldquo;Kill process&rdquo;</td><td>增加内存或优化应用</td></tr><tr><td><strong>CPU 100%</strong></td><td><code>top</code> + <code>journalctl -p warning</code></td><td>&ldquo;soft lockup&rdquo;</td><td>检查内核版本、驱动</td></tr><tr><td><strong>网络超时</strong></td><td><code>grep "timeout" /var/log/messages</code></td><td>&ldquo;Connection timed out&rdquo;</td><td>检查网络配置、DNS</td></tr><tr><td><strong>权限被拒绝</strong></td><td><code>grep "denied" /var/log/audit/audit.log</code></td><td>avc: denied</td><td>调整SELinux策略</td></tr><tr><td><strong>服务频繁重启</strong></td><td><code>journalctl -u &lt;服务> --since "1 hour ago"</code></td><td>多条"Starting&mldr;"</td><td>检查配置、资源限制</td></tr><tr><td><strong>数据库慢查询</strong></td><td><code>grep "slow query" /var/log/mysql.log</code></td><td>Query_time: 10.5s</td><td>优化SQL或添加索引</td></tr><tr><td><strong>SSL证书过期</strong></td><td><code>grep "expired" /var/log/httpd/error_log</code></td><td>&ldquo;certificate expired&rdquo;</td><td>更新证书</td></tr></tbody></table></div><hr><h2 id=九高级技巧与最佳实践>九、高级技巧与最佳实践</h2><h3 id=1-日志格式标准化>1. 日志格式标准化</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 使用logger命令写入自定义日志</span>
+</span></span><span class=line><span class=cl>logger -t MYAPP -p user.warning <span class=s2>&#34;Database connection failed&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># -t：标签（tag），在日志中显示为进程名</span>
+</span></span><span class=line><span class=cl><span class=c1># -p：优先级（facility.level）</span>
+</span></span><span class=line><span class=cl><span class=c1># 在/var/log/messages中显示：</span>
+</span></span><span class=line><span class=cl><span class=c1># Nov 11 14:30:00 server MYAPP: Database connection failed</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-日志关联分析>2. 日志关联分析</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 同时查看多个关联服务的日志（时间对齐）</span>
+</span></span><span class=line><span class=cl>journalctl -u nginx -u php-fpm --since <span class=s2>&#34;10 minutes ago&#34;</span> -o short
+</span></span><span class=line><span class=cl><span class=c1># -o short：短格式，只显示时间和服务名，便于对比</span>
+</span></span><span class=line><span class=cl><span class=c1># 输出示例：</span>
+</span></span><span class=line><span class=cl><span class=c1># 14:25:10 web01 nginx[1234]: GET /api/user</span>
+</span></span><span class=line><span class=cl><span class=c1># 14:25:11 web01 php-fpm[5678]: PHP Fatal error:...</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-性能分析>3. 性能分析</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 统计每秒日志条数（判断系统负载）</span>
+</span></span><span class=line><span class=cl>journalctl --since <span class=s2>&#34;1 hour ago&#34;</span> <span class=p>|</span> awk <span class=s1>&#39;{print $3}&#39;</span> <span class=p>|</span> cut -d: -f1,2,3 <span class=p>|</span> uniq -c <span class=p>|</span> sort -nr <span class=p>|</span> head
+</span></span><span class=line><span class=cl><span class=c1># 输出解读：</span>
+</span></span><span class=line><span class=cl><span class=c1>#    500 14:25:30</span>
+</span></span><span class=line><span class=cl><span class=c1># 表示在14:25:30这一秒内有500条日志，系统可能异常繁忙</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-日志远程传输集中管理>4. 日志远程传输（集中管理）</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 配置rsyslog发送到远程服务器</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;*.* @@192.168.1.200:514&#39;</span> &gt;&gt; /etc/rsyslog.conf
+</span></span><span class=line><span class=cl><span class=c1># @@：TCP协议（@为UDP）</span>
+</span></span><span class=line><span class=cl><span class=c1># 514：syslog默认端口</span>
+</span></span><span class=line><span class=cl>systemctl restart rsyslog
+</span></span></code></pre></td></tr></table></div></div><p><strong>总结建议</strong>：</p><ol><li><strong>理解日志结构</strong>：时间戳、主机名、进程名、消息体四部分</li><li><strong>善用管道组合</strong>：grep+awk+sort+uniq是黄金组合</li><li><strong>重视上下文</strong>：错误前5行和后5行往往有关键线索</li><li><strong>时间范围最关键</strong>：先确定问题发生时间，再精确提取</li><li><strong>从全局到局部</strong>：先用journalctl看整体，再用grep精确定位</li></ol><p>掌握这些，你就能像资深运维一样快速诊断90%的Linux问题！</p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/posts/kubernetes-pod/><div class=article-details><h2 class=article-title>Kubernetes Pod</h2></div></a></article><article><a href=/posts/kubectl%E5%91%BD%E4%BB%A4/><div class=article-details><h2 class=article-title>kubectl命令</h2></div></a></article><article><a href=/posts/gitgithub/><div class=article-details><h2 class=article-title>Git&amp;Github</h2></div></a></article><article><a href=/posts/linux%E5%9B%9B%E5%89%91%E5%AE%A2/><div class=article-details><h2 class=article-title>Linux四剑客</h2></div></a></article><article><a href=/posts/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/><div class=article-details><h2 class=article-title>Linux科学上网</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
