@@ -35,9 +35,11 @@ find [路径] [选项] [表达式]
 - **选项**：控制搜索行为
 - **表达式**：定义匹配条件
 ```
+
 ### 2.2 核心操作步骤详解
 
 **步骤1：按文件名查找**
+
 ```bash
 find /etc/ -type f -name '*.conf'
 find /etc/ -type f -name 'host*'      # 以hosts开头
