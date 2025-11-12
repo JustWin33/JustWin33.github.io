@@ -489,6 +489,3 @@ sort -k2 -nr | head -10
 
 掌握这四个工具的组合使用，可解决90%以上的Linux文本处理场景。建议通过`man find`、`man grep`、`man sed`、`man awk`查看完整手册深入学习。
 
-```
-
-```

@@ -6451,13 +6451,7 @@ find [路径] [选项] [表达式]&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;备份习惯&lt;/strong&gt;：任何修改操作前，先备份原始文件&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;掌握这四个工具的组合使用，可解决90%以上的Linux文本处理场景。建议通过&lt;code&gt;man find&lt;/code&gt;、&lt;code&gt;man grep&lt;/code&gt;、&lt;code&gt;man sed&lt;/code&gt;、&lt;code&gt;man awk&lt;/code&gt;查看完整手册深入学习。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
+</description>
         </item>
         <item>
         <title>Linux系统管理</title>
