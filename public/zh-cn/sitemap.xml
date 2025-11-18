@@ -57,13 +57,25 @@
     <loc>http://localhost:1313/posts/windows/</loc>
     <lastmod>2025-11-09T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/k8s/</loc>
+    <lastmod>2025-11-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/k8s/k8s/</loc>
+    <lastmod>2025-11-08T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/k8s/</loc>
     <lastmod>2025-11-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/linux%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2025-11-08T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/docker/docker-%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2025-11-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/docker/</loc>
+    <lastmod>2025-11-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/docker/</loc>
     <lastmod>2025-11-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/mysql/</loc>

@@ -137,6 +137,7 @@ categories:
 | `winver`           | 查看Windows版本信息                         |
 | `slmgr.vbs -dlv`   | 查看Windows激活状态                         |
 | `optionalfeatures` | 打开或关闭Windows功能                       |
+| `shell:appsfolder` | 查看所有下载的应用软件                      |
 
 ---
 

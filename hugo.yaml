@@ -175,10 +175,26 @@ menu:
       url: /Blockchain/
       weight: 5    
     
+    - identifier: docker
+      name: docker
+      url:  /docker/
+      weight: 6
+
+    - identifier: k8s
+      name:  k8s
+      url:  /k8s/
+      weight: 7
+   
     - identifier:
       name: 
       url:  
       weight:
+
+
+
+
+
+      
     social:  # 社交链接菜单
         - identifier: github
           name: GitHub
