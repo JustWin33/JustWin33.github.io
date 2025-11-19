@@ -21,6 +21,9 @@
     <loc>http://localhost:1313/posts/kali/</loc>
     <lastmod>2025-11-19T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/k8s/kubernetes-k8s-/</loc>
+    <lastmod>2025-11-19T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/k8s/kubernetes%E7%94%9F%E4%BA%A7%E7%BA%A7%E5%AE%8C%E6%95%B4%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/</loc>
     <lastmod>2025-11-19T00:00:00+00:00</lastmod>
   </url><url>
@@ -29,9 +32,6 @@
   </url><url>
     <loc>http://localhost:1313/k8s/pod%E6%8E%92%E6%9F%A5%E6%89%8B%E5%86%8C/</loc>
     <lastmod>2025-11-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/k8s/kubectl-%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2025-11-11T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/linux%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</loc>
     <lastmod>2025-11-11T00:00:00+00:00</lastmod>
@@ -65,9 +65,6 @@
   </url><url>
     <loc>http://localhost:1313/posts/windows/</loc>
     <lastmod>2025-11-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/k8s/k8s/</loc>
-    <lastmod>2025-11-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/linux%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2025-11-08T00:00:00+00:00</lastmod>
