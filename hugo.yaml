@@ -161,34 +161,34 @@ menu:
     - identifier: archives
       name: 归档
       url: /archives/
-      weight: 2
+      weight: 7
     - identifier: about
       name: 关于
       url: /about/       
-      weight: 3
+      weight: 8
     - identifier: links
-      name: 网站分享
+      name: 网站
       url: /links/
-      weight: 4
+      weight: 2
     - identifier: linux
       name: Linux
       url: /linux/
-      weight: 5    
+      weight: 3   
     
     - identifier: docker
       name: docker
       url:  /docker/
-      weight: 6
+      weight: 4
 
     - identifier: k8s
       name:  k8s
       url:  /k8s/
-      weight: 7
+      weight: 5
    
     - identifier: mysql
       name: mysql
       url:  /mysql/
-      weight: 8
+      weight: 6
 
 
 
