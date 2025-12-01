@@ -170,9 +170,9 @@ menu:
       name: 网站分享
       url: /links/
       weight: 4
-    - identifier: Blockchain
+    - identifier: linux
       name: Linux
-      url: /Blockchain/
+      url: /linux/
       weight: 5    
     
     - identifier: docker
@@ -185,10 +185,10 @@ menu:
       url:  /k8s/
       weight: 7
    
-    - identifier:
-      name: 
-      url:  
-      weight:
+    - identifier: mysql
+      name: mysql
+      url:  /mysql/
+      weight: 8
 
 
 

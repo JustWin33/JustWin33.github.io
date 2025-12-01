@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Blockchains on JustWin</title>
-        <link>http://localhost:1313/blockchain/</link>
-        <description>Recent content in Blockchains on JustWin</description>
+        <title>Linuxes on JustWin</title>
+        <link>http://localhost:1313/linux/</link>
+        <description>Recent content in Linuxes on JustWin</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>© 2025 win. 保留所有权利.</copyright>
-        <lastBuildDate>Wed, 19 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/blockchain/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 19 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/linux/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Kali</title>
-        <link>http://localhost:1313/blockchain/kali/</link>
+        <link>http://localhost:1313/linux/kali/</link>
         <pubDate>Wed, 19 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/kali/</guid>
+        <guid>http://localhost:1313/linux/kali/</guid>
         <description>&lt;p&gt;更新与升级&lt;/p&gt;
 &lt;p&gt;sudo apt upgrade -y&lt;/p&gt;
 &lt;p&gt;sudo apt autoremove&lt;/p&gt;
@@ -1897,10 +1897,10 @@
         </item>
         <item>
         <title>linux日志分析</title>
-        <link>http://localhost:1313/blockchain/linux%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</link>
+        <link>http://localhost:1313/linux/linux%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</link>
         <pubDate>Tue, 11 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/linux%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</guid>
+        <guid>http://localhost:1313/linux/linux%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/</guid>
         <description>&lt;h1 id=&#34;linux日志文件&#34;&gt;Linux日志文件
 &lt;/h1&gt;&lt;h2 id=&#34;一主要日志文件位置及含义&#34;&gt;一、主要日志文件位置及含义
 &lt;/h2&gt;&lt;h3 id=&#34;系统核心日志&#34;&gt;系统核心日志
@@ -3064,10 +3064,10 @@
         </item>
         <item>
         <title>Linux科学上网</title>
-        <link>http://localhost:1313/blockchain/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
+        <link>http://localhost:1313/linux/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
         <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</guid>
+        <guid>http://localhost:1313/linux/linux%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</guid>
         <description>&lt;h1 id=&#34;linux科学上网&#34;&gt;Linux科学上网
 &lt;/h1&gt;&lt;h2 id=&#34;一主流工具对比与选择&#34;&gt;一、主流工具对比与选择
 &lt;/h2&gt;&lt;table&gt;
@@ -3569,10 +3569,10 @@
         </item>
         <item>
         <title>Linux四剑客</title>
-        <link>http://localhost:1313/blockchain/linux%E5%9B%9B%E5%89%91%E5%AE%A2/</link>
+        <link>http://localhost:1313/linux/linux%E5%9B%9B%E5%89%91%E5%AE%A2/</link>
         <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/linux%E5%9B%9B%E5%89%91%E5%AE%A2/</guid>
+        <guid>http://localhost:1313/linux/linux%E5%9B%9B%E5%89%91%E5%AE%A2/</guid>
         <description>&lt;h1 id=&#34;linux四剑客&#34;&gt;Linux四剑客
 &lt;/h1&gt;&lt;p&gt;&amp;ldquo;Linux四剑客&amp;quot;是指在Linux系统中用于文件搜索和文本处理的四个核心命令行工具：&lt;strong&gt;find、grep、sed、awk&lt;/strong&gt;。它们是系统管理和运维工作中不可或缺的利器，熟练掌握可大幅提升工作效率。&lt;/p&gt;
 &lt;hr&gt;
@@ -4437,10 +4437,10 @@ find [路径] [选项] [表达式]&lt;/p&gt;
         </item>
         <item>
         <title>Linux系统管理</title>
-        <link>http://localhost:1313/blockchain/linux%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</link>
+        <link>http://localhost:1313/linux/linux%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</link>
         <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/linux%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</guid>
+        <guid>http://localhost:1313/linux/linux%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/</guid>
         <description>&lt;h1 id=&#34;linux系统管理&#34;&gt;Linux系统管理
 &lt;/h1&gt;&lt;h2 id=&#34;一存储管理基础&#34;&gt;一、存储管理基础
 &lt;/h2&gt;&lt;h3 id=&#34;11-raid磁盘阵列技术&#34;&gt;1.1 RAID磁盘阵列技术
@@ -11712,10 +11712,10 @@ find [路径] [选项] [表达式]&lt;/p&gt;
         </item>
         <item>
         <title>Linux工具</title>
-        <link>http://localhost:1313/blockchain/centosubuntu%E5%B7%A5%E5%85%B7/</link>
+        <link>http://localhost:1313/linux/centosubuntu%E5%B7%A5%E5%85%B7/</link>
         <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/centosubuntu%E5%B7%A5%E5%85%B7/</guid>
+        <guid>http://localhost:1313/linux/centosubuntu%E5%B7%A5%E5%85%B7/</guid>
         <description>&lt;h1 id=&#34;centosubuntu工具&#34;&gt;CentOS/Ubuntu工具
 &lt;/h1&gt;&lt;h2 id=&#34;一系统核心命令&#34;&gt;一、系统核心命令
 &lt;/h2&gt;&lt;h3 id=&#34;11-系统信息侦查&#34;&gt;1.1 系统信息侦查
@@ -13396,10 +13396,10 @@ find [路径] [选项] [表达式]&lt;/p&gt;
         </item>
         <item>
         <title>Linux命令</title>
-        <link>http://localhost:1313/blockchain/linux-%E5%91%BD%E4%BB%A4/</link>
+        <link>http://localhost:1313/linux/linux-%E5%91%BD%E4%BB%A4/</link>
         <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/linux-%E5%91%BD%E4%BB%A4/</guid>
+        <guid>http://localhost:1313/linux/linux-%E5%91%BD%E4%BB%A4/</guid>
         <description>&lt;h1 id=&#34;linux-命令&#34;&gt;Linux 命令
 &lt;/h1&gt;&lt;p&gt;作为运维工程师，我为您深度挖掘全网权威资料，整理出这份&lt;strong&gt;涵盖基础到内核级调试&lt;/strong&gt;的完整命令手册。每个命令都包含&lt;strong&gt;生产环境实战技巧&lt;/strong&gt;和&lt;strong&gt;避坑指南&lt;/strong&gt;。&lt;/p&gt;
 &lt;hr&gt;
@@ -16487,10 +16487,10 @@ find [路径] [选项] [表达式]&lt;/p&gt;
         </item>
         <item>
         <title>Linux脚本创建</title>
-        <link>http://localhost:1313/blockchain/linux-%E8%84%9A%E6%9C%AC%E5%88%9B%E5%BB%BA/</link>
+        <link>http://localhost:1313/linux/linux-%E8%84%9A%E6%9C%AC%E5%88%9B%E5%BB%BA/</link>
         <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/linux-%E8%84%9A%E6%9C%AC%E5%88%9B%E5%BB%BA/</guid>
+        <guid>http://localhost:1313/linux/linux-%E8%84%9A%E6%9C%AC%E5%88%9B%E5%BB%BA/</guid>
         <description>&lt;h1 id=&#34;linux-脚本创建&#34;&gt;Linux 脚本创建
 &lt;/h1&gt;&lt;h2 id=&#34;一脚本创建全流程详解&#34;&gt;一、脚本创建全流程详解
 &lt;/h2&gt;&lt;h3 id=&#34;11-创建脚本的标准步骤&#34;&gt;1.1 创建脚本的标准步骤
@@ -19085,10 +19085,10 @@ Shebang (&lt;code&gt;#!&lt;/code&gt;) 告诉系统使用哪个解释器执行脚
         </item>
         <item>
         <title>Linux脚本运行方式</title>
-        <link>http://localhost:1313/blockchain/linux-%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F/</link>
+        <link>http://localhost:1313/linux/linux-%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F/</link>
         <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/blockchain/linux-%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F/</guid>
+        <guid>http://localhost:1313/linux/linux-%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F/</guid>
         <description>&lt;h1 id=&#34;linux-脚本运行方式&#34;&gt;Linux 脚本运行方式
 &lt;/h1&gt;&lt;p&gt;在 CentOS/RHEL 系统下，运行脚本共有 &lt;strong&gt;20+ 种方法&lt;/strong&gt;，以下是详细分类说明：&lt;/p&gt;
 &lt;p&gt;下面脚本的名字是install_ops_tools_centos.sh作为参考&lt;/p&gt;
