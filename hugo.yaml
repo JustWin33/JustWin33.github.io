@@ -158,14 +158,14 @@ menu:
       name:  首页 
       url: /
       weight: 1
-    - identifier: archives
-      name: 归档
-      url: /archives/
-      weight: 7
+    - identifier: 
+      name: 
+      url: 
+      weight: 
     - identifier: about
       name: 关于
       url: /about/       
-      weight: 8
+      weight: 7
     - identifier: links
       name: 网站
       url: /links/
