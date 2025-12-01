@@ -120,13 +120,9 @@
                 href="http://localhost:1313/tags/"
                 />
   </url><url>
-    <loc>http://localhost:1313/categories/test/</loc>
-  </url><url>
     <loc>http://localhost:1313/posts/windows%E4%B8%93%E4%B8%9A%E7%89%88/</loc>
   </url><url>
     <loc>http://localhost:1313/archives/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</loc>
   </url><url>
     <loc>http://localhost:1313/search/</loc>
   </url><url>

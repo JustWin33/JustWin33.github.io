@@ -63,21 +63,21 @@ links:
     website: https://kkview.cn/zh-cn/index.html
 
 
-  - title: 
+  - title: 在线简历
     description: 
-    website: 
+    website: https://www.polebrief.com/edit
 
-  - title: 
+  - title: 打字
     description: 
-    website: 
+    website: https://qwerty.kaiyi.cool/
 
-  - title: 
+  - title: 密码哈希值转换器
     description: 
-    website: 
+    website: https://bcrypt-generator.com/
 
-  - title: 
+  - title: 哈希值生成器
     description: 
-    website: 
+    website: https://bcrypt.online/
 
   - title: 
     description: 

@@ -2,8 +2,8 @@
 title: windows专业版
 description: 在线激活
 categories:
-    - Test
-    - 教程
+    - 
+    - 
 ---
 
 #### 查看自己的当下的激活密钥
