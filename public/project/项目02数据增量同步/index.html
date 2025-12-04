@@ -1,0 +1,305 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="第一阶段：环境初始化 (在两台机器上都执行) 目的：确保网络互通，关闭干扰服务。\n配置主机名与解析\n1 2 3 4 5 6 7 8 9 10 # 在 101 上执行 hostnamectl set-hostname mysql-server && bash # 在 102 上执行 hostnamectl set-hostname backup-server && bash # 在两台机器都执行 cat >> /etc/hosts <<EOF 192.168.200.101 mysql-server 192.168.200.102 backup-server EOF [cite_start]关闭防火墙与 SELinux [cite: 11]\n"><title>数据增量同步</title><link rel=canonical href=http://localhost:1313/project/%E9%A1%B9%E7%9B%AE02%E6%95%B0%E6%8D%AE%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="数据增量同步"><meta property='og:description' content="第一阶段：环境初始化 (在两台机器上都执行) 目的：确保网络互通，关闭干扰服务。\n配置主机名与解析\n1 2 3 4 5 6 7 8 9 10 # 在 101 上执行 hostnamectl set-hostname mysql-server && bash # 在 102 上执行 hostnamectl set-hostname backup-server && bash # 在两台机器都执行 cat >> /etc/hosts <<EOF 192.168.200.101 mysql-server 192.168.200.102 backup-server EOF [cite_start]关闭防火墙与 SELinux [cite: 11]\n"><meta property='og:url' content='http://localhost:1313/project/%E9%A1%B9%E7%9B%AE02%E6%95%B0%E6%8D%AE%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Project'><meta property='article:published_time' content='2025-12-04T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-04T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="数据增量同步"><meta name=twitter:description content="第一阶段：环境初始化 (在两台机器上都执行) 目的：确保网络互通，关闭干扰服务。\n配置主机名与解析\n1 2 3 4 5 6 7 8 9 10 # 在 101 上执行 hostnamectl set-hostname mysql-server && bash # 在 102 上执行 hostnamectl set-hostname backup-server && bash # 在两台机器都执行 cat >> /etc/hosts <<EOF 192.168.200.101 mysql-server 192.168.200.102 backup-server EOF [cite_start]关闭防火墙与 SELinux [cite: 11]\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/links/><span>网站</span></a></li><li><a href=/linux/><span>Linux</span></a></li><li><a href=/docker/><span>docker</span></a></li><li><a href=/k8s/><span>k8s</span></a></li><li><a href=/mysql/><span>mysql</span></a></li><li><a href=/project/><span>项目</span></a></li><li><a href=/about/><span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#第一阶段环境初始化-在两台机器上都执行>第一阶段：环境初始化 (在两台机器上都执行)</a></li><li><a href=#第二阶段mysql-主服务器部署-操作节点192168200101>第二阶段：MySQL 主服务器部署 (操作节点：192.168.200.101)</a><ol><li><a href=#cite_start1-安装与配置-mysql-cite-28-36>[cite_start]1. 安装与配置 MySQL [cite: 28-36]</a></li><li><a href=#cite_start2-修改配置文件-开启-binlog-cite-41-42>[cite_start]2. 修改配置文件 (开启 Binlog) [cite: 41-42]</a></li><li><a href=#3-启动并初始化数据库>3. 启动并初始化数据库</a></li><li><a href=#cite_start4-导入业务数据-cite-93-113>[cite_start]4. 导入业务数据 [cite: 93-113]</a></li><li><a href=#cite_start5-编写本地逻辑备份脚本-修复语法错误版-cite-202-230>[cite_start]5. 编写本地逻辑备份脚本 (修复语法错误版) [cite: 202-230]</a></li><li><a href=#cite_start6-配置-rsync-服务端-cite-329-353>[cite_start]6. 配置 Rsync 服务端 [cite: 329-353]</a></li></ol></li><li><a href=#第三阶段备份服务器配置-操作节点192168200102>第三阶段：备份服务器配置 (操作节点：192.168.200.102)</a><ol><li><a href=#cite_start1-基础配置与目录创建-cite-371-376>[cite_start]1. 基础配置与目录创建 [cite: 371-376]</a></li><li><a href=#cite_start2-配置密码文件-cite-379-381>[cite_start]2. 配置密码文件 [cite: 379-381]</a></li><li><a href=#cite_start3-测试同步-关键验证步骤-cite-383-391>[cite_start]3. 测试同步 (关键验证步骤) [cite: 383-391]</a></li><li><a href=#cite_start4-配置-crontab-计划任务-cite-398-401>[cite_start]4. 配置 Crontab 计划任务 [cite: 398-401]</a></li></ol></li><li><a href=#验证清单>验证清单</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/project/%E9%A1%B9%E7%9B%AE02%E6%95%B0%E6%8D%AE%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/>数据增量同步</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-12-04</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 4 分钟</time></div></footer></div></header><section class=article-content><h3 id=第一阶段环境初始化-在两台机器上都执行>第一阶段：环境初始化 (在两台机器上都执行)</h3><p><strong>目的</strong>：确保网络互通，关闭干扰服务。</p><ol><li><p><strong>配置主机名与解析</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 在 101 上执行</span>
+</span></span><span class=line><span class=cl>hostnamectl set-hostname mysql-server <span class=o>&amp;&amp;</span> bash
+</span></span><span class=line><span class=cl><span class=c1># 在 102 上执行</span>
+</span></span><span class=line><span class=cl>hostnamectl set-hostname backup-server <span class=o>&amp;&amp;</span> bash
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 在两台机器都执行</span>
+</span></span><span class=line><span class=cl>cat &gt;&gt; /etc/hosts <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>192.168.200.101 mysql-server
+</span></span></span><span class=line><span class=cl><span class=s>192.168.200.102 backup-server
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>[cite_start]<strong>关闭防火墙与 SELinux</strong> [cite: 11]</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 两台机器都执行</span>
+</span></span><span class=line><span class=cl>systemctl stop firewalld <span class=o>&amp;&amp;</span> systemctl disable firewalld
+</span></span><span class=line><span class=cl>setenforce <span class=m>0</span>
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/SELINUX=enforcing/SELINUX=disabled/g&#39;</span> /etc/selinux/config
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h3 id=第二阶段mysql-主服务器部署-操作节点192168200101>第二阶段：MySQL 主服务器部署 (操作节点：192.168.200.101)</h3><p><strong>目的</strong>：安装数据库，开启二进制日志（Binlog），配置 Rsync 服务端。</p><h4 id=cite_start1-安装与配置-mysql-cite-28-36>[cite_start]1. 安装与配置 MySQL [cite: 28-36]</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建软件目录</span>
+</span></span><span class=line><span class=cl>mkdir -p /data/software
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /data/software
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装 MySQL (确保源已配置，或使用本地 rpm)</span>
+</span></span><span class=line><span class=cl>yum -y install mysql-community-server
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建关键目录 (修复 chroot failed 的核心步骤)</span>
+</span></span><span class=line><span class=cl>mkdir -p /data/mysql/logs/mysql_binlog
+</span></span><span class=line><span class=cl>chown -R mysql:mysql /data/mysql/logs/
+</span></span><span class=line><span class=cl>chmod <span class=m>755</span> /data/mysql/logs/mysql_binlog
+</span></span></code></pre></td></tr></table></div></div><h4 id=cite_start2-修改配置文件-开启-binlog-cite-41-42>[cite_start]2. 修改配置文件 (开启 Binlog) [cite: 41-42]</h4><p>这是之前导致你同步失败的关键点，<strong>必须配置</strong>。
+<code>vim /etc/my.cnf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=k>[mysqld]</span>
+</span></span><span class=line><span class=cl><span class=c1># 基础配置</span>
+</span></span><span class=line><span class=cl><span class=na>datadir</span><span class=o>=</span><span class=s>/var/lib/mysql</span>
+</span></span><span class=line><span class=cl><span class=na>socket</span><span class=o>=</span><span class=s>/var/lib/mysql/mysql.sock</span>
+</span></span><span class=line><span class=cl><span class=na>symbolic-links</span><span class=o>=</span><span class=s>0</span>
+</span></span><span class=line><span class=cl><span class=na>log-error</span><span class=o>=</span><span class=s>/var/log/mysqld.log</span>
+</span></span><span class=line><span class=cl><span class=na>pid-file</span><span class=o>=</span><span class=s>/var/run/mysqld/mysqld.pid</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># === 新增以下配置 ===</span>
+</span></span><span class=line><span class=cl><span class=c1># 开启 Binlog，路径必须与上面创建的目录一致</span>
+</span></span><span class=line><span class=cl><span class=na>server_id</span><span class=o>=</span><span class=s>1</span>
+</span></span><span class=line><span class=cl><span class=na>log-bin</span><span class=o>=</span><span class=s>/data/mysql/logs/mysql_binlog/mysql-bin</span>
+</span></span><span class=line><span class=cl><span class=c1># ==================</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=3-启动并初始化数据库>3. 启动并初始化数据库</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>systemctl start mysqld
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> mysqld
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 获取临时密码并登录修改 (假设改为 123123)</span>
+</span></span><span class=line><span class=cl>grep <span class=s2>&#34;password&#34;</span> /var/log/mysqld.log
+</span></span><span class=line><span class=cl>mysql -uroot -p<span class=s1>&#39;临时密码&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p><em>在 MySQL 中执行：</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>set</span><span class=w> </span><span class=k>global</span><span class=w> </span><span class=n>validate_password_policy</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>set</span><span class=w> </span><span class=k>global</span><span class=w> </span><span class=n>validate_password_length</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>alter</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=s1>&#39;root&#39;</span><span class=o>@</span><span class=s1>&#39;localhost&#39;</span><span class=w> </span><span class=n>identified</span><span class=w> </span><span class=k>by</span><span class=w> </span><span class=s1>&#39;123123&#39;</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>flush</span><span class=w> </span><span class=k>privileges</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>exit</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=cite_start4-导入业务数据-cite-93-113>[cite_start]4. 导入业务数据 [cite: 93-113]</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql -uroot -p123123
+</span></span></code></pre></td></tr></table></div></div><p><em>在 MySQL 中执行：</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>DATABASE</span><span class=w> </span><span class=n>bdqn_db</span><span class=w> </span><span class=nb>CHARACTER</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>utf8</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>USE</span><span class=w> </span><span class=n>bdqn_db</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>order_master</span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order_id</span><span class=w> </span><span class=nb>INT</span><span class=w> </span><span class=n>UNSIGNED</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=n>AUTO_INCREMENT</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;订单ID&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order_sn</span><span class=w> </span><span class=nb>BIGINT</span><span class=w> </span><span class=n>UNSIGNED</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;订单编号&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>customer_id</span><span class=w> </span><span class=nb>INT</span><span class=w> </span><span class=n>UNSIGNED</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;下单人ID&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>payment_method</span><span class=w> </span><span class=n>TINYINT</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;支付方式&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_id</span><span class=w> </span><span class=nb>INT</span><span class=w> </span><span class=n>UNSIGNED</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;商品id&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_name</span><span class=w> </span><span class=nb>VARCHAR</span><span class=p>(</span><span class=mi>50</span><span class=p>)</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;商品名称&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_cnt</span><span class=w> </span><span class=nb>INT</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;数量&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_price</span><span class=w> </span><span class=nb>DECIMAL</span><span class=p>(</span><span class=mi>12</span><span class=p>,</span><span class=mi>2</span><span class=p>)</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;单价&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order_money</span><span class=w> </span><span class=nb>DECIMAL</span><span class=p>(</span><span class=mi>12</span><span class=p>,</span><span class=mi>2</span><span class=p>)</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;金额&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>create_time</span><span class=w> </span><span class=n>DATETIME</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;下单时间&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>pay_time</span><span class=w> </span><span class=n>DATETIME</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;支付时间&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order_status</span><span class=w> </span><span class=n>TINYINT</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=k>NULL</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;状态&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>modified_time</span><span class=w> </span><span class=n>DATETIME</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;修改时间&#39;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=w> </span><span class=n>pk_orderid</span><span class=p>(</span><span class=n>order_id</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>)</span><span class=w> </span><span class=n>ENGINE</span><span class=o>=</span><span class=n>innodb</span><span class=w> </span><span class=k>COMMENT</span><span class=w> </span><span class=s1>&#39;订单主表&#39;</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=n>order_master</span><span class=w> </span><span class=k>VALUES</span><span class=p>(</span><span class=s1>&#39;1&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;202303150001&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;001&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;00001&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;Galaxy PHONE&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;5000&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;5000&#39;</span><span class=p>,</span><span class=w> </span><span class=n>NOW</span><span class=p>(),</span><span class=w> </span><span class=k>null</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;0&#39;</span><span class=p>,</span><span class=w> </span><span class=n>NOW</span><span class=p>());</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>exit</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=cite_start5-编写本地逻辑备份脚本-修复语法错误版-cite-202-230>[cite_start]5. 编写本地逻辑备份脚本 (修复语法错误版) [cite: 202-230]</h4><p><code>mkdir -p /data/tools/backup_mysql_tools</code>
+<code>mkdir -p /data/backup/mysql</code>
+<code>vim /data/tools/backup_mysql_tools/backup_mysql.sh</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=nv>BACKUP_USER</span><span class=o>=</span><span class=s2>&#34;root&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>BACKUP_PASS</span><span class=o>=</span><span class=s2>&#34;123123&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>TIME</span><span class=o>=</span><span class=k>$(</span>date +%F-%H-%M<span class=k>)</span>
+</span></span><span class=line><span class=cl><span class=nv>BACKUP_TIME</span><span class=o>=</span><span class=s2>&#34;180&#34;</span> <span class=c1># 修复了原文档的乱码</span>
+</span></span><span class=line><span class=cl><span class=nv>DB_NAME</span><span class=o>=</span><span class=s2>&#34;bdqn_db&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>BACKUP_PATH</span><span class=o>=</span><span class=s2>&#34;/data/backup/mysql&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>BACKUP_SQL_NAME</span><span class=o>=</span><span class=s2>&#34;backup-database-</span><span class=si>${</span><span class=nv>DB_NAME</span><span class=si>}</span><span class=s2>-</span><span class=si>${</span><span class=nv>TIME</span><span class=si>}</span><span class=s2>.sql&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>BACKUP_FILE_NAME</span><span class=o>=</span><span class=s2>&#34;backup-database-</span><span class=si>${</span><span class=nv>DB_NAME</span><span class=si>}</span><span class=s2>-</span><span class=si>${</span><span class=nv>TIME</span><span class=si>}</span><span class=s2>.tar.bz2&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>function</span> BACKUP_MYSQL<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>cd</span> <span class=si>${</span><span class=nv>BACKUP_PATH</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    mysqldump -u<span class=s2>&#34;</span><span class=si>${</span><span class=nv>BACKUP_USER</span><span class=si>}</span><span class=s2>&#34;</span> -p<span class=s2>&#34;</span><span class=si>${</span><span class=nv>BACKUP_PASS</span><span class=si>}</span><span class=s2>&#34;</span> <span class=si>${</span><span class=nv>DB_NAME</span><span class=si>}</span> &gt; <span class=si>${</span><span class=nv>BACKUP_SQL_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    tar -jcvf <span class=si>${</span><span class=nv>BACKUP_FILE_NAME</span><span class=si>}</span> <span class=si>${</span><span class=nv>BACKUP_SQL_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>    rm -rf <span class=si>${</span><span class=nv>BACKUP_SQL_NAME</span><span class=si>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>function</span> CLEAN_OLD_TIME<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 修复了原文档逻辑在花括号外的错误</span>
+</span></span><span class=line><span class=cl>    find <span class=si>${</span><span class=nv>BACKUP_PATH</span><span class=si>}</span> -mtime +<span class=si>${</span><span class=nv>BACKUP_TIME</span><span class=si>}</span> -type f <span class=p>|</span> xargs -r rm -rf
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>BACKUP_MYSQL
+</span></span><span class=line><span class=cl>CLEAN_OLD_TIME
+</span></span></code></pre></td></tr></table></div></div><p><em>添加执行权限并测试：</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>chmod +x /data/tools/backup_mysql_tools/backup_mysql.sh
+</span></span><span class=line><span class=cl>bash /data/tools/backup_mysql_tools/backup_mysql.sh
+</span></span><span class=line><span class=cl><span class=c1># 检查是否生成了 .tar.bz2 文件</span>
+</span></span><span class=line><span class=cl>ls -lh /data/backup/mysql/
+</span></span></code></pre></td></tr></table></div></div><h4 id=cite_start6-配置-rsync-服务端-cite-329-353>[cite_start]6. 配置 Rsync 服务端 [cite: 329-353]</h4><p><code>yum install -y rsync</code>
+<code>vim /etc/rsyncd.conf</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=na>uid</span> <span class=o>=</span> <span class=s>root</span>
+</span></span><span class=line><span class=cl><span class=na>gid</span> <span class=o>=</span> <span class=s>root</span>
+</span></span><span class=line><span class=cl><span class=na>use chroot</span> <span class=o>=</span> <span class=s>yes</span>
+</span></span><span class=line><span class=cl><span class=na>address</span> <span class=o>=</span> <span class=s>192.168.200.101</span>
+</span></span><span class=line><span class=cl><span class=na>port</span> <span class=o>=</span> <span class=s>873</span>
+</span></span><span class=line><span class=cl><span class=na>log file</span> <span class=o>=</span> <span class=s>/var/log/rsyncd.log</span>
+</span></span><span class=line><span class=cl><span class=na>pid file</span> <span class=o>=</span> <span class=s>/var/run/rsyncd.pid</span>
+</span></span><span class=line><span class=cl><span class=na>hosts allow</span> <span class=o>=</span> <span class=s>192.168.200.0/24</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[mysql-bin]</span>
+</span></span><span class=line><span class=cl><span class=c1># 这里必须对应前面创建的真实存在的目录</span>
+</span></span><span class=line><span class=cl><span class=na>path</span> <span class=o>=</span> <span class=s>/data/mysql/logs/mysql_binlog</span>
+</span></span><span class=line><span class=cl><span class=na>read only</span> <span class=o>=</span> <span class=s>yes</span>
+</span></span><span class=line><span class=cl><span class=na>dont compress</span> <span class=o>=</span> <span class=s>*.gz *.bz2 *.tgz *.zip *.rar *.z</span>
+</span></span><span class=line><span class=cl><span class=na>auth users</span> <span class=o>=</span> <span class=s>backuper</span>
+</span></span><span class=line><span class=cl><span class=na>secrets file</span> <span class=o>=</span> <span class=s>/etc/rsyncd_users.db</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[mysqldump]</span>
+</span></span><span class=line><span class=cl><span class=na>path</span> <span class=o>=</span> <span class=s>/data/backup/mysql</span>
+</span></span><span class=line><span class=cl><span class=na>read only</span> <span class=o>=</span> <span class=s>yes</span>
+</span></span><span class=line><span class=cl><span class=na>dont compress</span> <span class=o>=</span> <span class=s>*.gz *.bz2 *.tgz *.zip *.rar *.z</span>
+</span></span><span class=line><span class=cl><span class=na>auth users</span> <span class=o>=</span> <span class=s>backuper</span>
+</span></span><span class=line><span class=cl><span class=na>secrets file</span> <span class=o>=</span> <span class=s>/etc/rsyncd_users.db</span>
+</span></span></code></pre></td></tr></table></div></div><p><em>创建密码文件并启动：</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;backuper:666666&#34;</span> &gt; /etc/rsyncd_users.db
+</span></span><span class=line><span class=cl>chmod <span class=m>600</span> /etc/rsyncd_users.db
+</span></span><span class=line><span class=cl>rsync --daemon
+</span></span><span class=line><span class=cl><span class=c1># 验证端口</span>
+</span></span><span class=line><span class=cl>netstat -antp <span class=p>|</span> grep <span class=m>873</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第三阶段备份服务器配置-操作节点192168200102>第三阶段：备份服务器配置 (操作节点：192.168.200.102)</h3><p><strong>目的</strong>：拉取逻辑备份和增量日志，并设置定时任务。</p><h4 id=cite_start1-基础配置与目录创建-cite-371-376>[cite_start]1. 基础配置与目录创建 [cite: 371-376]</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install -y rsync
+</span></span><span class=line><span class=cl>mkdir -p /data/backup/mysql_dump
+</span></span><span class=line><span class=cl>mkdir -p /data/backup/mysql_binlog
+</span></span><span class=line><span class=cl>mkdir -p /data/tools/
+</span></span></code></pre></td></tr></table></div></div><h4 id=cite_start2-配置密码文件-cite-379-381>[cite_start]2. 配置密码文件 [cite: 379-381]</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 客户端只需密码</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;666666&#34;</span> &gt; /data/tools/server.pass
+</span></span><span class=line><span class=cl>chmod <span class=m>600</span> /data/tools/server.pass
+</span></span></code></pre></td></tr></table></div></div><h4 id=cite_start3-测试同步-关键验证步骤-cite-383-391>[cite_start]3. 测试同步 (关键验证步骤) [cite: 383-391]</h4><p><strong>请依次执行，确保无报错：</strong></p><p><em>测试 1：拉取逻辑备份（全量）</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>rsync -avz --password-file<span class=o>=</span>/data/tools/server.pass backuper@192.168.200.101::mysqldump /data/backup/mysql_dump/
+</span></span></code></pre></td></tr></table></div></div><p><em>(预期结果：成功传输 .tar.bz2 文件)</em></p><p><em>测试 2：拉取 Binlog（增量）</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>rsync -avz --password-file<span class=o>=</span>/data/tools/server.pass backuper@192.168.200.101::mysql-bin /data/backup/mysql_binlog/
+</span></span></code></pre></td></tr></table></div></div><p><em>(预期结果：成功传输 mysql-bin.000001 等文件。如果此时还报 <code>chroot failed</code>，请回到主服务器检查目录 <code>/data/mysql/logs/mysql_binlog</code> 是否存在且有权限)</em></p><h4 id=cite_start4-配置-crontab-计划任务-cite-398-401>[cite_start]4. 配置 Crontab 计划任务 [cite: 398-401]</h4><p>使用标准追加命令，避免语法错误。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 每天凌晨 2 点拉取 Binlog</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;0 2 * * * /usr/bin/rsync -avz --password-file=/data/tools/server.pass backuper@192.168.200.101::mysql-bin /data/backup/mysql_binlog/&#34;</span> &gt;&gt; /var/spool/cron/root
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 每天凌晨 2 点拉取 逻辑备份</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;0 2 * * * /usr/bin/rsync -avz --password-file=/data/tools/server.pass backuper@192.168.200.101::mysqldump /data/backup/mysql_dump/&#34;</span> &gt;&gt; /var/spool/cron/root
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 检查</span>
+</span></span><span class=line><span class=cl>crontab -l
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=验证清单>验证清单</h3><p>如果做完以上所有步骤，你的系统应满足：</p><ol><li><strong>101 主机</strong>：<code>/data/mysql/logs/mysql_binlog/</code> 下有 <code>mysql-bin.000001</code> 文件。</li><li><strong>101 主机</strong>：<code>/data/backup/mysql/</code> 下有 <code>.tar.bz2</code> 备份包。</li><li><strong>102 主机</strong>：手动执行 <code>rsync</code> 命令时，不再报错，且能看到文件被拉取过来。</li><li><strong>102 主机</strong>：<code>crontab -l</code> 中有两条定时的 <code>rsync</code> 任务。</li></ol></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/project/%E9%A1%B9%E7%9B%AE04centos%E9%83%A8%E7%BD%B2mha/><div class=article-details><h2 class=article-title>centos部署MHA</h2></div></a></article><article><a href=/project/%E9%A1%B9%E7%9B%AE03%E8%8B%8F%E5%86%9C%E4%BA%91-app-%E9%A1%B9%E7%9B%AE%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/><div class=article-details><h2 class=article-title>苏农云项目部署</h2></div></a></article><article><a href=/project/%E9%A1%B9%E7%9B%AE01ruoyi/><div class=article-details><h2 class=article-title>若依系统</h2></div></a></article><article><a href=/mysql/mysql%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC/><div class=article-details><h2 class=article-title>MySQL</h2></div></a></article><article><a href=/linux/kali/><div class=article-details><h2 class=article-title>Kali</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

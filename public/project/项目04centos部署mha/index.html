@@ -1,0 +1,685 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="CentOS 7 + MySQL 5.7 + MHA 高可用集群部署 1. 环境规划 前提条件：所有机器操作系统均为 CentOS 7.6/7.9，网络互通。\n主机名 IP地址 角色 Server ID 备注 mha-master 192.168.200.101 Master 1 核心主库 mha-slave1 192.168.200.102 Slave 2 备用从库 mha-slave2 192.168.200.103 Slave 3 备用从库 mha-manager 192.168.200.104 Manager - 监控管理节点 VIP 192.168.200.200 - - 业务连接IP 2. 基础环境初始化 (所有节点 101-104) 注意：本节操作需在 4 台机器上全部执行。\n"><title>centos部署MHA</title><link rel=canonical href=http://localhost:1313/project/%E9%A1%B9%E7%9B%AE04centos%E9%83%A8%E7%BD%B2mha/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="centos部署MHA"><meta property='og:description' content="CentOS 7 + MySQL 5.7 + MHA 高可用集群部署 1. 环境规划 前提条件：所有机器操作系统均为 CentOS 7.6/7.9，网络互通。\n主机名 IP地址 角色 Server ID 备注 mha-master 192.168.200.101 Master 1 核心主库 mha-slave1 192.168.200.102 Slave 2 备用从库 mha-slave2 192.168.200.103 Slave 3 备用从库 mha-manager 192.168.200.104 Manager - 监控管理节点 VIP 192.168.200.200 - - 业务连接IP 2. 基础环境初始化 (所有节点 101-104) 注意：本节操作需在 4 台机器上全部执行。\n"><meta property='og:url' content='http://localhost:1313/project/%E9%A1%B9%E7%9B%AE04centos%E9%83%A8%E7%BD%B2mha/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Project'><meta property='article:published_time' content='2025-12-04T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-04T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="centos部署MHA"><meta name=twitter:description content="CentOS 7 + MySQL 5.7 + MHA 高可用集群部署 1. 环境规划 前提条件：所有机器操作系统均为 CentOS 7.6/7.9，网络互通。\n主机名 IP地址 角色 Server ID 备注 mha-master 192.168.200.101 Master 1 核心主库 mha-slave1 192.168.200.102 Slave 2 备用从库 mha-slave2 192.168.200.103 Slave 3 备用从库 mha-manager 192.168.200.104 Manager - 监控管理节点 VIP 192.168.200.200 - - 业务连接IP 2. 基础环境初始化 (所有节点 101-104) 注意：本节操作需在 4 台机器上全部执行。\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/links/><span>网站</span></a></li><li><a href=/linux/><span>Linux</span></a></li><li><a href=/docker/><span>docker</span></a></li><li><a href=/k8s/><span>k8s</span></a></li><li><a href=/mysql/><span>mysql</span></a></li><li><a href=/project/><span>项目</span></a></li><li><a href=/about/><span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#1-环境规划>1. 环境规划</a></li><li><a href=#2-基础环境初始化-所有节点-101-104>2. 基础环境初始化 (所有节点 101-104)</a><ol><li><a href=#21-修复-yum-源-解决下载失败问题>2.1 修复 Yum 源 (解决下载失败问题)</a></li><li><a href=#22-系统配置-防火墙主机名hosts>2.2 系统配置 (防火墙/主机名/Hosts)</a></li><li><a href=#23-配置-ssh-免密互信-避坑指南>2.3 配置 SSH 免密互信 (避坑指南)</a></li></ol></li><li><a href=#3-mysql-集群部署-节点-101-102-103>3. MySQL 集群部署 (节点 101, 102, 103)</a><ol><li><a href=#31-准备安装包>3.1 准备安装包</a></li><li><a href=#32-创建自动化脚本>3.2 创建自动化脚本</a></li></ol></li><li><a href=#4-配置-gtid-主从复制>4. 配置 GTID 主从复制</a><ol><li><a href=#41-master-操作-101>4.1 Master 操作 (101)</a></li><li><a href=#42-slave-操作-102-和-103>4.2 Slave 操作 (102 和 103)</a></li></ol></li><li><a href=#5-mha-manager-部署-节点-104>5. MHA Manager 部署 (节点 104)</a><ol><li><a href=#51-安装软件>5.1 安装软件</a></li><li><a href=#52-配置文件>5.2 配置文件</a></li><li><a href=#53-故障切换脚本>5.3 故障切换脚本</a></li></ol></li><li><a href=#6-启动与验证>6. 启动与验证</a><ol><li><a href=#61-绑定-vip>6.1 绑定 VIP</a></li><li><a href=#62-最终检查-在-104-上执行>6.2 最终检查 (在 104 上执行)</a></li><li><a href=#63-启动-mha>6.3 启动 MHA</a></li><li><a href=#64-查看状态>6.4 查看状态</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/project/%E9%A1%B9%E7%9B%AE04centos%E9%83%A8%E7%BD%B2mha/>centos部署MHA</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-12-04</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 6 分钟</time></div></footer></div></header><section class=article-content><h1 id=centos-7--mysql-57--mha-高可用集群部署>CentOS 7 + MySQL 5.7 + MHA 高可用集群部署</h1><h2 id=1-环境规划>1. 环境规划</h2><p><strong>前提条件</strong>：所有机器操作系统均为 CentOS 7.6/7.9，网络互通。</p><div class=table-wrapper><table><thead><tr><th><strong>主机名</strong></th><th><strong>IP地址</strong></th><th><strong>角色</strong></th><th><strong>Server ID</strong></th><th><strong>备注</strong></th></tr></thead><tbody><tr><td><strong>mha-master</strong></td><td>192.168.200.101</td><td>Master</td><td>1</td><td>核心主库</td></tr><tr><td><strong>mha-slave1</strong></td><td>192.168.200.102</td><td>Slave</td><td>2</td><td>备用从库</td></tr><tr><td><strong>mha-slave2</strong></td><td>192.168.200.103</td><td>Slave</td><td>3</td><td>备用从库</td></tr><tr><td><strong>mha-manager</strong></td><td>192.168.200.104</td><td>Manager</td><td>-</td><td>监控管理节点</td></tr><tr><td><strong>VIP</strong></td><td>192.168.200.200</td><td>-</td><td>-</td><td>业务连接IP</td></tr></tbody></table></div><hr><h2 id=2-基础环境初始化-所有节点-101-104>2. 基础环境初始化 (所有节点 101-104)</h2><p><strong>注意：本节操作需在 4 台机器上全部执行。</strong></p><h3 id=21-修复-yum-源-解决下载失败问题>2.1 修复 Yum 源 (解决下载失败问题)</h3><p>由于你的环境无法访问阿里云内网源，必须先切换为公网源，否则依赖包下载会报错。</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 备份旧源
+</span></span><span class=line><span class=cl>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+</span></span><span class=line><span class=cl>rm -rf /etc/yum.repos.d/epel*
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 下载阿里云公网源
+</span></span><span class=line><span class=cl>curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+</span></span><span class=line><span class=cl>curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 3. 清理并生成缓存
+</span></span><span class=line><span class=cl>yum clean all &amp;&amp; yum makecache
+</span></span></code></pre></td></tr></table></div></div><h3 id=22-系统配置-防火墙主机名hosts>2.2 系统配置 (防火墙/主机名/Hosts)</h3><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 关闭防火墙与 SELinux
+</span></span><span class=line><span class=cl>systemctl stop firewalld &amp;&amp; systemctl disable firewalld
+</span></span><span class=line><span class=cl>setenforce 0
+</span></span><span class=line><span class=cl>sed -i &#39;s/SELINUX=enforcing/SELINUX=disabled/g&#39; /etc/selinux/config
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 配置 Hosts 解析
+</span></span><span class=line><span class=cl>cat &gt;&gt; /etc/hosts &lt;&lt; EOF
+</span></span><span class=line><span class=cl>192.168.200.101 mha-master
+</span></span><span class=line><span class=cl>192.168.200.102 mha-slave1
+</span></span><span class=line><span class=cl>192.168.200.103 mha-slave2
+</span></span><span class=line><span class=cl>192.168.200.104 mha-manager
+</span></span><span class=line><span class=cl>EOF
+</span></span></code></pre></td></tr></table></div></div><h3 id=23-配置-ssh-免密互信-避坑指南>2.3 配置 SSH 免密互信 (避坑指南)</h3><p><strong>重点</strong>：MHA Manager 必须能免密登录所有节点。建议做全网互信。</p><ol><li><p><strong>生成密钥</strong>（在每台机器执行）：</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ssh-keygen -t rsa
+</span></span><span class=line><span class=cl># 【注意】出现提示时，不要输入任何字符，直接连续按 3 次回车！
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>分发密钥</strong>（建议在每台机器上都执行一遍以下 4 条命令）：</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ssh-copy-id mha-master
+</span></span><span class=line><span class=cl>ssh-copy-id mha-slave1
+</span></span><span class=line><span class=cl>ssh-copy-id mha-slave2
+</span></span><span class=line><span class=cl>ssh-copy-id mha-manager
+</span></span><span class=line><span class=cl># 输入 yes 并输入 root 密码
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h2 id=3-mysql-集群部署-节点-101-102-103>3. MySQL 集群部署 (节点 101, 102, 103)</h2><h3 id=31-准备安装包>3.1 准备安装包</h3><p>在 <strong>101, 102, 103</strong> 机器上创建目录 <code>/opt/install</code>，上传以下两个文件：</p><ol><li><p><code>mysql_5.7.44.tar.bz2</code> (文件名必须精确匹配)</p></li><li><p><code>mha4mysql-node-0.58-0.el7.centos.noarch.rpm</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mkdir -p /opt/install 
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /opt/install
+</span></span><span class=line><span class=cl>将 mysql_5.7.44.tar.bz2 和 mha4mysql-node-0.58-0.el7.centos.noarch.rpm <span class=o>(</span>如果有<span class=o>)</span> 上传到该目录
+</span></span><span class=line><span class=cl>vim deploy_mysql_mha.sh
+</span></span><span class=line><span class=cl>chmod +x deploy_mysql_mha.sh
+</span></span><span class=line><span class=cl>./deploy_mysql_mha.sh
+</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=32-创建自动化脚本>3.2 创建自动化脚本</h3><p>在 <code>/opt/install</code> 下创建脚本 <code>vim deploy_mysql.sh</code>，复制以下<strong>V5 终极版代码</strong>：</p><p>3.3 执行脚本</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=c1># 脚本名称: MySQL 5.7.44 + MHA 部署脚本 </span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># --- 步骤 0: 交互式配置 ---</span>
+</span></span><span class=line><span class=cl>clear
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;========================================================&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;   MySQL 5.7.44 + MHA 一键部署脚本 (V5 终极清洗版)&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;========================================================&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;请根据规划输入当前机器的 Server ID:&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;  - Master (101) 请输入: 1&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;  - Slave1 (102) 请输入: 2&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;  - Slave2 (103) 请输入: 3&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;--------------------------------------------------------&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>read</span> -p <span class=s2>&#34;请输入 Server ID [1-3]: &#34;</span> SERVER_ID
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[[</span> ! <span class=s2>&#34;</span><span class=nv>$SERVER_ID</span><span class=s2>&#34;</span> <span class=o>=</span>~ ^<span class=o>[</span>1-9<span class=o>]</span>+$ <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;❌ 错误: Server ID 必须是数字！&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>MYSQL_PKG</span><span class=o>=</span><span class=s2>&#34;mysql_5.7.44.tar.bz2&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>MHA_NODE_PKG</span><span class=o>=</span><span class=s2>&#34;mha4mysql-node-0.58-0.el7.centos.noarch.rpm&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=c1># 步骤 1: 预先安装基础依赖</span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[1/7] 安装基础依赖...&#34;</span>
+</span></span><span class=line><span class=cl>yum install -y perl perl-devel libaio net-tools autoconf
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=c1># 步骤 2: 彻底清理旧环境 (新增 /data/mysql 清理)</span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[2/7] 正在暴力清理旧环境...&#34;</span>
+</span></span><span class=line><span class=cl>systemctl stop mysqld &gt;/dev/null 2&gt;<span class=p>&amp;</span><span class=m>1</span>
+</span></span><span class=line><span class=cl>pkill -9 mysqld &gt;/dev/null 2&gt;<span class=p>&amp;</span><span class=m>1</span>
+</span></span><span class=line><span class=cl>rpm -e --nodeps mariadb-libs &gt;/dev/null 2&gt;<span class=p>&amp;</span><span class=m>1</span>
+</span></span><span class=line><span class=cl>yum remove -y mariadb-libs mysql-libs &gt;/dev/null 2&gt;<span class=p>&amp;</span><span class=m>1</span>
+</span></span><span class=line><span class=cl>yum remove -y mysql-community-* mysql* MySQL* &gt;/dev/null 2&gt;<span class=p>&amp;</span><span class=m>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 【V5 关键修改】强制删除旧数据目录，解决 &#34;directory has files&#34; 报错</span>
+</span></span><span class=line><span class=cl>rm -rf /var/lib/mysql /etc/my.cnf* /var/log/mysqld.log
+</span></span><span class=line><span class=cl>rm -rf /data/mysql  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=c1># 步骤 3: 安装 MySQL (智能搜寻修复)</span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[3/7] 开始安装 MySQL 5.7.44...&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> ! -f <span class=s2>&#34;</span><span class=nv>$MYSQL_PKG</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;❌ 错误: 当前目录下未找到 </span><span class=nv>$MYSQL_PKG</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>INSTALL_TEMP_DIR</span><span class=o>=</span><span class=s2>&#34;mysql_install_temp&#34;</span>
+</span></span><span class=line><span class=cl>rm -rf <span class=nv>$INSTALL_TEMP_DIR</span> 
+</span></span><span class=line><span class=cl>mkdir -p <span class=nv>$INSTALL_TEMP_DIR</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;    正在解压...&#34;</span>
+</span></span><span class=line><span class=cl>tar xf <span class=nv>$MYSQL_PKG</span> -C <span class=nv>$INSTALL_TEMP_DIR</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;    正在搜寻 RPM 包...&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>RPM_LIST</span><span class=o>=</span><span class=k>$(</span>find <span class=nv>$INSTALL_TEMP_DIR</span> -name <span class=s2>&#34;*.rpm&#34;</span><span class=k>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> -z <span class=s2>&#34;</span><span class=nv>$RPM_LIST</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;❌ 严重错误: 解压后未找到任何 .rpm 文件！&#34;</span>
+</span></span><span class=line><span class=cl>    ls -R <span class=nv>$INSTALL_TEMP_DIR</span>
+</span></span><span class=line><span class=cl>    <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;    找到 RPM 包，正在安装...&#34;</span>
+</span></span><span class=line><span class=cl>rpm -Uvh <span class=nv>$RPM_LIST</span> --force --nodeps
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> ! -f <span class=s2>&#34;/usr/sbin/mysqld&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;❌ 严重错误: MySQL 安装失败，未找到 /usr/sbin/mysqld 文件！&#34;</span>
+</span></span><span class=line><span class=cl>    rm -rf <span class=nv>$INSTALL_TEMP_DIR</span>
+</span></span><span class=line><span class=cl>    <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>rm -rf <span class=nv>$INSTALL_TEMP_DIR</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=c1># 步骤 4: 安装 MHA Node 依赖</span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[4/7] 安装 MHA Node 依赖...&#34;</span>
+</span></span><span class=line><span class=cl>yum install -y perl-Config-Tiny perl-Log-Dispatch perl-Parallel-ForkManager
+</span></span><span class=line><span class=cl>yum install -y perl-DBD-MySQL --skip-broken
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> -f <span class=s2>&#34;</span><span class=nv>$MHA_NODE_PKG</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    rpm -ivh <span class=nv>$MHA_NODE_PKG</span> --force --nodeps
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=c1># 步骤 5: 写入配置文件</span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[5/7] 写入配置文件 /etc/my.cnf...&#34;</span>
+</span></span><span class=line><span class=cl>cat &gt; /etc/my.cnf <span class=s>&lt;&lt; EOF
+</span></span></span><span class=line><span class=cl><span class=s>[mysql]
+</span></span></span><span class=line><span class=cl><span class=s>port=3306
+</span></span></span><span class=line><span class=cl><span class=s>bind-address=0.0.0.0
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[mysqld]
+</span></span></span><span class=line><span class=cl><span class=s>character_set_server=utf8
+</span></span></span><span class=line><span class=cl><span class=s>init_connect=&#39;SET NAMES utf8&#39;
+</span></span></span><span class=line><span class=cl><span class=s>user=mysql
+</span></span></span><span class=line><span class=cl><span class=s>socket=/var/lib/mysql/mysql.sock
+</span></span></span><span class=line><span class=cl><span class=s>datadir=/data/mysql/data
+</span></span></span><span class=line><span class=cl><span class=s>max_connections=2000
+</span></span></span><span class=line><span class=cl><span class=s>skip-name-resolve
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># --- MHA 核心配置 ---
+</span></span></span><span class=line><span class=cl><span class=s>server-id=${SERVER_ID}
+</span></span></span><span class=line><span class=cl><span class=s>log-bin=/data/mysql/data/mysql-bin
+</span></span></span><span class=line><span class=cl><span class=s>relay-log=/data/mysql/data/relay-log
+</span></span></span><span class=line><span class=cl><span class=s>binlog_format=ROW
+</span></span></span><span class=line><span class=cl><span class=s>expire_logs_days=7
+</span></span></span><span class=line><span class=cl><span class=s>max_binlog_size=500M
+</span></span></span><span class=line><span class=cl><span class=s>binlog_cache_size=128K
+</span></span></span><span class=line><span class=cl><span class=s>log_slave_updates=1
+</span></span></span><span class=line><span class=cl><span class=s>slave-skip-errors=1
+</span></span></span><span class=line><span class=cl><span class=s>relay_log_recovery=1
+</span></span></span><span class=line><span class=cl><span class=s>master_info_repository=TABLE
+</span></span></span><span class=line><span class=cl><span class=s>relay_log_info_repository=TABLE
+</span></span></span><span class=line><span class=cl><span class=s>gtid_mode=on
+</span></span></span><span class=line><span class=cl><span class=s>enforce_gtid_consistency=1
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># --- 优化 ---
+</span></span></span><span class=line><span class=cl><span class=s>max_allowed_packet=100M
+</span></span></span><span class=line><span class=cl><span class=s>lower_case_table_names=1
+</span></span></span><span class=line><span class=cl><span class=s>slow_query_log=on
+</span></span></span><span class=line><span class=cl><span class=s>slow_query_log_file=/data/mysql/logs/slow_query_log.log
+</span></span></span><span class=line><span class=cl><span class=s>long_query_time=2
+</span></span></span><span class=line><span class=cl><span class=s>symbolic-links=0
+</span></span></span><span class=line><span class=cl><span class=s>innodb_buffer_pool_size=1G
+</span></span></span><span class=line><span class=cl><span class=s>innodb_open_files=800
+</span></span></span><span class=line><span class=cl><span class=s>innodb_file_per_table=1
+</span></span></span><span class=line><span class=cl><span class=s>innodb_flush_log_at_trx_commit=2
+</span></span></span><span class=line><span class=cl><span class=s>sync_binlog=1
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[mysqld_safe]
+</span></span></span><span class=line><span class=cl><span class=s>pid-file=/var/run/mysqld/mysqld.pid
+</span></span></span><span class=line><span class=cl><span class=s>log-error=/data/mysql/logs/mysql.err
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=c1># 步骤 6: 目录与初始化</span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[6/7] 配置目录与初始化...&#34;</span>
+</span></span><span class=line><span class=cl>mkdir -pv /data/mysql/<span class=o>{</span>data,logs<span class=o>}</span>
+</span></span><span class=line><span class=cl>mkdir -pv /var/lib/mysql
+</span></span><span class=line><span class=cl>chown -R mysql:mysql /data/mysql/
+</span></span><span class=line><span class=cl>chown -R mysql:mysql /var/lib/mysql/
+</span></span><span class=line><span class=cl>chmod <span class=m>750</span> /data/mysql/data
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 强制将日志输出到文件，确保能抓取到密码</span>
+</span></span><span class=line><span class=cl>/usr/sbin/mysqld --initialize --user<span class=o>=</span>mysql --datadir<span class=o>=</span>/data/mysql/data --log-error<span class=o>=</span>/data/mysql/logs/mysql.err
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> -ne <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;❌ 错误: 数据库初始化失败！&#34;</span>
+</span></span><span class=line><span class=cl>    tail -n <span class=m>10</span> /data/mysql/logs/mysql.err
+</span></span><span class=line><span class=cl>    <span class=nb>exit</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=c1># 步骤 7: 启动服务</span>
+</span></span><span class=line><span class=cl><span class=c1># ==========================================</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[7/7] 启动服务...&#34;</span>
+</span></span><span class=line><span class=cl>systemctl start mysqld
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> mysqld
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> systemctl is-active --quiet mysqld<span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;✅ MySQL 部署成功！Server ID: </span><span class=nv>$SERVER_ID</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nv>TEMP_PWD</span><span class=o>=</span><span class=k>$(</span>grep <span class=s1>&#39;temporary password&#39;</span> /data/mysql/logs/mysql.err <span class=p>|</span> awk <span class=s1>&#39;{print $NF}&#39;</span><span class=k>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;----------------------------------------------------&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;🔑 Root 初始密码: </span><span class=nv>$TEMP_PWD</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;----------------------------------------------------&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;❌ MySQL 启动失败。&#34;</span>
+</span></span><span class=line><span class=cl>    tail -n <span class=m>20</span> /data/mysql/logs/mysql.err
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span></code></pre></td></tr></table></div></div><p>分别在三台机器运行 <code>sh deploy_mysql.sh</code>，并根据提示输入 ID (1, 2, 3)。<strong>记录下最后生成的密码</strong>。</p><hr><h2 id=4-配置-gtid-主从复制>4. 配置 GTID 主从复制</h2><h3 id=41-master-操作-101>4.1 Master 操作 (101)</h3><p>登录数据库：</p><p>mysql -uroot -p&rsquo;脚本生成的密码'</p><p>执行 SQL：</p><p>SQL</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>-- 1. 修改密码
+</span></span><span class=line><span class=cl>ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123123&#39;;
+</span></span><span class=line><span class=cl>FLUSH PRIVILEGES;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-- 2. 创建用户 (复制用户 + MHA管理用户)
+</span></span><span class=line><span class=cl>GRANT REPLICATION SLAVE ON *.* TO repl@&#39;192.168.200.%&#39; IDENTIFIED BY &#39;repl_user&#39;;
+</span></span><span class=line><span class=cl>GRANT ALL ON *.* TO mha@&#39;192.168.200.%&#39; IDENTIFIED BY &#39;mha_user&#39;;
+</span></span><span class=line><span class=cl>FLUSH PRIVILEGES;
+</span></span></code></pre></td></tr></table></div></div><h3 id=42-slave-操作-102-和-103>4.2 Slave 操作 (102 和 103)</h3><p>在两台从库分别执行：</p><p>mysql -uroot -p&rsquo;脚本生成的密码'</p><p>执行 SQL：</p><p>SQL</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>-- 1. 修改密码
+</span></span><span class=line><span class=cl>ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123123&#39;;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-- 2. 配置 GTID 复制 (无需指定文件名和位置)
+</span></span><span class=line><span class=cl>STOP SLAVE;
+</span></span><span class=line><span class=cl>RESET SLAVE;
+</span></span><span class=line><span class=cl>CHANGE MASTER TO 
+</span></span><span class=line><span class=cl>  MASTER_HOST=&#39;192.168.200.101&#39;, 
+</span></span><span class=line><span class=cl>  MASTER_USER=&#39;repl&#39;, 
+</span></span><span class=line><span class=cl>  MASTER_PASSWORD=&#39;repl_user&#39;, 
+</span></span><span class=line><span class=cl>  MASTER_AUTO_POSITION=1;
+</span></span><span class=line><span class=cl>START SLAVE;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-- 3. 验证状态
+</span></span><span class=line><span class=cl>SHOW SLAVE STATUS\G;
+</span></span></code></pre></td></tr></table></div></div><p><strong>验证标准</strong>：确保 <code>Slave_IO_Running: Yes</code> 且 <code>Slave_SQL_Running: Yes</code>。</p><hr><h2 id=5-mha-manager-部署-节点-104>5. MHA Manager 部署 (节点 104)</h2><h3 id=51-安装软件>5.1 安装软件</h3><p>在 <strong>mha-manager (104)</strong> 上上传 RPM 包并安装：</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 安装 Perl 依赖 (已修复 Yum 源，这里应很顺利)
+</span></span><span class=line><span class=cl>yum install -y perl-DBD-MySQL perl-Config-Tiny perl-Log-Dispatch perl-Parallel-ForkManager
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 安装 MHA 组件
+</span></span><span class=line><span class=cl>rpm -ivh mha4mysql-node-0.58-0.el7.centos.noarch.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mha4mysql-manager-0.58-0.el7.centos.noarch.rpm
+</span></span></code></pre></td></tr></table></div></div><h3 id=52-配置文件>5.2 配置文件</h3><p>创建目录并编辑文件：</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>mkdir</span> <span class=o>-</span><span class=n>p</span> <span class=o>/</span><span class=n>data</span><span class=o>/</span><span class=n>mha</span><span class=o>/</span><span class=p>{</span><span class=n>conf</span><span class=p>,</span><span class=n>logs</span><span class=p>,</span><span class=n>tools</span><span class=p>,</span><span class=n>tmp</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>vim</span> <span class=o>/</span><span class=n>data</span><span class=o>/</span><span class=n>mha</span><span class=o>/</span><span class=n>conf</span><span class=o>/</span><span class=n>mha</span><span class=o>.</span><span class=n>conf</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>内容如下</strong>：</p><p>Ini, TOML</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=p>[</span><span class=n>server</span> <span class=n>default</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>manager_workdir</span><span class=o>=/</span><span class=n>data</span><span class=o>/</span><span class=n>mha</span><span class=o>/</span><span class=n>tmp</span>
+</span></span><span class=line><span class=cl><span class=n>manager_log</span><span class=o>=/</span><span class=n>data</span><span class=o>/</span><span class=n>mha</span><span class=o>/</span><span class=n>logs</span><span class=o>/</span><span class=n>manager</span><span class=o>.</span><span class=n>log</span>
+</span></span><span class=line><span class=cl><span class=n>remote_workdir</span><span class=o>=/</span><span class=n>data</span><span class=o>/</span><span class=n>mha</span><span class=o>/</span><span class=n>tmp</span>
+</span></span><span class=line><span class=cl><span class=n>ssh_user</span><span class=o>=</span><span class=n>root</span>
+</span></span><span class=line><span class=cl><span class=c1># MHA 监控用户</span>
+</span></span><span class=line><span class=cl><span class=n>user</span><span class=o>=</span><span class=n>mha</span>
+</span></span><span class=line><span class=cl><span class=n>password</span><span class=o>=</span><span class=n>mha_user</span>
+</span></span><span class=line><span class=cl><span class=c1># 复制用户</span>
+</span></span><span class=line><span class=cl><span class=n>repl_user</span><span class=o>=</span><span class=n>repl</span>
+</span></span><span class=line><span class=cl><span class=n>repl_password</span><span class=o>=</span><span class=n>repl_user</span>
+</span></span><span class=line><span class=cl><span class=c1># 切换脚本 (注意文件名是 script 不是 scrips)</span>
+</span></span><span class=line><span class=cl><span class=n>master_ip_failover_script</span><span class=o>=/</span><span class=n>data</span><span class=o>/</span><span class=n>mha</span><span class=o>/</span><span class=n>tools</span><span class=o>/</span><span class=n>master_ip_failover_script</span>
+</span></span><span class=line><span class=cl><span class=n>master_binlog_dir</span><span class=o>=/</span><span class=n>data</span><span class=o>/</span><span class=n>mysql</span><span class=o>/</span><span class=n>data</span>
+</span></span><span class=line><span class=cl><span class=n>ping_interval</span><span class=o>=</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>server1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>hostname</span><span class=o>=</span><span class=mf>192.168</span><span class=o>.</span><span class=mf>200.101</span>
+</span></span><span class=line><span class=cl><span class=n>candidate_master</span><span class=o>=</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>server2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>hostname</span><span class=o>=</span><span class=mf>192.168</span><span class=o>.</span><span class=mf>200.102</span>
+</span></span><span class=line><span class=cl><span class=n>candidate_master</span><span class=o>=</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>server3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>hostname</span><span class=o>=</span><span class=mf>192.168</span><span class=o>.</span><span class=mf>200.103</span>
+</span></span><span class=line><span class=cl><span class=n>candidate_master</span><span class=o>=</span><span class=mi>1</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=53-故障切换脚本>5.3 故障切换脚本</h3><p>创建脚本 vim /data/mha/tools/master_ip_failover_script：</p><p>(已修复 Perl 语法错误)</p><p>Perl</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>#!/usr/bin/env perl
+</span></span><span class=line><span class=cl>use strict;
+</span></span><span class=line><span class=cl>use warnings FATAL =&gt; &#39;all&#39;;
+</span></span><span class=line><span class=cl>use Getopt::Long;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>my ($command, $ssh_user, $orig_master_host, $orig_master_ip, $orig_master_port, $new_master_host, $new_master_ip, $new_master_port);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># === VIP配置 ===
+</span></span><span class=line><span class=cl>my $vip = &#39;192.168.200.200/24&#39;;
+</span></span><span class=line><span class=cl>my $key = &#39;1&#39;;
+</span></span><span class=line><span class=cl>my $iface = &#39;ens33&#39;; # 确认你的网卡名
+</span></span><span class=line><span class=cl># ==============
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>my $ssh_start_vip = &#34;/sbin/ifconfig $iface:$key $vip&#34;;
+</span></span><span class=line><span class=cl>my $ssh_stop_vip  = &#34;/sbin/ifconfig $iface:$key down&#34;;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>GetOptions(
+</span></span><span class=line><span class=cl>    &#39;command=s&#39;          =&gt; \$command,
+</span></span><span class=line><span class=cl>    &#39;ssh_user=s&#39;         =&gt; \$ssh_user,
+</span></span><span class=line><span class=cl>    &#39;orig_master_host=s&#39; =&gt; \$orig_master_host,
+</span></span><span class=line><span class=cl>    &#39;orig_master_ip=s&#39;   =&gt; \$orig_master_ip,
+</span></span><span class=line><span class=cl>    &#39;orig_master_port=i&#39; =&gt; \$orig_master_port,
+</span></span><span class=line><span class=cl>    &#39;new_master_host=s&#39;  =&gt; \$new_master_host,
+</span></span><span class=line><span class=cl>    &#39;new_master_ip=s&#39;    =&gt; \$new_master_ip,
+</span></span><span class=line><span class=cl>    &#39;new_master_port=i&#39;  =&gt; \$new_master_port,
+</span></span><span class=line><span class=cl>);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>exit &amp;main();
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sub main {
+</span></span><span class=line><span class=cl>    if ($command eq &#34;stop&#34; || $command eq &#34;stopssh&#34;) {
+</span></span><span class=line><span class=cl>        eval { &amp;stop_vip(); };
+</span></span><span class=line><span class=cl>        if ($@) { warn &#34;Got Error: $@\n&#34;; exit 1; }
+</span></span><span class=line><span class=cl>        exit 0;
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    elsif ($command eq &#34;start&#34;) {
+</span></span><span class=line><span class=cl>        eval { &amp;start_vip(); };
+</span></span><span class=line><span class=cl>        if ($@) { warn &#34;Got Error: $@\n&#34;; exit 1; }
+</span></span><span class=line><span class=cl>        exit 0;
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    elsif ($command eq &#34;status&#34;) {
+</span></span><span class=line><span class=cl>        print &#34;Checking script.. OK \n&#34;;
+</span></span><span class=line><span class=cl>        exit 0;
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    exit 0;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>sub start_vip { system(&#34;ssh $ssh_user\@$new_master_host \&#34; $ssh_start_vip \&#34;&#34;); }
+</span></span><span class=line><span class=cl>sub stop_vip  { system(&#34;ssh $ssh_user\@$orig_master_host \&#34; $ssh_stop_vip \&#34;&#34;); }
+</span></span></code></pre></td></tr></table></div></div><p><strong>赋予权限 (重要)</strong>：</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>chmod</span> <span class=o>+</span><span class=n>x</span> <span class=o>/</span><span class=n>data</span><span class=o>/</span><span class=n>mha</span><span class=o>/</span><span class=n>tools</span><span class=o>/</span><span class=n>master_ip_failover_script</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=6-启动与验证>6. 启动与验证</h2><h3 id=61-绑定-vip>6.1 绑定 VIP</h3><p>在 <strong>101 (Master)</strong> 上手动绑定 VIP：</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ifconfig ens33:1 192.168.200.200/24 up
+</span></span></code></pre></td></tr></table></div></div><h3 id=62-最终检查-在-104-上执行>6.2 最终检查 (在 104 上执行)</h3><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 检查 SSH
+</span></span><span class=line><span class=cl>masterha_check_ssh --conf=/data/mha/conf/mha.conf
+</span></span><span class=line><span class=cl># 必须显示: All SSH connection tests passed successfully.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 检查复制
+</span></span><span class=line><span class=cl>masterha_check_repl --conf=/data/mha/conf/mha.conf
+</span></span><span class=line><span class=cl># 必须显示: MySQL Replication Health is OK.
+</span></span></code></pre></td></tr></table></div></div><h3 id=63-启动-mha>6.3 启动 MHA</h3><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>nohup masterha_manager --conf=/data/mha/conf/mha.conf --remove_dead_master_conf --ignore_last_failover &lt; /dev/null &gt; /data/mha/logs/manager.log 2&gt;&amp;1 &amp;
+</span></span></code></pre></td></tr></table></div></div><h3 id=64-查看状态>6.4 查看状态</h3><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>masterha_check_status --conf=/data/mha/conf/mha.conf
+</span></span></code></pre></td></tr></table></div></div><p><strong>看到 <code>PING_OK</code>，即代表部署圆满成功！</strong></p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/project/%E9%A1%B9%E7%9B%AE02%E6%95%B0%E6%8D%AE%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/><div class=article-details><h2 class=article-title>数据增量同步</h2></div></a></article><article><a href=/project/%E9%A1%B9%E7%9B%AE03%E8%8B%8F%E5%86%9C%E4%BA%91-app-%E9%A1%B9%E7%9B%AE%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/><div class=article-details><h2 class=article-title>苏农云项目部署</h2></div></a></article><article><a href=/project/%E9%A1%B9%E7%9B%AE01ruoyi/><div class=article-details><h2 class=article-title>若依系统</h2></div></a></article><article><a href=/mysql/mysql%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC/><div class=article-details><h2 class=article-title>MySQL</h2></div></a></article><article><a href=/linux/kali/><div class=article-details><h2 class=article-title>Kali</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

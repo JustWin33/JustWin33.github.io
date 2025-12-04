@@ -2,8 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/project/%E9%A1%B9%E7%9B%AE04centos%E9%83%A8%E7%BD%B2mha/</loc>
+    <lastmod>2025-12-04T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2025-12-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-12-04T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -14,6 +17,18 @@
                 hreflang="zh-cn"
                 href="http://localhost:1313/"
                 />
+  </url><url>
+    <loc>http://localhost:1313/project/</loc>
+    <lastmod>2025-12-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/project/%E9%A1%B9%E7%9B%AE01ruoyi/</loc>
+    <lastmod>2025-12-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/project/%E9%A1%B9%E7%9B%AE02%E6%95%B0%E6%8D%AE%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/</loc>
+    <lastmod>2025-12-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/project/%E9%A1%B9%E7%9B%AE03%E8%8B%8F%E5%86%9C%E4%BA%91-app-%E9%A1%B9%E7%9B%AE%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2025-12-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/mysql/mysql%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC/</loc>
     <lastmod>2025-12-01T00:00:00+00:00</lastmod>

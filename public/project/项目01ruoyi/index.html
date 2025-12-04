@@ -1,0 +1,379 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="🚀 若依系统 (Ruoyi) Kubernetes 容器化部署完整实战手册\n版本说明：本手册基于 CentOS 7 + Kubernetes v1.20 + Docker 20.10 环境编写，修正了 NFS 权限、Docker Java 环境缺失、数据库防火墙拦截及 Service 端口映射错误等问题。\n"><title>若依系统</title><link rel=canonical href=http://localhost:1313/project/%E9%A1%B9%E7%9B%AE01ruoyi/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="若依系统"><meta property='og:description' content="🚀 若依系统 (Ruoyi) Kubernetes 容器化部署完整实战手册\n版本说明：本手册基于 CentOS 7 + Kubernetes v1.20 + Docker 20.10 环境编写，修正了 NFS 权限、Docker Java 环境缺失、数据库防火墙拦截及 Service 端口映射错误等问题。\n"><meta property='og:url' content='http://localhost:1313/project/%E9%A1%B9%E7%9B%AE01ruoyi/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Project'><meta property='article:published_time' content='2025-12-04T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-04T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="若依系统"><meta name=twitter:description content="🚀 若依系统 (Ruoyi) Kubernetes 容器化部署完整实战手册\n版本说明：本手册基于 CentOS 7 + Kubernetes v1.20 + Docker 20.10 环境编写，修正了 NFS 权限、Docker Java 环境缺失、数据库防火墙拦截及 Service 端口映射错误等问题。\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/links/><span>网站</span></a></li><li><a href=/linux/><span>Linux</span></a></li><li><a href=/docker/><span>docker</span></a></li><li><a href=/k8s/><span>k8s</span></a></li><li><a href=/mysql/><span>mysql</span></a></li><li><a href=/project/><span>项目</span></a></li><li><a href=/about/><span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#-0-核心-ip-规划表-基准配置>📋 0. 核心 IP 规划表 (基准配置)</a></li><li><a href=#第一阶段基础环境互通--nfs-客户端>第一阶段：基础环境互通 & NFS 客户端</a></li><li><a href=#第二阶段mysql-数据库部署-ip-192168200103>第二阶段：MySQL 数据库部署 (IP: 192.168.200.103)</a></li><li><a href=#第三阶段harbor-与-docker-信任配置-ip-192168200104>第三阶段：Harbor 与 Docker 信任配置 (IP: 192.168.200.104)</a></li><li><a href=#第四阶段构建镜像-在-harbor-104-上操作>第四阶段：构建镜像 (在 Harbor 104 上操作)</a></li><li><a href=#第五阶段nfs-存储服务端-ip-192168200106>第五阶段：NFS 存储服务端 (IP: 192.168.200.106)</a></li><li><a href=#第六阶段kubernetes-部署-在-master-100-上执行>第六阶段：Kubernetes 部署 (在 Master 100 上执行)</a><ol><li><a href=#1-部署-nfs-供应商--修正权限-bug>1. 部署 NFS 供应商 (🚨 修正权限 Bug)</a></li><li><a href=#2-部署应用--修正数据库连接--挂载覆盖问题>2. 部署应用 (🚨 修正数据库连接 & 挂载覆盖问题)</a></li><li><a href=#3-部署-service--修正端口映射问题>3. 部署 Service (🚨 修正端口映射问题)</a></li><li><a href=#4-部署-ingress>4. 部署 Ingress</a></li></ol></li><li><a href=#第七阶段最终验证>第七阶段：最终验证</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/project/%E9%A1%B9%E7%9B%AE01ruoyi/>若依系统</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-12-04</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 4 分钟</time></div></footer></div></header><section class=article-content><p>🚀 若依系统 (Ruoyi) Kubernetes 容器化部署完整实战手册</p><blockquote><p><strong>版本说明</strong>：本手册基于 <code>CentOS 7</code> + <code>Kubernetes v1.20</code> + <code>Docker 20.10</code> 环境编写，修正了 NFS 权限、Docker Java 环境缺失、数据库防火墙拦截及 Service 端口映射错误等问题。</p></blockquote><h2 id=-0-核心-ip-规划表-基准配置>📋 0. 核心 IP 规划表 (基准配置)</h2><div class=table-wrapper><table><thead><tr><th><strong>角色</strong></th><th><strong>主机名</strong></th><th><strong>IP 地址</strong></th><th><strong>关键说明</strong></th></tr></thead><tbody><tr><td><strong>K8s Master</strong></td><td><code>k8s-master</code></td><td><strong>192.168.200.100</strong></td><td>控制节点，执行 <code>kubectl</code> 的地方</td></tr><tr><td><strong>K8s Node1</strong></td><td><code>k8s-node1</code></td><td><strong>192.168.200.101</strong></td><td>Ingress 入口节点 (外部访问流量入口)</td></tr><tr><td><strong>K8s Node2</strong></td><td><code>k8s-node2</code></td><td><strong>192.168.200.102</strong></td><td>工作节点</td></tr><tr><td><strong>Database</strong></td><td><code>db-server</code></td><td><strong>192.168.200.103</strong></td><td>MySQL 物理机 (非 K8s 内)</td></tr><tr><td><strong>Harbor</strong></td><td><code>harbor</code></td><td><strong>192.168.200.104</strong></td><td>私有镜像仓库</td></tr><tr><td><strong>NFS</strong></td><td><code>nfs-server</code></td><td><strong>192.168.200.106</strong></td><td>共享存储服务器</td></tr></tbody></table></div><hr><h2 id=第一阶段基础环境互通--nfs-客户端>第一阶段：基础环境互通 & NFS 客户端</h2><p><strong>操作目的</strong>：确保机器互认，且所有 K8s 节点都能挂载 NFS 盘（<strong>修正点：</strong> 之前 Node 节点缺少 <code>nfs-utils</code> 导致挂载失败）。</p><p><strong>在所有 6 台机器上执行：</strong></p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 配置 Hosts 解析
+</span></span><span class=line><span class=cl>cat &gt;&gt; /etc/hosts &lt;&lt; EOF
+</span></span><span class=line><span class=cl>192.168.200.100 k8s-master
+</span></span><span class=line><span class=cl>192.168.200.101 k8s-node1
+</span></span><span class=line><span class=cl>192.168.200.102 k8s-node2
+</span></span><span class=line><span class=cl>192.168.200.103 db-server
+</span></span><span class=line><span class=cl>192.168.200.104 harbor
+</span></span><span class=line><span class=cl>192.168.200.106 nfs-server
+</span></span><span class=line><span class=cl>EOF
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 🚨 必须安装：防止 Pod 启动报 RunContainerError
+</span></span><span class=line><span class=cl>yum install -y nfs-utils
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=第二阶段mysql-数据库部署-ip-192168200103>第二阶段：MySQL 数据库部署 (IP: 192.168.200.103)</h2><p><strong>操作目的</strong>：部署数据库并允许 K8s 远程连接（<strong>修正点：</strong> 之前被防火墙拦截，且缺少用户授权）。</p><ol><li><p><strong>安装配置</strong></p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>tar -xvf mysql-5.7.40.tar.gz
+</span></span><span class=line><span class=cl>yum -y localinstall mysql-5.7.40/*
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mkdir -pv /data/mysql/{data,logs}
+</span></span><span class=line><span class=cl>chown -R mysql:mysql /data/mysql/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 写入配置
+</span></span><span class=line><span class=cl>cat &gt; /etc/my.cnf &lt;&lt;EOF
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl enable --now mysqld
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>安全设置与授权 (🚨 重点修正)</strong></p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 获取密码并登录
+</span></span><span class=line><span class=cl>grep password /data/mysql/logs/mysql.err
+</span></span><span class=line><span class=cl>mysql -uroot -p&#39;临时密码&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 修改 Root 密码
+</span></span><span class=line><span class=cl>set global validate_password_policy=0;
+</span></span><span class=line><span class=cl>set global validate_password_length=1;
+</span></span><span class=line><span class=cl>alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123123&#39;;
+</span></span><span class=line><span class=cl>flush privileges;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 3. 创建业务库与远程用户 (修复 Access denied)
+</span></span><span class=line><span class=cl>create database ruoyi_demo character set utf8;
+</span></span><span class=line><span class=cl># 创建 ruoyi_demo 用户，允许从任意地方 (%) 登录
+</span></span><span class=line><span class=cl>grant all privileges on ruoyi_demo.* to ruoyi_demo@&#39;%&#39; identified by &#39;123123&#39;;
+</span></span><span class=line><span class=cl>flush privileges;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 4. 导入数据
+</span></span><span class=line><span class=cl>use ruoyi_demo;
+</span></span><span class=line><span class=cl>source /root/ry_20240601.sql;
+</span></span><span class=line><span class=cl>exit
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>防火墙放行 (🚨 重点修正：修复 No route to host)</strong></p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 简单粗暴方案：直接关闭防火墙
+</span></span><span class=line><span class=cl>systemctl stop firewalld &amp;&amp; systemctl disable firewalld
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h2 id=第三阶段harbor-与-docker-信任配置-ip-192168200104>第三阶段：Harbor 与 Docker 信任配置 (IP: 192.168.200.104)</h2><p><strong>操作目的</strong>：让 K8s 能够从私有仓库拉取镜像（<strong>修正点：</strong> 确保所有节点信任 HTTP 仓库）。</p><ol><li><p><strong>部署 Harbor</strong> (在 104 执行)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> rpm_package/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>安装docker-compose
+</span></span><span class=line><span class=cl>chmod +x docker-compose
+</span></span><span class=line><span class=cl>mv docker-compose /usr/local/bin
+</span></span><span class=line><span class=cl>yum localinstall -y 03_docker_package/* docker_need_rpm_*/*
+</span></span><span class=line><span class=cl><span class=nb>cd</span> docker_harbor/
+</span></span><span class=line><span class=cl>tar xvf harbor-offline-installer-v2.30.tgz
+</span></span><span class=line><span class=cl>mv harbor /usr/local/
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /usr/local/harbor/
+</span></span><span class=line><span class=cl>mv harbor.yml.tmpl harbor.yml
+</span></span><span class=line><span class=cl>vim harbor.yml
+</span></span></code></pre></td></tr></table></div></div><ul><li>修改 <code>harbor.yml</code>：hostname 改为 <code>192.168.200.104</code>，注释掉 <code>https</code> 部分。</li><li>执行 <code>./install.sh</code>。</li><li>Web 界面新建公开项目：<code>car_prod</code>。</li></ul></li><li><p><strong>配置 Docker 信任</strong> (在 <strong>Master, Node1, Node2, Harbor</strong> 上执行)</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>vim</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>docker</span><span class=o>/</span><span class=n>daemon</span><span class=o>.</span><span class=n>json</span>
+</span></span><span class=line><span class=cl><span class=c1># 内容：</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;insecure-registries&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;192.168.200.104&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;exec-opts&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;native.cgroupdriver=systemd&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;registry-mirrors&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;https://docker.mirrors.ustc.edu.cn&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;storage-driver&#34;</span><span class=p>:</span> <span class=s2>&#34;overlay2&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重启并验证登录</span>
+</span></span><span class=line><span class=cl><span class=n>systemctl</span> <span class=n>daemon</span><span class=o>-</span><span class=n>reload</span> <span class=o>&amp;&amp;</span> <span class=n>systemctl</span> <span class=n>restart</span> <span class=n>docker</span>
+</span></span><span class=line><span class=cl><span class=n>docker</span> <span class=n>login</span> <span class=o>-</span><span class=n>u</span> <span class=n>admin</span> <span class=o>-</span><span class=n>p</span> <span class=n>Harbor12345</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=mf>192.168</span><span class=o>.</span><span class=mf>200.104</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h2 id=第四阶段构建镜像-在-harbor-104-上操作>第四阶段：构建镜像 (在 Harbor 104 上操作)</h2><p><strong>操作目的</strong>：构建带 Java 环境的业务镜像（<strong>修正点：</strong> 修复了之前 Dockerfile 缺少 Java 环境导致的 <code>executable file not found</code> 错误，并改用本地 CentOS 源）。</p><ol><li><p><strong>准备文件结构</strong></p><p>Plaintext</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>/data/docker/car_pro/
+</span></span><span class=line><span class=cl>├── Dockerfile
+</span></span><span class=line><span class=cl>├── software/jdk-8u11-linux-x64.tar.gz  (必须存在)
+</span></span><span class=line><span class=cl>└── project/ruoyi-admin.jar             (必须是 75M 的真包，不能是假空壳)
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>编写 Dockerfile (修正版)</strong></p><p>Dockerfile</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=c1># 使用本地 CentOS 7，不依赖外网</span>
+</span></span><span class=line><span class=cl><span class=n>FROM</span> <span class=n>centos</span><span class=p>:</span><span class=mi>7</span>
+</span></span><span class=line><span class=cl><span class=n>MAINTAINER</span> <span class=n>bdqn</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 解压 JDK</span>
+</span></span><span class=line><span class=cl><span class=n>ADD</span> <span class=n>software</span><span class=o>/</span><span class=n>jdk</span><span class=o>-</span><span class=mi>8</span><span class=n>u11</span><span class=o>-</span><span class=n>linux</span><span class=o>-</span><span class=n>x64</span><span class=o>.</span><span class=n>tar</span><span class=o>.</span><span class=n>gz</span> <span class=o>/</span><span class=n>usr</span><span class=o>/</span><span class=n>local</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 配置环境变量 (路径必须对)</span>
+</span></span><span class=line><span class=cl><span class=n>ENV</span> <span class=n>JAVA_HOME</span> <span class=o>/</span><span class=n>usr</span><span class=o>/</span><span class=n>local</span><span class=o>/</span><span class=n>jdk1</span><span class=o>.</span><span class=mf>8.0</span><span class=n>_11</span>
+</span></span><span class=line><span class=cl><span class=n>ENV</span> <span class=n>CLASSPATH</span> <span class=o>$</span><span class=n>JAVA_HOME</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>dt</span><span class=o>.</span><span class=n>jar</span><span class=p>:</span><span class=o>$</span><span class=n>JAVA_HOME</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>tools</span><span class=o>.</span><span class=n>jar</span>
+</span></span><span class=line><span class=cl><span class=n>ENV</span> <span class=n>PATH</span> <span class=o>$</span><span class=n>JAVA_HOME</span><span class=o>/</span><span class=n>bin</span><span class=p>:</span><span class=o>$</span><span class=n>PATH</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 复制 Jar 包到 /opt 目录</span>
+</span></span><span class=line><span class=cl><span class=n>ADD</span> <span class=n>project</span><span class=o>/</span> <span class=o>/</span><span class=n>opt</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设置工作目录</span>
+</span></span><span class=line><span class=cl><span class=n>WORKDIR</span> <span class=o>/</span><span class=n>opt</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=n>EXPOSE</span> <span class=mi>80</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动命令</span>
+</span></span><span class=line><span class=cl><span class=n>CMD</span> <span class=p>[</span><span class=s2>&#34;java&#34;</span><span class=p>,</span> <span class=s2>&#34;-Duser.timezone=Asia/Shanghai&#34;</span><span class=p>,</span> <span class=s2>&#34;-jar&#34;</span><span class=p>,</span> <span class=s2>&#34;ruoyi-admin.jar&#34;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>构建与推送</strong></p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>docker build -t 192.168.200.104/car_prod/ruoyi_demo:1.0 .
+</span></span><span class=line><span class=cl>docker push 192.168.200.104/car_prod/ruoyi_demo:1.0
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h2 id=第五阶段nfs-存储服务端-ip-192168200106>第五阶段：NFS 存储服务端 (IP: 192.168.200.106)</h2><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>mkdir</span> <span class=o>-</span><span class=n>pv</span> <span class=o>/</span><span class=n>data</span><span class=o>/</span><span class=n>store</span>
+</span></span><span class=line><span class=cl><span class=n>echo</span> <span class=s2>&#34;/data/store 192.168.200.0/24(rw,no_root_squash)&#34;</span> <span class=o>&gt;</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>exports</span>
+</span></span><span class=line><span class=cl><span class=n>systemctl</span> <span class=n>enable</span> <span class=o>--</span><span class=n>now</span> <span class=n>nfs</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=第六阶段kubernetes-部署-在-master-100-上执行>第六阶段：Kubernetes 部署 (在 Master 100 上执行)</h2><p><strong>这是核心部分，包含了所有修复后的 YAML 文件。</strong></p><h3 id=1-部署-nfs-供应商--修正权限-bug>1. 部署 NFS 供应商 (🚨 修正权限 Bug)</h3><p>使用修正后的 <code>01_services_account_nfs.yaml</code>，增加了 <code>endpoints</code> 权限，防止 <code>CrashLoopBackOff</code>。</p><p><strong>执行命令：</strong></p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 请使用之前对话中提供的完整 01-04 YAML 内容
+</span></span><span class=line><span class=cl>kubectl apply -f 01_services_account_nfs.yaml
+</span></span><span class=line><span class=cl>kubectl apply -f 02_nfs-deployment.yaml
+</span></span><span class=line><span class=cl>kubectl apply -f 03_nfs-storageclass.yaml
+</span></span><span class=line><span class=cl>kubectl apply -f 04_nfs-pvc-project.yaml
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-部署应用--修正数据库连接--挂载覆盖问题>2. 部署应用 (🚨 修正数据库连接 & 挂载覆盖问题)</h3><p>修正点 1：通过 env 注入数据库连接信息，指定 192.168.200.103 和 ruoyi_demo 用户。</p><p>修正点 2：修改挂载路径为 /opt/store，防止覆盖 Jar 包。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>vim 06_bdqn_project_car_prod.yaml
+</span></span></code></pre></td></tr></table></div></div><p>YAML</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>apiVersion: apps/v1
+</span></span><span class=line><span class=cl>kind: Deployment
+</span></span><span class=line><span class=cl>metadata:
+</span></span><span class=line><span class=cl>  name: bdqn-project-car
+</span></span><span class=line><span class=cl>spec:
+</span></span><span class=line><span class=cl>  replicas: 1
+</span></span><span class=line><span class=cl>  selector:
+</span></span><span class=line><span class=cl>    matchLabels:
+</span></span><span class=line><span class=cl>      app: carprod
+</span></span><span class=line><span class=cl>  template:
+</span></span><span class=line><span class=cl>    metadata:
+</span></span><span class=line><span class=cl>      labels:
+</span></span><span class=line><span class=cl>        app: carprod
+</span></span><span class=line><span class=cl>    spec:
+</span></span><span class=line><span class=cl>      containers:
+</span></span><span class=line><span class=cl>      - name: harbor-project-car
+</span></span><span class=line><span class=cl>        image: 192.168.200.104/car_prod/ruoyi_demo:1.0
+</span></span><span class=line><span class=cl>        imagePullPolicy: Always
+</span></span><span class=line><span class=cl>        ports:
+</span></span><span class=line><span class=cl>        - containerPort: 80
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        # 👇 修正：配置环境变量连接物理机数据库
+</span></span><span class=line><span class=cl>        env:
+</span></span><span class=line><span class=cl>        - name: SPRING_DATASOURCE_DRUID_MASTER_URL
+</span></span><span class=line><span class=cl>          value: &#34;jdbc:mysql://192.168.200.103:3306/ruoyi_demo?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false&amp;serverTimezone=GMT%2B8&#34;
+</span></span><span class=line><span class=cl>        - name: SPRING_DATASOURCE_DRUID_MASTER_PASSWORD
+</span></span><span class=line><span class=cl>          value: &#34;123123&#34;
+</span></span><span class=line><span class=cl>        - name: SPRING_DATASOURCE_DRUID_MASTER_USERNAME
+</span></span><span class=line><span class=cl>          value: &#34;ruoyi_demo&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        # 👇 修正：挂载到子目录，防止覆盖 Jar 包
+</span></span><span class=line><span class=cl>        volumeMounts:
+</span></span><span class=line><span class=cl>        - name: nfs-pvc
+</span></span><span class=line><span class=cl>          mountPath: /opt/store
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      volumes:
+</span></span><span class=line><span class=cl>      - name: nfs-pvc
+</span></span><span class=line><span class=cl>        persistentVolumeClaim:
+</span></span><span class=line><span class=cl>          claimName: nfs-project-pvc
+</span></span><span class=line><span class=cl>kubectl apply -f 06_bdqn_project_car_prod.yaml
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-部署-service--修正端口映射问题>3. 部署 Service (🚨 修正端口映射问题)</h3><p><strong>修正点</strong>：将 <code>targetPort</code> 改为 <code>80</code>，匹配容器内 Tomcat 端口，修复 503 错误。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>vim 07_bdqn_project_car_prod_services.yaml
+</span></span></code></pre></td></tr></table></div></div><p>YAML</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>apiVersion: v1
+</span></span><span class=line><span class=cl>kind: Service
+</span></span><span class=line><span class=cl>metadata:
+</span></span><span class=line><span class=cl>  name: bdqn-prod-svc
+</span></span><span class=line><span class=cl>  namespace: default
+</span></span><span class=line><span class=cl>spec:
+</span></span><span class=line><span class=cl>  selector:
+</span></span><span class=line><span class=cl>    app: carprod
+</span></span><span class=line><span class=cl>  ports:
+</span></span><span class=line><span class=cl>    - protocol: TCP
+</span></span><span class=line><span class=cl>      port: 80
+</span></span><span class=line><span class=cl>      targetPort: 80  # 🚨 修正：必须是 80，不能是 8080
+</span></span><span class=line><span class=cl>  type: ClusterIP
+</span></span><span class=line><span class=cl>kubectl apply -f 07_bdqn_project_car_prod_services.yaml
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-部署-ingress>4. 部署 Ingress</h3><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>kubectl apply -f 08_install_ingress_nginx.yaml
+</span></span><span class=line><span class=cl>kubectl apply -f 09_bdqn_project_car_prod_ingress.yaml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 🚨 绑定外网 IP (必做)
+</span></span><span class=line><span class=cl>kubectl edit svc ingress-nginx-controller -n ingress-nginx
+</span></span><span class=line><span class=cl># 在 spec 下添加：
+</span></span><span class=line><span class=cl># externalIPs:
+</span></span><span class=line><span class=cl># - 192.168.200.101
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=第七阶段最终验证>第七阶段：最终验证</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. Ingress Controller 必须运行在 Ready 的节点上</span>
+</span></span><span class=line><span class=cl>kubectl get pods -n ingress-nginx -o wide
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. Service 必须有 Endpoints</span>
+</span></span><span class=line><span class=cl>kubectl get endpoints bdqn-prod-svc
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. Ingress 规则已正确绑定</span>
+</span></span><span class=line><span class=cl>kubectl get ingress
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 4. 在 Node1 上测试本地访问（Pod IP 来自上面的 endpoints）</span>
+</span></span><span class=line><span class=cl>curl http://10.244.1.13
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 5. 在 Node1 上检查 80 端口是否监听</span>
+</span></span><span class=line><span class=cl>ss -tlnp <span class=p>|</span> grep <span class=m>80</span>
+</span></span></code></pre></td></tr></table></div></div><ol><li><p>Windows 配置 Hosts：</p><p>192.168.200.101 bqdn.project.mslinux.com</p></li><li><p>浏览器访问：</p><p><a class=link href=http://bqdn.project.mslinux.com/ target=_blank rel=noopener>http://bqdn.project.mslinux.com/</a></p></li></ol><p><strong>至此，若依系统应能完美运行！</strong></p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/project/%E9%A1%B9%E7%9B%AE04centos%E9%83%A8%E7%BD%B2mha/><div class=article-details><h2 class=article-title>centos部署MHA</h2></div></a></article><article><a href=/project/%E9%A1%B9%E7%9B%AE02%E6%95%B0%E6%8D%AE%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/><div class=article-details><h2 class=article-title>数据增量同步</h2></div></a></article><article><a href=/project/%E9%A1%B9%E7%9B%AE03%E8%8B%8F%E5%86%9C%E4%BA%91-app-%E9%A1%B9%E7%9B%AE%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/><div class=article-details><h2 class=article-title>苏农云项目部署</h2></div></a></article><article><a href=/mysql/mysql%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC/><div class=article-details><h2 class=article-title>MySQL</h2></div></a></article><article><a href=/linux/kali/><div class=article-details><h2 class=article-title>Kali</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

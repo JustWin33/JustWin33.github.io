@@ -1,0 +1,547 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="苏农云 APP 项目单机部署手册 环境信息：\n操作系统： Kylin Server 10 SP2 (x86) 服务器 IP： 192.168.200.111 (已根据您的情况写死，如IP变更请替换) 操作用户： root 验证状态： 已通过验证 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 ip a 注意看下面是ens33还是ens160 cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-ens160 TYPE=Ethernet BOOTPROTO=static NAME=ens160 DEVICE=ens160 ONBOOT=yes IPADDR=192.168.200.111 NETMASK=255.255.255.0 GATEWAY=192.168.200.2 DNS1=8.8.8.8 DNS2=114.114.114.114 EOF nmcli connection reload nmcli connection up ens160 ip addr show ens160 # 应该能看到192.168.200.111 ping 8.8.8.8 # 测试网络连通性 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 安装docker # 1. 编辑Docker repo文件 vim /etc/yum.repos.d/docker-ce.repo # 2. 将所有$releasever替换为8（共3处） # 将 baseurl=https://download.docker.com/linux/centos/$releasever/... # 改为 baseurl=https://download.docker.com/linux/centos/8/... # 或使用sed一键修改 sed -i 's/$releasever/8/g' /etc/yum.repos.d/docker-ce.repo # 3. 清理缓存并安装 yum clean all && yum makecache yum -y install docker-ce docker-ce-cli containerd.io docker --version systemctl start docker systemctl enable docker # 设置开机自启 运行测试 docker run hello-world 验证docker-compose docker compose version 第零步：彻底清理环境 (防止残留干扰) 为了确保万无一失，我们先清空之前所有可能出错的容器和文件。\n"><title>苏农云项目部署</title><link rel=canonical href=http://localhost:1313/project/%E9%A1%B9%E7%9B%AE03%E8%8B%8F%E5%86%9C%E4%BA%91-app-%E9%A1%B9%E7%9B%AE%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="苏农云项目部署"><meta property='og:description' content="苏农云 APP 项目单机部署手册 环境信息：\n操作系统： Kylin Server 10 SP2 (x86) 服务器 IP： 192.168.200.111 (已根据您的情况写死，如IP变更请替换) 操作用户： root 验证状态： 已通过验证 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 ip a 注意看下面是ens33还是ens160 cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-ens160 TYPE=Ethernet BOOTPROTO=static NAME=ens160 DEVICE=ens160 ONBOOT=yes IPADDR=192.168.200.111 NETMASK=255.255.255.0 GATEWAY=192.168.200.2 DNS1=8.8.8.8 DNS2=114.114.114.114 EOF nmcli connection reload nmcli connection up ens160 ip addr show ens160 # 应该能看到192.168.200.111 ping 8.8.8.8 # 测试网络连通性 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 安装docker # 1. 编辑Docker repo文件 vim /etc/yum.repos.d/docker-ce.repo # 2. 将所有$releasever替换为8（共3处） # 将 baseurl=https://download.docker.com/linux/centos/$releasever/... # 改为 baseurl=https://download.docker.com/linux/centos/8/... # 或使用sed一键修改 sed -i 's/$releasever/8/g' /etc/yum.repos.d/docker-ce.repo # 3. 清理缓存并安装 yum clean all && yum makecache yum -y install docker-ce docker-ce-cli containerd.io docker --version systemctl start docker systemctl enable docker # 设置开机自启 运行测试 docker run hello-world 验证docker-compose docker compose version 第零步：彻底清理环境 (防止残留干扰) 为了确保万无一失，我们先清空之前所有可能出错的容器和文件。\n"><meta property='og:url' content='http://localhost:1313/project/%E9%A1%B9%E7%9B%AE03%E8%8B%8F%E5%86%9C%E4%BA%91-app-%E9%A1%B9%E7%9B%AE%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Project'><meta property='article:published_time' content='2025-12-04T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-04T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="苏农云项目部署"><meta name=twitter:description content="苏农云 APP 项目单机部署手册 环境信息：\n操作系统： Kylin Server 10 SP2 (x86) 服务器 IP： 192.168.200.111 (已根据您的情况写死，如IP变更请替换) 操作用户： root 验证状态： 已通过验证 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 ip a 注意看下面是ens33还是ens160 cat <<EOF > /etc/sysconfig/network-scripts/ifcfg-ens160 TYPE=Ethernet BOOTPROTO=static NAME=ens160 DEVICE=ens160 ONBOOT=yes IPADDR=192.168.200.111 NETMASK=255.255.255.0 GATEWAY=192.168.200.2 DNS1=8.8.8.8 DNS2=114.114.114.114 EOF nmcli connection reload nmcli connection up ens160 ip addr show ens160 # 应该能看到192.168.200.111 ping 8.8.8.8 # 测试网络连通性 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 安装docker # 1. 编辑Docker repo文件 vim /etc/yum.repos.d/docker-ce.repo # 2. 将所有$releasever替换为8（共3处） # 将 baseurl=https://download.docker.com/linux/centos/$releasever/... # 改为 baseurl=https://download.docker.com/linux/centos/8/... # 或使用sed一键修改 sed -i 's/$releasever/8/g' /etc/yum.repos.d/docker-ce.repo # 3. 清理缓存并安装 yum clean all && yum makecache yum -y install docker-ce docker-ce-cli containerd.io docker --version systemctl start docker systemctl enable docker # 设置开机自启 运行测试 docker run hello-world 验证docker-compose docker compose version 第零步：彻底清理环境 (防止残留干扰) 为了确保万无一失，我们先清空之前所有可能出错的容器和文件。\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/links/><span>网站</span></a></li><li><a href=/linux/><span>Linux</span></a></li><li><a href=/docker/><span>docker</span></a></li><li><a href=/k8s/><span>k8s</span></a></li><li><a href=/mysql/><span>mysql</span></a></li><li><a href=/project/><span>项目</span></a></li><li><a href=/about/><span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#第零步彻底清理环境-防止残留干扰>第零步：彻底清理环境 (防止残留干扰)</a></li><li><a href=#第一步系统底层初始化-解决核心报错>第一步：系统底层初始化 (解决核心报错)</a></li><li><a href=#第二步资源解压-解决参数错误>第二步：资源解压 (解决参数错误)</a></li><li><a href=#第三步部署-mysql-数据库-percona-8>第三步：部署 MySQL 数据库 (Percona-8)</a></li><li><a href=#第四步部署-rabbitmq>第四步：部署 RabbitMQ</a></li><li><a href=#第五步部署-middleware-redis--memcached>第五步：部署 Middleware (Redis & Memcached)</a></li><li><a href=#第六步构建-tomcat-镜像>第六步：构建 Tomcat 镜像</a></li><li><a href=#第七步应用部署-最关键的一步>第七步：应用部署 (最关键的一步)</a></li><li><a href=#第八步最终访问>第八步：最终访问</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/project/%E9%A1%B9%E7%9B%AE03%E8%8B%8F%E5%86%9C%E4%BA%91-app-%E9%A1%B9%E7%9B%AE%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/>苏农云项目部署</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-12-04</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><h1 id=苏农云-app-项目单机部署手册>苏农云 APP 项目单机部署手册</h1><p><strong>环境信息：</strong></p><ul><li><strong>操作系统：</strong> Kylin Server 10 SP2 (x86)</li><li><strong>服务器 IP：</strong> <code>192.168.200.111</code> (已根据您的情况写死，如IP变更请替换)</li><li><strong>操作用户：</strong> root</li><li><strong>验证状态：</strong> 已通过验证</li></ul><hr><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ip a
+</span></span><span class=line><span class=cl>注意看下面是ens33还是ens160
+</span></span><span class=line><span class=cl>cat <span class=s>&lt;&lt;EOF &gt; /etc/sysconfig/network-scripts/ifcfg-ens160
+</span></span></span><span class=line><span class=cl><span class=s>TYPE=Ethernet
+</span></span></span><span class=line><span class=cl><span class=s>BOOTPROTO=static
+</span></span></span><span class=line><span class=cl><span class=s>NAME=ens160
+</span></span></span><span class=line><span class=cl><span class=s>DEVICE=ens160
+</span></span></span><span class=line><span class=cl><span class=s>ONBOOT=yes
+</span></span></span><span class=line><span class=cl><span class=s>IPADDR=192.168.200.111
+</span></span></span><span class=line><span class=cl><span class=s>NETMASK=255.255.255.0
+</span></span></span><span class=line><span class=cl><span class=s>GATEWAY=192.168.200.2
+</span></span></span><span class=line><span class=cl><span class=s>DNS1=8.8.8.8
+</span></span></span><span class=line><span class=cl><span class=s>DNS2=114.114.114.114
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>nmcli connection reload
+</span></span><span class=line><span class=cl>nmcli connection up ens160
+</span></span><span class=line><span class=cl>ip addr show ens160  <span class=c1># 应该能看到192.168.200.111</span>
+</span></span><span class=line><span class=cl>ping 8.8.8.8         <span class=c1># 测试网络连通性</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>安装docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 1. 编辑Docker repo文件</span>
+</span></span><span class=line><span class=cl>vim /etc/yum.repos.d/docker-ce.repo
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 将所有$releasever替换为8（共3处）</span>
+</span></span><span class=line><span class=cl><span class=c1># 将 baseurl=https://download.docker.com/linux/centos/$releasever/...</span>
+</span></span><span class=line><span class=cl><span class=c1># 改为 baseurl=https://download.docker.com/linux/centos/8/...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 或使用sed一键修改</span>
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/$releasever/8/g&#39;</span> /etc/yum.repos.d/docker-ce.repo
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 清理缓存并安装</span>
+</span></span><span class=line><span class=cl>yum clean all <span class=o>&amp;&amp;</span> yum makecache
+</span></span><span class=line><span class=cl>yum -y install docker-ce docker-ce-cli containerd.io
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker --version
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl start docker
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> docker  <span class=c1># 设置开机自启</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>运行测试
+</span></span><span class=line><span class=cl>docker run hello-world
+</span></span><span class=line><span class=cl>验证docker-compose
+</span></span><span class=line><span class=cl>docker compose version
+</span></span></code></pre></td></tr></table></div></div><h3 id=第零步彻底清理环境-防止残留干扰>第零步：彻底清理环境 (防止残留干扰)</h3><p>为了确保万无一失，我们先清空之前所有可能出错的容器和文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 停止并强制删除所有相关容器</span>
+</span></span><span class=line><span class=cl>docker rm -f percona8 redis rabbitmq memcached project_a project_m project_api 2&gt;/dev/null
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 清理旧的数据目录 (这一步会清空数据库，确保权限重置)</span>
+</span></span><span class=line><span class=cl>rm -rf /data/percona
+</span></span><span class=line><span class=cl>rm -rf /data/redis
+</span></span><span class=line><span class=cl>rm -rf /data/rabbitmq
+</span></span><span class=line><span class=cl>rm -rf /data/memcached
+</span></span><span class=line><span class=cl>rm -rf /data/project
+</span></span><span class=line><span class=cl>rm -rf /root/docker_build
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 重新创建干净的目录结构</span>
+</span></span><span class=line><span class=cl>mkdir -pv /data/software
+</span></span><span class=line><span class=cl>mkdir -pv /data/percona/<span class=o>{</span>data,log,conf<span class=o>}</span>
+</span></span><span class=line><span class=cl>mkdir -pv /data/redis/<span class=o>{</span>data,conf<span class=o>}</span>
+</span></span><span class=line><span class=cl>mkdir -pv /data/rabbitmq/<span class=o>{</span>data,home<span class=o>}</span>
+</span></span><span class=line><span class=cl>mkdir -pv /data/memcached
+</span></span><span class=line><span class=cl>mkdir -pv /data/project/<span class=o>{</span>a,m,api<span class=o>}</span>
+</span></span><span class=line><span class=cl>mkdir -pv /root/docker_build/software
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第一步系统底层初始化-解决核心报错>第一步：系统底层初始化 (解决核心报错)</h3><p><strong>解决历史问题：</strong></p><ul><li><code>OS errno 13 - Permission denied</code>: 通过关闭 SELinux 解决。</li><li><code>unable to allocate file descriptor</code>: 通过 ulimit 解决（在后续启动命令中）。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 核心：关闭 SELinux (必须执行，否则数据库必挂)</span>
+</span></span><span class=line><span class=cl>setenforce <span class=m>0</span>
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/SELINUX=enforcing/SELINUX=disabled/g&#39;</span> /etc/selinux/config
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 关闭防火墙 (确保外部能访问网站)</span>
+</span></span><span class=line><span class=cl>systemctl stop firewalld
+</span></span><span class=line><span class=cl>systemctl disable firewalld
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 配置 Host (解决应用内部域名解析)</span>
+</span></span><span class=line><span class=cl>hostnamectl set-hostname sny-app-dev
+</span></span><span class=line><span class=cl><span class=c1># 如果 hosts 里已经有旧IP，先删掉再加，防止冲突</span>
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;/sny-app-dev/d&#39;</span> /etc/hosts
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;192.168.200.111 sny-app-dev&#34;</span> &gt;&gt; /etc/hosts
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第二步资源解压-解决参数错误>第二步：资源解压 (解决参数错误)</h3><p><strong>解决历史问题：</strong></p><ul><li><code>unzip -0</code> 报错: 修正为 <code>-O</code> (大写字母)。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> /data/software
+</span></span><span class=line><span class=cl><span class=c1># 确保 zip 包已上传。使用 -O (大写字母O) 指定 gbk 编码</span>
+</span></span><span class=line><span class=cl><span class=c1># 如果提示是否替换(replace)，输入 A 回车</span>
+</span></span><span class=line><span class=cl>unzip -O gbk source_package_230221_v1.zip
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第三步部署-mysql-数据库-percona-8>第三步：部署 MySQL 数据库 (Percona-8)</h3><p><strong>解决历史问题：</strong></p><ul><li>无限重启: 修正配置文件权限为 644。</li><li><code>cp</code> 找不到文件: 修正了 <code>.sql</code> 文件源路径。</li></ul><p><strong>3.1 生成配置文件与权限修正</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 写入配置</span>
+</span></span><span class=line><span class=cl>cat &gt; /data/percona/conf/my.cnf <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>[mysqld]
+</span></span></span><span class=line><span class=cl><span class=s>datadir=/var/lib/mysql
+</span></span></span><span class=line><span class=cl><span class=s>socket=/var/lib/mysql/mysql.sock
+</span></span></span><span class=line><span class=cl><span class=s>character_set_server=gbk
+</span></span></span><span class=line><span class=cl><span class=s>log-error=/var/log/mysqld.log
+</span></span></span><span class=line><span class=cl><span class=s>pid-file=/var/run/mysqld/mysqld.pid
+</span></span></span><span class=line><span class=cl><span class=s>innodb_log_file_size=1024M
+</span></span></span><span class=line><span class=cl><span class=s>innodb_strict_mode=0
+</span></span></span><span class=line><span class=cl><span class=s>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+</span></span></span><span class=line><span class=cl><span class=s>!includedir /etc/my.cnf.d
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 【关键】修正权限：配置文件必须是 644，绝不能是 777</span>
+</span></span><span class=line><span class=cl>chmod <span class=m>644</span> /data/percona/conf/my.cnf
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 【关键】修正数据目录归属 (Percona 容器内用户 ID 为 1001)</span>
+</span></span><span class=line><span class=cl>touch /data/percona/log/mysqld.log
+</span></span><span class=line><span class=cl>chmod <span class=m>666</span> /data/percona/log/mysqld.log
+</span></span><span class=line><span class=cl>chown -R 1001:1001 /data/percona/data
+</span></span><span class=line><span class=cl>chown -R 1001:1001 /data/percona/log
+</span></span></code></pre></td></tr></table></div></div><p><strong>3.2 启动数据库</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -d --name percona8 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --privileged<span class=o>=</span><span class=nb>true</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --restart<span class=o>=</span>always <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -p 3306:3306 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -e <span class=nv>MYSQL_ROOT_PASSWORD</span><span class=o>=</span><span class=s2>&#34;znxd@230220&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /etc/localtime:/etc/localtime:ro <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/percona/data:/var/lib/mysql:rw <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/percona/conf/my.cnf:/etc/my.cnf:rw <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/percona/log/mysqld.log:/var/log/mysqld.log:rw <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  percona:8
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;等待数据库启动 (15秒)...&#34;</span>
+</span></span><span class=line><span class=cl>sleep <span class=m>15</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>3.3 导入数据</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 拷贝 SQL 文件 (注意路径包含 /source/)</span>
+</span></span><span class=line><span class=cl>cp /data/software/source/*.sql /data/percona/data/
+</span></span><span class=line><span class=cl>chmod <span class=m>644</span> /data/percona/data/*.sql
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 执行导入 (自动执行，无需交互)</span>
+</span></span><span class=line><span class=cl>docker <span class=nb>exec</span> -i percona8 mysql -uroot -p<span class=s1>&#39;znxd@230220&#39;</span> <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>create database if not exists cmscloud character set gbk;
+</span></span></span><span class=line><span class=cl><span class=s>create database if not exists erpcloud character set gbk;
+</span></span></span><span class=line><span class=cl><span class=s>create database if not exists appcloud character set gbk;
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>create user if not exists cmscloud@&#39;%&#39; identified by &#39;Cmscloud!230221&#39;;
+</span></span></span><span class=line><span class=cl><span class=s>grant all privileges on *.* to cmscloud@&#39;%&#39; with grant option;
+</span></span></span><span class=line><span class=cl><span class=s>flush privileges;
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>use cmscloud;
+</span></span></span><span class=line><span class=cl><span class=s>source /var/lib/mysql/cmscloud.sql;
+</span></span></span><span class=line><span class=cl><span class=s>use appcloud;
+</span></span></span><span class=line><span class=cl><span class=s>source /var/lib/mysql/appcloud.sql;
+</span></span></span><span class=line><span class=cl><span class=s>use erpcloud;
+</span></span></span><span class=line><span class=cl><span class=s>source /var/lib/mysql/erpcloud.sql;
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>alter user &#39;cmscloud&#39;@&#39;%&#39; identified with mysql_native_password by &#39;Cmscloud!230221&#39;;
+</span></span></span><span class=line><span class=cl><span class=s>flush privileges;
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第四步部署-rabbitmq>第四步：部署 RabbitMQ</h3><p><strong>解决历史问题：</strong></p><ul><li>崩溃/Exit 15: 修正数据目录权限为 999:999 (严禁 777)。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 1. 修正权限 (容器内用户 ID 为 999)</span>
+</span></span><span class=line><span class=cl>chown -R 999:999 /data/rabbitmq
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 启动容器</span>
+</span></span><span class=line><span class=cl>docker run -d --name rabbitmq <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --privileged<span class=o>=</span><span class=nb>true</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --restart<span class=o>=</span>always <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -p 5672:5672 -p 15672:15672 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/rabbitmq/data:/var/lib/rabbitmq <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/rabbitmq/home:/var/lib/rabbitmq/mnesia <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  rabbitmq:3.8.14
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 等待启动 (必须等待，否则无法配置用户)</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;等待 RabbitMQ 启动 (15秒)...&#34;</span>
+</span></span><span class=line><span class=cl>sleep <span class=m>15</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 4. 配置用户</span>
+</span></span><span class=line><span class=cl>docker <span class=nb>exec</span> -it rabbitmq bash -c <span class=s2>&#34;rabbitmqctl add_user admin 7548777 &amp;&amp; rabbitmqctl set_user_tags admin administrator &amp;&amp; rabbitmqctl set_permissions -p / admin &#39;.*&#39; &#39;.*&#39; &#39;.*&#39;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第五步部署-middleware-redis--memcached>第五步：部署 Middleware (Redis & Memcached)</h3><p><strong>解决历史问题：</strong></p><ul><li>Memcached 版本报错: 使用 <code>latest</code> 替代不存在的 <code>3.1.3</code>。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Redis</span>
+</span></span><span class=line><span class=cl>cat &gt; /data/redis/conf/redis.conf <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>bind 0.0.0.0
+</span></span></span><span class=line><span class=cl><span class=s>protected-mode no
+</span></span></span><span class=line><span class=cl><span class=s>port 6379
+</span></span></span><span class=line><span class=cl><span class=s>requirepass znxd@230220
+</span></span></span><span class=line><span class=cl><span class=s>timeout 0
+</span></span></span><span class=line><span class=cl><span class=s>daemonize no
+</span></span></span><span class=line><span class=cl><span class=s>appendonly yes
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker run -d --name redis <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --privileged<span class=o>=</span><span class=nb>true</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --restart<span class=o>=</span>always <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -p 6379:6379 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/redis/data:/data:rw <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/redis/conf:/etc/redis/:rw <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  redis:6.0.5 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  redis-server /etc/redis/redis.conf
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Memcached</span>
+</span></span><span class=line><span class=cl>docker run -d --name memcached --privileged<span class=o>=</span><span class=nb>true</span> --restart<span class=o>=</span>always -p 11211:11211 memcached
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第六步构建-tomcat-镜像>第六步：构建 Tomcat 镜像</h3><p><strong>解决历史问题：</strong></p><ul><li>Docker build 找不到文件: 创建专用构建目录。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir -p /root/docker_build/software
+</span></span><span class=line><span class=cl><span class=c1># 1. 准备文件</span>
+</span></span><span class=line><span class=cl>cp /data/software/apache-tomcat-9.0.71.tar.gz /root/docker_build/software/
+</span></span><span class=line><span class=cl>cp /data/software/jdk-8u11-linux-x64.tar.gz /root/docker_build/software/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>检查文件是否到位
+</span></span><span class=line><span class=cl>ls -lh /root/docker_build/software
+</span></span><span class=line><span class=cl><span class=c1># 2. 生成 Dockerfile</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /root/docker_build
+</span></span><span class=line><span class=cl>cat &gt; Dockerfile <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>FROM debian
+</span></span></span><span class=line><span class=cl><span class=s>MAINTAINER mslinux&lt;mslinux@163.com&gt;
+</span></span></span><span class=line><span class=cl><span class=s>ADD software/jdk-8u11-linux-x64.tar.gz /data/
+</span></span></span><span class=line><span class=cl><span class=s>ADD software/apache-tomcat-9.0.71.tar.gz /data/
+</span></span></span><span class=line><span class=cl><span class=s>WORKDIR /data
+</span></span></span><span class=line><span class=cl><span class=s>ENV JAVA_HOME /data/jdk1.8.0_11
+</span></span></span><span class=line><span class=cl><span class=s>ENV PATH \$PATH:\$JAVA_HOME/bin
+</span></span></span><span class=line><span class=cl><span class=s>EXPOSE 8080
+</span></span></span><span class=line><span class=cl><span class=s>CMD /data/apache-tomcat-9.0.71/bin/startup.sh &amp;&amp; tail -f /data/apache-tomcat-9.0.71/logs/catalina.out
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 构建</span>
+</span></span><span class=line><span class=cl>docker build -t znxd_tomcat9_java8:1.0 .
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第七步应用部署-最关键的一步>第七步：应用部署 (最关键的一步)</h3><p><strong>解决历史问题：</strong></p><ul><li><p><code>cp</code> 报错: 预先创建了 <code>{a,m,api}</code> 目录。</p></li><li><p><strong>打不开网站</strong>: 配置文件 IP 错误 (<code>172...</code> -> <code>192...</code>)。</p></li><li><p><strong>Tomcat 崩溃</strong>: 添加了 <code>ulimit</code> 和 <code>-Xmx512m</code> 内存限制。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir -pv /data/project/<span class=o>{</span>a,m,api<span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><p><strong>7.1 拷贝代码</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cp -ar /data/software/source/a.hzd360.com/ROOT/* /data/project/a/
+</span></span><span class=line><span class=cl>cp -ar /data/software/source/m.hzd360.com/ROOT/* /data/project/m/
+</span></span><span class=line><span class=cl>cp -ar /data/software/source/api.hzd360.com/ROOT/* /data/project/api/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>以输入 ls /data/project/a/，如果看到里面有很多文件（不是空的），说明拷贝成功了。
+</span></span></code></pre></td></tr></table></div></div><p><strong>7.2 一键修正所有配置文件 (使用您的真实IP)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># A 项目</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /data/project/a/WEB-INF/classes/
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/192.168.3.77/192.168.200.111/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/172.18.8.138/192.168.200.111/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/cmscloud1111/Cmscloud!230221/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/host=.*/host=192.168.200.111/g&#39;</span> redis.properties redis_info.properties
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/pass=.*/pass=znxd@230220/g&#39;</span> redis.properties redis_info.properties
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># M 项目</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /data/project/m/WEB-INF/classes/
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/192.168.3.77/192.168.200.111/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/172.18.8.138/192.168.200.111/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/cmscloud1111/Cmscloud!230221/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/192.168.1.201/192.168.200.111/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/host=.*/host=192.168.200.111/g&#39;</span> redis.properties redis_info.properties
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/pass=.*/pass=znxd@230220/g&#39;</span> redis.properties redis_info.properties
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># API 项目</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /data/project/api/WEB-INF/classes/
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/192.168.3.77/192.168.200.111/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/172.18.8.138/192.168.200.111/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/192.168.1.148/192.168.200.111/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/cmscloud1111/Cmscloud!230221/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/&lt;uid&gt;erpcloud&lt;\/uid&gt;/&lt;uid&gt;cmscloud&lt;\/uid&gt;/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/erpcloud1111/Cmscloud!230221/g&#39;</span> config.xml
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/host=.*/host=192.168.200.111/g&#39;</span> redis.properties redis_info.properties
+</span></span><span class=line><span class=cl>sed -i <span class=s1>&#39;s/pass=.*/pass=znxd@230220/g&#39;</span> redis.properties redis_info.properties
+</span></span></code></pre></td></tr></table></div></div><p><strong>7.3 启动应用 (带内存保护和句柄限制)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 启动 Project A (后台)</span>
+</span></span><span class=line><span class=cl>docker run -d --name project_a <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --privileged<span class=o>=</span><span class=nb>true</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --restart<span class=o>=</span>always <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -p 10001:8080 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --ulimit <span class=nv>nofile</span><span class=o>=</span>65535:65535 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -e <span class=nv>JAVA_OPTS</span><span class=o>=</span><span class=s2>&#34;-Xms256m -Xmx512m&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/project/a:/data/apache-tomcat-9.0.71/webapps/ROOT:rw <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  znxd_tomcat9_java8:1.0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动 Project M (移动端)</span>
+</span></span><span class=line><span class=cl>docker run -d --name project_m <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --privileged<span class=o>=</span><span class=nb>true</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --restart<span class=o>=</span>always <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -p 10002:8080 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --ulimit <span class=nv>nofile</span><span class=o>=</span>65535:65535 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -e <span class=nv>JAVA_OPTS</span><span class=o>=</span><span class=s2>&#34;-Xms256m -Xmx512m&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/project/m:/data/apache-tomcat-9.0.71/webapps/ROOT:rw <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  znxd_tomcat9_java8:1.0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动 Project API (接口)</span>
+</span></span><span class=line><span class=cl>docker run -d --name project_api <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --privileged<span class=o>=</span><span class=nb>true</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --restart<span class=o>=</span>always <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -p 10003:8080 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --ulimit <span class=nv>nofile</span><span class=o>=</span>65535:65535 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -e <span class=nv>JAVA_OPTS</span><span class=o>=</span><span class=s2>&#34;-Xms256m -Xmx512m&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/project/api:/data/apache-tomcat-9.0.71/webapps/ROOT:rw <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  znxd_tomcat9_java8:1.0
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=第八步最终访问>第八步：最终访问</h3><p><strong>等待 2-3 分钟</strong> 让所有 Java 服务完成启动，然后访问：</p><ul><li><strong>管理后台:</strong> <code>http://192.168.200.111:10001</code> (验证通过)</li><li><strong>移动端:</strong> <code>http://192.168.200.111:10002/app/?userid=13592052010</code></li><li><strong>API:</strong> <code>http://192.168.200.111:10003/api/myApp.jsp</code></li></ul></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/project/%E9%A1%B9%E7%9B%AE04centos%E9%83%A8%E7%BD%B2mha/><div class=article-details><h2 class=article-title>centos部署MHA</h2></div></a></article><article><a href=/project/%E9%A1%B9%E7%9B%AE02%E6%95%B0%E6%8D%AE%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/><div class=article-details><h2 class=article-title>数据增量同步</h2></div></a></article><article><a href=/project/%E9%A1%B9%E7%9B%AE01ruoyi/><div class=article-details><h2 class=article-title>若依系统</h2></div></a></article><article><a href=/mysql/mysql%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC/><div class=article-details><h2 class=article-title>MySQL</h2></div></a></article><article><a href=/linux/kali/><div class=article-details><h2 class=article-title>Kali</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -158,14 +158,14 @@ menu:
       name:  首页 
       url: /
       weight: 1
-    - identifier: 
-      name: 
-      url: 
-      weight: 
+    - identifier: project 
+      name: 项目
+      url: /project/
+      weight: 7
     - identifier: about
       name: 关于
       url: /about/       
-      weight: 7
+      weight: 8
     - identifier: links
       name: 网站
       url: /links/
