@@ -1,5 +1,5 @@
 ---
-title: Linux工具
+title: Linux工具性命令
 description: 
 date: 2025-11-09
 categories:
