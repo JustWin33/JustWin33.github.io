@@ -7,7 +7,393 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>© 2025 win. 保留所有权利.</copyright>
-        <lastBuildDate>Wed, 19 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/k8s/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 07 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/k8s/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Kubernetes全栈知识体系</title>
+        <link>http://localhost:1313/k8s/kubernetes%E5%85%A8%E6%A0%88%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/</link>
+        <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/k8s/kubernetes%E5%85%A8%E6%A0%88%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/</guid>
+        <description>&lt;p&gt;Kubernetes全栈知识体系&lt;/p&gt;
+&lt;h2 id=&#34;第一部分核心架构与原理&#34;&gt;第一部分：核心架构与原理
+&lt;/h2&gt;&lt;h3 id=&#34;11-kubernetes-定义与架构&#34;&gt;1.1 Kubernetes 定义与架构
+&lt;/h3&gt;&lt;p&gt;Kubernetes 是一个开源的容器编排平台，用于自动化部署、扩展和管理容器化应用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;集群架构（Control Plane - Node Model）&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Master 节点（控制平面）&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;kube-apiserver&lt;/strong&gt;：集群统一入口，处理 REST API 请求，负责认证鉴权。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;kube-controller-manager&lt;/strong&gt;：运行核心控制器（如 Node、Replication 控制器），维持集群期望状态。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;kube-scheduler&lt;/strong&gt;：负责 Pod 调度，根据资源、亲和性等策略选择最优节点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;etcd&lt;/strong&gt;：分布式键值存储，保存集群所有状态数据，是集群的“大脑”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Node 节点（工作节点）&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;kubelet&lt;/strong&gt;：节点代理，管理 Pod 生命周期，执行健康检查。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;kube-proxy&lt;/strong&gt;：维护网络规则（iptables/IPVS），实现 Service 负载均衡。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;容器运行时&lt;/strong&gt;：如 containerd 或 Docker，负责运行容器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;12-pod-核心原理与创建全流程&#34;&gt;1.2 Pod 核心原理与创建全流程
+&lt;/h3&gt;&lt;p&gt;Pod 是 K8s 的最小调度单元。一个 Pod 创建的完整流程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;客户端提交&lt;/strong&gt;：kubectl 向 apiserver 发送 REST API 请求。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证存储&lt;/strong&gt;：apiserver 认证鉴权后将 metadata 存入 etcd（状态 Pending）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;调度决策&lt;/strong&gt;：scheduler 监听到新 Pod，执行**预选（Predicate）&lt;strong&gt;和&lt;/strong&gt;优选（Priority）**算法选择节点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;绑定节点&lt;/strong&gt;：apiserver 更新 Pod 的 &lt;code&gt;nodeName&lt;/code&gt; 字段并写入 etcd。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;节点执行&lt;/strong&gt;：目标节点的 kubelet 监听到绑定事件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;容器启动&lt;/strong&gt;：kubelet 调用 CRI（容器运行时接口）拉取镜像、启动容器；调用 CNI（网络接口）分配 IP。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态上报&lt;/strong&gt;：kubelet 执行健康检查，更新状态为 Running。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第二部分生产级集群部署&#34;&gt;第二部分：生产级集群部署
+&lt;/h2&gt;&lt;h3 id=&#34;21-部署方式选择&#34;&gt;2.1 部署方式选择
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Minikube&lt;/strong&gt;：单节点，适合本地学习。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Kubeadm&lt;/strong&gt;：官方推荐，支持高可用，适合生产和测试。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;二进制部署&lt;/strong&gt;：手动配置所有组件，极度灵活但维护成本高。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;22-kubeadm-部署关键步骤centosubuntu&#34;&gt;2.2 Kubeadm 部署关键步骤（CentOS/Ubuntu）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;环境准备&lt;/strong&gt;：关闭 Swap、SELinux、防火墙；配置内核参数（开启 IP 转发和 bridge-nf）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安装运行时&lt;/strong&gt;：推荐使用 &lt;strong&gt;containerd&lt;/strong&gt;，需配置 &lt;code&gt;SystemdCgroup = true&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;初始化 Master&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;Bash&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;kubeadm init --apiserver-advertise-address=&amp;lt;MasterIP&amp;gt; --pod-network-cidr=10.244.0.0/16 --image-repository=registry.aliyuncs.com/google_containers
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安装网络插件&lt;/strong&gt;：常用 Calico（适合大规模、支持策略）或 Flannel（简单 overlay）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;节点加入&lt;/strong&gt;：在 Worker 节点执行 &lt;code&gt;kubeadm join&lt;/code&gt; 命令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第三部分工作负载与调度管理&#34;&gt;第三部分：工作负载与调度管理
+&lt;/h2&gt;&lt;h3 id=&#34;31-deployment无状态应用管理&#34;&gt;3.1 Deployment：无状态应用管理
+&lt;/h3&gt;&lt;p&gt;Deployment 提供副本控制、滚动更新和回滚能力。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;生产级配置示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;YAML&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apiVersion: apps/v1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;kind: Deployment
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;spec:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  replicas: 3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  strategy:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    type: RollingUpdate
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    rollingUpdate:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      maxUnavailable: 1  # 更新时最大不可用数
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      maxSurge: 1        # 更新时最大激增数
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  template:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    spec:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      affinity:          # 亲和性调度
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        podAntiAffinity: # Pod反亲和（避免单点故障）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          preferredDuringSchedulingIgnoredDuringExecution:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          - weight: 100
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            podAffinityTerm:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              labelSelector:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                matchLabels:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                  app: my-app
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;              topologyKey: kubernetes.io/hostname
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      containers:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      - name: app
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        resources:       # 必须配置资源限制
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          requests: {memory: &amp;#34;512Mi&amp;#34;, cpu: &amp;#34;250m&amp;#34;}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          limits:   {memory: &amp;#34;1Gi&amp;#34;, cpu: &amp;#34;500m&amp;#34;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;32-健康检查probes&#34;&gt;3.2 健康检查（Probes）
+&lt;/h3&gt;&lt;p&gt;K8s 提供三种探针，生产环境建议全部配置：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;LivenessProbe（存活探针）&lt;/strong&gt;：检测容器是否死锁。失败则&lt;strong&gt;重启容器&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ReadinessProbe（就绪探针）&lt;/strong&gt;：检测服务是否可用。失败则&lt;strong&gt;从 Service Endpoints 移除&lt;/strong&gt;，不接收流量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;StartupProbe（启动探针）&lt;/strong&gt;：保护启动慢的应用。成功前抑制其他探针，避免启动中被误杀。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;33-其他工作负载&#34;&gt;3.3 其他工作负载
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;StatefulSet&lt;/strong&gt;：管理有状态应用（如 MySQL），提供稳定网络标识（web-0, web-1）和有序部署。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DaemonSet&lt;/strong&gt;：在每个节点运行一个副本（如日志采集 Fluentd、监控 NodeExporter）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第四部分存储体系&#34;&gt;第四部分：存储体系
+&lt;/h2&gt;&lt;h3 id=&#34;41-存储分层概念&#34;&gt;4.1 存储分层概念
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Volume&lt;/strong&gt;：Pod 内部存储，随 Pod 生命周期消亡。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PV (PersistentVolume)&lt;/strong&gt;：集群级资源，由管理员创建。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PVC (PersistentVolumeClaim)&lt;/strong&gt;：用户对存储的申请请求。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;StorageClass&lt;/strong&gt;：定义存储类型，实现动态自动创建 PV。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;42-常用存储类型实战&#34;&gt;4.2 常用存储类型实战
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;emptyDir&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;特点&lt;/strong&gt;：临时存储，Pod 删除数据即丢失。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;场景&lt;/strong&gt;：缓存、日志收集 sidecar 共享数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;hostPath&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;特点&lt;/strong&gt;：挂载节点本地文件系统。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;风险&lt;/strong&gt;：Pod 漂移后数据丢失，存在安全风险。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;场景&lt;/strong&gt;：监控、日志采集类 DaemonSet。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;NFS（网络存储）&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;实战&lt;/strong&gt;：需在 Master 部署 NFS Server，Node 安装 &lt;code&gt;nfs-utils&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PV 配置&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;YAML&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apiVersion: v1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;kind: PersistentVolume
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;spec:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  capacity: {storage: 1Gi}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  accessModes: [ReadWriteMany] # 支持多节点读写
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  nfs:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    path: /nfs/data
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    server: 192.168.200.100
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第五部分网络与服务暴露&#34;&gt;第五部分：网络与服务暴露
+&lt;/h2&gt;&lt;h3 id=&#34;51-service-类型对比&#34;&gt;5.1 Service 类型对比
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;描述&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ClusterIP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;默认，仅集群内访问&lt;/td&gt;
+          &lt;td&gt;内部微服务调用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;NodePort&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;开放节点静态端口 (30000-32767)&lt;/td&gt;
+          &lt;td&gt;开发测试，非 HTTP 业务&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;LoadBalancer&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;需云厂商支持，分配公网 IP&lt;/td&gt;
+          &lt;td&gt;公有云生产环境&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ExternalName&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;映射到外部 DNS&lt;/td&gt;
+          &lt;td&gt;访问集群外服务&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;52-ingress统一入口&#34;&gt;5.2 Ingress（统一入口）
+&lt;/h3&gt;&lt;p&gt;Ingress 是 HTTP/HTTPS 的路由规则，需配合 Ingress Controller（如 Nginx）使用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;生产级 Nginx Ingress 部署&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;模式&lt;/strong&gt;：建议使用 &lt;code&gt;hostNetwork: true&lt;/code&gt;，直接监听节点 80/443 端口，减少 NAT 性能损耗。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;功能&lt;/strong&gt;：支持 URL 重写、SSL 卸载、限流、黑白名单。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;YAML 示例&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;YAML&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;apiVersion: networking.k8s.io/v1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;kind: Ingress
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;metadata:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  annotations:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    nginx.ingress.kubernetes.io/ssl-redirect: &amp;#34;true&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;spec:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  rules:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  - host: app.example.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    http:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      paths:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      - path: /
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        pathType: Prefix
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        backend:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          service: {name: my-svc, port: {number: 80}}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第六部分配置管理与安全&#34;&gt;第六部分：配置管理与安全
+&lt;/h2&gt;&lt;h3 id=&#34;61-configmap-与-secret&#34;&gt;6.1 ConfigMap 与 Secret
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ConfigMap&lt;/strong&gt;：明文存储非敏感配置（如配置文件、环境变量）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secret&lt;/strong&gt;：Base64 编码存储敏感信息（密码、证书）。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;最佳实践&lt;/strong&gt;：推荐使用 &lt;strong&gt;Volume 挂载&lt;/strong&gt;方式使用 Secret，支持&lt;strong&gt;热更新&lt;/strong&gt;（kubelet 周期性同步），而环境变量方式必须重启 Pod。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;62-rbac-权限控制&#34;&gt;6.2 RBAC 权限控制
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Role/ClusterRole&lt;/strong&gt;：定义权限集合（Rules）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RoleBinding/ClusterBinding&lt;/strong&gt;：将角色绑定到用户或 ServiceAccount。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第七部分系统化排错与诊断&#34;&gt;第七部分：系统化排错与诊断
+&lt;/h2&gt;&lt;h3 id=&#34;71-核心排错命令三剑客&#34;&gt;7.1 核心排错命令三剑客
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;kubectl get pods&lt;/code&gt;&lt;/strong&gt;：查看状态（Pending/CrashLoopBackOff）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;kubectl describe pod &lt;/code&gt;&lt;/strong&gt;：&lt;strong&gt;最关键一步&lt;/strong&gt;，查看 Events 事件（调度失败、镜像拉取失败、挂载失败）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;kubectl logs &lt;/code&gt;&lt;/strong&gt;：查看应用内部日志。
+&lt;ul&gt;
+&lt;li&gt;若容器频繁重启，使用 &lt;code&gt;kubectl logs -p &lt;/code&gt; 查看&lt;strong&gt;上一次&lt;/strong&gt;崩溃的日志。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;72-常见状态故障排查&#34;&gt;7.2 常见状态故障排查
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;状态&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;常见原因&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;排查与解决&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Pending&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;资源不足、污点限制、PVC未绑定&lt;/td&gt;
+          &lt;td&gt;检查 &lt;code&gt;describe&lt;/code&gt; 中的 Events；检查节点资源；检查 StorageClass。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ImagePullBackOff&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;镜像名错误、认证失败、网络问题&lt;/td&gt;
+          &lt;td&gt;检查镜像名称；检查 Secret 是否配置正确；手动在节点 docker pull 测试。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;CrashLoopBackOff&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;应用启动报错、配置错误、探针失败&lt;/td&gt;
+          &lt;td&gt;查看 &lt;code&gt;logs&lt;/code&gt; 和 &lt;code&gt;logs --previous&lt;/code&gt;；检查 ConfigMap 挂载；调整探针阈值。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;NotReady&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;就绪探针失败&lt;/td&gt;
+          &lt;td&gt;检查应用端口是否监听；检查 ReadinessProbe 路径是否正确。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Terminating&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;finalizer 卡住、挂载无法卸载&lt;/td&gt;
+          &lt;td&gt;检查存储连接；强制删除：&lt;code&gt;kubectl delete pod  --force --grace-period=0&lt;/code&gt;。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;73-网络与-service-排错&#34;&gt;7.3 网络与 Service 排错
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;检查 Endpoints&lt;/strong&gt;：&lt;code&gt;kubectl get endpoints &lt;/code&gt;，若为空，说明 Pod 标签未匹配或 Pod 未就绪。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测试连通性&lt;/strong&gt;：使用 &lt;code&gt;busybox&lt;/code&gt; 容器在集群内 &lt;code&gt;curl :&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;检查 DNS&lt;/strong&gt;：&lt;code&gt;nslookup &lt;/code&gt;，检查 CoreDNS 状态。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第八部分生产环境最佳实践清单&#34;&gt;第八部分：生产环境最佳实践清单
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;资源管理&lt;/strong&gt;：所有 Pod 必须设置 request（调度保障）和 limits（防止 OOM）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高可用&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Master 节点至少 3 个。&lt;/li&gt;
+&lt;li&gt;关键应用多副本 + &lt;code&gt;podAntiAffinity&lt;/code&gt; 强制反亲和。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全性&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;镜像不使用 &lt;code&gt;:latest&lt;/code&gt; 标签。&lt;/li&gt;
+&lt;li&gt;启用 RBAC，遵循最小权限原则。&lt;/li&gt;
+&lt;li&gt;敏感信息必须使用 Secret，甚至结合 Vault。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;监控运维&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;部署 Prometheus + Grafana 监控集群和应用指标。&lt;/li&gt;
+&lt;li&gt;部署 EFK（Elasticsearch, Fluentd, Kibana）统一收集日志。&lt;/li&gt;
+&lt;li&gt;定期备份 etcd 数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Kubernetes</title>
         <link>http://localhost:1313/k8s/kubernetes-k8s-/</link>
         <pubDate>Wed, 19 Nov 2025 00:00:00 +0000</pubDate>
