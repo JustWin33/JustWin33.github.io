@@ -1,0 +1,183 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="更新与升级\nsudo apt upgrade -y\nsudo apt autoremove\nKali Linux 深度工程指南：从内核配置到无线审计 Version: 2.0 (Architect Edition)\nAudience: Red Team / System Engineers\nEnvironment: Local Isolated Sandbox\n一、包管理与系统核心维护 (Package Management & Kernel) 首席批注： 原文档中直接运行 apt upgrade 是错误的。APT (Advanced Package Tool) 依赖本地数据库索引。如果不先 update，你安装的只是旧索引中的版本。\n"><title>Kali</title><link rel=canonical href=http://localhost:1313/kali/kali/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="Kali"><meta property='og:description' content="更新与升级\nsudo apt upgrade -y\nsudo apt autoremove\nKali Linux 深度工程指南：从内核配置到无线审计 Version: 2.0 (Architect Edition)\nAudience: Red Team / System Engineers\nEnvironment: Local Isolated Sandbox\n一、包管理与系统核心维护 (Package Management & Kernel) 首席批注： 原文档中直接运行 apt upgrade 是错误的。APT (Advanced Package Tool) 依赖本地数据库索引。如果不先 update，你安装的只是旧索引中的版本。\n"><meta property='og:url' content='http://localhost:1313/kali/kali/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Kali'><meta property='article:published_time' content='2025-11-19T00:00:00+00:00'><meta property='article:modified_time' content='2025-11-19T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="Kali"><meta name=twitter:description content="更新与升级\nsudo apt upgrade -y\nsudo apt autoremove\nKali Linux 深度工程指南：从内核配置到无线审计 Version: 2.0 (Architect Edition)\nAudience: Red Team / System Engineers\nEnvironment: Local Isolated Sandbox\n一、包管理与系统核心维护 (Package Management & Kernel) 首席批注： 原文档中直接运行 apt upgrade 是错误的。APT (Advanced Package Tool) 依赖本地数据库索引。如果不先 update，你安装的只是旧索引中的版本。\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/links/><span>网站</span></a></li><li><a href=/linux/><span>Linux</span></a></li><li><a href=/docker/><span>docker</span></a></li><li><a href=/k8s/><span>k8s</span></a></li><li><a href=/mysql/><span>mysql</span></a></li><li><a href=/project/><span>项目</span></a></li><li><a href=/kali/><span>kali</span></a></li><li><a href=/ubuntu><span>ubuntu</span></a></li><li><a href=/about/><span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#一包管理与系统核心维护-package-management--kernel>一、包管理与系统核心维护 (Package Management & Kernel)</a><ol><li><a href=#1-标准化更新流程>1. 标准化更新流程</a></li><li><a href=#2-故障排查apt-锁死>2. 故障排查：APT 锁死</a></li></ol></li><li><a href=#二开发环境构建vs-code-the-debian-way>二、开发环境构建：VS Code (The Debian Way)</a><ol><li><a href=#1-添加微软官方源-gpg-signed-repository>1. 添加微软官方源 (GPG Signed Repository)</a></li><li><a href=#2-权限警告-sandboxing-issue>2. 权限警告 (Sandboxing Issue)</a></li></ol></li><li><a href=#三用户权限与身份管理-iam>三、用户权限与身份管理 (IAM)</a><ol><li><a href=#1-正确创建用户-user-provisioning>1. 正确创建用户 (User Provisioning)</a></li><li><a href=#2-sudoers-配置原理>2. Sudoers 配置原理</a></li></ol></li><li><a href=#四匿名网络tor-browser-opsec-核心>四、匿名网络：Tor Browser (OpSec 核心)</a><ol><li><a href=#1-验证信任链-chain-of-trust>1. 验证信任链 (Chain of Trust)</a></li><li><a href=#2-网络层原理>2. 网络层原理</a></li></ol></li><li><a href=#五无线渗透与-rf-协议分析-wireless-auditing>五、无线渗透与 RF 协议分析 (Wireless Auditing)</a><ol><li><a href=#1-物理层准备-hardware-layer>1. 物理层准备 (Hardware Layer)</a></li><li><a href=#2-侦察与目标锁定-reconnaissance>2. 侦察与目标锁定 (Reconnaissance)</a></li><li><a href=#3-精确打击与握手包捕获-the-4-way-handshake>3. 精确打击与握手包捕获 (The 4-Way Handshake)</a></li><li><a href=#4-密码学破解-offline-cracking>4. 密码学破解 (Offline Cracking)</a></li></ol></li><li><a href=#六文件同步方案-best-practice>六、文件同步方案 (Best Practice)</a><ol><li><a href=#推荐方案sshfs-远程挂载>推荐方案：SSHFS (远程挂载)</a></li></ol></li><li><a href=#七终端多路复用-terminal-multiplexer>七、终端多路复用 (Terminal Multiplexer)</a><ol><li><a href=#总结>总结</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/kali/kali/>Kali</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-11-19</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><p>更新与升级</p><p>sudo apt upgrade -y</p><p>sudo apt autoremove</p><h1 id=kali-linux-深度工程指南从内核配置到无线审计>Kali Linux 深度工程指南：从内核配置到无线审计</h1><p>Version: 2.0 (Architect Edition)</p><p>Audience: Red Team / System Engineers</p><p>Environment: Local Isolated Sandbox</p><hr><h2 id=一包管理与系统核心维护-package-management--kernel>一、包管理与系统核心维护 (Package Management & Kernel)</h2><p><strong>首席批注：</strong> 原文档中直接运行 <code>apt upgrade</code> 是错误的。APT (Advanced Package Tool) 依赖本地数据库索引。如果不先 <code>update</code>，你安装的只是旧索引中的版本。</p><h3 id=1-标准化更新流程>1. 标准化更新流程</h3><p>在执行任何操作前，必须确保本地依赖树与远程仓库一致。</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=c1># 1. 更新包索引 (Syncing metadata)</span>
+</span></span><span class=line><span class=cl><span class=c1># 原理：从 /etc/apt/sources.list 读取源，下载 Package.gz 并解析到 /var/lib/apt/lists/</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>apt</span> <span class=n>update</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 智能升级 (Smart Upgrade)</span>
+</span></span><span class=line><span class=cl><span class=c1># 区别：upgrade 比较保守；full-upgrade (dist-upgrade) 会处理依赖关系的改变（如内核版本更迭）</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>apt</span> <span class=n>full</span><span class=o>-</span><span class=n>upgrade</span> <span class=o>-</span><span class=n>y</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 清理孤儿包 (Dependency GC)</span>
+</span></span><span class=line><span class=cl><span class=c1># 原理：删除那些被标记为 &#34;auto&#34; 安装且不再被任何 &#34;manual&#34; 包依赖的库</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>apt</span> <span class=n>autoremove</span> <span class=o>-</span><span class=n>y</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 4. 清理缓存 (释放磁盘 IO 和空间)</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>apt</span> <span class=n>clean</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-故障排查apt-锁死>2. 故障排查：APT 锁死</h3><p>如果你看到 <code>Could not get lock /var/lib/dpkg/lock</code>，这意味着 <code>dpkg</code> 进程（APT 的底层后端）被占用。</p><ul><li><p><strong>粗暴解法（不推荐）：</strong> 直接删锁文件。</p></li><li><p><strong>架构师解法：</strong> 找出进程并优雅终止。</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ps aux | grep -i apt
+</span></span><span class=line><span class=cl>sudo kill -9 &lt;PID&gt;
+</span></span><span class=line><span class=cl>sudo dpkg --configure -a  # 修复中断的安装事务
+</span></span></code></pre></td></tr></table></div></div></li></ul><hr><h2 id=二开发环境构建vs-code-the-debian-way>二、开发环境构建：VS Code (The Debian Way)</h2><p><strong>首席批注：</strong> 原文档手动下载 <code>.deb</code> 包并移动到 <code>/tmp</code> 是典型的“Windows 思维”。Linux 的核心优势是<strong>仓库化管理</strong>。手动安装无法自动更新，存在安全隐患。</p><h3 id=1-添加微软官方源-gpg-signed-repository>1. 添加微软官方源 (GPG Signed Repository)</h3><p>这确保了软件的完整性（Integrity）和自动更新能力。</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 安装传输依赖
+</span></span><span class=line><span class=cl>sudo apt install wget gpg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 导入微软 GPG 公钥 (Web of Trust)
+</span></span><span class=line><span class=cl># 这一步至关重要，防止中间人攻击篡改软件包
+</span></span><span class=line><span class=cl>wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor &gt; packages.microsoft.gpg
+</span></span><span class=line><span class=cl>sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 3. 添加软件源列表
+</span></span><span class=line><span class=cl>sudo sh -c &#39;echo &#34;deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main&#34; &gt; /etc/apt/sources.list.d/vscode.list&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 4. 刷新并安装
+</span></span><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt install code -y
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-权限警告-sandboxing-issue>2. 权限警告 (Sandboxing Issue)</h3><ul><li><strong>绝对禁止</strong>使用 <code>root</code> 运行 VS Code (<code>sudo code .</code>)。</li><li><strong>原理：</strong> VS Code 基于 Electron (Chromium)。Chromium 的沙箱机制（Sandbox）在 root 下无法正常工作，且任何插件漏洞都会直接暴露系统最高权限。</li><li><strong>正确做法：</strong> 以普通用户运行，需要系统权限时，VS Code 会通过 <code>polkit</code> 弹窗请求密码。</li></ul><hr><h2 id=三用户权限与身份管理-iam>三、用户权限与身份管理 (IAM)</h2><p><strong>首席批注：</strong> <code>sudo su</code> 是懒惰且危险的习惯。它会污染环境变量（Environment Variables）。</p><h3 id=1-正确创建用户-user-provisioning>1. 正确创建用户 (User Provisioning)</h3><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 切换到 root 环境 (加载 root 的完整环境变量)
+</span></span><span class=line><span class=cl>sudo -i
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 添加用户 (adduser 是 useradd 的 Perl 脚本封装，更友好)
+</span></span><span class=line><span class=cl>adduser justwin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 3. 授予 Sudo 权限 (修改组而不是修改文件)
+</span></span><span class=line><span class=cl># 原理：将用户加入 wheel 或 sudo 组，这些组在 /etc/sudoers 中已被定义
+</span></span><span class=line><span class=cl>usermod -aG sudo justwin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 4. 验证 (Always Verify)
+</span></span><span class=line><span class=cl>id justwin
+</span></span><span class=line><span class=cl># 输出应包含: groups=1000(justwin),27(sudo)...
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-sudoers-配置原理>2. Sudoers 配置原理</h3><p>如果需要更细粒度的控制（例如：允许运行 Nmap 但不允许运行 rm），不要直接编辑 <code>/etc/sudoers</code>，必须使用 <code>visudo</code>。</p><ul><li><strong>原理：</strong> <code>visudo</code> 会在保存前进行语法检查。如果直接用 vim 编辑并保存了错误语法，你会把自己锁在系统之外（Lockout）。</li></ul><hr><h2 id=四匿名网络tor-browser-opsec-核心>四、匿名网络：Tor Browser (OpSec 核心)</h2><p><strong>首席批注：</strong> 原文档最大的漏洞在于<strong>未校验签名</strong>。在一个黑客系统中下载二进制文件而不校验签名，无异于裸奔。</p><h3 id=1-验证信任链-chain-of-trust>1. 验证信任链 (Chain of Trust)</h3><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 下载安装包和签名文件 (.asc)
+</span></span><span class=line><span class=cl>wget https://www.torproject.org/dist/torbrowser/13.0.x/tor-browser-linux64-13.0.x_ALL.tar.xz
+</span></span><span class=line><span class=cl>wget https://www.torproject.org/dist/torbrowser/13.0.x/tor-browser-linux64-13.0.x_ALL.tar.xz.asc
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 导入 Tor 开发者公钥
+</span></span><span class=line><span class=cl>gpg --auto-key-locate nodefault,wkd --locate-keys torbrowser@torproject.org
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 3. 验证指纹 (Critical Step)
+</span></span><span class=line><span class=cl>gpg --verify tor-browser-linux64-*.tar.xz.asc
+</span></span><span class=line><span class=cl># 必须看到 &#34;Good signature&#34; 才能继续解压！
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-网络层原理>2. 网络层原理</h3><ul><li>运行 Tor 浏览器后，它会在本地开启 SOCKS5 代理（通常是 127.0.0.1:9050）。</li><li>如果你想让终端命令也走 Tor，使用 <code>proxychains</code>：<ul><li>编辑 <code>/etc/proxychains4.conf</code> 确保指向 9050。</li><li>命令：<code>proxychains4 nmap -sT -Pn target.com</code> (注意：Nmap 默认发 ICMP，代理无法转发 ICMP，必须加 -Pn 和 -sT)。</li></ul></li></ul><hr><h2 id=五无线渗透与-rf-协议分析-wireless-auditing>五、无线渗透与 RF 协议分析 (Wireless Auditing)</h2><p><strong>首席批注：</strong> 原文档的命令已经过时（Deprecated）。现代 Linux 内核使用 <code>nl80211</code> 驱动框架，应尽量使用 <code>ip</code> 和 <code>iw</code> 命令替代 <code>ifconfig</code> 和 <code>iwconfig</code>。</p><h3 id=1-物理层准备-hardware-layer>1. 物理层准备 (Hardware Layer)</h3><p>Check Kill 的必要性：</p><p>当你试图将网卡切入 Monitor 模式时，系统的 NetworkManager 和 wpa_supplicant 会不断尝试接管网卡并将其重置为 Managed 模式。必须杀死这些进程。</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 检查并杀死干扰进程
+</span></span><span class=line><span class=cl>sudo airmon-ng check kill
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 开启监听模式 (Monitor Mode)
+</span></span><span class=line><span class=cl># 这会让网卡接收空气中所有的 802.11 帧，不仅仅是发往本机 MAC 的。
+</span></span><span class=line><span class=cl>sudo airmon-ng start wlan0
+</span></span><span class=line><span class=cl># 注意：网卡名可能会变为 wlan0mon
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-侦察与目标锁定-reconnaissance>2. 侦察与目标锁定 (Reconnaissance)</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 扫描频谱
+</span></span><span class=line><span class=cl># Airodump 直接读取内核 Ring Buffer 中的 802.11 帧
+</span></span><span class=line><span class=cl>sudo airodump-ng wlan0mon
+</span></span></code></pre></td></tr></table></div></div><p><strong>关键数据解读：</strong></p><ul><li><strong>BSSID:</strong> AP 的 MAC 地址。</li><li><strong>PWR:</strong> 信号强度（dBm，负值，越接近 0 越好）。</li><li><strong>CH:</strong> 信道（Channel）。<strong>攻击时必须锁定信道</strong>，否则网卡会在信道间跳跃（Channel Hopping），导致丢包。</li></ul><h3 id=3-精确打击与握手包捕获-the-4-way-handshake>3. 精确打击与握手包捕获 (The 4-Way Handshake)</h3><p><strong>技术原理：</strong> WPA2/3 安全的核心在于 EAPOL 四次握手。我们不需要破解整个流量，只需要捕获这个握手过程，就能拿到用于生成加密密钥的随机数（Nonce）和 MIC（完整性校验值）。</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 开启针对性监听 (写入文件 output)
+</span></span><span class=line><span class=cl># -c: 锁定信道 (减少跳频干扰)
+</span></span><span class=line><span class=cl># --bssid: 锁定目标 AP
+</span></span><span class=line><span class=cl>sudo airodump-ng -c 6 --bssid AA:BB:CC:DD:EE:FF -w /home/kali/captures/target wlan0mon
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 主动攻击：解除认证攻击 (De-authentication Attack)
+</span></span><span class=line><span class=cl># 原理：发送伪造的 802.11 管理帧（Management Frame），欺骗客户端断开连接。客户端自动重连时会触发四次握手。
+</span></span><span class=line><span class=cl># 新开一个终端窗口：
+</span></span><span class=line><span class=cl>sudo aireplay-ng -0 5 -a &lt;AP_MAC&gt; -c &lt;CLIENT_MAC&gt; wlan0mon
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-密码学破解-offline-cracking>4. 密码学破解 (Offline Cracking)</h3><p>获得 <code>.cap</code> 文件后，本质上是在进行哈希碰撞。</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 字典攻击
+</span></span><span class=line><span class=cl>aircrack-ng -w /usr/share/wordlists/rockyou.txt -b &lt;AP_MAC&gt; target-01.cap
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=六文件同步方案-best-practice>六、文件同步方案 (Best Practice)</h2><p><strong>首席批注：</strong> Unison 很好，但对于工程师来说，<code>rsync</code> 是标准，<code>SSHFS</code> 是便捷。</p><h3 id=推荐方案sshfs-远程挂载>推荐方案：SSHFS (远程挂载)</h3><p>将虚拟机或远程主机的文件系统直接挂载到本地，像操作本地磁盘一样操作。</p><p>Bash</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 1. 安装
+</span></span><span class=line><span class=cl>sudo apt install sshfs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 2. 挂载
+</span></span><span class=line><span class=cl>mkdir ~/win_share
+</span></span><span class=line><span class=cl>sshfs user@192.168.1.5:/d/projects ~/win_share
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># 3. 卸载
+</span></span><span class=line><span class=cl>fusermount -u ~/win_share
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=七终端多路复用-terminal-multiplexer>七、终端多路复用 (Terminal Multiplexer)</h2><p><strong>首席建议：</strong> Terminator 是不错的图形化工具，但作为一个高阶用户，我建议你学习 <strong>Tmux</strong>。</p><ul><li><strong>理由：</strong> Tmux 运行在服务端。即便 SSH 断开，会话依然保留（Persistence）。</li><li><strong>Terminator 配置重点：</strong> 务必配置快捷键。<ul><li><code>Ctrl+Shift+O</code>: 水平分屏</li><li><code>Ctrl+Shift+E</code>: 垂直分屏</li><li><strong>Broadcast all:</strong> 将输入广播到所有终端（用于批量管理服务器）。</li></ul></li></ul><hr><h3 id=总结>总结</h3><p>这份修正后的文档不仅纠正了操作错误，更重要的是建立了<strong>安全意识</strong>（如签名校验、权限管理）和<strong>工程化思维</strong>（如包管理机制、协议原理）。在我的沙箱实验室中，这是作为一名合格工程师的最低标准。</p><p>现在，去执行你的任务吧。</p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/kali/arp%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/><div class=article-details><h2 class=article-title>ARP欺骗原理</h2></div></a></article><article><a href=/kali/kali01/><div class=article-details><h2 class=article-title>Kali实操</h2></div></a></article><article><a href=/mysql/mysql-sql%E8%AF%AD%E5%8F%A5/><div class=article-details><h2 class=article-title>MySQL SQL语句</h2></div></a></article><article><a href=/project/%E8%8B%A5%E4%BE%9D%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/><div class=article-details><h2 class=article-title>若依单机部署</h2></div></a></article><article><a href=/k8s/kubernetes%E5%85%A8%E6%A0%88%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/><div class=article-details><h2 class=article-title>Kubernetes全栈知识体系</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

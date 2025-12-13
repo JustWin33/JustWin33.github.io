@@ -165,7 +165,7 @@ menu:
     - identifier: about
       name: 关于
       url: /about/       
-      weight: 8
+      weight: 10
     - identifier: links
       name: 网站
       url: /links/
@@ -190,8 +190,17 @@ menu:
       url:  /mysql/
       weight: 6
 
+    - identifier: kali
+      name: kali
+      url: /kali/
+      weight: 8
 
+    - identifier: ubuntu
+      name: ubuntu
+      url: /ubuntu
+      weight: 9
 
+      
 
 
       
