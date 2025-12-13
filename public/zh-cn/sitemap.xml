@@ -5,6 +5,9 @@
     <loc>http://localhost:1313/kali/arp%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2025-12-13T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/cmd-1/</loc>
+    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/</loc>
     <lastmod>2025-12-13T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -22,6 +25,15 @@
     <lastmod>2025-12-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/kali/kali01/</loc>
+    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/linux/</loc>
+    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/linux/linux%E7%B3%BB%E7%BB%9F%E5%8C%BA%E5%88%86/</loc>
+    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/post/</loc>
     <lastmod>2025-12-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/mysql/mysql-sql%E8%AF%AD%E5%8F%A5/</loc>
@@ -51,12 +63,6 @@
     <loc>http://localhost:1313/docker/docker%E6%BA%90/</loc>
     <lastmod>2025-12-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/linux/</loc>
-    <lastmod>2025-12-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2025-12-04T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/ubuntu/vmware-ubuntu/</loc>
     <lastmod>2025-12-04T00:00:00+00:00</lastmod>
   </url><url>
@@ -83,9 +89,6 @@
   </url><url>
     <loc>http://localhost:1313/mysql/mysql%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC/</loc>
     <lastmod>2025-12-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/cmd/</loc>
-    <lastmod>2025-11-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/kali/kali/</loc>
     <lastmod>2025-11-19T00:00:00+00:00</lastmod>

@@ -7,314 +7,325 @@ categories:
     - 
 ---
 
-# 🐧 Linux 运维命令手册 
+
+
+# 🐧 Linux 运维命令
 
 **适用场景**：系统管理、故障排查、性能调优、自动化运维
 **核心原则**：生产环境安全第一，操作前确认，高危命令需谨慎。
 
 -----
 
-## 📂 第一章：核心文件与目录管理
+## 📂 第一章：文件管理与搜索 (核心基础)
 
-### 1.1 目录列表与切换 (`ls`, `cd`, `pwd`)
+### 1.1 目录与文件操作增强版 (`ls`, `cd`, `pwd`, `ln`)
 
-  * **`ls` (List)**：查看目录内容
+  * **`ls` (List)**
 
-      * `ls -lhS --color=auto`：**[运维推荐]** 按文件大小排序，显示人类可读单位 (KB/MB)，带颜色区分。
-      * `ls -lart`：按修改时间倒序排列（最新的在最下），常用于快速查看最近改动的文件。
-      * `ls -i`：查看 inode 号（排查硬链接或文件名乱码无法删除时使用）。
-      * `ls -Z`：查看 SELinux 上下文。
+      * `ls -lhS --color=auto`：**[推荐]** 按文件大小排序（大文件在顶），显示单位(KB/MB)。
+      * `ls -lart`：按修改时间倒序（最新的在最下），快速定位刚刚被改动的文件。
+      * `ls -i`：查看 inode 号（解决文件名乱码无法删除的“钉子户”文件）。
 
-  * **`cd` (Change Directory)**
+  * **`ln` (Link) —— 链接管理**
 
-      * `cd -`：**[高频]** 快速回到上一次所在的目录。
-      * `cd ~` / `cd`：回到当前用户家目录。
+      * `ln -s /path/to/source /path/to/link`：**[常用]** 创建软链接（快捷方式）。*注意：源路径建议写绝对路径，防止失效。*
+      * `ln source target`：创建硬链接（同一个 inode，防误删）。
 
-  * **`pwd` (Print Working Directory)**
+### 1.2 文件增删改 (`mkdir`, `rm`, `cp`, `mv`)
 
-      * `pwd -P`：显示真实的物理路径（解析软链接后的路径）。
+  * **`rm` (Remove) —— ⚠️ 高危区**
 
-### 1.2 文件增删改 (`mkdir`, `rm`, `cp`, `mv`, `touch`)
+      * **[黄金法则]**：使用通配符前，先用 `ls` 确认！例如：`ls *.log && rm -f *.log`。
+      * `rm -rf /path`：强制递归删除。
+      * **[避坑]**：严禁在脚本中使用 `rm -rf /${VAR}/*`，如果变量未定义，就是删根！
 
-  * **`mkdir` (Make Directory)**
+  * **`cp` (Copy) & `mv` (Move)**
 
-      * `mkdir -p /path/to/dir`：递归创建多级目录，若存在不报错。
-      * `mkdir -m 755 /path`：创建目录时直接指定权限。
+      * `cp -a source dest`：**[备份首选]** 完整保留权限、时间戳、所属主（等同于 `-dR --preserve=all`）。
+      * `mv -b source dest`：如果目标存在，先自动备份目标文件（生成 `file~`）。
 
-  * **`rm` (Remove) —— ⚠️ 高危命令**
+### 1.3 文件查找与内容查看 (`find`, `tail`, `less`)
 
-      * **[黄金法则]**：先 `ls` 确认文件，再 `rm`。例如：`ls /tmp/garbage && rm -rf /tmp/garbage`。
-      * **[安全技巧]**：在 `.bashrc` 中设置别名 `alias rm='rm -i'` (删除前确认) 或 `alias rm='rm --preserve-root'` (防删根目录)。
-      * `rm -rf /path`：强制递归删除，不可恢复。
+  * **`find` (搜索神器)**
 
-  * **`cp` (Copy)**
+      * `find /var/log -name "*.log" -mtime +7`：查找 `/var/log` 下 7 天前的 log 文件。
+      * `find / -size +100M`：**[磁盘清理]** 全盘查找大于 100M 的大文件。
+      * `find . -name "*.tmp" -exec rm -f {} \;`：查找并直接删除（慎用）。
+      * `find / -perm -u=s -type f`：查找具有 SUID 权限的危险文件（安全审计）。
 
-      * `cp -a source dest`：**[备份首选]** 等同于 `-dR --preserve=all`，完整保留权限、时间戳、链接等属性。
-      * `cp -u source dest`：增量复制，仅当源文件比目标新或目标不存在时才复制。
+  * **内容查看**
 
-  * **`mv` (Move)**
-
-      * `mv -n file1 file2`：不覆盖已存在的目标文件。
-      * `mv -t target_dir source_files`：将多个源文件移动到目标目录。
-
-  * **`touch`**
-
-      * `touch -t 202501011200 file`：修改文件时间戳为指定时间。
-      * `touch -r ref_file file`：将 `file` 的时间戳改成与 `ref_file` 一致。
+      * `tail -f app.log`：**[运维高频]** 实时监控日志末尾输出。
+      * `tail -100f app.log`：查看最后 100 行并保持实时刷新。
+      * `less file`：翻页查看大文件（比 `cat` 更有利于内存，按 `G` 到底部，`/keyword` 搜索）。
 
 -----
 
 ## 📊 第二章：系统资源与性能深度监控
 
-### 2.1 CPU 与 进程 (`top`, `htop`, `vmstat`, `mpstat`)
+### 2.1 CPU 与 负载 (`top`, `uptime`, `mpstat`)
 
   * **`top` (实时监控)**
 
-      * `top -Hp <PID>`：**[排查神器]** 查看指定进程内的所有**线程**资源占用（排查 Java/Go 高负载关键）。
-      * `top -b -n 1 > top.log`：批处理模式，将快照保存到文件。
-      * *交互快捷键*：`P` (按CPU排序), `M` (按内存排序), `1` (显示多核详情)。
+      * `top -Hp <PID>`：**[排查神器]** 查看指定进程内的**线程**资源占用（定位 Java/Go 某线程高负载）。
+      * *快捷键*：`1` (展开多核), `c` (显示完整命令路径), `k` (杀进程).
+      * **[Load Average 解读]**：右上角的三个数字分别代表 1、5、15 分钟的平均负载。如果数值 \> CPU 核数，说明系统过载。
 
-  * **`vmstat` (虚拟内存统计)**
+  * **`vmstat` (虚拟内存与系统瓶颈)**
 
-      * `vmstat 1 10`：每秒刷新1次，共10次。
-      * **[关键指标解读]**：
-          * `r` (Running)：运行队列，超过 CPU 核数表示 CPU 瓶颈。
-          * `si`/`so` (Swap In/Out)：非 0 表示内存不足，正在使用交换分区。
-          * `wa` (IO Wait)：持续 \>20% 说明磁盘 IO 是瓶颈。
+      * `vmstat 1`：每秒刷新。
+      * **[关键指标]**：
+          * `r` (Run)：运行队列，\> CPU 核数 = CPU 瓶颈。
+          * `b` (Block)：等待 IO 的进程数，高说明磁盘 IO 堵塞。
+          * `si/so`：非 0 说明物理内存不够，正在用 Swap。
 
-  * **`mpstat` (多核 CPU 分析)**
-
-      * `mpstat -P ALL 1`：显示每个 CPU 核心的独立利用率，排查单核被打满的情况。
-
-### 2.2 内存分析 (`free`, `pmap`, `smem`)
+### 2.2 内存分析 (`free`, `smem`)
 
   * **`free`**
-
-      * `free -h`：人类可读格式。
-      * **[避坑]**：不要只看 `free` 列，`available` 才是真正应用程序可用的内存。
-
-  * **`pmap` (进程内存映射)**
-
-      * `pmap -x <PID>`：查看进程详细内存分布，排查内存泄漏。
+      * `free -h`：看内存总量。
+      * **[核心认知]**：Linux 内存管理策略是“吃光用尽”。`buff/cache` 占用高是正常的（用于加速读写），重点看 `available`（应用程序真正可用的）。
 
 ### 2.3 磁盘 IO (`iostat`, `iotop`, `du`, `df`)
 
   * **`iostat`**
 
-      * `iostat -x 1 10`：显示扩展统计信息。
-      * **[关键指标]**：`%util` (设备利用率) \>80% 为瓶颈；`await` (平均响应时间) \>10ms 需关注。
+      * `iostat -xzk 1`：详细 IO 统计。
+      * **[判据]**：`%util` \> 80% (磁盘忙碌)；`await` \> 10ms (响应慢)；`svctm` (实际处理时间)。
 
   * **`du` / `df`**
 
-      * `df -h`：查看磁盘挂载点使用率（生产红线：\>85% 预警）。
-      * `df -i`：查看 inode 使用率（inode 耗尽会导致无法写入）。
-      * `du -h --max-depth=1 /var | sort -hr | head -10`：**[实战]** 快速找出 `/var` 下最大的一级子目录。
+      * `df -Th`：查看分区类型（xfs/ext4）和使用率。
+      * `df -i`：查看 inode 使用率（inode 耗尽会导致有空间但无法写入）。
+      * `du -h --max-depth=1 /var | sort -hr | head -10`：**[空间清理]** 快速找出 `/var` 下最大的 10 个目录。
 
-### 2.4 网络流量 (`iftop`, `ss`, `tcpdump`)
+-----
+
+## 🌐 第三章：网络与连接 (新增增强章节)
+
+### 3.1 网络连接与流量 (`ss`, `iftop`, `nload`)
 
   * **`ss` (Socket Statistics - 推荐替代 netstat)**
 
-      * `ss -tuln`：显示所有监听的 TCP/UDP 端口。
-      * `ss -s`：显示 Socket 统计摘要（快速查看连接总数）。
-      * `ss -o state established '( dport = :22 or sport = :22 )'`：过滤特定端口的已建立连接。
+      * `ss -tulnp`：显示所有监听端口及对应的进程名（需 root）。
+      * `ss -an state established`：查看所有已建立的连接。
+      * `ss -s`：快速统计连接总数（SYN, ESTABLISHED 等）。
 
-  * **`tcpdump` (抓包 - 网络排障核心)**
+  * **`iftop`**
 
-      * `tcpdump -i eth0 -nn -s0 -v port 80`：抓取 HTTP 流量。
-      * `tcpdump -i any -nn host 1.2.3.4`：抓取与特定 IP 的交互。
-      * `tcpdump -w capture.pcap`：保存为文件供 Wireshark 分析。
-      * `tcpdump -A -s0 port 80`：以 ASCII 码显示包内容（可看 HTTP Body）。
+      * `iftop -P`：实时流量监控，显示谁在跟谁通信，以及占用的带宽。
+
+### 3.2 网络连通性测试 (`curl`, `nc`, `ping`)
+
+  * **`curl` (接口测试)**
+
+      * `curl -I www.google.com`：只看 HTTP 响应头（检查 200 OK）。
+      * `curl -v http://127.0.0.1:8080`：打印详细通信过程（Debug 专用）。
+      * `curl -o /dev/null -s -w "%{time_total}\n" http://baidu.com`：测试网站响应耗时。
+
+  * **`nc` (Netcat - 网络瑞士军刀)**
+
+      * `nc -z -v -w 2 192.168.1.1 3306`：**[探测端口]** 探测目标 IP 的 3306 端口是否通（替代 telnet）。
+
+  * **`ip` (IP配置)**
+
+      * `ip addr`：查看 IP 地址（替代 ifconfig）。
+      * `ip route`：查看路由表（排查网关问题）。
 
 -----
 
-## 📝 第三章：文本处理“三剑客” (运维必修)
+## 📝 第四章：文本处理“三剑客” (运维必修)
 
-### 3.1 `grep` (文本搜索)
+### 4.1 `grep` (过滤)
 
-  * **基础**：`grep -i "error" file` (忽略大小写)；`grep -v "info" file` (反选，排除)。
-  * **正则**：`grep -E "error|warn" file` (匹配多个关键字)。
-  * **上下文**：`grep -C 5 "exception" file` (显示匹配行前后 5 行，`-A` 后，`-B` 前)。
-  * **统计**：`grep -c "404" access.log` (统计行数)。
+  * `grep -r "Error" /var/log/`：递归搜索目录下所有文件。
+  * `grep -E "Failed|Error" file`：正则匹配多个关键词。
+  * `grep -v "^#" config.conf | grep -v "^$"`：**[配置清洗]** 去除配置文件中的注释行和空行。
+  * `grep -C 5 "Exception" app.log`：查看报错前后 5 行上下文。
 
-### 3.2 `awk` (文本处理与统计)
+### 4.2 `awk` (取列与统计)
 
-  * **提取列**：`awk '{print $1, $NF}' file` (打印第1列和最后一列)。
-  * **条件过滤**：`awk '$9=="500" {print $0}' access.log` (打印第9列为500的行)。
-  * **[实战] Nginx 日志分析 Top IP**：
+  * `awk '{print $1, $NF}' file`：打印第 1 列和最后一列。
+  * **[实战] 统计 Nginx 日志 Top 10 访问 IP**：
     ```bash
     awk '{print $1}' access.log | sort | uniq -c | sort -nr | head -10
     ```
-
-### 3.3 `sed` (流编辑器)
-
-  * **替换**：`sed 's/old/new/g' file` (全局替换输出，不改源文件)。
-  * **修改文件**：`sed -i 's/PORT/8080/g' config.conf` (直接修改文件，建议先备份)。
-  * **时间范围提取**：
+  * **[实战] 统计 TCP 连接状态**：
     ```bash
-    sed -n '/2024-01-01 10:00/,/2024-01-01 11:00/p' access.log
+    ss -an | awk '{print $1}' | sort | uniq -c
     ```
+
+### 4.3 `sed` (替换与修改)
+
+  * `sed 's/old/new/g' file`：在屏幕输出替换结果。
+  * `sed -i.bak 's/8080/9090/g' config.xml`：**[安全]** 直接修改文件，并自动备份为 `.bak`。
+  * `sed -n '/10:00/,/11:00/p' access.log`：按时间范围截取日志。
 
 -----
 
-## 💻 第四章：进程全生命周期管理
+## 💻 第五章：进程管理
 
-### 4.1 查找进程 (`ps`, `pgrep`)
+  * **`ps` & `pgrep`**
 
-  * `ps aux --sort=-%cpu`：显示所有进程并按 CPU 使用率降序排列。
-  * `pgrep -f "java -jar app.jar"`：按完整命令行查找 PID。
-  * `pstree -p`：以树状图显示进程关系及 PID。
-
-### 4.2 控制进程 (`kill`, `nohup`)
+      * `ps aux --sort=-%cpu | head`：列出最耗 CPU 的进程。
+      * `pgrep -a java`：查看所有 Java 进程的完整命令。
 
   * **`kill`**
 
-      * `kill -15 <PID>`：**[推荐]** 发送 TERM 信号，让进程优雅退出（保存数据、关闭句柄）。
-      * `kill -9 <PID>`：强制杀死进程，可能导致数据丢失，仅在进程卡死时使用。
-      * `kill -HUP <PID>`：让进程重载配置（如 Nginx 平滑重启）。
-
-  * **`nohup`**
-
-      * `nohup java -jar app.jar > app.log 2>&1 &`：标准后台运行写法，防挂断，重定向标准输出和错误。
+      * `kill -15 <PID>`：**[推荐]** 优雅退出（TERM 信号）。
+      * `kill -9 <PID>`：强制杀死（KILL 信号，可能丢数据）。
+      * `pkill -u user1`：踢掉某个用户的所有进程。
 
 -----
 
-## 🛠️ 第五章：系统服务与日志 (Systemd)
+## 🛠️ 第六章：系统服务与日志 (Systemd)
 
-### 5.1 服务管理 (`systemctl`)
+  * **`systemctl`**
 
-  * `systemctl status/start/stop/restart nginx`：基本控制。
-  * `systemctl enable nginx`：设置开机自启。
-  * `systemctl list-units --type=service --state=failed`：**[实战]** 快速列出所有启动失败的服务。
+      * `systemctl status/start/stop/restart nginx`
+      * `systemctl enable nginx`：开机自启。
+      * `systemctl list-units --type=service --state=failed`：**[故障概览]** 列出所有挂掉的服务。
 
-### 5.2 日志查询 (`journalctl`)
+  * **`journalctl`**
 
-  * `journalctl -u nginx -f`：实时跟踪特定服务的日志。
-  * `journalctl --since "10 minutes ago"`：查看最近 10 分钟的日志。
-  * `journalctl -p err`：只看错误级别的日志。
-  * `journalctl --disk-usage`：查看日志占用了多少磁盘。
-
------
-
-## 📦 第六章：压缩、备份与传输
-
-### 6.1 打包与压缩 (`tar`)
-
-  * **压缩**：`tar -czf backup.tar.gz /data`
-      * `-c`: 创建, `-z`: gzip压缩, `-f`: 指定文件名。
-  * **解压**：`tar -xzf backup.tar.gz -C /opt`
-      * `-x`: 解压, `-C`: 指定解压目录。
-  * **查看**：`tar -tzf backup.tar.gz` (不解压查看内容)。
-
-### 6.2 同步与传输 (`rsync`)
-
-  * **`rsync` (运维神器)**
-      * `rsync -avz /src/ /dst/`：同步目录（`-a` 归档模式保留属性, `-v` 详细, `-z` 压缩传输）。
-      * `rsync -avz --delete /src/ /dst/`：**[慎用]** 镜像同步，目标端多余文件会被删除。
-      * `rsync -avz --bwlimit=10240 /src/ user@host:/dst/`：限速 10MB/s 传输，防止占满带宽。
+      * `journalctl -u nginx -f`：实时看某服务日志。
+      * `journalctl -xe`：服务启动失败时，看详细报错堆栈。
+      * `journalctl --disk-usage` / `journalctl --vacuum-time=7d`：查看并清理 7 天前的系统日志。
 
 -----
 
-## 🔐 第七章：用户权限与安全
+## 📦 第七章：压缩、传输与软件包
 
-### 7.1 权限控制 (`chmod`, `chown`)
+### 7.1 压缩 (`tar`)
 
-  * `chmod 755 file` (rwx-r-x-r-x) / `chmod 644 file` (rw-r--r--)。
-  * `chmod +x script.sh`：赋予执行权限。
-  * `chown -R user:group /data`：递归修改目录的所有者和所属组。
+  * `tar -czf backup.tar.gz /data`：打包压缩。
+  * `tar -xzf backup.tar.gz -C /opt`：解压到指定目录。
 
-### 7.2 特殊权限与安全
+### 7.2 传输 (`rsync`, `scp`)
 
-  * `lsattr / chattr`：
-      * `chattr +i file`：**[安全加固]** 锁定文件，root 也无法修改或删除（适用于 `/etc/passwd` 等关键文件）。
-      * `chattr -i file`：解锁文件。
-  * `w` / `last`：查看当前登录用户及历史登录记录，排查非法入侵。
+  * `scp -r /local/dir user@host:/remote/dir`：简单的远程拷贝。
+  * `rsync -avzP /source/ user@host:/dest/`：**[推荐]** 增量同步，显示进度条 (`P`)。
 
------
+### 7.3 软件包管理 (基础)
 
-## ⚙️ 第八章：内核调优与硬件信息 (专家级)
-
-### 8.1 硬件查看
-
-  * `lscpu`：查看 CPU 架构、核数。
-  * `lsblk` / `fdisk -l`：查看磁盘分区情况。
-  * `dmidecode -t memory`：查看内存硬件条数、频率。
-
-### 8.2 内核参数 (`sysctl`)
-
-  * `sysctl -a`：查看所有内核参数。
-  * `sysctl -p`：加载 `/etc/sysctl.conf` 配置。
-  * **[常见调优]**：
-      * 减少 Swap 使用：`vm.swappiness = 10`
-      * 开启端口复用：`net.ipv4.tcp_tw_reuse = 1` (解决大量 TIME\_WAIT)。
+  * **CentOS/RHEL**: `yum update`, `yum install tree`, `yum clean all`.
+  * **Ubuntu/Debian**: `apt update`, `apt install tree`.
 
 -----
 
-## 🧩 第九章：生产环境故障排查实战案例
+## 🔐 第八章：用户权限与安全加固
+
+  * **`chmod` / `chown`**
+
+      * `chmod 755 file` (脚本常用) / `chmod 600 id_rsa` (私钥文件必须权限)。
+      * `chown -R user:group /data`。
+
+  * **`chattr` (文件锁)**
+
+      * `chattr +i /etc/passwd`：**[防黑]** 锁定关键文件，root 也无法修改/删除。
+      * `lsattr file`：查看锁定状态。
+
+  * **`sudo`**
+
+      * `visudo`：编辑 sudo 权限配置（语法检查防错）。
+
+-----
+
+## ⚙️ 第九章：内核与硬件信息 (专家级)
+
+  * `uname -a` / `cat /etc/os-release`：查看系统版本内核。
+  * `lscpu`：查看 CPU 架构核数。
+  * `lsblk`：查看磁盘分区挂载。
+  * `dmesg | tail -20`：**[硬件故障]** 查看内核环形缓冲区（OOM Killer、硬件报错都在这）。
+  * `sysctl -p`：重新加载内核参数（如 TCP 调优后）。
+
+-----
+
+## 🧩 第十章：生产环境故障排查实战案例 (FAQ)
 
 ### 案例 1：CPU 100% 但找不到高负载进程
 
-**现象**：`top` 显示 CPU 使用率高，但进程列表无异常。
-**分析**：可能是短命进程（频繁启动退出）或 IO 等待。
+**现象**：`top` CPU 高，但进程列表里没有特别高的。
+**原因**：短命进程（频繁启动退出）或 内核态占用。
 **排查**：
 
-1.  看 `top` 中的 `wa` (IO Wait) 是否高。
-2.  `perf top` 查看热点函数。
-3.  如果 `wa` 高，用 `iotop -oP` 抓出正在进行磁盘读写的进程。
+1.  看 `top` 表头的 `sy` (System) 和 `wa` (IO Wait)。
+2.  如果是 `sy` 高，可能是驱动或内核 bug。
+3.  如果是 `wa` 高，使用 `iotop` 抓磁盘读写进程。
 
 ### 案例 2：磁盘满了但 `du` 统计不到大文件
 
-**现象**：`df -h` 显示 100%，但 `du -sh /` 显示占用很少。
-**原因**：文件被删除（rm），但进程仍持有句柄，空间未释放。
+**现象**：`df -h` 显示 100%，`du -sh` 却只有 50%。
+**原因**：文件被 `rm` 删除，但进程仍持有句柄（文件未真正释放）。
 **排查**：
 
 ```bash
 lsof | grep deleted
 ```
 
-**解决**：重启对应进程，或 `echo > /proc/<PID>/fd/<FD>` 清空文件描述符。
+**解决**：重启持有句柄的进程（如 nginx/java），或 `echo > /proc/<PID>/fd/<FD>` 置空。
 
-### 案例 3：网络连接数暴增
+### 案例 3：服务器变慢，网络卡顿
 
-**排查**：
+**排查三板斧**：
 
-1.  `ss -s` 查看总连接数。
-2.  `netstat -anp | grep ESTABLISHED | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr | head` 找出连接数最多的来源 IP。
+1.  `ping <网关>`：看内网延迟丢包。
+2.  `curl -v <目标>`：看 TCP 建连耗时。
+3.  `dmesg | grep -i "error"`：看网卡是否有物理报错。
 
 -----
 
-## 📜 第十章：自动化巡检脚本模板
+## 📜 第十一章：自动化巡检脚本 (最终版)
 
-将以下脚本保存为 `check.sh` 即可快速进行系统体检：
+保存为 `health_check.sh`：
 
 ```bash
 #!/bin/bash
-# 系统健康检查简易脚本
+# Linux System Health Check Script
+# V2.0 - Added Colors and detailed checks
 
-echo "===== System Check $(date) ====="
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}===== System Health Check $(date) =====${NC}"
 
 # 1. 负载检查
-echo "--- Load Average ---"
-uptime
+load=$(uptime | awk -F'load average:' '{ print $2 }' | cut -d, -f1 | tr -d ' ')
+echo -e "\n[1] Load Average (1min): $load"
+if (( $(echo "$load > 4.0" | bc -l) )); then
+    echo -e "${RED}ALERT: High Load!${NC}"
+fi
 
-# 2. 内存检查 (重点看 available)
-echo "--- Memory ---"
+# 2. 磁盘空间 (>85% 告警)
+echo -e "\n[2] Disk Usage > 85%:"
+df -h | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while read output;
+do
+  usep=$(echo $output | awk '{ print $1}' | cut -d'%' -f1  )
+  partition=$(echo $output | awk '{ print $2 }' )
+  if [ $usep -ge 85 ]; then
+    echo -e "${RED}WARNING: Running out of space \"$partition ($usep%)\"${NC}"
+  else
+    echo "  OK: $partition ($usep%)"
+  fi
+done
+
+# 3. 内存情况
+echo -e "\n[3] Memory Usage:"
 free -h
 
-# 3. 磁盘空间 (>85% 需警惕)
-echo "--- Disk Usage ---"
-df -h | grep -E '^/dev'
+# 4. 检查失败的服务
+echo -e "\n[4] Failed Systemd Services:"
+failed_services=$(systemctl list-units --type=service --state=failed --no-pager --plain | grep ".service")
+if [ -n "$failed_services" ]; then
+    echo -e "${RED}$failed_services${NC}"
+else
+    echo "  All services are healthy."
+fi
 
-# 4. 磁盘 IO 检查 (查看是否有设备利用率超标)
-echo "--- Disk IO ---"
-iostat -x 1 1 | awk '$NF > 80 {print "WARNING: High IO on " $1}'
+# 5. 检查僵尸进程
+zombies=$(ps aux | awk '{if ($8=="Z") print $0}' | wc -l)
+echo -e "\n[5] Zombie Processes: $zombies"
 
-# 5. 网络连接概况
-echo "--- Network Connections ---"
-ss -s
-
-# 6. 检查失败的服务
-echo "--- Failed Services ---"
-systemctl list-units --type=service --state=failed
-
-echo "===== Check Complete ====="
+echo -e "\n${GREEN}===== Check Complete =====${NC}"
 ```
+

@@ -1,7 +1,7 @@
 ---
-title: CMD
-description: 
-date: 2025-11-19
+title: CMD-1
+description: 示例 
+date: 2025-12-13
 categories:
     - 
     - 
