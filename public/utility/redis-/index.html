@@ -1,0 +1,372 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="redis 生产环境部署手册 第一部分：部署前置检查与规划 1. 操作系统选择 推荐：AlmaLinux 8 / Rocky Linux 8 (RHEL 8 下游，稳定，内核较新) 或 Ubuntu 22.04 LTS。 避免：CentOS 7 (GCC 版本过低，编译 Redis 6/7 需繁琐升级，且官方已停止维护)。 本手册环境：以 AlmaLinux 8 为例。 2. 架构规划决策树 在部署前，请根据数据量和业务场景选择架构：\n"><title>redis</title><link rel=canonical href=http://localhost:1313/utility/redis-/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="redis"><meta property='og:description' content="redis 生产环境部署手册 第一部分：部署前置检查与规划 1. 操作系统选择 推荐：AlmaLinux 8 / Rocky Linux 8 (RHEL 8 下游，稳定，内核较新) 或 Ubuntu 22.04 LTS。 避免：CentOS 7 (GCC 版本过低，编译 Redis 6/7 需繁琐升级，且官方已停止维护)。 本手册环境：以 AlmaLinux 8 为例。 2. 架构规划决策树 在部署前，请根据数据量和业务场景选择架构：\n"><meta property='og:url' content='http://localhost:1313/utility/redis-/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Utility'><meta property='article:published_time' content='2025-12-14T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-14T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="redis"><meta name=twitter:description content="redis 生产环境部署手册 第一部分：部署前置检查与规划 1. 操作系统选择 推荐：AlmaLinux 8 / Rocky Linux 8 (RHEL 8 下游，稳定，内核较新) 或 Ubuntu 22.04 LTS。 避免：CentOS 7 (GCC 版本过低，编译 Redis 6/7 需繁琐升级，且官方已停止维护)。 本手册环境：以 AlmaLinux 8 为例。 2. 架构规划决策树 在部署前，请根据数据量和业务场景选择架构：\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/links/><span>网站</span></a></li><li><a href=/linux/><span>Linux</span></a></li><li><a href=/docker/><span>docker</span></a></li><li><a href=/k8s/><span>k8s</span></a></li><li><a href=/mysql/><span>mysql</span></a></li><li><a href=/project/><span>项目</span></a></li><li><a href=/kali/><span>kali</span></a></li><li><a href=/ubuntu/><span>ubuntu</span></a></li><li><a href=/utility/><span>Utility</span></a></li><li><a href=/about/><span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#第一部分部署前置检查与规划>第一部分：部署前置检查与规划</a><ol><li><a href=#1-操作系统选择>1. 操作系统选择</a></li><li><a href=#2-架构规划决策树>2. 架构规划决策树</a></li></ol></li><li><a href=#第二部分almalinux-8-一键安装脚本>第二部分：AlmaLinux 8 一键安装脚本</a></li><li><a href=#第三部分标准化配置详解>第三部分：标准化配置详解</a><ol><li><a href=#1-systemd-服务文件标准模版>1. Systemd 服务文件标准模版</a></li><li><a href=#2-生产环境-redisconf-关键参数清单>2. 生产环境 <code>redis.conf</code> 关键参数清单</a></li></ol></li><li><a href=#第四部分高可用架构配置指南>第四部分：高可用架构配置指南</a><ol><li><a href=#方案-asentinel-哨兵-模式配置>方案 A：Sentinel (哨兵) 模式配置</a></li><li><a href=#方案-bcluster-集群-模式配置>方案 B：Cluster (集群) 模式配置</a></li></ol></li><li><a href=#第五部分常用维护命令>第五部分：常用维护命令</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/utility/redis-/>redis</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-12-14</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 4 分钟</time></div></footer></div></header><section class=article-content><h1 id=redis-生产环境部署手册>redis 生产环境部署手册</h1><h2 id=第一部分部署前置检查与规划>第一部分：部署前置检查与规划</h2><h3 id=1-操作系统选择>1. 操作系统选择</h3><ul><li><strong>推荐</strong>：<strong>AlmaLinux 8 / Rocky Linux 8</strong> (RHEL 8 下游，稳定，内核较新) 或 <strong>Ubuntu 22.04 LTS</strong>。</li><li><strong>避免</strong>：CentOS 7 (GCC 版本过低，编译 Redis 6/7 需繁琐升级，且官方已停止维护)。</li><li><strong>本手册环境</strong>：以 <strong>AlmaLinux 8</strong> 为例。</li></ul><h3 id=2-架构规划决策树>2. 架构规划决策树</h3><p>在部署前，请根据数据量和业务场景选择架构：</p><div class=table-wrapper><table><thead><tr><th style=text-align:left>场景特征</th><th style=text-align:left>推荐架构</th><th style=text-align:left>核心优势</th></tr></thead><tbody><tr><td style=text-align:left><strong>数据量 &lt; 10GB</strong> 且 <strong>读多写少</strong></td><td style=text-align:left><strong>主从复制 + Sentinel (哨兵)</strong></td><td style=text-align:left>结构简单，维护成本低，具备自动故障转移能力。</td></tr><tr><td style=text-align:left><strong>数据量 > 50GB</strong> 或 <strong>写请求极高</strong></td><td style=text-align:left><strong>Redis Cluster (集群)</strong></td><td style=text-align:left>数据分片存储 (16384 槽)，水平扩展能力强，无中心架构。</td></tr><tr><td style=text-align:left><strong>数据量巨大且只需简单缓存</strong></td><td style=text-align:left><strong>Codis / Twemproxy</strong> (即使现在 Cluster 已成熟，部分旧系统仍在使用)</td><td style=text-align:left>(本手册不涉及，建议优先使用原生 Cluster)</td></tr></tbody></table></div><hr><h2 id=第二部分almalinux-8-一键安装脚本>第二部分：AlmaLinux 8 一键安装脚本</h2><p>此脚本会自动安装依赖、下载 Redis 7.2.4 (目前稳定版)、编译安装、配置 Systemd 服务和基础配置文件。</p><p><strong>使用方法</strong>：将以下内容保存为 <code>install_redis_el8.sh</code>，赋予执行权限 <code>chmod +x install_redis_el8.sh</code> 并以 root 运行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=c1># </span>
+</span></span><span class=line><span class=cl><span class=c1># Redis 7.x One-Click Install Script for AlmaLinux 8 / Rocky Linux 8</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>REDIS_VERSION</span><span class=o>=</span><span class=s2>&#34;7.2.4&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>INSTALL_DIR</span><span class=o>=</span><span class=s2>&#34;/usr/local/redis&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>DATA_DIR</span><span class=o>=</span><span class=s2>&#34;/data/redis&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>CONFIG_DIR</span><span class=o>=</span><span class=s2>&#34;/etc/redis&#34;</span>
+</span></span><span class=line><span class=cl><span class=nv>LOG_DIR</span><span class=o>=</span><span class=s2>&#34;/var/log/redis&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 1. 系统检查与依赖安装</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[1/6] Installing dependencies...&#34;</span>
+</span></span><span class=line><span class=cl>dnf install -y epel-release
+</span></span><span class=line><span class=cl>dnf groupinstall -y <span class=s2>&#34;Development Tools&#34;</span>
+</span></span><span class=line><span class=cl>dnf install -y openssl-devel systemd-devel wget tar
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 下载与解压</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[2/6] Downloading Redis </span><span class=si>${</span><span class=nv>REDIS_VERSION</span><span class=si>}</span><span class=s2>...&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /tmp
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> ! -f redis-<span class=si>${</span><span class=nv>REDIS_VERSION</span><span class=si>}</span>.tar.gz <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    wget https://download.redis.io/releases/redis-<span class=si>${</span><span class=nv>REDIS_VERSION</span><span class=si>}</span>.tar.gz
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>tar xzf redis-<span class=si>${</span><span class=nv>REDIS_VERSION</span><span class=si>}</span>.tar.gz
+</span></span><span class=line><span class=cl><span class=nb>cd</span> redis-<span class=si>${</span><span class=nv>REDIS_VERSION</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 编译安装</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[3/6] Compiling Redis...&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># 使用 systemd 支持编译</span>
+</span></span><span class=line><span class=cl>make -j <span class=k>$(</span>nproc<span class=k>)</span> <span class=nv>USE_SYSTEMD</span><span class=o>=</span>yes
+</span></span><span class=line><span class=cl>make <span class=nv>PREFIX</span><span class=o>=</span><span class=si>${</span><span class=nv>INSTALL_DIR</span><span class=si>}</span> install
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 4. 环境配置</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[4/6] Configuring environment...&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># 创建用户</span>
+</span></span><span class=line><span class=cl>id redis <span class=p>&amp;</span>&gt; /dev/null
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> <span class=nv>$?</span> -ne <span class=m>0</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    useradd -r -s /sbin/nologin -M redis
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建目录</span>
+</span></span><span class=line><span class=cl>mkdir -p <span class=si>${</span><span class=nv>DATA_DIR</span><span class=si>}</span> <span class=si>${</span><span class=nv>CONFIG_DIR</span><span class=si>}</span> <span class=si>${</span><span class=nv>LOG_DIR</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>chown -R redis:redis <span class=si>${</span><span class=nv>DATA_DIR</span><span class=si>}</span> <span class=si>${</span><span class=nv>CONFIG_DIR</span><span class=si>}</span> <span class=si>${</span><span class=nv>LOG_DIR</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>chmod <span class=m>750</span> <span class=si>${</span><span class=nv>DATA_DIR</span><span class=si>}</span> <span class=si>${</span><span class=nv>CONFIG_DIR</span><span class=si>}</span> <span class=si>${</span><span class=nv>LOG_DIR</span><span class=si>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 环境变量</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;export PATH=\$PATH:</span><span class=si>${</span><span class=nv>INSTALL_DIR</span><span class=si>}</span><span class=s2>/bin&#34;</span> &gt; /etc/profile.d/redis.sh
+</span></span><span class=line><span class=cl><span class=nb>source</span> /etc/profile.d/redis.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 5. 生成配置文件</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[5/6] Generating redis.conf...&#34;</span>
+</span></span><span class=line><span class=cl>cat &gt; <span class=si>${</span><span class=nv>CONFIG_DIR</span><span class=si>}</span>/redis.conf <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s># 基础网络
+</span></span></span><span class=line><span class=cl><span class=s>bind 0.0.0.0
+</span></span></span><span class=line><span class=cl><span class=s>port 6379
+</span></span></span><span class=line><span class=cl><span class=s>protected-mode no
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 认证安全 (生产环境请修改此密码!)
+</span></span></span><span class=line><span class=cl><span class=s>requirepass &#34;StrongPass_ChangeMe&#34;
+</span></span></span><span class=line><span class=cl><span class=s>masterauth &#34;StrongPass_ChangeMe&#34;
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 守护进程与 Systemd
+</span></span></span><span class=line><span class=cl><span class=s>daemonize no
+</span></span></span><span class=line><span class=cl><span class=s>supervised systemd
+</span></span></span><span class=line><span class=cl><span class=s>pidfile /run/redis/redis.pid
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 日志
+</span></span></span><span class=line><span class=cl><span class=s>logfile &#34;${LOG_DIR}/redis.log&#34;
+</span></span></span><span class=line><span class=cl><span class=s>loglevel notice
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 持久化 (RDB + AOF)
+</span></span></span><span class=line><span class=cl><span class=s>dir &#34;${DATA_DIR}&#34;
+</span></span></span><span class=line><span class=cl><span class=s>dbfilename dump.rdb
+</span></span></span><span class=line><span class=cl><span class=s># RDB 策略: 3600秒1次修改, 300秒100次, 60秒10000次
+</span></span></span><span class=line><span class=cl><span class=s>save 3600 1 300 100 60 10000
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>appendonly yes
+</span></span></span><span class=line><span class=cl><span class=s>appendfilename &#34;appendonly.aof&#34;
+</span></span></span><span class=line><span class=cl><span class=s>appendfsync everysec
+</span></span></span><span class=line><span class=cl><span class=s>auto-aof-rewrite-percentage 100
+</span></span></span><span class=line><span class=cl><span class=s>auto-aof-rewrite-min-size 64mb
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 内存限制 (建议设置为物理内存的 75%)
+</span></span></span><span class=line><span class=cl><span class=s># maxmemory 4gb
+</span></span></span><span class=line><span class=cl><span class=s>maxmemory-policy allkeys-lru
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s># 慢查询
+</span></span></span><span class=line><span class=cl><span class=s>slowlog-log-slower-than 10000
+</span></span></span><span class=line><span class=cl><span class=s>slowlog-max-len 1000
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>chown redis:redis <span class=si>${</span><span class=nv>CONFIG_DIR</span><span class=si>}</span>/redis.conf
+</span></span><span class=line><span class=cl>chmod <span class=m>640</span> <span class=si>${</span><span class=nv>CONFIG_DIR</span><span class=si>}</span>/redis.conf
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 6. 配置 Systemd 服务</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;[6/6] Configuring Systemd...&#34;</span>
+</span></span><span class=line><span class=cl>mkdir -p /run/redis
+</span></span><span class=line><span class=cl>chown redis:redis /run/redis
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>cat &gt; /etc/systemd/system/redis.service <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>[Unit]
+</span></span></span><span class=line><span class=cl><span class=s>Description=Redis In-Memory Data Store
+</span></span></span><span class=line><span class=cl><span class=s>Documentation=https://redis.io/
+</span></span></span><span class=line><span class=cl><span class=s>After=network.target
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[Service]
+</span></span></span><span class=line><span class=cl><span class=s>Type=notify
+</span></span></span><span class=line><span class=cl><span class=s>User=redis
+</span></span></span><span class=line><span class=cl><span class=s>Group=redis
+</span></span></span><span class=line><span class=cl><span class=s>ExecStart=${INSTALL_DIR}/bin/redis-server ${CONFIG_DIR}/redis.conf
+</span></span></span><span class=line><span class=cl><span class=s>ExecStop=${INSTALL_DIR}/bin/redis-cli -a StrongPass_ChangeMe shutdown
+</span></span></span><span class=line><span class=cl><span class=s>Restart=always
+</span></span></span><span class=line><span class=cl><span class=s># 需要配合 redis.conf 中的 supervised systemd
+</span></span></span><span class=line><span class=cl><span class=s>RuntimeDirectory=redis
+</span></span></span><span class=line><span class=cl><span class=s>RuntimeDirectoryMode=0755
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[Install]
+</span></span></span><span class=line><span class=cl><span class=s>WantedBy=multi-user.target
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重新加载并启动</span>
+</span></span><span class=line><span class=cl>systemctl daemon-reload
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> --now redis
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;==========================================&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;Redis </span><span class=si>${</span><span class=nv>REDIS_VERSION</span><span class=si>}</span><span class=s2> installation completed!&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;Service status:&#34;</span>
+</span></span><span class=line><span class=cl>systemctl status redis --no-pager
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;==========================================&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=第三部分标准化配置详解>第三部分：标准化配置详解</h2><h3 id=1-systemd-服务文件标准模版>1. Systemd 服务文件标准模版</h3><p>不要直接后台运行脚本，请使用以下标准模版管理服务。该模版已集成在上方脚本中，以下为详细说明：</p><p><strong>文件位置</strong>: <code>/etc/systemd/system/redis.service</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=k>[Unit]</span>
+</span></span><span class=line><span class=cl><span class=na>Description</span><span class=o>=</span><span class=s>Redis In-Memory Data Store</span>
+</span></span><span class=line><span class=cl><span class=na>Documentation</span><span class=o>=</span><span class=s>https://redis.io/</span>
+</span></span><span class=line><span class=cl><span class=na>After</span><span class=o>=</span><span class=s>network.target</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Service]</span>
+</span></span><span class=line><span class=cl><span class=c1># 使用 notify 类型，Redis 启动就绪后会发送信号给 systemd</span>
+</span></span><span class=line><span class=cl><span class=na>Type</span><span class=o>=</span><span class=s>notify</span>
+</span></span><span class=line><span class=cl><span class=na>User</span><span class=o>=</span><span class=s>redis</span>
+</span></span><span class=line><span class=cl><span class=na>Group</span><span class=o>=</span><span class=s>redis</span>
+</span></span><span class=line><span class=cl><span class=c1># 启动命令</span>
+</span></span><span class=line><span class=cl><span class=na>ExecStart</span><span class=o>=</span><span class=s>/usr/local/redis/bin/redis-server /etc/redis/redis.conf</span>
+</span></span><span class=line><span class=cl><span class=c1># 停止命令 (注意：如果设置了密码，必须加 -a 参数)</span>
+</span></span><span class=line><span class=cl><span class=na>ExecStop</span><span class=o>=</span><span class=s>/usr/local/redis/bin/redis-cli -a StrongPass_ChangeMe shutdown</span>
+</span></span><span class=line><span class=cl><span class=c1># 总是重启，防止异常退出</span>
+</span></span><span class=line><span class=cl><span class=na>Restart</span><span class=o>=</span><span class=s>always</span>
+</span></span><span class=line><span class=cl><span class=c1># 自动创建 /run/redis 目录用于存放 pid 文件</span>
+</span></span><span class=line><span class=cl><span class=na>RuntimeDirectory</span><span class=o>=</span><span class=s>redis</span>
+</span></span><span class=line><span class=cl><span class=na>RuntimeDirectoryMode</span><span class=o>=</span><span class=s>0755</span>
+</span></span><span class=line><span class=cl><span class=c1># 增加文件打开数限制 (高并发必须)</span>
+</span></span><span class=line><span class=cl><span class=na>LimitNOFILE</span><span class=o>=</span><span class=s>65536</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Install]</span>
+</span></span><span class=line><span class=cl><span class=na>WantedBy</span><span class=o>=</span><span class=s>multi-user.target</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-生产环境-redisconf-关键参数清单>2. 生产环境 <code>redis.conf</code> 关键参数清单</h3><p>在生成的配置文件基础上，以下参数需根据实际机器配置进行微调：</p><div class=table-wrapper><table><thead><tr><th style=text-align:left>参数</th><th style=text-align:left>推荐值</th><th style=text-align:left>说明</th></tr></thead><tbody><tr><td style=text-align:left><code>daemonize</code></td><td style=text-align:left><strong>no</strong></td><td style=text-align:left>使用 Systemd 管理时必须设为 no，否则 systemd 会无法追踪进程。</td></tr><tr><td style=text-align:left><code>supervised</code></td><td style=text-align:left><strong>systemd</strong></td><td style=text-align:left>配合 Systemd 的 <code>Type=notify</code>，实现更好的进程管理。</td></tr><tr><td style=text-align:left><code>maxmemory</code></td><td style=text-align:left><strong>物理内存的 70-80%</strong></td><td style=text-align:left>预留内存给系统和 Redis 的额外开销，防止 OOM。</td></tr><tr><td style=text-align:left><code>maxmemory-policy</code></td><td style=text-align:left><strong>allkeys-lru</strong></td><td style=text-align:left>缓存场景首选；如果是持久存储场景，可设为 <code>noeviction</code>。</td></tr><tr><td style=text-align:left><code>appendfsync</code></td><td style=text-align:left><strong>everysec</strong></td><td style=text-align:left>兼顾性能与数据安全，最多丢失 1 秒数据。</td></tr><tr><td style=text-align:left><code>replicaof</code></td><td style=text-align:left>(从节点配置)</td><td style=text-align:left>替代旧版的 <code>slaveof</code>，格式: <code>replicaof &lt;MasterIP> &lt;Port></code>。</td></tr></tbody></table></div><hr><h2 id=第四部分高可用架构配置指南>第四部分：高可用架构配置指南</h2><h3 id=方案-asentinel-哨兵-模式配置>方案 A：Sentinel (哨兵) 模式配置</h3><p>适用于 <strong>1 主 2 从 + 3 哨兵</strong> 的场景。</p><ol><li><p><strong>数据节点配置 (redis.conf)</strong></p><ul><li><strong>Master</strong>: 无需特殊配置。</li><li><strong>Slave</strong>: 添加 <code>replicaof &lt;MasterIP> 6379</code> 和 <code>masterauth &lt;MasterPassword></code>。</li></ul></li><li><p><strong>哨兵节点配置 (sentinel.conf)</strong>
+所有哨兵节点配置相同：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>port 26379
+</span></span><span class=line><span class=cl>daemonize no
+</span></span><span class=line><span class=cl># 监控 mymaster，至少 2 个哨兵同意才判定客观下线
+</span></span><span class=line><span class=cl>sentinel monitor mymaster 192.168.1.100 6379 2
+</span></span><span class=line><span class=cl>sentinel auth-pass mymaster StrongPass_ChangeMe
+</span></span><span class=line><span class=cl>sentinel down-after-milliseconds mymaster 30000
+</span></span><span class=line><span class=cl>sentinel parallel-syncs mymaster 1
+</span></span><span class=line><span class=cl>sentinel failover-timeout mymaster 180000
+</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=方案-bcluster-集群-模式配置>方案 B：Cluster (集群) 模式配置</h3><p>适用于 <strong>3 主 3 从</strong> (至少 6 个节点) 的场景。</p><ol><li><p><strong>节点配置 (redis.conf)</strong>
+所有 6 个节点开启以下配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cluster-enabled yes
+</span></span><span class=line><span class=cl>cluster-config-file nodes-6379.conf
+</span></span><span class=line><span class=cl>cluster-node-timeout 15000
+</span></span><span class=line><span class=cl>masterauth &#34;StrongPass_ChangeMe&#34;
+</span></span><span class=line><span class=cl>requirepass &#34;StrongPass_ChangeMe&#34;
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>创建集群</strong>
+使用 <code>redis-cli</code> 一键创建 (Redis 5+):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/usr/local/redis/bin/redis-cli -a StrongPass_ChangeMe --cluster create <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>192.168.1.11:6379 192.168.1.12:6379 192.168.1.13:6379 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>192.168.1.14:6379 192.168.1.15:6379 192.168.1.16:6379 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>--cluster-replicas <span class=m>1</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h2 id=第五部分常用维护命令>第五部分：常用维护命令</h2><ol><li><p><strong>查看服务状态</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>systemctl status redis
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>查看 Redis 内部状态</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 交互式进入</span>
+</span></span><span class=line><span class=cl>redis-cli -a StrongPass_ChangeMe
+</span></span><span class=line><span class=cl>&gt; INFO Server       <span class=c1># 查看版本和运行参数</span>
+</span></span><span class=line><span class=cl>&gt; INFO Replication  <span class=c1># 查看主从状态</span>
+</span></span><span class=line><span class=cl>&gt; INFO Persistence  <span class=c1># 查看 RDB/AOF 状态</span>
+</span></span><span class=line><span class=cl>&gt; INFO Memory       <span class=c1># 查看内存使用</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>实时监控日志</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>tail -f /var/log/redis/redis.log
+</span></span></code></pre></td></tr></table></div></div></li></ol></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/utility/ansible/><div class=article-details><h2 class=article-title>Ansible</h2></div></a></article><article><a href=/utility/jenkins/><div class=article-details><h2 class=article-title>Jenkins</h2></div></a></article><article><a href=/utility/nfs/><div class=article-details><h2 class=article-title>NFS</h2></div></a></article><article><a href=/utility/prometheus-/><div class=article-details><h2 class=article-title>Prometheus</h2></div></a></article><article><a href=/utility/tomcat/><div class=article-details><h2 class=article-title>Tomcat</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

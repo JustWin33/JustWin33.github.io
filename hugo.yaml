@@ -165,7 +165,7 @@ menu:
     - identifier: about
       name: 关于
       url: /about/       
-      weight: 10
+      weight: 11
     - identifier: links
       name: 网站
       url: /links/
@@ -197,10 +197,14 @@ menu:
 
     - identifier: ubuntu
       name: ubuntu
-      url: /ubuntu
+      url: /ubuntu/
       weight: 9
 
-      
+    - identifier: Utility
+      name: Utility
+      url: /Utility/
+      weight: 10
+
 
 
       

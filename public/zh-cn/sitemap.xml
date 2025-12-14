@@ -2,14 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/kali/arp%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/utility/ansible/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/cmd-1/</loc>
-    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/utility/helm/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/utility/jenkins/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -20,6 +23,33 @@
                 hreflang="zh-cn"
                 href="http://localhost:1313/"
                 />
+  </url><url>
+    <loc>http://localhost:1313/utility/nfs/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/utility/nginx/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/utility/prometheus-/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/utility/redis-/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/utility/tomcat/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/utility/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/utility/zabbix/</loc>
+    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/kali/arp%E6%AC%BA%E9%AA%97%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/cmd-1/</loc>
+    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/kali/</loc>
     <lastmod>2025-12-13T00:00:00+00:00</lastmod>

@@ -1,0 +1,317 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Nginx 完整部署与配置 1. 环境准备与安装 基于 CentOS 7 环境\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 1. 安装 EPEL 源 sudo yum install epel-release -y # 2. 安装 Nginx sudo yum install nginx -y # 3. 启动并设置开机自启 sudo systemctl start nginx sudo systemctl enable nginx # 4. 配置防火墙 (开放 80/443) sudo firewall-cmd --permanent --add-service=http sudo firewall-cmd --permanent --add-service=https sudo firewall-cmd --reload **\n"><title>nginx</title><link rel=canonical href=http://localhost:1313/utility/nginx/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="nginx"><meta property='og:description' content="Nginx 完整部署与配置 1. 环境准备与安装 基于 CentOS 7 环境\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 1. 安装 EPEL 源 sudo yum install epel-release -y # 2. 安装 Nginx sudo yum install nginx -y # 3. 启动并设置开机自启 sudo systemctl start nginx sudo systemctl enable nginx # 4. 配置防火墙 (开放 80/443) sudo firewall-cmd --permanent --add-service=http sudo firewall-cmd --permanent --add-service=https sudo firewall-cmd --reload **\n"><meta property='og:url' content='http://localhost:1313/utility/nginx/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Utility'><meta property='article:published_time' content='2025-12-14T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-14T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="nginx"><meta name=twitter:description content="Nginx 完整部署与配置 1. 环境准备与安装 基于 CentOS 7 环境\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 1. 安装 EPEL 源 sudo yum install epel-release -y # 2. 安装 Nginx sudo yum install nginx -y # 3. 启动并设置开机自启 sudo systemctl start nginx sudo systemctl enable nginx # 4. 配置防火墙 (开放 80/443) sudo firewall-cmd --permanent --add-service=http sudo firewall-cmd --permanent --add-service=https sudo firewall-cmd --reload **\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/links/><span>网站</span></a></li><li><a href=/linux/><span>Linux</span></a></li><li><a href=/docker/><span>docker</span></a></li><li><a href=/k8s/><span>k8s</span></a></li><li><a href=/mysql/><span>mysql</span></a></li><li><a href=/project/><span>项目</span></a></li><li><a href=/kali/><span>kali</span></a></li><li><a href=/ubuntu/><span>ubuntu</span></a></li><li><a href=/utility/><span>Utility</span></a></li><li><a href=/about/><span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#nginx-完整部署与配置>Nginx 完整部署与配置</a><ol><li><a href=#1-环境准备与安装>1. 环境准备与安装</a></li><li><a href=#2-全局主配置文件-nginxconf>2. 全局主配置文件 (<code>nginx.conf</code>)</a></li><li><a href=#3-站点详细配置-虚拟主机>3. 站点详细配置 (虚拟主机)</a></li><li><a href=#4-sslhttps-配置-可选>4. SSL/HTTPS 配置 (可选)</a></li></ol></li><li><a href=#常用维护命令与操作>常用维护命令与操作</a></li><li><a href=#注意事项-precautions>注意事项 (Precautions)</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/utility/nginx/>nginx</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-12-14</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 4 分钟</time></div></footer></div></header><section class=article-content><h3 id=nginx-完整部署与配置>Nginx 完整部署与配置</h3><h4 id=1-环境准备与安装>1. 环境准备与安装</h4><p>基于 CentOS 7 环境</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=c1># 1. 安装 EPEL 源</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>yum</span> <span class=n>install</span> <span class=n>epel</span><span class=o>-</span><span class=n>release</span> <span class=o>-</span><span class=n>y</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 安装 Nginx</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>yum</span> <span class=n>install</span> <span class=n>nginx</span> <span class=o>-</span><span class=n>y</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 启动并设置开机自启</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>systemctl</span> <span class=n>start</span> <span class=n>nginx</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>systemctl</span> <span class=n>enable</span> <span class=n>nginx</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 4. 配置防火墙 (开放 80/443)</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>firewall</span><span class=o>-</span><span class=n>cmd</span> <span class=o>--</span><span class=n>permanent</span> <span class=o>--</span><span class=n>add</span><span class=o>-</span><span class=n>service</span><span class=o>=</span><span class=n>http</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>firewall</span><span class=o>-</span><span class=n>cmd</span> <span class=o>--</span><span class=n>permanent</span> <span class=o>--</span><span class=n>add</span><span class=o>-</span><span class=n>service</span><span class=o>=</span><span class=n>https</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>firewall</span><span class=o>-</span><span class=n>cmd</span> <span class=o>--</span><span class=n>reload</span>
+</span></span></code></pre></td></tr></table></div></div><p>**</p><hr><h4 id=2-全局主配置文件-nginxconf>2. 全局主配置文件 (<code>nginx.conf</code>)</h4><p>建议保留默认结构，仅在 <code>http</code> 块中添加全局优化配置。</p><p><strong>编辑文件</strong>：<code>sudo vi /etc/nginx/nginx.conf</code></p><p>Nginx</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>user</span> <span class=n>nginx</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>worker_processes</span> <span class=n>auto</span><span class=p>;</span> <span class=c1># 自动根据 CPU 核心数调整</span>
+</span></span><span class=line><span class=cl><span class=n>error_log</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=nb>log</span><span class=o>/</span><span class=n>nginx</span><span class=o>/</span><span class=n>error</span><span class=o>.</span><span class=n>log</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>pid</span> <span class=o>/</span><span class=n>run</span><span class=o>/</span><span class=n>nginx</span><span class=o>.</span><span class=n>pid</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>events</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>worker_connections</span> <span class=mi>1024</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>http</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>include</span>       <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>nginx</span><span class=o>/</span><span class=n>mime</span><span class=o>.</span><span class=n>types</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>default_type</span>  <span class=n>application</span><span class=o>/</span><span class=n>octet</span><span class=o>-</span><span class=n>stream</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 日志格式</span>
+</span></span><span class=line><span class=cl>    <span class=n>log_format</span>  <span class=n>main</span>  <span class=s1>&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+</span></span><span class=line><span class=cl>                      <span class=s1>&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+</span></span><span class=line><span class=cl>                      <span class=s1>&#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>access_log</span>  <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=nb>log</span><span class=o>/</span><span class=n>nginx</span><span class=o>/</span><span class=n>access</span><span class=o>.</span><span class=n>log</span>  <span class=n>main</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>sendfile</span>            <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>tcp_nopush</span>          <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>tcp_nodelay</span>         <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>keepalive_timeout</span>   <span class=mi>65</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>types_hash_max_size</span> <span class=mi>2048</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># --- 安全与优化配置 (源自文件2的修正) ---</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 隐藏 Nginx 版本号，防止扫描</span>
+</span></span><span class=line><span class=cl>    <span class=n>server_tokens</span> <span class=n>off</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 开启目录索引 (可选，全局开启)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># autoindex on; </span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 限制并发连接数 (定义内存区域)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 限制每个 IP 的并发连接数为 10m 大小的空间</span>
+</span></span><span class=line><span class=cl>    <span class=n>limit_conn_zone</span> <span class=o>$</span><span class=n>binary_remote_addr</span> <span class=n>zone</span><span class=o>=</span><span class=n>addr_limit</span><span class=p>:</span><span class=mi>10</span><span class=n>m</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 限制请求速率</span>
+</span></span><span class=line><span class=cl>    <span class=n>limit_req_zone</span> <span class=o>$</span><span class=n>binary_remote_addr</span> <span class=n>zone</span><span class=o>=</span><span class=n>req_limit</span><span class=p>:</span><span class=mi>10</span><span class=n>m</span> <span class=n>rate</span><span class=o>=</span><span class=mi>1</span><span class=n>r</span><span class=o>/</span><span class=n>s</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>include</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>nginx</span><span class=o>/</span><span class=n>conf</span><span class=o>.</span><span class=n>d</span><span class=o>/*.</span><span class=n>conf</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h4 id=3-站点详细配置-虚拟主机>3. 站点详细配置 (虚拟主机)</h4><p>我们将所有高级功能（动静分离、SSL、认证、限速）集成到一个完整的虚拟主机配置文件中。</p><p><strong>创建文件</strong>：<code>sudo vi /etc/nginx/conf.d/web_full.conf</code></p><p>Nginx</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>listen</span> <span class=mi>80</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>server_name</span> <span class=n>example</span><span class=o>.</span><span class=n>com</span> <span class=n>www</span><span class=o>.</span><span class=n>example</span><span class=o>.</span><span class=n>com</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 网站根目录</span>
+</span></span><span class=line><span class=cl>    <span class=n>root</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>example</span><span class=o>.</span><span class=n>com</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>index</span> <span class=n>index</span><span class=o>.</span><span class=n>html</span> <span class=n>index</span><span class=o>.</span><span class=n>htm</span> <span class=n>index</span><span class=o>.</span><span class=n>php</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># --- 1. 动静分离配置 ---</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># 静态资源：图片、CSS、JS 本地处理并设置缓存</span>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>~*</span> \<span class=o>.</span><span class=p>(</span><span class=n>png</span><span class=o>|</span><span class=n>jpg</span><span class=o>|</span><span class=n>jpeg</span><span class=o>|</span><span class=n>gif</span><span class=o>|</span><span class=n>bmp</span><span class=o>|</span><span class=n>ico</span><span class=o>|</span><span class=n>css</span><span class=o>|</span><span class=n>js</span><span class=p>)</span><span class=o>$</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>root</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>example</span><span class=o>.</span><span class=n>com</span><span class=o>/</span><span class=n>images</span><span class=p>;</span> <span class=c1># 指定单独存放图片的路径</span>
+</span></span><span class=line><span class=cl>        <span class=n>expires</span> <span class=mi>1</span><span class=n>h</span><span class=p>;</span>                       <span class=c1># 设置缓存时间为1小时 (修正了原文档的 lh)</span>
+</span></span><span class=line><span class=cl>        <span class=n>access_log</span> <span class=n>off</span><span class=p>;</span>                   <span class=c1># 不记录静态资源日志以减少 I/O</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 动态资源：PHP 转发给后端 (例如 LAMP 服务器 192.168.200.50)</span>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>~</span> \<span class=o>.</span><span class=n>php</span><span class=o>$</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_pass</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=mf>192.168</span><span class=o>.</span><span class=mf>200.50</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 必须传递真实的 Host 和 IP，否则后端无法获取客户端信息</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>Host</span> <span class=o>$</span><span class=n>host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Real</span><span class=o>-</span><span class=ne>IP</span> <span class=o>$</span><span class=n>remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>proxy_set_header</span> <span class=n>X</span><span class=o>-</span><span class=n>Forwarded</span><span class=o>-</span><span class=n>For</span> <span class=o>$</span><span class=n>proxy_add_x_forwarded_for</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># --- 2. 目录访问控制与别名 ---</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 别名测试：访问 /abc 实际指向 /var/www/html</span>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>/</span><span class=n>abc</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>alias</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>html</span><span class=o>/</span><span class=p>;</span> <span class=c1># 注意：alias 末尾通常需要加 /</span>
+</span></span><span class=line><span class=cl>        <span class=n>index</span> <span class=n>index</span><span class=o>.</span><span class=n>html</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 禁止访问特定目录 /a/</span>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>^~</span> <span class=o>/</span><span class=n>a</span><span class=o>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>deny</span> <span class=n>all</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># --- 3. 密码访问控制 (Auth Basic) ---</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 需要先生成密码文件：htpasswd -c /etc/nginx/.htpasswd admin</span>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>/</span><span class=n>status</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>stub_status</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>auth_basic</span> <span class=s2>&#34;Restricted Area&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>auth_basic_user_file</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>nginx</span><span class=o>/.</span><span class=n>htpasswd</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># --- 4. 限速与下载限制 ---</span>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>/</span><span class=n>downloads</span><span class=o>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>alias</span> <span class=o>/</span><span class=n>data</span><span class=o>/</span><span class=n>apps</span><span class=o>/</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>limit_conn</span> <span class=n>addr_limit</span> <span class=mi>1</span><span class=p>;</span>  <span class=c1># 每个IP限制1个连接</span>
+</span></span><span class=line><span class=cl>        <span class=n>limit_rate</span> <span class=mi>512</span><span class=n>k</span><span class=p>;</span>          <span class=c1># 限制下载速度为 512KB/s</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># --- 5. 自定义错误页面 ---</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 将 404 错误指向自定义页面</span>
+</span></span><span class=line><span class=cl>    <span class=n>error_page</span> <span class=mi>404</span> <span class=o>/</span><span class=mf>404.</span><span class=n>html</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>=</span> <span class=o>/</span><span class=mf>404.</span><span class=n>html</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>root</span> <span class=o>/</span><span class=n>usr</span><span class=o>/</span><span class=n>share</span><span class=o>/</span><span class=n>nginx</span><span class=o>/</span><span class=n>html</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h4 id=4-sslhttps-配置-可选>4. SSL/HTTPS 配置 (可选)</h4><p>如果需要开启 HTTPS，请在 <code>conf.d</code> 下添加如下配置（基于文件 2 的 SSL 部分优化）：</p><p>Nginx</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>listen</span> <span class=mi>443</span> <span class=n>ssl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>server_name</span> <span class=n>example</span><span class=o>.</span><span class=n>com</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 证书路径 (需先申请或生成证书)</span>
+</span></span><span class=line><span class=cl>    <span class=n>ssl_certificate</span>     <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>nginx</span><span class=o>/</span><span class=n>ssl</span><span class=o>/</span><span class=n>server</span><span class=o>.</span><span class=n>crt</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=n>ssl_certificate_key</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>nginx</span><span class=o>/</span><span class=n>ssl</span><span class=o>/</span><span class=n>server</span><span class=o>.</span><span class=n>key</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># SSL 优化配置</span>
+</span></span><span class=line><span class=cl>    <span class=n>ssl_session_cache</span> <span class=n>shared</span><span class=p>:</span><span class=n>SSL</span><span class=p>:</span><span class=mi>1</span><span class=n>m</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>ssl_session_timeout</span>  <span class=mi>5</span><span class=n>m</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>ssl_ciphers</span> <span class=n>HIGH</span><span class=p>:</span><span class=o>!</span><span class=n>aNULL</span><span class=p>:</span><span class=o>!</span><span class=n>MD5</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>ssl_prefer_server_ciphers</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>location</span> <span class=o>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>root</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>example</span><span class=o>.</span><span class=n>com</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>index</span> <span class=n>index</span><span class=o>.</span><span class=n>html</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=常用维护命令与操作>常用维护命令与操作</h3><ol><li><p><strong>生成密码文件 (用于访问控制)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>sudo</span> <span class=n>yum</span> <span class=n>install</span> <span class=n>httpd</span><span class=o>-</span><span class=n>tools</span> <span class=o>-</span><span class=n>y</span>
+</span></span><span class=line><span class=cl><span class=c1># 创建用户 linux，密码 666666</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>htpasswd</span> <span class=o>-</span><span class=n>c</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>nginx</span><span class=o>/.</span><span class=n>htpasswd</span> <span class=n>linux</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>生成自签名 SSL 证书 (测试用)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sudo mkdir -p /etc/nginx/ssl
+</span></span><span class=line><span class=cl>cd /etc/nginx/ssl
+</span></span><span class=line><span class=cl># 生成私钥
+</span></span><span class=line><span class=cl>sudo openssl genrsa -out server.key 2048
+</span></span><span class=line><span class=cl># 生成证书请求 (CSR)
+</span></span><span class=line><span class=cl>sudo openssl req -new -key server.key -out server.csr
+</span></span><span class=line><span class=cl># 生成自签名证书 (CRT)
+</span></span><span class=line><span class=cl>sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+</span></span></code></pre></td></tr></table></div></div></li><li><p>日志切割 (推荐方式)</p><p>原文档使用 Shell 脚本切割日志。在 CentOS/RedHat 系统中，推荐使用系统自带的 logrotate，Nginx 安装时通常会自动生成配置文件 /etc/logrotate.d/nginx，无需手动编写脚本。如果必须手动切割，原脚本逻辑可行，但请确保脚本有执行权限。</p></li></ol><hr><h3 id=注意事项-precautions>注意事项 (Precautions)</h3><ol><li><p>配置语法检查 (最重要的步骤)</p><p>每次修改配置文件后，必须运行以下命令检查语法，否则重启可能会导致网站宕机：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sudo nginx -t
+</span></span></code></pre></td></tr></table></div></div><p>只有看到 <code>syntax is ok</code> 和 <code>test is successful</code> 才能重启服务。</p></li><li><p>SELinux 权限问题</p><p>如果您更改了默认的网站根目录（例如改到了 /data/web 或 /var/www/example.com），SELinux 可能会阻止 Nginx 读取文件，导致 403 Forbidden 错误。</p><ul><li><em>临时解决</em>：<code>setenforce 0</code></li><li><em>永久解决</em>：<code>chcon -Rt httpd_sys_content_t /您的自定义目录</code></li></ul></li><li><p>文件权限</p><p>确保 Nginx 的运行用户（通常是 nginx）对网站目录有读取权限，对上传目录有写入权限。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>sudo</span> <span class=n>chown</span> <span class=o>-</span><span class=n>R</span> <span class=n>nginx</span><span class=p>:</span><span class=n>nginx</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>example</span><span class=o>.</span><span class=n>com</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>chmod</span> <span class=o>-</span><span class=n>R</span> <span class=mi>755</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>www</span><span class=o>/</span><span class=n>example</span><span class=o>.</span><span class=n>com</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>Alias 与 Root 的区别</strong></p><ul><li><code>root</code>：会将 location 后面的路径拼接到 root 路径之后。</li><li><code>alias</code>：会将 location 后面的路径<strong>替换</strong>为 alias 路径。</li><li><strong>注意</strong>：使用 <code>alias</code> 时，目录路径末尾通常需要加 <code>/</code>，否则容易出错。</li></ul></li><li><p>安全隐患</p><p>原文档中提到将 404 错误状态码强制改为 200 (error_page 404 =200 /404.jpg)。</p><ul><li><strong>警告</strong>：这在 SEO（搜索引擎优化）中是极其糟糕的做法（称为“软 404”），会让搜索引擎误以为错误的页面是正常的。除非是为了特殊的安全伪装，否则<strong>不要</strong>在生产环境中使用 <code>=200</code>。</li></ul></li></ol><p>通过以上步骤，您可以搭建一个功能完善、安全且易于维护的 Nginx 服务器。</p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/utility/ansible/><div class=article-details><h2 class=article-title>Ansible</h2></div></a></article><article><a href=/utility/jenkins/><div class=article-details><h2 class=article-title>Jenkins</h2></div></a></article><article><a href=/utility/nfs/><div class=article-details><h2 class=article-title>NFS</h2></div></a></article><article><a href=/utility/prometheus-/><div class=article-details><h2 class=article-title>Prometheus</h2></div></a></article><article><a href=/utility/tomcat/><div class=article-details><h2 class=article-title>Tomcat</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

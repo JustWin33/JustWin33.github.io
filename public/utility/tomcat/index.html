@@ -1,0 +1,360 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Apache Tomcat 部署运维指南 (CentOS 7/Linux 通用版) 第一部分：核心知识点 (原理篇) 在动手之前，理解 Tomcat 的架构能让你在报错时迅速定位问题。\n1. Tomcat 是什么？ Tomcat 是 Apache 基金会开源的 Servlet 容器，也是 Java Web 应用（如 Spring Boot）的默认服务器。\n"><title>Tomcat</title><link rel=canonical href=http://localhost:1313/utility/tomcat/><link rel=stylesheet href=/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css><meta property='og:title' content="Tomcat"><meta property='og:description' content="Apache Tomcat 部署运维指南 (CentOS 7/Linux 通用版) 第一部分：核心知识点 (原理篇) 在动手之前，理解 Tomcat 的架构能让你在报错时迅速定位问题。\n1. Tomcat 是什么？ Tomcat 是 Apache 基金会开源的 Servlet 容器，也是 Java Web 应用（如 Spring Boot）的默认服务器。\n"><meta property='og:url' content='http://localhost:1313/utility/tomcat/'><meta property='og:site_name' content='JustWin'><meta property='og:type' content='article'><meta property='article:section' content='Utility'><meta property='article:published_time' content='2025-12-14T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-14T00:00:00+00:00'><meta property='og:image' content='http://localhost:1313/'><meta name=twitter:title content="Tomcat"><meta name=twitter:description content="Apache Tomcat 部署运维指南 (CentOS 7/Linux 通用版) 第一部分：核心知识点 (原理篇) 在动手之前，理解 Tomcat 的架构能让你在报错时迅速定位问题。\n1. Tomcat 是什么？ Tomcat 是 Apache 基金会开源的 Servlet 容器，也是 Java Web 应用（如 Spring Boot）的默认服务器。\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='http://localhost:1313/'><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"light")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/images/avatar_hu_89ca753ea8ea85c7.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>✍️</span></figure><div class=site-meta><h1 class=site-name><a href=/>JustWin</a></h1><h2 class=site-description>分享技术与生活</h2></div></header><ol class=menu-social><li><a href=https://github.com/passion-win target=_blank title=GitHub rel=me><svg width="800" height="800" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>github [#142]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M94 7399C99.523 7399 104 7403.59 104 7409.253 104 7413.782 101.138 7417.624 97.167 7418.981 96.66 7419.082 96.48 7418.762 96.48 7418.489 96.48 7418.151 96.492 7417.047 96.492 7415.675 96.492 7414.719 96.172 7414.095 95.813 7413.777 98.04 7413.523 100.38 7412.656 100.38 7408.718 100.38 7407.598 99.992 7406.684 99.35 7405.966 99.454 7405.707 99.797 7404.664 99.252 7403.252 99.252 7403.252 98.414 7402.977 96.505 7404.303 95.706 7404.076 94.85 7403.962 94 7403.958 93.15 7403.962 92.295 7404.076 91.497 7404.303 89.586 7402.977 88.746 7403.252 88.746 7403.252 88.203 7404.664 88.546 7405.707 88.649 7405.966 88.01 7406.684 87.619 7407.598 87.619 7408.718 87.619 7412.646 89.954 7413.526 92.175 7413.785 91.889 7414.041 91.63 7414.493 91.54 7415.156 90.97 7415.418 89.522 7415.871 88.63 7414.304 88.63 7414.304 88.101 7413.319 87.097 7413.247 87.097 7413.247 86.122 7413.234 87.029 7413.87 87.029 7413.87 87.684 7414.185 88.139 7415.37 88.139 7415.37 88.726 7417.2 91.508 7416.58 91.513 7417.437 91.522 7418.245 91.522 7418.489 91.522 7418.76 91.338 7419.077 90.839 7418.982 86.865 7417.627 84 7413.783 84 7409.253 84 7403.59 88.478 7399 94 7399" id="github-[#142]"/></g></g></g></svg></a></li><li><a href=https://t.me/+TFjBeZzowwU1YTY1 target=_blank title=telegram rel=me><svg viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320S183 568 320 568 568 457 568 320 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419c-3.5 18.6-10.3 24.8-16.9 25.4C375.6 445.7 364.7 434.9 350.7 425.7c-21.8-14.3-34.2-23.2-55.3-37.2C270.9 372.4 286.8 363.5 300.7 349 304.4 345.2 367.8 287.5 369 282.3 369.2 281.6 369.3 279.2 367.8 277.9 366.3 276.6 364.2 277.1 362.7 277.4 360.5 277.9 325.6 300.9 258.1 346.5 248.2 353.3 239.2 356.6 231.2 356.4 222.3 356.2 205.3 351.4 192.6 347.3 177.1 342.3 164.7 339.6 165.8 331 166.4 326.5 172.5 322 184.2 317.3 256.5 285.8 304.7 265 328.8 255c68.9-28.6 83.2-33.6 92.5-33.8C423.4 221.2 427.9 221.7 430.9 224.1 432.9 225.8 434.1 228.2 434.4 230.8 434.9 234 435 237.3 434.8 240.6z"/></svg></a></li><li><a href=https://twitter.com/@win1688888888 target=_blank title=twitter rel=me><svg width="800" height="800" viewBox="0 -2 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><title>twitter [#154]</title><desc>Created with Sketch.</desc><defs/><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000"><g id="icons" transform="translate(56.000000, 160.000000)"><path d="M10.29 7377C17.837 7377 21.965 7370.84365 21.965 7365.50546 21.965 7365.33021 21.965 7365.15595 21.953 7364.98267 22.756 7364.41163 23.449 7363.70276 24 7362.8915 23.252 7363.21837 22.457 7363.433 21.644 7363.52751 22.5 7363.02244 23.141 7362.2289 23.448 7361.2926 22.642 7361.76321 21.761 7362.095 20.842 7362.27321 19.288 7360.64674 16.689 7360.56798 15.036 7362.09796 13.971 7363.08447 13.518 7364.55538 13.849 7365.95835 10.55 7365.79492 7.476 7364.261 5.392 7361.73762 4.303 7363.58363 4.86 7365.94457 6.663 7367.12996 6.01 7367.11125 5.371 7366.93797 4.8 7366.62489V7366.67608C4.801 7368.5989 6.178 7370.2549 8.092 7370.63591 7.488 7370.79836 6.854 7370.82199 6.24 7370.70483 6.777 7372.35099 8.318 7373.47829 10.073 7373.51078 8.62 7374.63513 6.825 7375.24554 4.977 7375.24358 4.651 7375.24259 4.325 7375.22388 4 7375.18549 5.877 7376.37088 8.06 7377 10.29 7376.99705" id="twitter-[#154]"/></g></g></g></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><span>首页</span></a></li><li><a href=/links/><span>网站</span></a></li><li><a href=/linux/><span>Linux</span></a></li><li><a href=/docker/><span>docker</span></a></li><li><a href=/k8s/><span>k8s</span></a></li><li><a href=/mysql/><span>mysql</span></a></li><li><a href=/project/><span>项目</span></a></li><li><a href=/kali/><span>kali</span></a></li><li><a href=/ubuntu/><span>ubuntu</span></a></li><li><a href=/utility/><span>Utility</span></a></li><li><a href=/about/><span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=http://localhost:1313/ selected>中文</option><option value=http://localhost:1313/en/>English</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#第一部分核心知识点-原理篇>第一部分：核心知识点 (原理篇)</a><ol><li><a href=#1-tomcat-是什么>1. Tomcat 是什么？</a></li><li><a href=#2-关键目录结构-部署必背>2. 关键目录结构 (部署必背)</a></li></ol></li><li><a href=#第二部分生产环境部署实战-操作篇>第二部分：生产环境部署实战 (操作篇)</a><ol><li><a href=#步骤一安装-java-环境-jdk>步骤一：安装 Java 环境 (JDK)</a></li><li><a href=#步骤二下载与规范化部署-tomcat>步骤二：下载与规范化部署 Tomcat</a></li><li><a href=#步骤三配置-systemd-系统服务-核心>步骤三：配置 Systemd 系统服务 (核心)</a></li><li><a href=#步骤四防火墙设置>步骤四：防火墙设置</a></li></ol></li><li><a href=#第三部分高级配置-管理与优化>第三部分：高级配置 (管理与优化)</a><ol><li><a href=#1-配置-tomcat-管理员-manager-app>1. 配置 Tomcat 管理员 (Manager App)</a></li></ol></li></ol><ol><li><ol><li><a href=#核心架构图解>核心架构图解</a></li><li><a href=#第一步安装-nginx>第一步：安装 Nginx</a></li><li><a href=#第二步配置反向代理-核心步骤>第二步：配置反向代理 (核心步骤)</a></li><li><a href=#第三步解决-selinux-权限问题-centos-特有坑>第三步：解决 SELinux 权限问题 (CentOS 特有坑)</a></li><li><a href=#第四步验证全链路>第四步：验证全链路</a></li><li><a href=#进阶场景tomcat-负载均衡-集群>进阶场景：Tomcat 负载均衡 (集群)</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category></header><div class=article-title-wrapper><h2 class=article-title><a href=/utility/tomcat/>Tomcat</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2025-12-14</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 7 分钟</time></div></footer></div></header><section class=article-content><h1 id=apache-tomcat-部署运维指南-centos-7linux-通用版>Apache Tomcat 部署运维指南 (CentOS 7/Linux 通用版)</h1><h2 id=第一部分核心知识点-原理篇>第一部分：核心知识点 (原理篇)</h2><p>在动手之前，理解 Tomcat 的架构能让你在报错时迅速定位问题。</p><h3 id=1-tomcat-是什么>1. Tomcat 是什么？</h3><p>Tomcat 是 Apache 基金会开源的 <strong>Servlet 容器</strong>，也是 Java Web 应用（如 Spring Boot）的默认服务器。</p><ul><li><strong>核心作用</strong>：它充当“翻译官”，监听 HTTP 端口（如 8080），将收到的网络请求转换为 Java 对象（Request），交给你的 Java 代码处理，再将结果（Response）返回给浏览器。</li></ul><h3 id=2-关键目录结构-部署必背>2. 关键目录结构 (部署必背)</h3><p>部署完成后，你必须熟悉 <code>/opt/tomcat</code> 下的这几个目录：</p><div class=table-wrapper><table><thead><tr><th style=text-align:left>目录</th><th style=text-align:left>重要级</th><th style=text-align:left>作用</th></tr></thead><tbody><tr><td style=text-align:left><strong>bin/</strong></td><td style=text-align:left>⭐⭐⭐</td><td style=text-align:left>存放脚本。<code>startup.sh</code> (启动), <code>shutdown.sh</code> (停止)。</td></tr><tr><td style=text-align:left><strong>conf/</strong></td><td style=text-align:left>⭐⭐⭐⭐⭐</td><td style=text-align:left><strong>配置中心</strong>。<code>server.xml</code> (端口/连接), <code>web.xml</code> (全局设置)。</td></tr><tr><td style=text-align:left><strong>webapps/</strong></td><td style=text-align:left>⭐⭐⭐⭐</td><td style=text-align:left><strong>代码存放处</strong>。默认将 <code>.war</code> 包扔在这里会自动解压部署。</td></tr><tr><td style=text-align:left><strong>logs/</strong></td><td style=text-align:left>⭐⭐⭐⭐⭐</td><td style=text-align:left><strong>排错第一现场</strong>。<code>catalina.out</code> 是最重要的控制台日志。</td></tr><tr><td style=text-align:left><strong>work/</strong></td><td style=text-align:left>⭐</td><td style=text-align:left>JSP 编译后的临时文件，清理缓存时可删除。</td></tr></tbody></table></div><hr><h2 id=第二部分生产环境部署实战-操作篇>第二部分：生产环境部署实战 (操作篇)</h2><blockquote><p><strong>环境假设</strong>：CentOS 7 / RedHat 系列 Linux
+<strong>用户权限</strong>：需拥有 <code>sudo</code> 权限</p></blockquote><h3 id=步骤一安装-java-环境-jdk>步骤一：安装 Java 环境 (JDK)</h3><p>Tomcat 是纯 Java 编写的，必须依赖 JDK 运行。</p><ol><li><p><strong>检查是否已安装</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>java -version
+</span></span><span class=line><span class=cl><span class=c1># 如果显示 &#34;command not found&#34; 或版本过低，继续下一步</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>安装 OpenJDK 1.8 (生产环境最常用版本)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y java-1.8.0-openjdk-devel
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>❗关键步骤：获取 Java 真实安装路径</strong>
+Systemd 服务配置需要绝对路径，运行以下命令并记下输出结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查找 java 命令的位置，并找出其软链接背后的真实路径</span>
+</span></span><span class=line><span class=cl>readlink -f <span class=k>$(</span>which java<span class=k>)</span> <span class=p>|</span> sed <span class=s2>&#34;s:bin/java::&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p><em>预期输出示例（记下来，后面配置要用）：</em> <code>/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.382.b05-1.el7_9.x86_64/jre/</code></p></blockquote></li></ol><h3 id=步骤二下载与规范化部署-tomcat>步骤二：下载与规范化部署 Tomcat</h3><p>我们将 Tomcat 部署在 <code>/opt</code> 目录，并使用专用用户运行，这是企业安全标准。</p><ol><li><p><strong>下载 Tomcat 9 (稳定版)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> /tmp
+</span></span><span class=line><span class=cl><span class=c1># 下载 9.0.x 最新版（建议去官网核对版本号）</span>
+</span></span><span class=line><span class=cl>wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>解压并规范目录</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建标准目录</span>
+</span></span><span class=line><span class=cl>sudo mkdir -p /opt/tomcat
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 解压并剥离首层文件夹（直接把内容解压到 /opt/tomcat 下，而不是 /opt/tomcat/apache-tomcat-x.x.x）</span>
+</span></span><span class=line><span class=cl>sudo tar -zxvf apache-tomcat-9.0.80.tar.gz -C /opt/tomcat --strip-components<span class=o>=</span><span class=m>1</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>创建专用用户 (安全加固)</strong>
+禁止 root 用户直接运行 Tomcat，防止黑客提权。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建一个没有登录权限(/bin/false)的用户组和用户</span>
+</span></span><span class=line><span class=cl>sudo groupadd tomcat
+</span></span><span class=line><span class=cl>sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 移交文件所有权给 tomcat 用户</span>
+</span></span><span class=line><span class=cl>sudo chown -R tomcat:tomcat /opt/tomcat/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 赋予脚本执行权限</span>
+</span></span><span class=line><span class=cl>sudo chmod +x /opt/tomcat/bin/*.sh
+</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=步骤三配置-systemd-系统服务-核心>步骤三：配置 Systemd 系统服务 (核心)</h3><p>配置后，Tomcat 可以开机自启，崩溃自动重启。</p><ol><li><p><strong>创建服务文件</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vi /etc/systemd/system/tomcat.service
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>写入以下内容 (无误版)</strong>
+<em>注意：将 <code>Environment="JAVA_HOME=..."</code> 修改为你步骤一里获取的真实路径！</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=k>[Unit]</span>
+</span></span><span class=line><span class=cl><span class=na>Description</span><span class=o>=</span><span class=s>Apache Tomcat 9 Web Application Container</span>
+</span></span><span class=line><span class=cl><span class=na>After</span><span class=o>=</span><span class=s>network.target syslog.target</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Service]</span>
+</span></span><span class=line><span class=cl><span class=na>Type</span><span class=o>=</span><span class=s>forking</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 指定运行用户</span>
+</span></span><span class=line><span class=cl><span class=na>User</span><span class=o>=</span><span class=s>tomcat</span>
+</span></span><span class=line><span class=cl><span class=na>Group</span><span class=o>=</span><span class=s>tomcat</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ❗修改这里：填写你步骤一里查到的真实 Java 路径</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk&#34; </span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;CATALINA_PID=/opt/tomcat/temp/tomcat.pid&#34;</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;CATALINA_HOME=/opt/tomcat&#34;</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#34;CATALINA_BASE=/opt/tomcat&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 内存优化参数 (可选，防止内存溢出)</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>&#39;CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=na>ExecStart</span><span class=o>=</span><span class=s>/opt/tomcat/bin/startup.sh</span>
+</span></span><span class=line><span class=cl><span class=na>ExecStop</span><span class=o>=</span><span class=s>/opt/tomcat/bin/shutdown.sh</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 进程崩溃后自动重启</span>
+</span></span><span class=line><span class=cl><span class=na>Restart</span><span class=o>=</span><span class=s>on-failure</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Install]</span>
+</span></span><span class=line><span class=cl><span class=na>WantedBy</span><span class=o>=</span><span class=s>multi-user.target</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>启动服务</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 重新加载服务配置</span>
+</span></span><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动 Tomcat</span>
+</span></span><span class=line><span class=cl>sudo systemctl start tomcat
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设置开机自启</span>
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> tomcat
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>验证状态</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl status tomcat
+</span></span></code></pre></td></tr></table></div></div><p><em>看到绿色的 <code>active (running)</code> 即表示成功。</em></p></li></ol><h3 id=步骤四防火墙设置>步骤四：防火墙设置</h3><ol><li><p><strong>开放 8080 端口</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo firewall-cmd --zone<span class=o>=</span>public --add-port<span class=o>=</span>8080/tcp --permanent
+</span></span><span class=line><span class=cl>sudo firewall-cmd --reload
+</span></span></code></pre></td></tr></table></div></div><p><em>(如果是阿里云/腾讯云服务器，还需要在控制台的“安全组”中放行 8080 端口)</em></p></li><li><p><strong>测试访问</strong>
+浏览器访问：<code>http://服务器IP:8080</code>
+<em>出现 Apache Tomcat 的 logo 页面即部署完成。</em></p></li></ol><hr><h2 id=第三部分高级配置-管理与优化>第三部分：高级配置 (管理与优化)</h2><h3 id=1-配置-tomcat-管理员-manager-app>1. 配置 Tomcat 管理员 (Manager App)</h3><p>默认情况下，Tomcat 的后台管理页面是被禁用的。</p><ol><li><p><strong>编辑用户配置</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vi /opt/tomcat/conf/tomcat-users.xml
+</span></span></code></pre></td></tr></table></div></div><p>在 <code>&lt;tomcat-users></code> 标签内添加：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;role</span> <span class=na>rolename=</span><span class=s>&#34;manager-gui&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;role</span> <span class=na>rolename=</span><span class=s>&#34;admin-gui&#34;</span><span class=nt>/&gt;</span>
+</span></span><span class=line><span class=cl><span class=nt>&lt;user</span> <span class=na>username=</span><span class=s>&#34;admin&#34;</span> <span class=na>password=</span><span class=s>&#34;StrongPassword123&#34;</span> <span class=na>roles=</span><span class=s>&#34;manager-gui,admin-gui&#34;</span><span class=nt>/&gt;</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>解除本地访问限制 (允许远程登录后台)</strong>
+默认 Manager App 只允许 <code>127.0.0.1</code> 访问。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 修改 manager 应用的 context.xml</span>
+</span></span><span class=line><span class=cl>sudo vi /opt/tomcat/webapps/manager/META-INF/context.xml
+</span></span></code></pre></td></tr></table></div></div><p><strong>操作</strong>：注释掉 <code>&lt;Valve></code> 标签（或者将你的 IP 加入 <code>allow</code> 列表）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml></code></pre></td></tr></table></div></div></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>*对 `Host Manager` (/opt/tomcat/webapps/host-manager/META-INF/context.xml) 也做同样操作。*
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>3.  **重启生效**
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    ```bash
+</span></span><span class=line><span class=cl>    sudo systemctl restart tomcat
+</span></span><span class=line><span class=cl>    ```
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>### 2\. 修改端口 (如改为 80)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>如果你想直接输入 IP 访问而不加端口：
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>1.  编辑 `sudo vi /opt/tomcat/conf/server.xml`
+</span></span><span class=line><span class=cl>2.  找到 `&lt;Connector port=&#34;8080&#34; ...&gt;`
+</span></span><span class=line><span class=cl>3.  将 `8080` 改为 `80`。
+</span></span><span class=line><span class=cl>    *注意：Linux 下使用 1024 以下端口通常需要 root 权限，systemd 方式启动通常没问题，但建议保持 8080 或使用 Nginx 反向代理。*
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-----
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## 第四部分：常用运维命令与排错
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>这是你需要贴在工位上的**速查表**。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>### 1\. 常用命令
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>| 动作             | 命令                            |
+</span></span><span class=line><span class=cl>| :--------------- | :------------------------------ |
+</span></span><span class=line><span class=cl>| **启动**         | `sudo systemctl start tomcat`   |
+</span></span><span class=line><span class=cl>| **停止**         | `sudo systemctl stop tomcat`    |
+</span></span><span class=line><span class=cl>| **重启**         | `sudo systemctl restart tomcat` |
+</span></span><span class=line><span class=cl>| **查看状态**     | `sudo systemctl status tomcat`  |
+</span></span><span class=line><span class=cl>| **查看进程**     | `ps -ef | grep tomcat`          |
+</span></span><span class=line><span class=cl>| **查看端口占用** | `netstat -tlnp | grep 8080`     |
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>### 2\. 故障排查 (Log Analysis)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>**场景：** 启动了但网页打不开，或者显示 500 错误。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>**必杀技：实时查看日志**
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>```bash
+</span></span><span class=line><span class=cl># 实时滚动显示最新的日志，排错神器
+</span></span><span class=line><span class=cl>tail -f /opt/tomcat/logs/catalina.out
+</span></span></code></pre></td></tr></table></div></div><ul><li><strong>看到 <code>Caused by: ...</code></strong>：通常是你的 Java 代码报错了。</li><li><strong>看到 <code>Address already in use</code></strong>：端口被占用了，检查是否有另一个 Tomcat 在运行。</li><li><strong>看到 <code>OutOfMemoryError</code></strong>：内存爆了，需要调整 Systemd 文件中的 <code>CATALINA_OPTS</code> 参数。</li></ul><p><strong>Nginx + Tomcat 反向代理实战指南</strong>。</p><p>这是生产环境中最经典、最标准的架构：<strong>前端 Nginx (80端口)</strong> 负责抗压和转发，<strong>后端 Tomcat (8080端口)</strong> 专注处理 Java 业务。</p><hr><h1 id=nginx--tomcat-反向代理配置指南-centos-7-版>Nginx + Tomcat 反向代理配置指南 (CentOS 7 版)</h1><h3 id=核心架构图解>核心架构图解</h3><ul><li><strong>用户</strong> -> 访问 <code>http://服务器IP</code> (默认80端口)</li><li><strong>Nginx</strong> -> 接收请求，通过<strong>反向代理</strong>转发给本地的 <code>127.0.0.1:8080</code></li><li><strong>Tomcat</strong> -> 处理 Java 业务，将结果返回给 Nginx</li><li><strong>Nginx</strong> -> 将结果返回给用户</li></ul><p>这样做的好处：<strong>安全</strong>（隐藏了 Tomcat 真实端口）、<strong>快</strong>（Nginx 处理静态资源速度极快）、<strong>灵活</strong>（以后可以轻松扩展成多台 Tomcat 负载均衡）。</p><hr><h3 id=第一步安装-nginx>第一步：安装 Nginx</h3><p>如果你的服务器上还没安装 Nginx，请执行以下命令：</p><ol><li><p><strong>添加 EPEL 源 (Nginx 在 EPEL 源中)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y epel-release
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>安装 Nginx</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y nginx
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>启动并设置开机自启</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl start nginx
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> nginx
+</span></span></code></pre></td></tr></table></div></div><p><em>此时访问服务器 IP，应该能看到 Nginx 的欢迎页面。</em></p></li></ol><hr><h3 id=第二步配置反向代理-核心步骤>第二步：配置反向代理 (核心步骤)</h3><p>我们需要修改 Nginx 的配置文件，让它把请求转交给 Tomcat。</p><ol><li><p><strong>新建/编辑配置文件</strong>
+为了保持配置整洁，建议在 <code>conf.d</code> 目录下新建一个专门的 <code>.conf</code> 文件，而不是直接修改主文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vi /etc/nginx/conf.d/tomcat_proxy.conf
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>写入以下配置 (请直接复制并修改 server_name)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=k>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>listen</span>       <span class=mi>80</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 将下面的 localhost 修改为你的 域名 或 服务器公网IP
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kn>server_name</span>  <span class=s>localhost</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 核心转发配置
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kn>location</span> <span class=s>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 将请求转发给本地的 Tomcat (8080)
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kn>proxy_pass</span> <span class=s>http://127.0.0.1:8080</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># --- 必需的请求头设置 (这是重点) ---
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1># 1. 传递域名给 Tomcat (否则 Tomcat 可能会重定向错)
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kn>proxy_set_header</span> <span class=s>Host</span> <span class=nv>$host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 2. 传递用户的真实 IP (否则 Java 代码里读到的都是 127.0.0.1)
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kn>proxy_set_header</span> <span class=s>X-Real-IP</span> <span class=nv>$remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>proxy_set_header</span> <span class=s>X-Forwarded-For</span> <span class=nv>$proxy_add_x_forwarded_for</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 3. 传递协议 (http/https)
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kn>proxy_set_header</span> <span class=s>X-Forwarded-Proto</span> <span class=nv>$scheme</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 可选优化：让 Nginx 直接处理静态文件 (图片/css/js)，减轻 Tomcat 压力
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1># location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|css|js)$ {
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>#    root /opt/tomcat/webapps/ROOT;
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>#    expires 30d;
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1># }
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>检查配置是否有语法错误</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nginx -t
+</span></span></code></pre></td></tr></table></div></div><p><em>必须看到 <code>syntax is ok</code> 和 <code>test is successful</code> 才能继续。</em></p></li><li><p><strong>重启 Nginx 使配置生效</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl restart nginx
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h3 id=第三步解决-selinux-权限问题-centos-特有坑>第三步：解决 SELinux 权限问题 (CentOS 特有坑)</h3><p><strong>这步非常关键！</strong>
+如果你是 CentOS 7，默认的 SELinux 安全策略会<strong>禁止</strong> Nginx 主动发起网络连接（即禁止它连接 8080 端口）。如果不做这步，你会看到 Nginx 报错 <code>502 Bad Gateway</code>。</p><ol><li><p><strong>方法一：告诉 SELinux 允许 Nginx 联网 (推荐)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 打开 httpd_can_network_connect 开关</span>
+</span></span><span class=line><span class=cl>sudo setsebool -P httpd_can_network_connect <span class=m>1</span>
+</span></span></code></pre></td></tr></table></div></div><p><em>(参数 <code>-P</code> 表示永久生效，执行可能需要几秒钟，请耐心等待)</em></p></li><li><p><strong>方法二：临时关闭 SELinux (暴力解法)</strong>
+如果你不想折腾 SELinux，可以临时关闭它测试：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo setenforce <span class=m>0</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h3 id=第四步验证全链路>第四步：验证全链路</h3><p>现在，你的架构已经部署完毕。</p><ol><li><p>确保 Tomcat 正在运行：<code>sudo systemctl status tomcat</code></p></li><li><p>确保 Nginx 正在运行：<code>sudo systemctl status nginx</code></p></li><li><p><strong>最终测试</strong>：
+打开浏览器，直接访问 <strong><code>http://服务器IP</code></strong> (不需要加 :8080)。</p><ul><li><strong>预期结果</strong>：你应该能看到 <strong>Tomcat</strong> 的页面（虽然你访问的是 Nginx 的 80 端口）。</li><li><strong>如果看到 Nginx 欢迎页</strong>：说明上面的 <code>server_name</code> 没匹配上，或者 <code>nginx.conf</code> 里有默认的 server 块抢占了 80 端口。建议注释掉 <code>/etc/nginx/nginx.conf</code> 里的默认 <code>server { ... }</code> 块。</li></ul></li></ol><hr><h3 id=进阶场景tomcat-负载均衡-集群>进阶场景：Tomcat 负载均衡 (集群)</h3><p>如果你以后业务做大了，一台 Tomcat 扛不住，部署了三台 (8080, 8081, 8082)，Nginx 配置只需要改一点点即可实现<strong>负载均衡</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nginx data-lang=nginx><span class=line><span class=cl><span class=c1># 定义一个上游服务器组
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>upstream</span> <span class=s>my_java_app</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>server</span> <span class=n>127.0.0.1</span><span class=p>:</span><span class=mi>8080</span> <span class=s>weight=1</span><span class=p>;</span> <span class=c1># 权重1
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kn>server</span> <span class=n>127.0.0.1</span><span class=p>:</span><span class=mi>8081</span> <span class=s>weight=1</span><span class=p>;</span> <span class=c1># 权重1
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kn>server</span> <span class=n>127.0.0.1</span><span class=p>:</span><span class=mi>8082</span> <span class=s>weight=2</span><span class=p>;</span> <span class=c1># 权重2 (性能好的机器多扛点)
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kn>listen</span> <span class=mi>80</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kn>server_name</span> <span class=s>localhost</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kn>location</span> <span class=s>/</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 这里的地址改成上面的 upstream 名字
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kn>proxy_pass</span> <span class=s>http://my_java_app</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=kn>proxy_set_header</span> <span class=s>Host</span> <span class=nv>$host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=kn>proxy_set_header</span> <span class=s>X-Real-IP</span> <span class=nv>$remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>本文采用 CC BY-NC-SA 4.0 许可协议</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/utility/ansible/><div class=article-details><h2 class=article-title>Ansible</h2></div></a></article><article><a href=/utility/jenkins/><div class=article-details><h2 class=article-title>Jenkins</h2></div></a></article><article><a href=/utility/nfs/><div class=article-details><h2 class=article-title>NFS</h2></div></a></article><article><a href=/utility/prometheus-/><div class=article-details><h2 class=article-title>Prometheus</h2></div></a></article><article><a href=/utility/helm/><div class=article-details><h2 class=article-title>helm</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo data-repo-id data-category data-category-id data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2025 © 2025 win. 保留所有权利.</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.31.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
