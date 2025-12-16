@@ -4,6 +4,18 @@ links:
 
 
   
+  - title: 网站部署上线
+    description: 
+    website: https://app.netlify.com/
+
+  - title: ngrok
+    description: 流量转发，隧道 
+    website: https://dashboard.ngrok.com/
+
+
+  - title: 硅基流动
+    description: aiapi大模型
+    website: https://cloud.siliconflow.cn
  
   - title: 图床
     description: 免费图床
