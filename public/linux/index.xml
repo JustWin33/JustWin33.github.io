@@ -7,7 +7,79 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>© 2025 win. 保留所有权利.</copyright>
-        <lastBuildDate>Sat, 13 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 18 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linuxclash</title>
+        <link>http://localhost:1313/linux/clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
+        <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/linux/clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</guid>
+        <description>&lt;p&gt;shellclash linux使用教程，Debian/Ubuntu安装clash linux server vpn&lt;/p&gt;
+&lt;p&gt;1、SSH工具下载
+FinalShell
+2、安装环境：
+sudo apt update
+sudo apt install bzip2 tar
+sudo apt-get install curl
+3、安装ShellCrash:
+sudo -i    #切换为root用户&lt;/p&gt;
+&lt;p&gt;export url=&amp;lsquo;&lt;a class=&#34;link&#34; href=&#34;https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master%27&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master&#39;&lt;/a&gt; &amp;amp;&amp;amp; wget -q &amp;ndash;no-check-certificate -O /tmp/install.sh $url/install.sh  &amp;amp;&amp;amp; bash /tmp/install.sh &amp;amp;&amp;amp; source /etc/profile &amp;amp;&amp;gt; /dev/null&lt;/p&gt;
+&lt;p&gt;备用安装源：&lt;/p&gt;
+&lt;p&gt;export url=&amp;lsquo;&lt;a class=&#34;link&#34; href=&#34;https://gh.jwsc.eu.org/master%27&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://gh.jwsc.eu.org/master&#39;&lt;/a&gt; &amp;amp;&amp;amp; bash -c &amp;ldquo;$(curl -kfsSl $url/install.sh)&amp;rdquo; &amp;amp;&amp;amp; source /etc/profile &amp;amp;&amp;gt; /dev/null&lt;/p&gt;
+&lt;p&gt;1公测版
+1 /etc/
+1
+crash
+2
+1
+clash
+7890&lt;/p&gt;
+&lt;p&gt;自己本地LinuxIP&lt;/p&gt;
+&lt;p&gt;clash
+1
+1
+1
+&lt;a class=&#34;link&#34; href=&#34;https://win1688888888.dpdns.org/03ea7121-577a-4c38-9f90-abf624de7e47/sub&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://win1688888888.dpdns.org/03ea7121-577a-4c38-9f90-abf624de7e47/sub&lt;/a&gt;
+1
+1
+1
+9
+4      安装面板
+4     基础面板
+0
+1
+复制地址，如果这个管理地址正常时能直接打开的如果不是你的Linux的IP，就需要手动替换，再在浏览器打开&lt;/p&gt;
+&lt;p&gt;0&lt;/p&gt;
+&lt;p&gt;放行端口&lt;/p&gt;
+&lt;p&gt;iptables -I INPUT -p tcp &amp;ndash;dport 9999 -j ACCEPT&lt;/p&gt;
+&lt;p&gt;密钥：clash&lt;/p&gt;
+&lt;p&gt;Clash管理地址（将IP替换成自己服务器IP）：http://192.168.1.1:9999/ui&lt;/p&gt;
+&lt;p&gt;测速打开google
+curl google.com&lt;/p&gt;
+&lt;p&gt;测速
+sudo apt install speedtest-cli
+运行：speedtest&lt;/p&gt;
+&lt;p&gt;添加/更新
+确保是root用户
+crash
+6
+1
+1
+粘贴你的最新V2ray连接
+1&lt;/p&gt;
+&lt;p&gt;常见问题
+在连接SSH时提示端口22:连接被拒绝：ssh:connetct to host 192.168.1.1 port 22:Connection refused&lt;/p&gt;
+&lt;p&gt;请安装SSH服务，使用以下命令安装：
+Debian/Ubuntu: sudo apt-get install openssh-server
+CentOS/RHEL: sudo yum install openssh-server&lt;/p&gt;
+&lt;p&gt;本教程使用的命令，使用的时Ubuntu/Debian系统，如果你使用的是CentOS或者其他，就切换对应的命令，别外ShellCrash安装源也是通用的。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://url.v1.mk/sub?target=clash&amp;amp;url=https%3A%2F%2Fwin1688888888.dpdns.org%2F03ea7121-577a-4c38-9f90-abf624de7e47%2Fsub&amp;amp;insert=false&amp;amp;config=https%3A%2F%2Fraw.githubusercontent.com%2FbyJoey%2Ftest%2Frefs%2Fheads%2Fmain%2Ftist.ini&amp;amp;emoji=true&amp;amp;list=false&amp;amp;xudp=false&amp;amp;udp=false&amp;amp;tfo=false&amp;amp;expand=true&amp;amp;scv=false&amp;amp;fdn=false&amp;amp;new_name=true&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://url.v1.mk/sub?target=clash&amp;url=https%3A%2F%2Fwin1688888888.dpdns.org%2F03ea7121-577a-4c38-9f90-abf624de7e47%2Fsub&amp;insert=false&amp;config=https%3A%2F%2Fraw.githubusercontent.com%2FbyJoey%2Ftest%2Frefs%2Fheads%2Fmain%2Ftist.ini&amp;emoji=true&amp;list=false&amp;xudp=false&amp;udp=false&amp;tfo=false&amp;expand=true&amp;scv=false&amp;fdn=false&amp;new_name=true&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Linux系统区分</title>
         <link>http://localhost:1313/linux/linux%E7%B3%BB%E7%BB%9F%E5%8C%BA%E5%88%86/</link>
         <pubDate>Sat, 13 Dec 2025 00:00:00 +0000</pubDate>
