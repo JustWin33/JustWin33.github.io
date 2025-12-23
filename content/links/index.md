@@ -22,6 +22,9 @@ links:
     website: https://telegraph-image-5tj.pages.dev
     
 
+  - title: 学习英语网站导航
+    description: 
+    website: https://en.knowledgefxg.com/
 
   - title: 临时邮箱
     description: 避免个人信息泄露
